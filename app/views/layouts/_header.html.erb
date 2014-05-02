@@ -88,7 +88,9 @@
     		    <input id="member_search" class="typeahead" type="text" style="display:none;" placeholder="Member Name" />
     		    <button type="submit" class="btn right_align">Go</button>
 	        </form>
-            <span id="basketball_graphic"></span>                
+	        <% if @hero %>
+            <span id="basketball_graphic"></span>
+            <% end %>                
 		</div>
     </div>
 </div>

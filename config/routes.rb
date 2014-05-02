@@ -1,6 +1,11 @@
 Findbball::Application.routes.draw do
-  match '/home', to: 'static_pages#home', via: 'get'
+  
+  match '/home', to: 'static_pages#home',   via: 'get'
   root 'static_pages#splash'
+
+  get "players/new"
+  match '/signup', to: 'players#new',        via: 'get'
+
 
 
 
