@@ -44,7 +44,7 @@ padding-top: 10px;
 display: block; 
 width: 225px;  
 height: 55px;
-background: url(../img/findbball.png);
+background: url(findbball.png);
 font-size: 1px; 
 color: black;
 }
@@ -156,7 +156,7 @@ white-space: nowrap;
 
 
 #nav2_container{ 
-background: url(../img/gradient_blue.png) repeat-x;
+background: url(gradient_blue.png) repeat-x;
 padding-top: 2px;
 height: 36px;
 display: block;
@@ -207,7 +207,7 @@ zoom: 1;
 position: absolute; 
 top: 7px; 
 right: 0px;
-background: url(../img/icon/mailbox.png);
+background: url(icon/mailbox.png);
 }
 
 .right_align{ 
@@ -286,7 +286,7 @@ div.mc-image {
 #basketball_graphic{ 
 width: 399px;
 height: 209px; 
-background-image: url(../img/basketball_big.png);
+background-image: url(basketball_big.png);
 background-repeat: no-repeat;
 display: block;
 position: absolute; 
@@ -355,7 +355,7 @@ font-style: italic;
 position: absolute; 
 width: 100%;
 height: 38px;
-background: url(../img/transparent_blue2.png);
+background: url(transparent_blue2.png);
 display: block;
 bottom: 0px; 
 left: 0px;
@@ -385,7 +385,7 @@ margin-bottom: 5px;
 #heading_articles{
 height: 36px; 
 width: 929px; 
-background: url(../img/gradient_gray.png);
+background: url(gradient_gray.png);
 margin-bottom: 10px;
 position: relative;
 }
@@ -792,7 +792,7 @@ top: 0px;
 left: 0px;
 height: 16px;
 width: 10%;
-background: url(../img/gradient_prog.png) repeat-x;
+background: url(gradient_prog.png) repeat-x;
 }
 
 #progbar_indicator{
@@ -939,7 +939,7 @@ z-index: 2;
 position: absolute;
 top: 0px;
 left: 0px;
-background: url(../img/play_btn.png);
+background: url(play_btn.png);
 background-position: top left;
 }
 
@@ -1052,7 +1052,7 @@ font-weight: bold;
 
 .result_time, .result_upcoming, .result_reviews{
 font-weight: bold;
-background: url(../img/icon/clock.png) no-repeat center left;
+background: url(icon/clock.png) no-repeat center left;
 display: block; 
 height: 38px;
 line-height: 38px;
@@ -1071,11 +1071,11 @@ text-decoration: none;
 }
 
 .result_upcoming{
-background-image: url(../img/icon/ball.png);
+background-image: url(icon/ball.png);
 }
 
 .result_reviews{
-background-image: url(../img/icon/speech.png);
+background-image: url(icon/speech.png);
 }
 
 
@@ -1088,22 +1088,22 @@ margin-bottom: 0px;
 .skill_graphic{
 width: 199px; 
 height: 21px; 
-background-image: url(../img/icon/skill_intermediate.png);
+background-image: url(icon/skill_intermediate.png);
 display: block;
 margin-left: auto;
 margin-right: auto;
 }
 
 .skill_graphic.beginner{
-background-image: url(../img/icon/skill_beginner.png);  
+background-image: url(icon/skill_beginner.png);  
 }
 
 .skill_graphic.advanced{
-background-image: url(../img/icon/skill_advanced.png);  
+background-image: url(icon/skill_advanced.png);  
 }
 
 .skill_graphic.difficult{
-background-image: url(../img/icon/skill_difficult.png);  
+background-image: url(icon/skill_difficult.png);  
 }
 
 
@@ -1133,7 +1133,7 @@ z-index: 1;
 }
 
 #signup_modal{
-background: url(../img/transparent_black.png); 
+background: url(transparent_black.png); 
 width: 450px; 
 z-index: 2;
 position: relative;
@@ -1464,7 +1464,7 @@ height: 0px;
 
 #courtPickUpGame{
 text-align: center;
-background: url(../img/icon/clock.png) no-repeat left;
+background: url(icon/clock.png) no-repeat left;
 height: 38px;
 line-height: 38px;
 margin-left: auto;
@@ -1502,7 +1502,7 @@ display: inline-block;
 }
 
 .courtVideo .play_btn{
-background-image: url(../img/play_btn_small.png);
+background-image: url(play_btn_small.png);
 height: 70px;
 width: 95px;
 }
@@ -1651,7 +1651,7 @@ border-bottom: #d9d9d9 solid 1px;
 font-size: 20px;
 padding: 0px;
 margin: 0px; 
-background: url(../img/icon/ball.png);
+background: url(icon/ball.png);
 background-position: center left;
 background-repeat: no-repeat;
 padding-left: 35px;
@@ -1724,7 +1724,7 @@ display: block;
 position: absolute; 
 top: 0px;
 left: 0px;
-background: url(../img/transparent_gray.png);
+background: url(transparent_gray.png);
 width: 100%;
 height: 100%;
 z-index: 1;

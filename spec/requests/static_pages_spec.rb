@@ -1,10 +1,13 @@
 require 'spec_helper'
 
-describe "Static pages" do
-	context "Home page" do
-		it "should have content 'Findbball'" do
-			visit '/static_pages/home'
-			expect(page).to have_content('Findbball.com')
-		end
+describe "Static Pages" do
+
+	subject { page }
+
+	context "Splash Page" do
+		before { visit root_path }
+		it { should have_selector("#splash") }
+		it { should_not have_selector("#top") }
+		it { should_not have_selector("#footer") }
 	end
 end
