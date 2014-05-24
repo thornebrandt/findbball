@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/datepicker.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/Arbiter.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
+	<script src="js/global.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">My Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+    			<div id="nav_top_right">
+                    <div id="logged_in">
+            	        You are logged in as <a href="#" id="nav_username">Jerry</a> <a href="#"> <img src="img/user/jerry.jpg" height="40" width="40"></a>
+            	    </div>
+        		</div>
+		</div>
+		
+		<div id="nav2_container">	
+    		<div id="nav2">
+    		    <form id="i_want_to_form" autocomplete="off">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+                    <input id="location_search" type="text" placeholder="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+                <!-- <span id="basketball_graphic"></span> -->                
+    		</div>
+	    </div>
+	    <div id="nav3_container">
+	        <div id="nav3">
+	            <a href="#">My Profile</a>
+	            <a href="#">Edit Profile</a>
+	            <a href="#">Account Settings</a>
+	            <a href="#">My Courts</a>
+	            <a href="#">My Events</a>
+	            <a href="#">My Teams</a>
+	            <div id="mailbox">
+	                <a href="#">Inbox(2) <span class="mailbox_icon"></span></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <div class="container-fluid">
+        <div class="sidebar left">
+            <div id="profile_left">
+                <div id="profile_pic_container">
+                    <img id="profile_pic" src="img/user/jerry.jpg">
+                    <a href="#" id="edit_photo" class="edit_player_photo">
+                        edit photo
+                    </a>
+                </div>
+                <div id="upload_photo_modal" class="modal hide fade">
+                    <div id="upload_photo">
+                        <h3>Upload a new Profile Image</h1>
+                		<form method="post" enctype="multipart/form-data"  action="php/upload.php" autocomplete="off">
+                    		<input class="btn" type="file" name="images" id="images" />
+                    		<button type="submit"  id="btn1">Upload Photo</button>
+                    	</form>
+                  	    <div id="response"></div>
+                        <img id="profile_preview" src="img/user/jerry.jpg">
+                        <p>
+                            <button id="confirm_image" class="btn hide">Confirm Image</button>
+                        </p>
+                    </div>
+                </div>
+                <p id="profile_name"><span id="edit_profile_name" class="editable">Jerry</span><br>
+                    <a class="editThis editable" href="#">edit display name</a>
+                    <input style="display: none;" type="text" class="editing editInput" value="Jerry" />
+                    <button rel="edit_profile_name" type="submit" class="editing editComplete">Submit</button>
+                    <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+                </p>
+                <br>
+                <p class="profile_subtitle">
+                    <span id="edit_profile_subtitle" class="editable">Never been very good. Just like to play.</span><br>
+                    <a class="editThis editable" href="#">edit slogan</a>
+                    <textarea rows="3" class="editing editInput" type="text">Never been very good. Just like to play.</textarea>
+                    <button rel="edit_profile_subtitle" type="submit" class="editing editComplete">Submit</button>
+                    <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+                </p>
+                <div id="profile_completion_container">
+                    <h3>PROFILE COMPLETION</h3>
+                    <div id="progbar">
+                        <div id="progbar_fill">
+                            <span id="progbar_indicator">50%</span>
+                        </div>
+                    </div>
+                    <div id="next_step">
+                    Next Step <a href="#">Update Contact Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar right">
+        <div id="profile_right">
+                <h3>MY FRIENDS(3)</h3>
+                <a class="friend" href="#"><img src="img/user/paris_hilton.jpg"></a>
+                <a class="friend" href="#"><img src="img/user/falcor.gif"></a>
+                <a class="friend" href="#"><img src="img/user/notacop.jpg"></a>
+            <div id="friend_feed_container">    
+                <div class="friend_feed">
+                    <img src="img/user/paris_hilton.jpg">
+                    <p class="status"><a href="#">Paris</a> posted an <a href="#">event</a><br>
+                        <a class="status_title" href="#">High Heels tournament</a>
+                    </p>
+                    <span class="status_time">2 hours ago</span>
+                </div>
+                <div class="friend_feed">
+                    <img src="img/user/notacop.jpg">
+                    <p class="status"><a href="#">Notacop</a> posted an <a href="#">event</a><br>
+                        <a class="status_title" href="#">Let's do illegal stuff</a>
+                    </p>
+                    <span class="status_time">1 day ago</span>
+                </div>
+                <div class="friend_feed">
+                    <img src="img/user/notacop.jpg">
+                    <p class="status"><a href="#">Notacop</a> reviewed an <a href="#">event</a><br>
+                        <a class="status_title" href="#">Street Ball</a>
+                    </p>
+                    <span class="status_time">1 day ago</span>
+                </div>
+                <div class="friend_feed">
+                    <img src="img/user/falcor.gif">
+                    <p class="status"><a href="#">Falcor</a> added a <a href="#">court</a><br>
+                        <a class="status_title" href="#">Enchanted forest</a>
+                    </p>
+                    <span class="status_time">1 week ago</span>
+                </div>
+                <div class="friend_feed">
+                    <img src="img/user/paris_hilton.jpg">
+                    <p class="status"><a href="#">Paris</a> added a <a href="#">court</a><br>
+                        <a class="status_title" href="#">My house y'all</a>
+                    </p>
+                    <span class="status_time">2 hours ago</span>
+                </div>  
+            </div>
+            <button class="btn btn-primary" id="find_friends_btn">Find Friends</button>
+        </div>
+        </div>
+         <div class="content">
+            <div id="fullname">
+                <h2 id="edit_fullname" class="editable">Jerry Gurgich</h2><a href="#" class="editThis editable">edit full name</a>
+                <input style="display: none;" type="text" class="editing editInput" value="Jerry Gurgish" />
+                <button rel="edit_fullname" type="submit" class="editing editComplete">Submit</button>                
+            </div>    
+            <p id="home_address">
+                <div id="edit_address" class="editable">
+                    2505 Old Bridge Ct<br>
+                    Evansville, IN(Indiana) 47710-5229</div><a href="#" class="editThis editable">edit address</a>
+                <textarea rows="2" class="editing editInput" type="text">
+                    2505 Old Bridge Ct
+                    Evansville, IN(Indiana) 47710-5229
+                </textarea>
+                <button rel="edit_address" type="submit" class="editing editComplete">Submit</button>
+                <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+            </p>
+            <p>
+                <span class="edit_profile_label">Nationality</span>
+                <select id="select_nationality">
+                    <option>Undisclosed</option>
+                    <option>Black</option>
+                    <option>White</option>
+                    <option>African</option>
+                    <option>Asian</option>
+                    <option>Native American</option>
+                    <option>Other</option>
+                </select>
+            </p>
+            <div class="datepicker_container">
+                <span class="edit_profile_label">Birthdate</span>
+                <div class="input-append date" id="datepicker" data-date="03-21-1964" data-date-format="dd-mm-yyyy">
+                  <input class="span2" size="16" type="text" value="12-02-2012">
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+            </div>
+            <br>
+            <p>
+                <span class="edit_profile_label">About Me</span>
+                <br>
+                <div id="about_me">
+                    <div id="edit_about_me" class="editable">
+                        My actual name is Gary.  I’ve just gone by Jerry because my first boss misunderstood my name and I couldn’t bear to correct him. So now I go by Jerry. Oh well.  I’m not sure how I ended up on this site.  I don’t understand computers very well.  I’m trying to read the sports pages
+                    </div>
+                    <a href="#" class="editThis editable">edit about me</a>
+                    <textarea rows="8" class="editing editInput" type="text">My actual name is Gary.  I’ve just gone by Jerry because my first boss misunderstood my name and I couldn’t bear to correct him. So now I go by Jerry. Oh well.  I’m not sure how I ended up on this site.  I don’t understand computers very well.  I’m trying to read the sports pages
+                    </textarea>
+                    <br>
+                    <button rel="edit_about_me" type="submit" class="editing editComplete">Submit</button>
+                    <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+                </div>
+            </p>
+            <p>
+                <span class="edit_profile_label">Favorite Place to Play</span>
+                <br>
+                <a href="#">Add a favorite place</a>
+            </p>
+            <p>
+                <span class="edit_profile_label">Teams</span>
+                <br>
+                You are not on any teams <a href="#">manage teams</a>
+            </p>
+
+         </div>
+         <div id="adspace">
+             <a href="#"><img src="img/add_placeholder.jpg"></a>
+         </div>
+
+</div>
+<div id="footer">
+    <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+</div>		
+</body>
+</html>

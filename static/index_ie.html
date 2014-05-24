@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="jquery.maximage.css" rel="stylsheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/global.js"></script>
+  <script src="js/Arbiter.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+<div id="main">
+	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Ranking</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">Mt Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+			<div id="nav_top_right">
+    		    <a href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+    		</div>
+		</div>
+		<div id="nav2_container">
+    		<div id="nav2">
+    		    <form id="i_want_to_form">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+        		    <input type="text" value="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+                <!-- <span id="basketball_graphic"></span> -->                
+    		</div>
+	    </div>
+	</div>
+    <div id="heroContainer">
+	    <div id="hero">
+	        <div>
+                <img src="img/hero/1.jpg">
+                <h2> <span id="h2_join">join.</span> <span class="h2_discover"> discover. </span> <br> <span class="blue ball">ball.</span></h2>
+            </div>
+            <div>
+                <img src="img/hero/2.jpg">
+                <h2>Check out our <br><span class="blue">mobile app</span> today</h2>
+            </div>
+            <div>
+                <img src="img/hero/3.jpg">
+                <h2>10 reasons<br> why it's <span class="blue">time</span><br> to upgrade your gear</h2>
+            </div>
+            <div>
+                <img src="img/hero/4.jpg">
+                <h2 class="smaller">Basketball<br>is happening <span class="blue">now</span><br>Find a pick-up game!</h2>
+            </div>
+	    </div>
+    </div>
+    <div id="content">
+        <div id="featured">
+            <div class="featured_cell">
+                <img src="img/feature/1.jpg">
+                <div class="feature_heading_container">
+                    <a href="#">Join a Pick-Up Game</a>
+                </div>
+            </div>
+            <div class="featured_cell">
+                  <img src="img/feature/2.jpg">
+                  <div class="feature_heading_container">
+                      <a href="#">Find a Pick-Up game starting shortly near you</a>
+                  </div>
+            </div>
+            <div class="featured_cell">
+                  <img src="img/feature/3.jpg">
+                  <div class="feature_heading_container">
+                      <a href="#">Rate our members</a>
+                  </div>
+            </div>
+            <div class="featured_cell">
+                  <img src="img/feature/4.jpg">
+                  <div class="feature_heading_container">
+                      <a href="#">Check out our mobile version</a>
+                  </div>
+            </div>
+        </div>
+        
+        <div id="adspace">
+            <a href="#"><img src="img/add_placeholder.jpg"></a>
+        </div>
+        
+        <div id="heading_articles">
+            <h3>ARTICLES</h3>
+        </div>
+        
+        <div id="articles_container">
+            <div class="article_cell">
+                <img src="img/article/ghost.png">
+                <a href="#">Gym is a ghost town</a>
+                <span class="date">Today</span>
+            </div>
+            <div class="article_cell">
+                 <img src="img/article/ghost.png">
+                 <a href="#">Gym is a ghost town</a>
+                 <span class="date">Yesterday</span>
+             </div>
+             <div class="article_cell">
+                  <img src="img/article/ghost.png">
+                  <a href="#">Gym is a ghost town</a>
+                  <span class="date">2 days ago</span>
+              </div>
+              <div class="article_cell">
+                   <img src="img/article/ghost.png">
+                   <a href="#">Gym is a ghost town</a>
+                   <span class="date">3 days ago</span>
+               </div>
+        </div>    
+    </div>
+    <div id="footer">
+        <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </div>
+</div>		
+</body>
+</html>

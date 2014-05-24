@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/Arbiter.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
+	<script src="js/global.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">Mt Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+			<div id="nav_top_right">
+    		    <a href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+    		</div>
+		</div>
+		<div id="nav2_container">
+    		<div id="nav2">
+    		    <form id="i_want_to_form">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+        		    <input id="location_search" type="text" autocomplete="off" placeholder="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+    		</div>
+	    </div>
+	</div>
+    <div id="map_canvas" class="findHoops"></div>
+    <div id="content">
+    	<div id="adspace">
+            <a href="#"><img src="img/add_placeholder.jpg"></a>
+        </div>
+        <div id="heading_articles">
+            <h3>RESULTS</h3>
+        </div>
+        <div id="results_container">
+            <div class="result">
+                <a class="result_location">Wicker Park Fieldhouse</a>
+                <br>
+                <p class="result_address">1424 N. Damen Ave<br>Chicago IL 60622</a>
+                <p class="result_distance">less than a mile</p>
+                <a href="#" class="result_directions">(Get Directions)</a>
+                <p class="best_time">Best time for a pickup game:</p>
+                <p class="result_time">10am to 12pm</p>
+                <p class="result_skill">Intermediate</p>
+                <div class="skill_graphic intermediate"></div>
+                <a href="#" class="result_upcoming">Upcoming Events(4)</a>
+                <a href="#" class="result_reviews">Reviews(12)</a>
+                <div class="result_author_container">
+                    Added 2/13 by <a href="#">Jerry</a><img src="img/user/jerry.jpg" class="user_icon">
+                </div>
+                <div class="modal hide fade reviewsModal">
+                    <h3>REVIEWS(12)</h3>
+                    <div class="reviewsContainer">
+                        <div class="review">
+                            <img class="review_author" src="img/user/jerry.jpg">
+                            <p class="review_body">
+                            <a class="review_author_name">Jerry</a><br>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="review">
+                            <img class="review_author" src="img/user/jerry.jpg">
+                            <p class="review_body">
+                            <a class="review_author_name">Jerry</a><br>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="review">
+                            <img class="review_author" src="img/user/jerry.jpg">
+                            <p class="review_body">
+                            <a class="review_author_name">Jerry</a><br>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                            </p>
+                            <hr>
+                        </div>                        
+                        <div class="review">
+                            <img class="review_author" src="img/user/paris_hilton.jpg">
+                            <p class="review_body">
+                                <a class="review_author_name">Paris</a><br>
+                                Nobody knows what ur talking abt. 
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="review">
+                            <img class="review_author" src="img/user/jerry.jpg">
+                            <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Whoa, why was I speaking in greek?
+                            </p>
+                            <hr>
+                        </div>
+                        <b><a href="court.html#reviews" target="_self" title="anchorLink">See All 12 Reviews</a></b>
+                    </div>
+                </div>
+            </div>
+            <div class="result">
+                <a class="result_location">Chicago Sky</a>
+                <br>
+                <p class="result_address">1424 N. Damen Ave<br>Chicago IL 60622</a>
+                <p class="result_distance">1 mile</p>
+                <a href="#" class="result_directions">(Get Directions)</a>
+                <p class="best_time">Best time for a pickup game:</p>
+                <p class="result_time">8am to 12pm</p>
+                <p class="result_skill">Advanced</p>
+                <div class="skill_graphic advanced"></div>
+                <a href="#" class="result_upcoming">Upcoming Events(15)</a>
+                <a href="#" class="result_reviews noReviews">No Reviews</a>
+                <div class="result_author_container">
+                    Added 2/10 by <a href="#">Jerry</a><img src="img/user/jerry.jpg" class="user_icon">
+                </div>
+            </div>
+            <div class="result">
+                <a class="result_location">Mount Camel High School</a>
+                <br>
+                <p class="result_address">1424 N. Damen Ave<br>Chicago IL 60622</a>
+                <p class="result_distance">3 miles</p>
+                <a href="#" class="result_directions">(Get Directions)</a>
+                <p class="best_time">Best time for a pickup game:</p>
+                <p class="result_time">4am to 6pm</p>
+                <p class="result_skill">Beginner</p>
+                <div class="skill_graphic beginner"></div>
+                <a href="#" class="result_upcoming">Upcoming Events(4)</a>
+                <a href="#" class="result_reviews">Reviews(12)</a>
+                <div class="result_author_container">
+                    Added 2/13 by <a href="#">Jerry</a><img src="img/user/jerry.jpg" class="user_icon">
+                </div>
+                 <div class="modal hide fade reviewsModal">
+                        <h3>REVIEWS(12)</h3>
+                        <div class="reviewsContainer">
+                            <a name="reviews"></a>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>                        
+                            <div class="review">
+                                <img class="review_author" src="img/user/paris_hilton.jpg">
+                                <p class="review_body">
+                                    <a class="review_author_name">Paris</a><br>
+                                    Nobody knows what ur talking abt. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                    <a class="review_author_name">Jerry</a><br>
+                                    Whoa, why was I speaking in greek?
+                                </p>
+                                <hr>
+                            </div>
+                            <b><a href="court.html#reviews" target="_self" title="anchorLink">See All 12 Reviews</a></b>
+                        </div>
+                    </div>
+            </div>
+            <div class="result">
+                <a class="result_location">Sport Court Midwest</a>
+                <br>
+                <p class="result_address">1425 N. Damen Ave<br>Chicago IL 60622</a>
+                <p class="result_distance">10 miles</p>
+                <a href="#" class="result_directions">(Get Directions)</a>
+                <p class="best_time">Best time for a pickup game:</p>
+                <p class="result_time">10am to 12pm</p>
+                <p class="result_skill">Difficult</p>
+                <div class="skill_graphic difficult"></div>
+                <a href="#" class="result_upcoming">No Upcoming Events</a>
+                <a href="#" class="result_reviews">Reviews(12)</a>
+                <div class="result_author_container">
+                    Added 2/13 by <a href="#">Paris</a><img src="img/user/paris_hilton.jpg" class="user_icon">
+                </div>
+                 <div class="modal hide fade reviewsModal">
+                        <h3>REVIEWS(12)</h3>
+                        <div class="reviewsContainer">
+                            <a name="reviews"></a>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                <a class="review_author_name">Jerry</a><br>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                </p>
+                                <hr>
+                            </div>                        
+                            <div class="review">
+                                <img class="review_author" src="img/user/paris_hilton.jpg">
+                                <p class="review_body">
+                                    <a class="review_author_name">Paris</a><br>
+                                    Nobody knows what ur talking abt. 
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="review">
+                                <img class="review_author" src="img/user/jerry.jpg">
+                                <p class="review_body">
+                                    <a class="review_author_name">Jerry</a><br>
+                                    Whoa, why was I speaking in greek?
+                                </p>
+                                <hr>
+                            </div>
+                             <div class="review">
+                                    <img class="review_author" src="img/user/jerry.jpg">
+                                    <p class="review_body">
+                                    <a class="review_author_name">Jerry</a><br>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                    </p>
+                                    <hr>
+                                </div>
+                                <div class="review">
+                                    <img class="review_author" src="img/user/jerry.jpg">
+                                    <p class="review_body">
+                                    <a class="review_author_name">Jerry</a><br>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                    </p>
+                                    <hr>
+                                </div>
+                                <div class="review">
+                                    <img class="review_author" src="img/user/jerry.jpg">
+                                    <p class="review_body">
+                                    <a class="review_author_name">Jerry</a><br>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+                                    </p>
+                                    <hr>
+                                </div>                        
+                                <div class="review">
+                                    <img class="review_author" src="img/user/paris_hilton.jpg">
+                                    <p class="review_body">
+                                        <a class="review_author_name">Paris</a><br>
+                                        Nobody knows what ur talking abt. 
+                                    </p>
+                                    <hr>
+                                </div>
+                            <b><a href="court.html#reviews" target="_self" title="anchorLink">See All 12 Reviews</a></b>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </div>
+</div>		
+</body>
+</html>

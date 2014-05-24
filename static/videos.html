@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="jquery.maximage.css" rel="stylsheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/Arbiter.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
+	<script src="js/global.js"></script>
+	<script>
+    </script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+    	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">My Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+			<div id="nav_top_right">
+    		    <a href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+    		</div>
+		</div>
+		<div id="nav2_container">
+    		<div id="nav2">
+    		    <form id="i_want_to_form">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+        		    <input id="location_search" type="text" placeholder="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+    		</div>
+	    </div>
+	</div>
+    <div id="content">
+            <h3>POPULAR VIDEOS</h3>
+       
+             <div id="youtube_videos">
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/kdb3vv-5ygI/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=kdb3vv-5ygI" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                    <iframe width="560" height="315" src="//www.youtube.com/embed/kdb3vv-5ygI" frameborder="0" allowfullscreen>
+                                    </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            Javale Mcgee Bloopers Highlights
+                        </a>
+                        <p class="video_date">
+                           Today
+                        </p>
+                    </div>
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/zclIeiWhwCo/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=zclIeiWhwCo" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                        <iframe width="560" height="315" src="//www.youtube.com/embed/zclIeiWhwCo" frameborder="0" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            Motivation - What Is Your Excuse?
+                        </a>
+                        <p class="video_date">
+                           Yesterday
+                        </p>
+                    </div>
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/lk-Oi9sLz2E/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=lk-Oi9sLz2E" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                        <iframe width="560" height="315" src="//www.youtube.com/embed/lk-Oi9sLz2E" frameborder="0" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            Best Dunk Mix Ever 2011
+                        </a>
+                        <p class="video_date">
+                           2 days ago
+                        </p>
+                    </div>
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/EEtpH6ZEPOc/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=EEtpH6ZEPOc" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                        <iframe width="560" height="315" src="//www.youtube.com/embed/EEtpH6ZEPOc" frameborder="0" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            10000 Hours episode 1
+                        </a>
+                        <p class="video_date">
+                           5 days ago
+                        </p>
+                    </div>
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/gXhVAc61LvU/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=gXhVAc61LvU" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                        <iframe width="560" height="315" src="//www.youtube.com/embed/gXhVAc61LvU" frameborder="0" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            Cat Playing Basketball
+                        </a>
+                        <p class="video_date">
+                           8 days ago
+                        </p>
+                    </div>
+                    <div class="youtube_video_container">
+                        <div class="youtube_video">
+                            <img src="http://img.youtube.com/vi/DQ1aEfgrf80/0.jpg">
+                            <a href="http://www.youtube.com/watch?v=DQ1aEfgrf80" class="play_btn"></a>
+                            <div class="modal hide fade youtubeModal">
+                                <div class="modal-body">
+                                    <div class="youtube_container">
+                                        <iframe width="560" height="315" src="//www.youtube.com/embed/DQ1aEfgrf80" frameborder="0" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="video_title">
+                            The Next Lebron James
+                        </a>
+                        <p class="video_date">
+                           2 months ago
+                        </p>
+                    </div>
+                </div>
+       
+       
+        <div id="adspace">
+            <a href="#"><img src="img/add_placeholder.jpg"></a>
+        </div> 
+    </div>
+    <div id="footer">
+        <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </div>
+    <div id="player"></div>
+</div>		
+</body>
+</html>

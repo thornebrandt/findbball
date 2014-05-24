@@ -1,0 +1,335 @@
+#logo_container{
+width: 100%; 
+background: black; 
+height: 65px;
+display: block;
+position: relative; 
+top: 0px;
+left: 0px;
+}
+
+
+#logo{
+display: block; 
+height: 65px; 
+width: 225px;
+position: relative;
+margin-left: auto; 
+margin-right: auto;
+margin-top: 5px;
+background: url(../../img/findbball.png) no-repeat;
+}
+
+#content{
+position: relative;
+width: 100%;
+padding: 0px;
+}
+
+#content h3{
+margin: 0px;
+padding: 0px;
+font-size: 14px;
+font-weight: black;
+}
+
+.mobile_heading{
+font-size: 19px;
+margin: 5px 5px 0px 5px;
+}
+
+#notmember{
+text-align: right;
+color: #c1c1c1;
+float: right;
+clear: both;
+}
+
+#signin_table{
+width: 100%;
+border-collapse: collapse;
+}
+
+
+#signin_table .label_td{
+text-align: right;
+width: 80px;
+padding-right: 5px;
+}
+
+#login_facebook_container{
+background: #c1c1c1;
+height: 41px;
+width: 100%;
+margin: 0px; 
+padding: 0px;
+position: relative;
+}
+
+
+#facebook_container{
+position: absolute;
+display: block;
+width: 200px;
+right: 10px;
+top: 5px;
+}
+
+.button_container, .content{
+margin-left: 10px;
+margin-right: 10px;
+}
+
+#or{
+font-size: 19px;
+color: white;
+line-height: 41px;
+margin-left: 20%;
+}
+
+#quicklinks .ui-btn, .quickLinks .ui-btn { 
+height: 50px; 
+font-size: 48px !important; 
+line-height: 30px;
+background: url(../../img/gradient_button.png);
+text-shadow:0 0 0;
+margin: 5px 0px 5px 0px;
+}
+
+.centered{
+text-align: center;
+}
+
+#fullsite_container{
+margin-top: 10px;
+padding-left: 5px;
+padding-right: 5px;
+}
+
+#footer{
+text-align: center;
+}
+
+#footer .ui-btn-text{
+font-size: 9px;
+padding: 0px !important;
+}
+
+#footer .ui-mini .ui-btn-inner{
+padding: 6px;
+}
+
+#logged_in_header{
+height: 28px;
+background: #d5d5d5;
+color: black;
+line-height: 26px;
+font-size: 14px;
+position: relative;
+}
+
+#mail_container{
+float: right;
+font-size: 20px;
+font-weight: bold;
+line-height: 28px;
+position: relative;
+padding-right: 40px;
+display: block;
+}
+
+#mail_container img{
+position: absolute;
+right: 0px;
+top: 2px;
+right: 5px;
+}
+
+#mail_container a{
+text-decoration: none;
+color: black;
+}
+
+#logout{
+float: right;
+}
+
+.center{
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+}
+
+#go{
+float: right;
+}
+
+#friend_feed_container, #court_event_container{
+border: #9c9c9c solid 1px;
+margin: 10px;
+position: relative;
+}
+
+.feed_element{
+position: relative;
+padding: 10px;
+font-size: 13px;
+line-height: 13px;
+}
+
+.feed_element:nth-child(even){
+background: #ececec;
+border-top: #9c9c9c solid 1px;
+border-bottom: #9c9c9c solid 1px;
+}
+
+.feed_element p{
+margin-top: 3px;
+padding-top: 0px;
+}
+
+
+.dropdown-menu.ui-listview{
+margin-top: 0px;
+}
+
+
+#map_canvas{
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+height: 180px;
+}
+
+#mapItems{
+display: none;
+}
+
+
+.map_result{
+background-color: #dee8ed;
+border-top: #6f7476 solid 2px;
+border-bottom: #6f7476 solid 2px;
+padding: 10px;
+position: relative;
+font-size: 14px;
+}
+
+
+.map_result:nth-child(even){
+background-color: white;
+border-top: none;
+border-bottom: none;
+}
+
+.map_result .distance{
+position: absolute; 
+top: 10px; 
+right: 10px;
+text-align: right;
+font-weight: bold;
+color: black;
+}
+
+.map_result .author{
+position: absolute; 
+bottom: 10px; 
+right: 10px;
+color: black;
+}
+
+.map_result .name{
+font-weight: bold;
+}
+
+.map_result .address{
+color: gray;
+}
+
+.gray{
+color: gray;
+}
+
+
+.blue{
+color: #387ed2;
+}
+
+.map_result .info{
+font-weight: bold;
+color: black;
+}
+
+.map_result .info a{
+text-decoration: none;
+color: black;
+}
+
+.courtTitle{
+margin: 20px 0px 0px 10px; 
+padding: 0px;
+}
+
+.join_event{
+float: right;
+position: absolute;
+bottom: 10px;
+right: 10px;
+}
+
+.court_hours{
+color: #811114;
+font-weight: bold;
+}
+
+#court_pickup{
+text-align: center;
+}
+
+#court_pickup_time{
+color: black;
+font-weight: 800;
+font-size: 18px;
+}
+
+.event_title{
+font-size: 19px;
+line-height: 19px;
+font-weght: bold;
+color: #387ed2;
+}
+
+.court_author{
+position: absolute;
+font-size: 12px;
+top: -15px; 
+right: 0px; 
+color: gray;
+margin: 0px;
+padding: 0px;
+}
+
+.court_directions{
+font-size: 20px;
+}
+
+
+.floatRight{
+float: right;
+}
+
+.pickup{
+color: #811114;
+}
+
+.court_pickup_container{
+position: relative;
+}
+
+.larger{
+font-size: larger;
+}
+
+.clearfix{
+clear: both;
+}

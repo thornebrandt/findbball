@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/datepicker.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/Arbiter.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
+	<script src="js/global.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">My Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+    			<div id="nav_top_right">
+                    <div id="logged_in">
+            	        You are logged in as <a href="#" id="nav_username">Jerry</a> <a href="#"> <img src="img/user/jerry.jpg" height="40" width="40"></a>
+            	    </div>
+        		</div>
+		</div>
+		
+		<div id="nav2_container">	
+    		<div id="nav2">
+    		    <form id="i_want_to_form" autocomplete="off">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+                    <input id="location_search" type="text" placeholder="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+                <!-- <span id="basketball_graphic"></span> -->                
+    		</div>
+	    </div>
+	    <div id="nav3_container">
+	        <div id="nav3">
+	            <a href="#">My Profile</a>
+	            <a href="#">Edit Profile</a>
+	            <a href="#">Account Settings</a>
+	            <a href="#">My Courts</a>
+	            <a href="#">My Events</a>
+	            <a href="#">My Teams</a>
+	            <div id="mailbox">
+	                <a href="#">Inbox(2) <span class="mailbox_icon"></span></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <h3 id="account_settings_header">Account Settings</h3>
+    <div class="container-fluid" id="account_settings">
+        <div class="sidebar left">
+            <div id="profile_left">
+                <div id="profile_pic_container">
+                    <img id="profile_pic" src="img/user/jerry.jpg">
+                    <div class="gray_overlay"></div>
+                    <a href="#" id="edit_photo" class="edit_player_photo">
+                        edit photo
+                    </a>
+                </div>
+                <div id="upload_photo_modal" class="modal hide fade">
+                    <div id="upload_photo">
+                        <h3>Upload a new Profile Image</h1>
+                		<form method="post" enctype="multipart/form-data"  action="php/upload.php" autocomplete="off">
+                    		<input class="btn" type="file" name="images" id="images" />
+                    		<button type="submit"  id="btn1">Upload Photo</button>
+                    	</form>
+                  	    <div id="response"></div>
+                        <img id="profile_preview" src="img/user/jerry.jpg">
+                        <p>
+                            <button id="confirm_image" class="btn hide">Confirm Image</button>
+                        </p>
+                    </div>
+                </div>
+                <p id="profile_name"><span id="edit_profile_name" class="editable">Jerry</span><br>
+                    <a class="editThis editable" href="#">edit display name</a>
+                    <input style="display: none;" type="text" class="editing editInput" value="Jerry" />
+                    <button rel="edit_profile_name" type="submit" class="btn editing editComplete">Submit</button>
+                </p>
+                <br>
+                <p class="profile_subtitle">
+                    <span id="edit_profile_subtitle" class="editable">Never been very good. Just like to play.</span><br>
+                    <a class="editThis editable" href="#">edit slogan</a>
+                    <textarea rows="3" class="editing editInput" type="text">Never been very good. Just like to play.</textarea>
+                    <button rel="edit_profile_subtitle" type="submit" class="editing editComplete">Submit</button>
+                </p>
+            </div>
+        </div>
+        <div class="sidebar right">
+        <div id="profile_right">
+            <div id="profile_completion_container">
+                <h3>PROFILE COMPLETION</h3>
+                <div id="progbar">
+                    <div id="progbar_fill">
+                        <span id="progbar_indicator">50%</span>
+                    </div>
+                </div>
+                <div id="next_step">
+                Next Step <a href="#">Update Contact Info</a>
+                </div>
+            </div>
+        </div>
+        </div>
+         <div class="content">
+            <table id="account_settings_table">
+                <tbody>
+                    <tr>
+                        <td class="account_settings_label">Username</td>
+                        <td>
+                            <span id="edit_settings_username" class="editable">Jerry</span>
+                            <a class="editThis editable" href="#">edit username</a>                    
+                            <input style="display: none;" type="text" class="editing editInput" value="Jerry" />
+                            <br>                
+                            <button rel="edit_settings_username" type="submit" class="btn editing editComplete">Submit</button>
+                            <button rel="edit_settings_username" type="submit" class="btn btn-warning editing editCancel">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">Full Name</td>
+                        <td>
+                            <span id="edit_settings_fullname" class="editable">Gary Gurgich</span>
+                            <a class="editThis editable" href="#">edit fullname</a>                    
+                            <input style="display: none;" type="text" class="editing editInput" value="Garry Gurgich" />
+                            <br>                 
+                            <button rel="edit_settings_fullname" type="submit" class="btn editing editComplete">Submit</button>
+                            <button rel="edit_settings_fullname" type="submit" class="btn btn-warning editing editCancel">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">Email</td>
+                        <td>
+                            <span id="edit_settings_email" class="editable">ggurchich@aol.com</span>
+                            <a class="editThis editable" href="#">edit email</a>                    
+                            <input style="display: none;" type="text" class="editing editInput" value="Garry Gurgich" />
+                            <br>                  
+                            <button rel="edit_settings_email" type="submit" class="btn editing editComplete">Submit</button>
+                            <button rel="edit_settings_email" type="submit" class="btn btn-warning editing editCancel">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">
+                            <input type="checkbox" class="checkbox" name="findMyEmail" value="findMyEmail">
+                        </td>
+                        <td>
+                            Allow others to find me by email
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">Password</td>
+                        <td>
+                            <span id="edit_settings_email" class="editable">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                            <a class="editThis editable" href="#" id="editPassword">change password</a> 
+                            <div id="changePasswordTableContainer" class="editing">
+                                <table id="changePasswordTable">    
+                                    <tbody>
+                                        <tr>
+                                            <td class="alignRight">Current Password</td>
+                                            <td><input type="password" class="editing password" id="currentPassword" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="alignRight">New Password</td>
+                                            <td><input type="password" class="editing password" id="newPassword" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="alignRight">Confirm</td>
+                                            <td><input type="password" class="editing password" id="confirmPassword" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button rel="edit_settings_email" type="submit" class="btn" id="changePassword">Submit</button>
+                                                <button rel="edit_settings_email" type="submit" class="btn btn-warning" id="cancelChangePassword">Cancel</button> 
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                            </div>
+ 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="notice">
+                            <span id="passwordNotice" style="display: none;">Your password was successfully changed.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><hr></td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">
+                            Notifications
+                        </td>
+                        <td>
+                            Send me email notifactions about:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">
+                            <input class="checkbox" type="checkbox" name="notify_siteUpdates" value="notify_siteUpdates">
+                        </td>
+                        <td>
+                            Site Updates, Improvements, Bug Fixes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="account_settings_label">
+                            <input class="checkbox" type="checkbox" name="notify_newPlayer" value="notify_newPlayer">
+                        </td>
+                        <td>
+                            A new player joins one of my games
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <button type="button" class="btn btn-danger" id="deactivate_account">Deactivate Account</button>
+            <button type="button" class="btn" id="save_account_settings" >Save</button>
+
+         </div>
+         <div id="adspace">
+             <a href="#"><img src="img/add_placeholder.jpg"></a>
+         </div>
+         <div id="are_you_sure_delete_modal" class="modal hide fade">
+             <div id="upload_photo" class="innerModal">
+                <h1>Are you sure you want to deactivate your account?</h2>
+                <button type="button" class="btn" id="confirm_deactivate">Yes</button>
+                <button type="button" class="btn" id="cancel_deactivate" >No</button>
+             </div>
+         </div>
+</div>
+<div id="footer">
+    <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+</div>		
+</body>
+</html>

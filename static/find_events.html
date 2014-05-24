@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery.cycle.all.js"></script>
+	<script src="js/jquery.maximage.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/Arbiter.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
+	<script src="js/global.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>FindBball</title>
+	<meta name="author" content="Thorne Brandt">
+	<!-- Date: 2013-05-27 -->
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]> <div id="main" class="iem7"> <![endif]-->
+<!--[if lt IE 7 ]> <div id="main" class="ie"> <![endif]-->
+<!--[if IE 7 ]>    <div id="main"class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <div id="main" class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><div id="main"><!--<![endif]-->
+	<div id="top">
+		<div id="nav">
+			<a href="home.html" id="logo">Findbball</a>
+			<ul id="nav_dropdown" class="dropdown">
+				<li>
+					<a href="#">Bball Courts</a>
+					<ul>
+						<li><a href="#">Add Court</a></li>
+						<li><a href="#">Court Profiles</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Community</a>
+					<ul>
+						<li><a href="#">Find Events</a></li>
+						<li><a href="#">Create Event</a></li>
+						<li><a href="#">Find Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">My Bball</a>
+					<ul>
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">My Inbox</a></li>
+						<li><a href="#">My Courts</a></li>
+						<li><a href="#">Mt Team</a></li>
+					</ul>
+				</li>
+				<li>
+				    <a href="#">Login</a>
+		        </li>
+		        <li>
+		            <a href="#">Signup</a>
+		        </li>
+			</ul>
+			<div id="nav_top_right">
+    		    <a href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+    		</div>
+		</div>
+		<div id="nav2_container">
+    		<div id="nav2">
+    		    <form id="i_want_to_form">
+        		    I want to: 
+        		    <select id="i_want_to">
+        		        <option>Find Hoops</option>
+        		        <option>Find Events</option>
+        		        <option>Find Members</option>
+        		    </select>
+        		    within
+        		    <select id="within">
+                        <option>Any Distance</option>
+                        <option>100 miles</option>
+                        <option>50 miles</option>
+                        <option>25 miles</option>
+                        <option>10 miles</option>
+        		    </select>
+        		    of 
+        		    <input id="location_search" type="text" autocomplete="off" placeholder="Chicago" />
+        		    <button type="submit" class="btn right_align">Go</button>
+    	        </form>
+    		</div>
+	    </div>
+	</div>
+    <div id="map_canvas" class="findHoops"></div>
+    <div id="content">
+        <div id="adspace">
+            <a href="#"><img src="img/add_placeholder.jpg"></a>
+        </div>
+        <div id="heading_articles">
+            <h3>RESULTS(3)</h3>
+        </div>
+        <div id="event_result_container">
+            <div class="event_result">
+                <h2 class="event_result_title">High Heels Tournament</h2>
+                <a href="court.html" class="event_result_court">Wicker Park Fieldhouse</a>
+                <br>
+                <span class="event_result_time">Tomorrow 8pm - 10pm</span>
+                <br>
+                <span class="event_result_address gray">1425 N Damen Ave Chicago IL 606022</span>
+                <div class="author_container">
+                    <a href="player_profile.html"><img src="img/user/paris_hilton.jpg"></a>
+                    <br>
+                    <div class="author_info_right">
+                    added by <b><a href="player_profile.html">Paris</a></b><br>
+                    April 2013<br>
+                    </div>
+                </div>
+                <span class="event_result_attending">12 attending</span>
+                <button class="event_result_join btn">Join Event</button>
+            </div>
+            <div class="event_result">
+                <h2 class="event_result_title">Roller-Skate Bbball</h2>
+                <a href="court.html" class="event_result_court">Another Court Place</a>
+                <br>
+                <span class="event_result_time">Friday 12pm - 4pm</span>
+                <br>
+                <span class="event_result_address gray">420 N. Pacman Street Ave. Chicago IL 60601</span>
+                <div class="author_container">
+                    <a href="player_profile.html"><img src="img/user/notacop.jpg"></a>
+                    <br>
+                    <div class="author_info_right">
+                    added by <b><a href="player_profile.html">Notacop</a></b><br>
+                    April 2013<br>
+                    </div>
+                </div>
+                <span class="event_result_attending">8 attending</span>
+                <button class="event_result_join btn">Join Event</button>
+            </div>
+            <div class="event_result">
+                <h2 class="event_result_title">Senior Ball</h2>
+                <a href="court.html" class="event_result_court">Wicker Park Fieldhouse</a>
+                <br>
+                <span class="event_result_time">November 22nd, 6am - 8am</span>
+                <br>
+                <span class="event_result_address gray">1425 N Damen Ave Chicago IL 606022</span>
+                <div class="author_container">
+                    <a href="player_profile.html"><img src="img/user/jerry.jpg"></a>
+                    <br>
+                    <div class="author_info_right">
+                    added by <b><a href="player_profile.html">Jerry</a></b><br>
+                    April 2013<br>
+                    </div>
+                </div>
+                <span class="event_result_attending">1 attending</span>
+                <button class="event_result_join btn">Join Event</button>
+            </div>
+            <p id="noMoreEvents">
+                <span class="smaller">No More Events</span>
+                <br>
+                <b><a href="#">Create One</a></b>
+            </p>
+        </div>
+
+    </div>
+    <div id="footer">
+        <a href="#">About us</a> | <a href="#">Contact</a> | <a href="#">Help</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </div>
+</div>		
+</body>
+</html>

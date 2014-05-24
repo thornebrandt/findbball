@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="dev/css/bootstrap.min.css" rel="stylesheet">
+<script src="dev/js/jquery-1.9.1.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FindBball</title>
+<meta name="author" content="Thorne Brandt">
+<!-- Date: 2013-05-27 -->
+<style>
+body{
+    background: url(splash.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+
+#email{
+display: none;
+}   
+
+#splash_logo{
+    margin-left: 20px;
+    margin-top: 20px;
+    display: block;
+}
+
+#mailingListContainer{
+position: absolute; 
+right: 15%;
+top: 32%;
+width: 500px;
+height: 350px;
+text-align: center;
+}
+
+h2{
+position: absolute;
+left: 20px;
+bottom: 20px;
+color: white;
+font-size: 49px;
+}
+
+h1{
+color: white;
+font-weight: 800;
+font-family: 'Open Sans', sans-serif;
+font-size: 23px;
+-webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: #1f8aed;
+text-shadow: 1px 1px 0 #1f8aed, -1px -1px 0 #1f8aed, 1px -1px 0 #1f8aed, -1px 1px 0 #1f8aed, 1px 1px 0 #1f8aed;
+text-align: center;
+}
+
+
+</style>
+</head>
+<body>
+<img id="splash_logo" src="dev/img/logo_basketball.png">
+<div id="mailingListContainer">
+    <h1>Enter your email to get on the invite list</h1>
+    <form id="mailingListForm" action="mailing_list.php">
+        <input type="text" id="mailingList"></input><br>
+        <input type="text" name="email" id="email"></input><br>
+        <button type="submit" class="btn btn-primary">Go</button>
+    </form>
+</discoverv>
+<h2>join. discover. ball.</h2>
+</body>
+</html>
+<script>
+
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+
+
+
+$("#mailingListForm").submit( 
+    function(e){
+        e.preventDefault();
+        var _email = $("#mailingList").val(); 
+        var _address = $("#email").val(); 
+        if (isEmail(_email)){ 
+            var el = $("#mailingListContainer");
+            el.hide();
+            el.html("<h1>Thanks</h1>"); 
+            el.fadeIn();
+            $.post("mailing_list.php",
+                {   em : _email,
+                    address : _address
+                }       
+            );
+        } else { 
+            alert(_email + " is not a valid email address!"); 
+        }
+    }
+); 
+
+
+
+</script>
