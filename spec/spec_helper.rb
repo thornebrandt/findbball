@@ -12,6 +12,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -41,4 +42,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Capybara::DSL
+end
+
+def logger
+  Rails::logger
 end

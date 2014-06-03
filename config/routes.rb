@@ -1,12 +1,12 @@
 Findbball::Application.routes.draw do
-  
+  resources :sessions, only: [:new, :create, :destroy]
   match '/home', to: 'static_pages#home',   via: 'get'
   root 'static_pages#splash'
-
   get "players/new"
-  match '/signup', to: 'players#new',        via: 'get'
-
-
+  resources :players
+  match '/signup', to: 'players#new',         via: 'get'
+  match '/signin', to: 'sessions#new',        via: 'get'
+  match '/signout', to: 'sessions#destroy',   via: 'delete'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

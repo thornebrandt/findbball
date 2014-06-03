@@ -16,8 +16,12 @@
 <body class="body">
 	<% unless @noHeaderFooter %>
 		<%= render 'layouts/header' %>
+    <% flash.each do |key, value| %>
+     <div class="alert alert-<%= key %>"><%= value %> </div>
+    <% end %>
 	<% end %>
-	<%= yield %>
+	 <%= yield %>
+  <%= debug(params) if Rails.env.development? %>
 	<% unless @noHeaderFooter %>
 		<%= render 'layouts/footer' %>
 	<% end %>

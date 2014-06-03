@@ -21,7 +21,7 @@ describe Player do
 	it { should respond_to(:authenticate) }
 	it { should be_valid } 
 
-	describe "when required fields are not present" do 
+	describe "when email is not present" do 
 		before { @player.email = ""}
 		it { should_not be_valid } 
 	end
@@ -56,6 +56,16 @@ describe Player do
 
 		it { should_not be_valid } 
 	end
+
+	describe "an email address with mixed case" do
+		let(:mixed_case_email) { 'mIxEdEmaIl@example.com' }
+		it "should be saved as lowercase" do
+			@player.email = mixed_case_email
+			@player.save
+			expect(@player.reload.email).to eq mixed_case_email.downcase
+		end
+	end
+
 
 
 	describe "return value of authenticate method" do

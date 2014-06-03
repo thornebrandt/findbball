@@ -1,0 +1,12 @@
+<table id="history">
+    <thead>
+        <tr>
+            <th colspan="2"><h4>HISTORY</h4></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tdRightAlign italics"><%= time_ago_in_words(@player.created_at) %> ago</td>
+            <td><b><%= @player.name %></b> signed up</td>
+        </tr>
+</table>    

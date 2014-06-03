@@ -1,0 +1,14 @@
+<div class="sidebar right">
+    <div id="profile_right">
+    <% if @current_player_has_friends == true %>
+            <h3>MY FRIENDS(3)</h3>
+            <a class="friend" href="#"><img src="img/user/paris_hilton.jpg"></a>
+            <a class="friend" href="#"><img src="img/user/falcor.gif"></a>
+            <a class="friend" href="#"><img src="img/user/notacop.jpg"></a>
+    <% end %>
+    <%= render 'players/player_feed' %>
+        <button class="btn btn-primary" id="find_friends_btn">Find Friends</button>
+        <%= render 'events/events_container' %>
+        <%= render 'courts/courts_container' %>  
+    </div>
+</div>
