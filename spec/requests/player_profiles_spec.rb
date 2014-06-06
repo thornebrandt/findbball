@@ -34,6 +34,7 @@ describe "PlayerProfiles" do
 		
 		describe "main content" do
 		it { should have_content(player.member_since) }
+		it { should have_css(table.history) }
 		
 		context "when member does not have schedule" do
 		  before {@player_has_schedule = false}
@@ -45,8 +46,7 @@ describe "PlayerProfiles" do
 		  it { should have_css(div.next_game) }
 		end
 		
-		it { should have_css(table.history) }
-		
+		end
 	end
 
 	describe "signup page" do
