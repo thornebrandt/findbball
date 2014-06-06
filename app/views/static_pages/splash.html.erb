@@ -1,10 +1,15 @@
 <div id="splash">
 	<%= image_tag "logo_basketball_shadow.png", :id => 'splash_logo' %>
-	<p><span class="black">Findbball.com</span> is coming this fall</p>
+	<p><span class="black">Findbball.com</span> is coming this fall! Subscribe here:</p>
+	<br />
 	<div id="mailingListContainer">
-<!-- 		<form id="mailingListForm" action="#">
-			<input type="text" id="mailingList"></input> <button type="submit" class="btn btn-primary">Submit</button>
-			<input type="text" name="email" id="email"></input>
-		</form> -->
+		<form action="http://FindBball.us8.list-manage1.com/subscribe/post?u=260229d58e57a8eb09bd30837&amp;id=87674013ff" 
+	     method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			<input type="email" value="" name="EMAIL" class="email" id="mailingList" required><button type="submit" class="btn btn-primary">Submit</button>
+			<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    		<div style="position: absolute; left: -5000px;"><input type="text" name="b_260229d58e57a8eb09bd30837_87674013ff" tabindex="-1" value=""></div>
+		</form>
+    <span id="links"><a href="http://insidefindbball.com/the-journey/">About us</a> <a href="http://insidefindbball.com/home-2/">Blog</a> <a href="http://insidefindbball.com/join-us/">Contact us</a> <a href="http://insidefindbball.com/join-us/">Join us</a></span> 
 	</div>
+	<a href="https://www.facebook.com/Findbball"><%= link_to image_tag("chiclet-fb.png") %></a> <a href="https://twitter.com/findbball"><%= link_to image_tag("chiclet-twt.png") %><a href="https://www.youtube.com/channel/UC0xN2SMytNM3HsFzmd0n7cQ"><%= link_to image_tag("chiclet-youtube.png") %></a> <a href="#"><%= link_to image_tag("chiclet-inst.png") %></a>
 </div>

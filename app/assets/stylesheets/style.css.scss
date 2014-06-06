@@ -1890,7 +1890,7 @@ margin-left: 10px;
   .black{
   color: black;
   }
-
+  
   .btn{
   background: gray;
   margin-bottom: 10px;
@@ -1917,6 +1917,16 @@ margin-left: 10px;
 
   #mailingListContainer{
   }
+
+  #links{
+  font-size: 16px;
+  color: white;
+  a:link, a:visited, a:hover {
+    color: white;
+    
+    }
+  }
+
 
   h1{
   color: white;
