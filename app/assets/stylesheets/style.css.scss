@@ -11,18 +11,18 @@ clear: both;
 margin-top: -8px;
 }
 
-#main{ 
+#main{
 margin: 0px;
 padding: 0px;
-display: block;  
-top: 0px; 
-left: 0px; 
+display: block;
+top: 0px;
+left: 0px;
 width: 100%;
 position: absolute;
 font-family: Arial, Helvetica;
 }
 
-#top{ 
+#top{
 background: black;
 color: white;
 position: relative;
@@ -30,22 +30,22 @@ position: relative;
 
 #nav{
 z-index:99;
-position: relative; 
-display: block; 
-width: 937px; 
-height: 56px; 
-margin-left: auto; 
+position: relative;
+display: block;
+width: 937px;
+height: 56px;
+margin-left: auto;
 margin-right: auto;
 padding-top: 10px;
 }
 
 
-#logo{ 
-display: block; 
-width: 225px;  
+#logo{
+display: block;
+width: 225px;
 height: 55px;
 background: url(findbball.png);
-font-size: 1px; 
+font-size: 1px;
 color: black;
 }
 
@@ -82,9 +82,9 @@ color: black;
 	left: 100%;
 }
 
-#nav_top_right{ 
-position: absolute; 
-top: 0px; 
+#nav_top_right{
+position: absolute;
+top: 0px;
 right: 0px;
 color: #999;
 font-weight: 800;
@@ -92,53 +92,53 @@ font-size: 15px;
 }
 
 
-#nav_top_right a{ 
+#nav_top_right a{
 color: #c1c1c1;
 }
 
-#nav_top_right span{ 
-margin-left: 12px; 
+#nav_top_right span{
+margin-left: 12px;
 margin-right: 12px;
 }
 
 
 #nav_dropdown{
-position: absolute; 
-left: 242px; 
-top: 30px; 
+position: absolute;
+left: 242px;
+top: 30px;
 background: black;
 }
 
-#nav_dropdown ul{ 
-border: black solid 3px; 
+#nav_dropdown ul{
+border: black solid 3px;
 background: white;
 color: black;
 width: 150px;
 }
 
-#nav_dropdown a{ 
+#nav_dropdown a{
 color: white;
 text-transform: uppercase;
 text-decoration: none;
 font-size: 16px;
 font-weight: bold;
-padding: 5px 20px 10px 10px; 
+padding: 5px 20px 10px 10px;
 }
 
 
-#nav_dropdown ul a{ 
+#nav_dropdown ul a{
 color: black;
 font-size: 14px;
-padding: 5px 5px 5px 10px; 
+padding: 5px 5px 5px 10px;
 }
 
 
-#nav_dropdown ul a.odd{ 
+#nav_dropdown ul a.odd{
 background: #efefef;
 }
 
-#nav_dropdown ul a:hover{ 
-background: #8db4d9; 
+#nav_dropdown ul a:hover{
+background: #8db4d9;
 color: white;
 }
 
@@ -155,7 +155,7 @@ white-space: nowrap;
 
 
 
-#nav2_container{ 
+#nav2_container{
 background: url(gradient_blue.png) repeat-x;
 padding-top: 2px;
 height: 36px;
@@ -163,9 +163,9 @@ display: block;
 position: relative;
 }
 
-#nav2, #nav3{ 
-width: 937px; 
-margin-left: auto; 
+#nav2, #nav3{
+width: 937px;
+margin-left: auto;
 margin-right: auto;
 position: relative;
 font-family: 'Open Sans', sans-serif;
@@ -176,8 +176,8 @@ font-size: 15px;
 
 #nav3_container{
 background: #ababab;
-height: 36px; 
-display: block; 
+height: 36px;
+display: block;
 position: relative;
 }
 
@@ -191,7 +191,7 @@ margin-left: 15px;
 margin-right: 15px;
 }
 
-#mailbox{ 
+#mailbox{
 position: absolute;
 right: 0px;
 top: 0px;
@@ -204,21 +204,21 @@ height: 23px;
 display: inline-block;
 zoom: 1;
 *display: inline;
-position: absolute; 
-top: 7px; 
+position: absolute;
+top: 7px;
 right: 0px;
 background: url(icon/mailbox.png);
 }
 
-.right_align{ 
-position: absolute; 
-right: 0px; 
+.right_align{
+position: absolute;
+right: 0px;
 top: 0px;
 }
 
 
-#heroContainer{ 
-position: relative; 
+#heroContainer{
+position: relative;
 width: 100%;
 height: 429px;
 display: block;
@@ -231,18 +231,18 @@ margin-bottom: 10px;
   color: white;
   font-weight: 800;
   font-family: 'Open Sans', sans-serif;
-  font-size: 80px; 
+  font-size: 80px;
   line-height: 75px;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #1f8aed;
   text-shadow:
          3px 3px 0 #1f8aed,
-       -1px -1px 0 #1f8aed,  
+       -1px -1px 0 #1f8aed,
         1px -1px 0 #1f8aed,
         -1px 1px 0 #1f8aed,
          1px 1px 0 #1f8aed;
   position: absolute;
-  right: 30px; 
+  right: 30px;
   bottom: 10px;
   text-align: right;
 }
@@ -251,16 +251,16 @@ margin-bottom: 10px;
 font-size: smaller;
 }
 
-#hero .smaller{ 
+#hero .smaller{
 font-size: 60px;
 }
 
-#hero .blue{ 
+#hero .blue{
   color: #1f8aed;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #ffffff;
   text-shadow:
-       -1px -1px 0 #ffffff,  
+       -1px -1px 0 #ffffff,
         1px -1px 0 #ffffff,
         -1px 1px 0 #ffffff,
          1px 1px 0 #ffffff;
@@ -279,18 +279,18 @@ div.mc-image {
     background-size: cover;
     background-repeat: no-repeat;
     bottom: 100px !important;
-    
+
 }
 
 
-#basketball_graphic{ 
+#basketball_graphic{
 width: 399px;
-height: 209px; 
+height: 209px;
 background-image: url(basketball_big.png);
 background-repeat: no-repeat;
 display: block;
-position: absolute; 
-top: 40px; 
+position: absolute;
+top: 40px;
 left: 0px;
 z-index: 98;
 }
@@ -299,9 +299,9 @@ z-index: 98;
 #content{
 position: relative;
 width: 937px;
-margin-left: auto; 
-margin-right: auto; 
-} 
+margin-left: auto;
+margin-right: auto;
+}
 
 
 .featured_cell{
@@ -319,10 +319,10 @@ margin-left: 0px;
 }
 
 
-.article_cell{ 
+.article_cell{
 display: inline-block;
 zoom: 1;
-*display: inline; 
+*display: inline;
 width: 226px;
 padding-bottom: 30px;
 position: relative;
@@ -341,57 +341,57 @@ font-size: 17px;
 font-weight: bold;
 }
 
-.article_cell .date{ 
+.article_cell .date{
 color: gray;
-position: absolute; 
-bottom: 0px; 
+position: absolute;
+bottom: 0px;
 right: 0px;
 font-size: 12px;
 font-style: italic;
 }
 
 
-.feature_heading_container{ 
-position: absolute; 
+.feature_heading_container{
+position: absolute;
 width: 100%;
 height: 38px;
 background: url(transparent_blue2.png);
 display: block;
-bottom: 0px; 
+bottom: 0px;
 left: 0px;
 color: white;
 text-align: center;
 }
 
-.feature_heading_container a{ 
+.feature_heading_container a{
 color: white;
 font-weight: bold;
-font-size: 17px; 
+font-size: 17px;
 line-height: 10px;
 }
 
-.ie7 .feature_heading_container a{ 
+.ie7 .feature_heading_container a{
 font-size: 14px;
 line-height: 12px;
 margin-top: 10px;
 display: block;
 }
 
-#adspace{ 
+#adspace{
 margin-top: 5px;
 margin-bottom: 5px;
 }
 
 #heading_articles{
-height: 36px; 
-width: 929px; 
+height: 36px;
+width: 929px;
 background: url(gradient_gray.png);
 margin-bottom: 10px;
 position: relative;
 }
 
 .more{
-position: absolute; 
+position: absolute;
 right: 10px;
 top: 10px;
 color: white;
@@ -417,25 +417,25 @@ h3, h4{
   padding-left: 20px;
 }
 
-.ie7 #heading_articles h3{ 
+.ie7 #heading_articles h3{
 	line-height: 18px;
 }
 
 
-#footer{ 
+#footer{
 text-align: center;
-margin-top: 20px; 
+margin-top: 20px;
 margin-bottom: 40px;
 }
 
-#footer a{ 
+#footer a{
 color: #333;
 }
 
 
 .container-fluid{
-  width: 937px; 
-  margin-left: auto; 
+  width: 937px;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -462,7 +462,7 @@ color: #333;
 }
 
 
-#nav_username{ 
+#nav_username{
 margin-right: 10px;
 color: #61a3e1 !important;
 }
@@ -489,7 +489,7 @@ zoom: 1;
 }
 
 .friend img{
-height: 40px; 
+height: 40px;
 width: 40px;
 }
 
@@ -499,7 +499,7 @@ width: auto;
 overflow: auto;
 }
 
-#profile_left h3{ 
+#profile_left h3{
   margin-bottom: 0px;
   margin-top: 20px;
 }
@@ -513,14 +513,14 @@ margin-bottom: 0px;
 }
 
 .profile_subtitle{
-margin-top: 0px; 
-color: gray; 
+margin-top: 0px;
+color: gray;
 text-align:center;
 font-size: 12px;
 }
 
 
-#teams, #teams *, #reviews, #reviews *{ 
+#teams, #teams *, #reviews, #reviews *{
 list-style: none;
 margin: 0px;
 vertical-align: bottom;
@@ -562,18 +562,18 @@ font-size: 12px;
 .friend_feed img, .court_event img{
 height: 40px;
 width: 40px;
-display: block; 
-position: absolute; 
-left: 6px; 
+display: block;
+position: absolute;
+left: 6px;
 top: 6px;
 }
 
 
 .friend_feed .status{
-position: absolute; 
-top: 6px; 
+position: absolute;
+top: 6px;
 left: 52px;
-margin: 0px; 
+margin: 0px;
 padding: 0px;
 display: block;
 line-height: 11px;
@@ -585,18 +585,18 @@ font-weight: bold;
 }
 
 .friend_feed .status_title{
-top: 20px; 
-left: 48px; 
-margin: 0px; 
-padding: 0px; 
+top: 20px;
+left: 48px;
+margin: 0px;
+padding: 0px;
 display: block;
 font-weight: bold;
 color: #1f8aed !important;
 }
 
 .friend_feed .status_time{
-position: absolute; 
-bottom: 0px; 
+position: absolute;
+bottom: 0px;
 right: 3px;
 font-style: italic;
 font-size: 11px;
@@ -624,7 +624,7 @@ display: block;
 }
 
 .event_title{
-display: block; 
+display: block;
 margin-top: -10px;
 font-weight: bold;
 padding: 0px;
@@ -682,26 +682,26 @@ text-align: center;
 display: block;
 font-weight: bold;
 line-height: 14px;
-margin: 0px; 
+margin: 0px;
 padding: 0px;
 }
 
 .next_game_time{
 text-align: center;
 display: block;
-margin: 0px; 
+margin: 0px;
 padding: 0px;
 }
 
 .bottom_right{
 position: absolute;
-bottom: 10px; 
+bottom: 10px;
 right: 10px;
 }
 
 .top_right{
 position: absolute;
-top: 10px; 
+top: 10px;
 right: 10px;
 }
 
@@ -781,7 +781,7 @@ display: block;
 background: white;
 border: gray solid 1px;
 margin-left: auto;
-margin-right: auto; 
+margin-right: auto;
 position: relative;
 margin-bottom: 15px;
 }
@@ -892,7 +892,7 @@ margin-left: 0px;
 
 
 .youtube_video{
-width: 222px; 
+width: 222px;
 height: 164px;
 display: block;
 margin-bottom: 3px;
@@ -903,7 +903,7 @@ vertical-align: text-bottom;
 .video_title, .article_title{
 position: relative;
 font-weight: bold;
-font-size: 16px; 
+font-size: 16px;
 text-align: center;
 width: 100%;
 display: block;
@@ -933,7 +933,7 @@ z-index: 1;
 }
 
 .play_btn{
-width: 222px; 
+width: 222px;
 height: 164px;
 z-index: 2;
 position: absolute;
@@ -974,7 +974,7 @@ height: 30px !important;
 width: 100%;
 height: 30px !important;
 padding-bottom: 0px !important;
-margin-top: 5px; 
+margin-top: 5px;
 margin-left: 10px;
 padding-right: 10px;
 }
@@ -994,7 +994,7 @@ height: 200px;
 
 .result{
 background: #dee8ed;
-width: 219px; 
+width: 219px;
 display: inline-block;
 position: relative;
 text-align: center;
@@ -1004,7 +1004,7 @@ margin-left: 14px;
 }
 
 #result p{
-margin: 5 0 5 0; 
+margin: 5 0 5 0;
 padding: 0px;
 }
 
@@ -1053,7 +1053,7 @@ font-weight: bold;
 .result_time, .result_upcoming, .result_reviews{
 font-weight: bold;
 background: url(icon/clock.png) no-repeat center left;
-display: block; 
+display: block;
 height: 38px;
 line-height: 38px;
 margin-left: 14px;
@@ -1086,8 +1086,8 @@ margin-bottom: 0px;
 }
 
 .skill_graphic{
-width: 199px; 
-height: 21px; 
+width: 199px;
+height: 21px;
 background-image: url(icon/skill_intermediate.png);
 display: block;
 margin-left: auto;
@@ -1095,15 +1095,15 @@ margin-right: auto;
 }
 
 .skill_graphic.beginner{
-background-image: url(icon/skill_beginner.png);  
+background-image: url(icon/skill_beginner.png);
 }
 
 .skill_graphic.advanced{
-background-image: url(icon/skill_advanced.png);  
+background-image: url(icon/skill_advanced.png);
 }
 
 .skill_graphic.difficult{
-background-image: url(icon/skill_difficult.png);  
+background-image: url(icon/skill_difficult.png);
 }
 
 
@@ -1114,27 +1114,27 @@ width: auto;
 
 #signup{
 height: 100%;
-width: 100%; 
+width: 100%;
 display: block;
 overflow: hidden;
-position: absolute; 
-top: 0px; 
+position: absolute;
+top: 0px;
 left: 0px;
 z-index: 1;
 background: black;
 }
 
 #signup_bg{
-position: absolute; 
-top: 0px; 
-left: 0px; 
+position: absolute;
+top: 0px;
+left: 0px;
 width: 100%;
 z-index: 1;
 }
 
 #signup_modal{
-background: url(transparent_black.png); 
-width: 450px; 
+background: url(transparent_black.png);
+width: 450px;
 z-index: 2;
 position: relative;
 margin-left: auto;
@@ -1157,7 +1157,7 @@ margin-right: auto;
 
 .hr{
 border-bottom: white solid 1px;
-width: 98%; 
+width: 98%;
 height: 1px;
 margin-bottom: 13px;
 }
@@ -1218,12 +1218,12 @@ display: none;
 
 #edit_photo{
 background: white;
-position: absolute; 
-bottom: 0px; 
+position: absolute;
+bottom: 0px;
 right: 0px;
 font-size: 12px;
 border: black solid 1px;
-padding-right: 20px; 
+padding-right: 20px;
 padding-left: 20px;
 text-align: center;
 display: none;
@@ -1251,11 +1251,11 @@ width: 150px;
 }
 
 #datepicker{
-position: absolute; 
-right: 0px; 
+position: absolute;
+right: 0px;
 top: -5px;
 }
-                    
+
 .datepicker_container{
 position: relative;
 display: block;
@@ -1284,7 +1284,7 @@ margin-bottom: 10px;
 }
 
 #enter_address_container{
-width: 100%; 
+width: 100%;
 position: relative;
 height: 40px;
 font-size: 18px;
@@ -1308,7 +1308,7 @@ border: black solid 1px;
 width: 150px;
 }
 
-.time_of_day, .am_or_pm{ 
+.time_of_day, .am_or_pm{
 width: 80px;
 }
 
@@ -1440,8 +1440,8 @@ font-size: 16px;
 }
 
 .author_container{
-position: absolute; 
-top: 10px; 
+position: absolute;
+top: 10px;
 right: 230px;
 width: 200px;
 text-align: right;
@@ -1475,7 +1475,7 @@ width: 380px;
 #courtDifficulty{
 color:  #4F92D2;
 width: 199px;
-margin-left: auto; 
+margin-left: auto;
 margin-right: auto;
 text-align: center;
 }
@@ -1495,7 +1495,7 @@ text-align: center;
 
 .courtVideo{
 height: 70px;
-width: 95px; 
+width: 95px;
 position: relative;
 margin: 5px;
 display: inline-block;
@@ -1514,7 +1514,7 @@ position: relative;
 .review_author{
 height: 40px;
 width: 40px;
-position: absolute; 
+position: absolute;
 top: 0px;
 left: 0px;
 }
@@ -1650,7 +1650,7 @@ border-bottom: #d9d9d9 solid 1px;
 .event_result_title{
 font-size: 20px;
 padding: 0px;
-margin: 0px; 
+margin: 0px;
 background: url(icon/ball.png);
 background-position: center left;
 background-repeat: no-repeat;
@@ -1677,13 +1677,13 @@ top: 0px;
 }
 
 .author_info_right{
-position: absolute; 
+position: absolute;
 right: 50px;
 top: 0px;
 }
 
 .event_result_attending{
-position: absolute; 
+position: absolute;
 right: 5px;
 bottom: 40px;
 font-size: 18px;
@@ -1721,7 +1721,7 @@ text-indent: 0px;
 
 .gray_overlay{
 display: block;
-position: absolute; 
+position: absolute;
 top: 0px;
 left: 0px;
 background: url(transparent_gray.png);
@@ -1777,7 +1777,7 @@ display: block;
 padding: 0px;
 padding-left: 3px;
 padding-right: 2px;
-margin: 0px; 
+margin: 0px;
 border-collapse: collapse;
 }
 
@@ -1871,7 +1871,7 @@ margin-left: 10px;
 
 
 #splash{
-  background: url(gradient.jpg) no-repeat center center fixed; 
+  background: url(gradient.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1890,7 +1890,7 @@ margin-left: 10px;
   .black{
   color: black;
   }
-  
+
   .btn{
   background: gray;
   margin-bottom: 10px;
@@ -1903,13 +1903,13 @@ margin-left: 10px;
 
   #email{
   display: none;
-  } 
+  }
 
   #splash_logo{
   display: block;
   width: 409px;
   height: 299px;
-  margin-top: 250px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
@@ -1929,7 +1929,7 @@ margin-left: 10px;
     display: inline;
     }
   }
-  
+
   #chiclets{
     li {
     padding-right: 30px;
