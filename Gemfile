@@ -19,6 +19,11 @@ group :test do
 	gem 'database_cleaner', '1.2.0'
 end
 
+group :production do
+    gem 'mysql', '~> 2.9.1'
+    gem 'mysql2', '~> 0.3.13'
+end
+
 
 
 gem 'sass-rails', '~> 4.0.1'
