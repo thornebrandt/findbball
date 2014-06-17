@@ -3,7 +3,8 @@ var service;
 var infowindow;
 var urlParams;
 var court = {}; //starting to creat an object
-var fbb = {}; //global object; 
+var fbb = {}; //global object;
+var google = {};
 fbb.courts = {};
 fbb.court = {};
 fbb.lat;
@@ -15,7 +16,7 @@ fbb.defaultLat = 41.907940468646984;
 fbb.defaultLng = -87.67672317193603;
 fbb.defaultCourt = "Wicker Park Fieldhouse";
 
-$(function(){   
+$(function(){
   function onLoad(){ //put automatic functions here
     fbb.getUserLocation();
     checkDOM();
@@ -45,10 +46,10 @@ $(function(){
       //if a map hasn't been loaded already
       if(fbb.lat){
         fbb.loadMap(fbb.lat, fbb.lng);
-      } else { 
+      } else {
         if(fbb.userLat){
           fbb.loadMap(fbb.userLat, fbb.userLng);
-        } else { 
+        } else {
           //no latLng information
           fbb.loadMap(fbb.defaultLat, fbb.defaultLng);  //might replace with default
         }
@@ -88,7 +89,7 @@ $(function(){
     if($.cookie("courtData")){
       console.log("it still exists");
       var courtData = JSON.parse($.cookie("courtData"));
-      $.removeCookie('courtData');    
+      $.removeCookie('courtData');
       var openHours = "Open " + courtData.openTime1 + courtData.openAM1 + " - " +
                                 courtData.openTime2 + courtData.openAM2;
       var pickupHours = courtData.pickupDay + "s " + courtData.pickupTime + courtData.pickupAM;
@@ -180,7 +181,7 @@ $(function(){
         alert("passwords do not match");
         $("#passwordNotice").hide();
 
-      } else { 
+      } else {
         hidePasswordBox();
         $("#passwordNotice").fadeIn();
       }
@@ -198,7 +199,7 @@ $(function(){
     function(e){
       e.preventDefault();
   });
-  
+
   $("#aboutUs").click(
     function(e){
       e.preventDefault();
@@ -236,7 +237,7 @@ $(function(){
 
 
 
-  
+
   $("#member_search").typeahead({
     source: function(query, process){
       return $.get("data/names_filler.json", {query: query}, function(data){
@@ -247,18 +248,18 @@ $(function(){
       window.location = "player_profile.html?user=" + _member;
     }
   });
-  
+
 
 //starting to modulate code;
   fbb.loadCourt = function(_court){
     $.get("data/courts_filler.json", function(data){
-      fbb.courts = data; 
+      fbb.courts = data;
       if(fbb.courts[_court]){
         fbb.court = fbb.courts[_court];
         fbb.lat = fbb.court.lat;
         fbb.lng = fbb.court.lng;
         fbb.loadMap(fbb.lat, fbb.lng);
-      } else { 
+      } else {
         console.log("Error: invalid court");
         console.log(fbb.courts[_court]);
       }
@@ -293,12 +294,12 @@ $(function(){
         map_canvas = "add_court_map";
         loadGoogleMap(selectedCourt.lat, selectedCourt.lng)
       }
-    });  
+    });
 
     $("#selectCourt").click(
       function(e){
         //typeahead submit!!
-        e.preventDefault(); 
+        e.preventDefault();
         $("#courtSearchContainer .typeahead .active").click()
       }
     );
@@ -333,8 +334,8 @@ $(function(){
 
 
   if($("#showReviews").length != 0){
-    if(window.location.hash){ 
-      if(window.location.hash.substring(1) == "reviews"){ 
+    if(window.location.hash){
+      if(window.location.hash.substring(1) == "reviews"){
         $("#showReviews").hide();
         $("#hiddenReviews").show();
       }
@@ -349,7 +350,7 @@ $(function(){
       $("#hiddenReviews").slideDown();
     }
   );
-  
+
   $("#hideReviews").click(
     function(e){
       e.preventDefault();
@@ -357,8 +358,8 @@ $(function(){
       $("#hiddenReviews").slideUp();
     }
   );
-  
-  
+
+
   $(".result_reviews").click(
     function(e){
       e.preventDefault();
@@ -389,10 +390,10 @@ $(function(){
         vid.push('</iframe>');
         vid.push('</div></div></div></div>');
         var vidHtml = vid.join("");
-        $("#courtVideos").append(vidHtml); 
+        $("#courtVideos").append(vidHtml);
         $("#add_video_modal").modal("hide");
         $("#youtube_url").val("");
-      } else { 
+      } else {
         alert("not a valid youtube link");
       }
     }
@@ -415,9 +416,9 @@ $(function(){
   $("#confirm_main_image").click(
     function(){
       $(".change_image_confirm").hide();
-	    $("#selectCourtPhotoModal").modal("hide");  
+	    $("#selectCourtPhotoModal").modal("hide");
 	    var _imgSrc = $("#main_image_src").val()
-	    $("#profile_pic").attr("src", _imgSrc); 
+	    $("#profile_pic").attr("src", _imgSrc);
     }
   );
 
@@ -428,7 +429,7 @@ $(function(){
       $("#selectCourtPhotoModal").modal();
 	  }
 	);
-	
+
 	$("#edit_photo.edit_event_photo").click(
 	  function(e){
       e.preventDefault();
@@ -437,8 +438,8 @@ $(function(){
 	  }
 	);
 
-	$(document).on("click", "#selectPhotoContainer .courtPhoto", 
-	  function(){ 
+	$(document).on("click", "#selectPhotoContainer .courtPhoto",
+	  function(){
 	    $(".selectedPhoto").removeClass("selectedPhoto");
 	    $(this).addClass("selectedPhoto");
 	    var imgSrc = $(this).attr("src");
@@ -446,10 +447,10 @@ $(function(){
 	    $("#main_image_src").val(imgSrc);
 	  }
 	);
-	
-	
-	$(document).on("click", "#courtPhotos .courtPhoto", 
-	  function(){ 
+
+
+	$(document).on("click", "#courtPhotos .courtPhoto",
+	  function(){
 	    var galleryModal = $("#galleryModal");
 	    var _src = $(this).attr("src");
 	    var _index = $(this).index();
@@ -457,7 +458,7 @@ $(function(){
 	    galleryModal.modal();
 	  }
 	);
-	
+
 	$("#gallery_next, #gallery_previous").click(
 	  function(e){
 	    e.preventDefault();
@@ -476,8 +477,8 @@ $(function(){
       $("#galleryPhoto").attr("rel", nextIndex);
 	  }
 	);
-	
-	
+
+
   if($("#addEvent_form").length != 0){
     var validator = $("#addEvent_form").validate({
       rules: {
@@ -500,7 +501,7 @@ $(function(){
   }
 
 
-	
+
 	if($("#addCourt_form").length != 0){
   	var validator = $("#addCourt_form").validate({
   	  rules: {
@@ -526,27 +527,27 @@ $(function(){
       }
     });
   }
-	
 
-		
+
+
 	$("#confirm_image").click(
 	  function(){
 	    $('#upload_photo_modal').modal('hide');
 	    $("#profile_pic").attr("src", $("#profile_preview").attr("src"));
 	  }
 	);
-	
-	
+
+
 	if ($("#datepicker").length != 0){
   	var dp = $("#datepicker");
-      dp.datepicker().on('changeDate', function(e){ 
+      dp.datepicker().on('changeDate', function(e){
         dp.datepicker('hide');
         var _date = dp.date('date');
   	  }
   	);
   }
-	
-	
+
+
 	$("#edit_photo.edit_player_photo, #edit_photo.edit_event_photo").click(
 	  function(e){
 	    e.preventDefault();
@@ -554,8 +555,8 @@ $(function(){
 	    editProfilePhoto();
 	  }
 	);
-	
-	
+
+
 	$("#upload_court_photo").click(
 	  function(e){
 	    e.preventDefault();
@@ -563,32 +564,32 @@ $(function(){
 	    addCourtPhoto();
     }
   );
-	
-	
-	
+
+
+
 	var dndSupported = function () {
     var div = document.createElement('div');
     return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
   };
-	
-	
-	
-	
+
+
+
+
 	//edit photo
 	$("#profile_pic_container").hover(
-	  function(){ 
+	  function(){
 	    $("#edit_photo").show();
-	  }, 
+	  },
 	  function(){
 	    $("#edit_photo").hide();
 	  }
 	);
-	
-	
-	
-	
+
+
+
+
 	//edit profile
-	
+
 	$(".editThis").click(
 	  function(e){
 	    e.preventDefault();
@@ -596,7 +597,7 @@ $(function(){
 	    $(this).parent().children(".editing").show();
 	  }
 	);
-	
+
 
   $(".editCancel").click(
     function(e){
@@ -605,7 +606,7 @@ $(function(){
     }
   );
 
-	
+
 	$(".editComplete").click(
 	  function(e){
 	    e.preventDefault();
@@ -616,8 +617,8 @@ $(function(){
 	    $(_target).text(_value);
 	  }
 	);
-	
-	
+
+
 	$(".video_title").click(
 	  function(e){
 	    e.preventDefault();
@@ -625,7 +626,7 @@ $(function(){
       _youtubeModal.modal();
 	  }
 	);
-	
+
 
   $(".article_title").click(
     function(e){
@@ -636,20 +637,20 @@ $(function(){
   );
 
 
-	
-	$(document).on("click", ".play_btn", 
+
+	$(document).on("click", ".play_btn",
 	  function(e){
 	    e.preventDefault();
       var _youtubeModal = $(this).parent().children(".youtubeModal");
       _youtubeModal.modal();
 	  }
 	);
-	
-	
+
+
   // service = new google.maps.places.PlacesService(map);
   // service.nearbySearch(request, callback);
 	//loadGoogleMap();
-		
+
 	$(".featured_cell:first, .article_cell:first, #nav3 a:first, .result:first").css("margin-left", "0px");
   $('#hero').maximage({
           cssTransitions:false,
@@ -660,30 +661,30 @@ $(function(){
               timeout: 7000
           }
   });
-	
+
 	$(".dropdown li ul").each(
-		function(){ 
+		function(){
 			var _this = $(this);
 			_this.children("li").children("a:odd").addClass("odd");
 		}
 	);
-	
+
 	$(".friend_feed:odd").addClass("odd");
-	
-	
+
+
 	if($("#progbar_fill").length !==0){
 	  //animate progbar if it exists
 	  var progbarFill = $("#progbar_fill");
 	  var indicator = $("#progbar_indicator");
 	  var percentComplete = indicator.text();
-    
-    progbarFill.animate({width: percentComplete}, 1200, fadeIndicator);  
+
+    progbarFill.animate({width: percentComplete}, 1200, fadeIndicator);
 	  function fadeIndicator(){
       indicator.fadeIn();
   	}
 	}
-	
-	
+
+
 
   $("#upload_court_photo").click(
     function(e){
@@ -691,10 +692,10 @@ $(function(){
       $("#upload_court_photo_modal").modal();
     }
   );
-	
-	
+
+
 	onLoad();
-}); 
+});
 
 
 //END PAGE LOAD
@@ -706,13 +707,13 @@ function checkForMapCanvas(){
     map_canvas = "add_court_map";
   } else if ($("#court_map").length != 0){
     map_canvas = "court_map";
-  } else { 
+  } else {
     map_canvas = "noMap"
   }
 }
 
 
-function loadGoogleMap(_lat, _long){  
+function loadGoogleMap(_lat, _long){
   fbb.mapCenter = new google.maps.LatLng(_lat, _long);
   var service = new google.maps.places.AutocompleteService();
   var geocoder = new google.maps.Geocoder();
@@ -724,7 +725,7 @@ function loadGoogleMap(_lat, _long){
            scrollwheel: false,
            mapTypeId: google.maps.MapTypeId.ROADMAP
          };
-  
+
    if(locationQuery){
        geocoder.geocode({ address: locationQuery }, function(results, status) {
          if (status != google.maps.GeocoderStatus.OK) {
@@ -736,12 +737,12 @@ function loadGoogleMap(_lat, _long){
          map.setZoom(15);
        });
    }
-  
-    
+
+
     map = new google.maps.Map(document.getElementById(map_canvas), mapOptions);
     var marker = new google.maps.Marker({
                     icon: "img/icon/ball_pointer.png",
-                    position: fbb.mapCenter, 
+                    position: fbb.mapCenter,
                     map: map
                     });
 
@@ -758,7 +759,7 @@ function loadGoogleMap(_lat, _long){
       map.setZoom(15);
       var marker = new google.maps.Marker({
                       icon: "img/icon/ball_pointer.png",
-                      position: _point, 
+                      position: _point,
                       draggable: true,
                       map: map
                       });
@@ -767,12 +768,12 @@ function loadGoogleMap(_lat, _long){
       court.lat = lat;
       court.lng = lng;
       $("#latLng").html("Court found at "+ _address + " (Lat: " + lat + ", Long: " + lng + ") <i>Drag for better placement</i>");
-      google.maps.event.addListener(marker, 'dragend', function() 
+      google.maps.event.addListener(marker, 'dragend', function()
       {
           lat = marker.position.lat();
           lng = marker.position.lng();
           $("#latLng").html("Court found at "+ _address + " (Lat: " + lat + ", Long: " + lng + ") <i>Drag for better placement</i>");
-      });   
+      });
 
       $(".row_addLocation").hide();
       $(".row_addedLocation").show();
@@ -816,7 +817,7 @@ function loadGoogleMap(_lat, _long){
             return;
           }
           map.setCenter(results[0].geometry.location);
-          map.setZoom(12); 
+          map.setZoom(12);
         });
        } else {
          window.location = "find_hoops.html?location=" + item;
@@ -845,7 +846,7 @@ function editProfilePhoto(){
 
 function addCourtPhoto(){
   if ($("#response").length !=0){
-  } else{ 
+  } else{
     $("#courtPreviewContainer").append("<div id='response'></div>");
     var input = document.getElementById("court_image"), formdata = false;
     uploadImagePreview(input, "submit_court_photo", updateCourtPhotos);
@@ -865,31 +866,31 @@ function updateCourtPhotos(source){
   $(".response_confirm").show();
   console.log($("#courtPreviewContainer"));
   $("#courtPreviewContainer").append("<img id='courtPreview' src='"+source+"'>");
-  
+
   $("#cancel_image").unbind().bind(
     "click",
     function(){
       $(".response_confirm").hide();
-      $("#upload_form").show();    
+      $("#upload_form").show();
       $("#response").html("");
       $("#courtPreview").remove();
     }
   );
-  
+
   $("#confirm_image").unbind().bind(
     "click",
     function(){
       var imgSrc = $("#courtPreview").attr("src");
       $('#upload_court_photo_modal').modal('hide');
       $("#response").html("");
-      $("#upload_form").show();    
+      $("#upload_form").show();
       $("#courtPreview").remove();
       $("#courtPhotos").append("<img class='courtPhoto' src='"+imgSrc+"'>");
       $("#profile_pic").attr("src", imgSrc);
     }
   );
-  
-  
+
+
 }
 
 function mapFromAddress(_address){
@@ -904,20 +905,20 @@ function mapFromAddress(_address){
 
 function uploadImagePreview(_input, _btn, handler){
   //input : file input that holds image
-  //btn :  ok. 
+  //btn :  ok.
   //handler : what happens after upload.  source is the image src
-  
+
   function showUploadedItem (source) {
       handler(source);
-	} 
-  
+	}
+
   if (window.FormData) {
 	    //internet explorer
   		formdata = new FormData();
   		document.getElementById(_btn).style.display = "none";
 	}
 
-  
+
  	_input.addEventListener("change", function (evt) {
  		document.getElementById("response").innerHTML = "Uploading . . ."
  		var i = 0, len = this.files.length, img, reader, file;
@@ -928,7 +929,7 @@ function uploadImagePreview(_input, _btn, handler){
 			if (!!file.type.match(/image.*/)) {
 				if ( window.FileReader ) {
 					reader = new FileReader();
-					reader.onloadend = function (e) { 
+					reader.onloadend = function (e) {
 						showUploadedItem(e.target.result, file.fileName);
 					};
 					reader.readAsDataURL(file);
@@ -936,7 +937,7 @@ function uploadImagePreview(_input, _btn, handler){
 				if (formdata) {
 					formdata.append("images[]", file);
 				}
-			}	
+			}
 		}
 
 		if (formdata) {
@@ -981,7 +982,7 @@ function getQueryVariable(query, variable){
     if (pair[0] == variable) {
       return pair[1];
     }
-  } 
+  }
   return false
 }
 
@@ -1022,7 +1023,7 @@ function showAddress(address, geocoder) {
 
 function checkDOM(){
   if($("#court_search").length !== 0){
-    fbb.courtSearch(); 
+    fbb.courtSearch();
   }
 
 
@@ -1030,6 +1031,6 @@ function checkDOM(){
     //is there a backend court
     // if not, default court
     //default Court is for presentation
-    fbb.loadCourt(fbb.defaultCourt); 
+    fbb.loadCourt(fbb.defaultCourt);
   }
 }
