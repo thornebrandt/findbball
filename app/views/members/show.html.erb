@@ -1,4 +1,4 @@
-<% provide(:title, @player.name) %>
+<% provide(:title, @member.name) %>
 <div id="nav3_container">
     <div id="nav3">
         <a href="#">My Profile</a>
@@ -13,15 +13,15 @@
     </div>
 </div>
 <div class="container-fluid">
-	<%= render '/players/profile_left' %>
-  	<%= render '/players/profile_right' %>
+	<%= render '/members/profile_left' %>
+  	<%= render '/members/profile_right' %>
      <div class="content">
-        <h2 id="fullname"><%= @player.name %></h2>
-        <p id="member_since">member since <%= member_since_date(@player.created_at) %></p>
-            <% if @player_has_schedule == true %>
-            	<%= render 'players/player_headline' %>
+        <h2 id="fullname"><%= @member.name %></h2>
+        <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
+            <% if @member_has_schedule == true %>
+            	<%= render 'members/member_headline' %>
     		<% end %>
-        <table id="player_info">
+        <table id="member_info">
             <tbody>
                 <tr>
                     <th>Plays Basketball</th>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <th>Favorite Place to Play</th>
-                    <th class="tdRightAlign">Favorite Player</th>
+                    <th class="tdRightAlign">Favorite member</th>
                 </tr>
                 <tr>
                     <td>Wicker Park FieldHouse</td>
@@ -65,6 +65,6 @@
                 </tr>
             </tbody>
         </table>
-        <%= render 'players/player_history' %>
+        <%= render 'members/member_history' %>
      </div>
      <%= render 'ads/placeholder' %>

@@ -10,7 +10,7 @@ describe "AuthenticationPages" do
   		it { should have_title('Sign in') }
 
   		describe "with valid information" do
-  			let(:player) { FactoryGirl.create(:player) } 
+  			let(:member) { FactoryGirl.create(:member) } 
   			before do
   				fill_in "Email", with: player.email.upcase
   				fill_in "Password", with: player.password

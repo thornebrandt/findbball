@@ -8,6 +8,6 @@ class Member < ActiveRecord::Base
 
 	def beforeSave
 		self.email.downcase!
-		self.name ||= "New Player"
+		self.name ||= "New Member"
 	end
 end

@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		player = Player.find_by(email: params[:session][:email].downcase)
-		if player && player.authenticate(params[:session][:password]).password
+		member = Member.find_by(email: params[:session][:email].downcase)
+		if member && member.authenticate(params[:session][:password]).password
 		else
 			flash[:error] = "Invalid email/password combination" #not right
 			render 'new'

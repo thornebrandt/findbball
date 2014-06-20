@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe "PlayerProfiles" do
+describe "MemberProfiles" do
 
 	subject { page }
 
 	describe "profile page" do
-		let(:player) { FactoryGirl.create(:player) }
-		before { visit player_path(player) }
+		let(:member) { FactoryGirl.create(:member) }
+		before { visit member_path(member) }
 		
 		describe "sidebar left" do
 		  it { should have_css(div.sidebar_left) }
@@ -20,12 +20,12 @@ describe "PlayerProfiles" do
 		  it { should have_css(div.sidebar_right) }
 		  
 		  context "when member has no friends" do
-		    before {@current_player_has_friends = false }
+		    before {@current_member_has_friends = false }
 		    it { should_not have_css(a.friend) }
 		  end
 		    
 		  context "when member has friends" do
-		    before {@current_player_has_friends = true }
+		    before {@current_member_has_friends = true }
 		    it { should have_css(a.friend) }
 		  end
 		  it { should have_css(div.friend_feed_container) }
@@ -34,18 +34,18 @@ describe "PlayerProfiles" do
 		end
 		
 		describe "main content" do
-		  it { should have_content(player.name) }
-      it { should have_title(player.name) }
-	   	it { should have_content(player.member_since) }
+		  it { should have_content(member.name) }
+      it { should have_title(member.name) }
+	   	it { should have_content(member.member_since) }
 		  it { should have_css(table.history) }
 		
 	   	context "when member does not have schedule" do
-	   	  before {@player_has_schedule = false}
+	   	  before {@member_has_schedule = false}
 	   	  it { should_not have_css(div.next_game) }
 	   	end
 		
 	   	context "when member has schedule" do
-	   	  before {@player_has_schedule = true}
+	   	  before {@member_has_schedule = true}
 	   	  it { should have_css(div.next_game) }
 	   	end
 		end
@@ -62,7 +62,7 @@ describe "PlayerProfiles" do
 		let(:submit) { "Create my account" }
 		describe "with invalid information" do
 			it "should not create a user" do
-				expect { click_button submit }.not_to change(Player, :count)
+				expect { click_button submit }.not_to change(Member, :count)
 			end
 
 			describe "after submission" do
@@ -80,13 +80,13 @@ describe "PlayerProfiles" do
 			end
 
 			it "should create a user" do
-				expect { click_button submit }.to change(Player, :count).by(1)
+				expect { click_button submit }.to change(Member, :count).by(1)
 			end
 
 			it "should have a valid email" do
 				click_button submit
-				newPlayer = Player.order("created_at").last
-				newPlayer.email.should == "dude@example.com"
+				newMember = Member.order("created_at").last
+				newMember.email.should == "dude@example.com"
 			end
 		end
 	end

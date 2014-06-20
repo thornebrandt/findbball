@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Member do
 
 	before do
-		@player = Player.new(
+		@member = Member.new(
 						email: "freddy@elmstreet.com",
 						password: "inYourDreams",
 						password_confirmation: "inYourDreams"
 					)
 	end
 
-	subject { @player }
+	subject { @member }
 
 
 	it { should respond_to(:name) }
@@ -22,17 +22,17 @@ describe Member do
 	it { should be_valid } 
 
 	describe "when email is not present" do 
-		before { @player.email = ""}
+		before { @member.email = ""}
 		it { should_not be_valid } 
 	end
 
 	describe "when email format is invalid" do
 	   	it "should be invalid" do
-	     	addresses = %w[player@foo,com player_at_foo.org example.player@foo.
+	     	addresses = %w[member@foo,com member_at_foo.org example.member@foo.
 	                    foo@bar_baz.com foo@bar+baz.com]
 	     	addresses.each do |invalid_address|
-	       	@player.email = invalid_address
-	       	expect(@player).not_to be_valid
+	       	@member.email = invalid_address
+	       	expect(@member).not_to be_valid
 	    	end
 	   	end
 	end
@@ -41,17 +41,17 @@ describe Member do
 	   	it "should be valid" do
 	     	addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
 	     	addresses.each do |valid_address|
-	       	@player.email = valid_address
-	       	expect(@player).to be_valid
+	       	@member.email = valid_address
+	       	expect(@member).to be_valid
 	     	end
 	   	end
 	end
 
 	describe "when email address is already taken" do
 		before do
-			player_with_same_email = @player.dup
-			player_with_same_email.email = @player.email.upcase
-			player_with_same_email.save
+			member_with_same_email = @member.dup
+			member_with_same_email.email = @member.email.upcase
+			member_with_same_email.save
 		end
 
 		it { should_not be_valid } 
@@ -60,30 +60,30 @@ describe Member do
 	describe "an email address with mixed case" do
 		let(:mixed_case_email) { 'mIxEdEmaIl@example.com' }
 		it "should be saved as lowercase" do
-			@player.email = mixed_case_email
-			@player.save
-			expect(@player.reload.email).to eq mixed_case_email.downcase
+			@member.email = mixed_case_email
+			@member.save
+			expect(@member.reload.email).to eq mixed_case_email.downcase
 		end
 	end
 
 
 
 	describe "return value of authenticate method" do
-		before { @player.save }
-		let(:found_player) { Player.find_by(email: @player.email) }
+		before { @member.save }
+		let(:found_member) { member.find_by(email: @member.email) }
 
 		describe "with valid password" do
-			it { should eq found_player.authenticate(@player.password) }
+			it { should eq found_member.authenticate(@member.password) }
 		end
 
 		describe "with invalid password" do
-			let(:wrong_password_player) { found_player.authenticate("luckyGuess") }
-			it { should_not eq wrong_password_player }
-			specify { expect(wrong_password_player).to be_false }
+			let(:wrong_password_member) { found_member.authenticate("luckyGuess") }
+			it { should_not eq wrong_password_member }
+			specify { expect(wrong_password_member).to be_false }
 		end
 
 		describe "with a password that is too short" do 
-			before { @player.password = @player.password_confirmation = "a" * 5 }
+			before { @member.password = @member.password_confirmation = "a" * 5 }
 			it { should be_invalid }
 		end
 

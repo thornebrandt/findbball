@@ -1,6 +1,6 @@
 FactoryGirl.define do
-	factory :player do
-		email "artist@formally.com"
+	factory :member do
+		email "artist@formerly.com"
 		password "knownAsPrince"
 		password_confirmation "knownAsPrince"
 	end
