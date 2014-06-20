@@ -7,8 +7,7 @@ describe "PlayerProfiles" do
 	describe "profile page" do
 		let(:player) { FactoryGirl.create(:player) }
 		before { visit player_path(player) }
-		it { should have_content(player.name) }
-		it { should have_title(player.name) }
+		
 		describe "sidebar left" do
 		  it { should have_css(div.sidebar_left) }
 		  it { should have_css(img.profile_pic) }
@@ -16,12 +15,14 @@ describe "PlayerProfiles" do
 		  it { should have_css(div.teams_container) }
 		  it { should have_css(div.reviews_container) }
 		end
+		
 		describe "sidebar right" do
 		  it { should have_css(div.sidebar_right) }
 		  
 		  context "when member has no friends" do
 		    before {@current_player_has_friends = false }
 		    it { should_not have_css(a.friend) }
+		  end
 		    
 		  context "when member has friends" do
 		    before {@current_player_has_friends = true }
@@ -33,19 +34,20 @@ describe "PlayerProfiles" do
 		end
 		
 		describe "main content" do
-		it { should have_content(player.member_since) }
-		it { should have_css(table.history) }
+		  it { should have_content(player.name) }
+      it { should have_title(player.name) }
+	   	it { should have_content(player.member_since) }
+		  it { should have_css(table.history) }
 		
-		context "when member does not have schedule" do
-		  before {@player_has_schedule = false}
-		  it { should_not have_css(div.next_game) }
-		end
+	   	context "when member does not have schedule" do
+	   	  before {@player_has_schedule = false}
+	   	  it { should_not have_css(div.next_game) }
+	   	end
 		
-		context "when member has schedule" do
-		  before {@player_has_schedule = true}
-		  it { should have_css(div.next_game) }
-		end
-		
+	   	context "when member has schedule" do
+	   	  before {@player_has_schedule = true}
+	   	  it { should have_css(div.next_game) }
+	   	end
 		end
 	end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Player do
+describe Member do
 
 	before do
 		@player = Player.new(

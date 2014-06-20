@@ -1,7 +1,7 @@
     <div class="sidebar left">
         <div id="profile_left">
         	<%= image_tag "player_placeholder.png", id: "profile_pic" %>
-            <p id="profile_name"><%= @player.name %></p>
+            <p id="profile_name"><%= @member.name %></p>
             <p class="profile_subtitle">Play with me</p>
             <%= render '/friends/friends_container' %>
             <%= render '/teams/teams_container' %>
