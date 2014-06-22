@@ -1,4 +1,4 @@
-# directions for deployment
+# directions for deployment on webfaction
 cd findbball_rails
 
 export GEM_HOME=$PWD/gems
@@ -8,6 +8,19 @@ gem install bundle
 cd findbball
 rake db:migrate RAILS_ENV=production
 ../bin/restart
+
+#local production server:
+
+rails s -e production
+
+
+
+
+
+#production assets:
+
+rake assets:precompile RAILS_ENV=production
+
 
 
 
