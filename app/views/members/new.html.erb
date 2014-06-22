@@ -1,9 +1,14 @@
 <% provide(:title, "Sign up") %>
 <div id="signup">
     <%= image_tag('signup.jpg', id: 'signup_bg') %>
+    <div id="alert-modal">
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %> </div>
+        <% end %>
+    </div>
     <div id="signup_modal">
         <h2>SIGN UP</h2>
-        <%= form_for(:member) do |f| %>
+        <%= form_for(@member) do |f| %>
             <table id="signup_table">
                 <tr>
                     <td width="50%" class="signup_label">
@@ -23,10 +28,10 @@
                 </tr>
                 <tr>
                     <td class="signup_label">
-                        <b><%= f.label :confirm_password %></b>
+                        <b><%= f.label :password_confirmation, "Confirm Password" %></b>
                     </td>
                     <td>
-                        <%= f.password_field :confirm_password, class: 'signup_input' %>
+                        <%= f.password_field :password_confirmation, class: 'signup_input' %>
                     </td>
                 </tr>
                 <tr>
