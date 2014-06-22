@@ -13,13 +13,10 @@ rake db:migrate RAILS_ENV=production
 
 rails s -e production
 
-
-
-
-
-#production assets:
+#production assets ( do locally )
 
 rake assets:precompile RAILS_ENV=production
+
 
 
 

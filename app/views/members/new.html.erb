@@ -1,19 +1,46 @@
-<% provide(:title, 'Sign up') %>
-<div class="row">
-	<div class="span6 offset3">
-		<h1>Sign up</h1>
-		<%= form_for(@member) do |f| %>
-			<%= render 'shared/error_messages' %>
-			<%= f.label :email %>
-			<%= f.text_field :email %>
-			<%= f.label :name, "Nickname" %>
-			<%= f.text_field :name %>
-			<%= f.label :password %>
-			<%= f.password_field :password %>
-			<%= f.label :password_confirmation, "Confirm Password" %>
-			<%= f.password_field :password_confirmation %>
-			<br>
-			<%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-		<% end %>
-	</div>
+<% provide(:title, "Sign up") %>
+<div id="signup">
+    <%= image_tag('signup.jpg', id: 'signup_bg') %>
+    <div id="signup_modal">
+        <h2>SIGN UP</h2>
+        <%= form_for(:member) do |f| %>
+            <table id="signup_table">
+                <tr>
+                    <td width="50%" class="signup_label">
+                        <b><%= f.label :email %></b>
+                    </td>
+                    <td>
+                        <%= f.text_field :email, class: 'signup_input' %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="signup_label">
+                        <b><%= f.label :password %></b>
+                    </td>
+                    <td>
+                        <%= f.password_field :password, class: 'signup_input' %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="signup_label">
+                        <b><%= f.label :confirm_password %></b>
+                    </td>
+                    <td>
+                        <%= f.password_field :confirm_password, class: 'signup_input' %>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-right">
+                        <%= f.submit "Create Account", class: "btn" %>
+                    </td>
+                </tr>
+            </table>
+        <% end %>
+        <div class="hr"></div>
+<!--         <div id="facebook_signup_container">
+            <h3>or</h3>
+            <div id="facebook_btn"><a href="#"><img src="img/facebook_placeholder.png"></a></div>
+        </div> -->
+        <p class="signup_disclaimer text-center">By joining, you agree to the <a href="#">Terms of conditions</a></p>
+    </div>
 </div>
