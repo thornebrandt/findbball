@@ -70,7 +70,7 @@ describe Member do
 
 	describe "return value of authenticate method" do
 		before { @member.save }
-		let(:found_member) { member.find_by(email: @member.email) }
+		let(:found_member) { Member.find_by(email: @member.email) }
 
 		describe "with valid password" do
 			it { should eq found_member.authenticate(@member.password) }
