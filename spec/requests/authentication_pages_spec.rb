@@ -28,7 +28,7 @@ describe "AuthenticationPages" do
   		end
 
   		describe "after visiting another page" do
-  			before { click_link "home" }
+  			before { click_link "Home" }
   			it { should_not have_seletor('div.alert.alert.error') }
   		end
   	end
