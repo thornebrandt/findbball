@@ -15,7 +15,7 @@ class MembersController < ApplicationController
 			redirect_to @member
 		else
 			@noHeaderFooter = true
-			flash[:error] = "Could not create member"
+			flash[:error] = "Could not create member."
 			render 'new'
 		end
 	end

@@ -3,7 +3,7 @@ Rspec.configure do |c|
     c.filter_run_excluding :skip => true
 end
 
-describe "MemberProfiles" do
+describe "member pages: " do
 
     subject { page }
 
@@ -62,14 +62,14 @@ describe "MemberProfiles" do
         before { visit signup_path }
         let(:submit) { "Create Account" }
         describe "with invalid information" do
-            it "should not create a user" do
+            it "should not create a member" do
                 expect { click_button submit }.not_to change(Member, :count)
             end
 
             describe "after submission" do
                 before { click_button submit }
                 it { should have_title('Sign up') }
-                it { should have_content('error') }
+                it { should have_content('Could not create member') }
             end
         end
 
@@ -80,7 +80,7 @@ describe "MemberProfiles" do
                 fill_in "Confirm Password",     with: "password"
             end
 
-            it "should create a user" do
+            it "should create a member" do
                 expect { click_button submit }.to change(Member, :count).by(1)
             end
 
