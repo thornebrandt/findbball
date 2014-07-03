@@ -12,8 +12,8 @@ describe "AuthenticationPages" do
   		describe "with valid information" do
   			let(:member) { FactoryGirl.create(:member) } 
   			before do
-  				fill_in "Email", with: player.email.upcase
-  				fill_in "Password", with: player.password
+  				fill_in "Email", with: member.email.upcase
+  				fill_in "Password", with: member.password
   				click_button "Sign in"
   			end
 
