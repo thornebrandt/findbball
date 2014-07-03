@@ -1,4 +1,5 @@
 class Member < ActiveRecord::Base
+  has_many :courts
 	has_secure_password
 	before_save :beforeSave
 	before_create :create_remember_token
