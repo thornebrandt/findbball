@@ -1,5 +1,10 @@
+cd findbball
+git pull
+
 # directions for deployment on webfaction
 cd findbball_rails
+
+
 
 export GEM_HOME=$PWD/gems
 export RUBYLIB=$PWD/lib

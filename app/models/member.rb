@@ -28,6 +28,7 @@ class Member < ActiveRecord::Base
 
 	private
 		def create_remember_token
+            print 'creating remember token'
 			self.remember_token = Member.hash(Member.new_remember_token)
 		end
 end
