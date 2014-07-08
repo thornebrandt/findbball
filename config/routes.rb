@@ -9,6 +9,8 @@ Findbball::Application.routes.draw do
   match '/signup', to: 'members#new',         via: 'get'
   match '/signin', to: 'sessions#new',        via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
+  
+  match '/addcourt', to: 'courts#new',        via: 'get'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

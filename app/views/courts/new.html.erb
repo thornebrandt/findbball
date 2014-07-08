@@ -1,7 +1,7 @@
 <% provide(:title, "Add a court") %>
 <h1>Add a court</h1>
 
-<div class="row">>
+<div class="row">
 	<div class="span6 offset3">
 		<%= form_for(@court) do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
@@ -12,7 +12,7 @@
 			<%= f.label :address %>
 			<%= f.text_field :address %>
 			
-			<%= f.submit "Add this court", class: "btn btn-large btn-primary" %>
+			<%= f.submit "Add my court", class: "btn btn-large btn-primary" %>
 		<% end %>
 	</div>
 </div>
