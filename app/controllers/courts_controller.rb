@@ -5,6 +5,7 @@ class CourtsController < ApplicationController
   end
   
   def new
+    @court = current_user.courts.build if signed_in?
   end
   
 end
