@@ -20,11 +20,14 @@ describe Member do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:courts) }
-	it { should be_valid } 
+    it { should respond_to(:general_location) }
+    it { should respond_to(:display_name) }
+    it { should respond_to(:full_name) }
+	it { should be_valid }
 
-	describe "when email is not present" do 
+	describe "when email is not present" do
 		before { @member.email = ""}
-		it { should_not be_valid } 
+		it { should_not be_valid }
 	end
 
 	describe "when email format is invalid" do
@@ -55,7 +58,7 @@ describe Member do
 			member_with_same_email.save
 		end
 
-		it { should_not be_valid } 
+		it { should_not be_valid }
 	end
 
 	describe "an email address with mixed case" do
@@ -66,7 +69,6 @@ describe Member do
 			expect(@member.reload.email).to eq mixed_case_email.downcase
 		end
 	end
-
 
 
 	describe "return value of authenticate method" do
@@ -83,7 +85,7 @@ describe Member do
 			specify { expect(wrong_password_member).to be_false }
 		end
 
-		describe "with a password that is too short" do 
+		describe "with a password that is too short" do
 			before { @member.password = @member.password_confirmation = "a" * 5 }
 			it { should be_invalid }
 		end
