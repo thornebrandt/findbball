@@ -2,23 +2,15 @@ require 'spec_helper'
 
 describe Court do
   
-  let(:member) { FactoryGirl.create(:member) }
-  before { @court = member.courts.build(name: "Courtem ipsum", address: "1408 Parkway Rd", member: @member) }
+  before { @court = Court.new(name: "Courtem ipsum", address: "1408 Parkway Rd", member_id: nil) }
   
   subject { @court }
   
   it { should respond_to(:name) }
   it { should respond_to(:address) }
-  it { should respond_to(:member) }
   it { should respond_to(:member_id) }
-  its(:member) { should eq member }
   
   it { should be_valid }
-  
-  describe "when member_id is not present" do
-    before { @court.member_id = nil }
-    it { should_not be_valid }
-  end
   
   describe "with blank name" do
     before { @court.name = nil}

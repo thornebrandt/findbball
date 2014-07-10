@@ -8,6 +8,5 @@ FactoryGirl.define do
 	factory :court do
 	  name "Courtem ipsum"
 	  address "1408 Parkway Rd"
-	  member
 	end
 end

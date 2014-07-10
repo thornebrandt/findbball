@@ -5,7 +5,7 @@ class CourtsController < ApplicationController
   end
   
   def new
-    @court = current_user.courts.build if signed_in?
+    @court = Court.new
   end
   
   def create
@@ -14,9 +14,13 @@ class CourtsController < ApplicationController
       flash[:success] = "Court created!"
       redirect_to @court
     else
-      @noHeaderFooter = true
       flash[:error] = "Could not create court."
       render 'new'
     end
   end
+  
+    private
+    def court_params
+        params.require(:court).permit(:name, :address, :member_id)
+    end
 end
