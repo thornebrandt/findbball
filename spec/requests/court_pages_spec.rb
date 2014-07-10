@@ -17,6 +17,7 @@ describe "Court pages" do
     before { visit addcourt_path }
     it { should have_content('Add a court') }
     it { should have_title(full_title('Add a court')) }
+    it { should have_field('Name') }
   end
   
   describe "add court" do
