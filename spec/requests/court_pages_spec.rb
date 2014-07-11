@@ -11,6 +11,33 @@ describe "Court pages" do
     it { should have_content(court.name) }
     it { should have_content(court.address) }
     it { should have_title(court.name) }
+    
+    describe "sidebar left" do
+      it { should have_css('div.profile_pic_container') }
+      it { should have_css('button.playToday') }
+      it { should have_css('div.court_events_container') }
+      it { should have_css('div.friends_container') }
+    end
+    
+    describe "sidebar right" do
+      it { should have_css('div.author_container') }
+      it { should have_css('div.court_map') }
+      it { should have_css('h4.milesAway') }
+      it { should have_css('a.changeLocation') }
+      it { should have_css('img.ad_right') }
+    end
+    
+    describe "content" do
+      it { should have_css('h2.courtName') }
+      it { should have_css('a.courtWebsite') }
+      it { should have_css('p.courtAddress') }
+      it { should have_css('p.courtHours') }
+      it { should have_css('div.courtDifficulty') }
+      it { should have_css('p.courtPickUpGame') }
+      it { should have_css('div.courtPhotos_container') }
+      it { should have_css('div.courtVideos_container') }
+      it { should have_css('div.reviewsContainer') }
+    end
   end
   
   describe "add court page" do

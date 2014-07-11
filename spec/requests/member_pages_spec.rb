@@ -30,7 +30,7 @@ describe "member pages: " do
                 it { should have_css('a.friend') }
             end
                 it { should have_css('div.friend_feed_container') }
-                it { should have_css('div.events_container') }
+                it { should have_css('div.member_events_container') }
                 it { should have_css('div.courts_container') }
         end
 

@@ -8,7 +8,13 @@ describe Court do
   
   it { should respond_to(:name) }
   it { should respond_to(:address) }
+  it { should respond_to(:city) }
+  it { should respond_to(:state) }
+  it { should respond_to(:zip) }
+  
   it { should respond_to(:member_id) }
+  it { should respond_to(:best_time) }
+  it { should respond_to(:skill_level) }
   
   it { should be_valid }
   
