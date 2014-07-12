@@ -11,6 +11,7 @@ describe Court do
   it { should respond_to(:city) }
   it { should respond_to(:state) }
   it { should respond_to(:zip) }
+  it { should respond_to(:country) }
   
   it { should respond_to(:member_id) }
   it { should respond_to(:best_time) }
