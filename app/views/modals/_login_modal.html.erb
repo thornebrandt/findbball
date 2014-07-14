@@ -1,0 +1,17 @@
+<div id="loginModal" class="footer_modal modal hide fade noScroll">
+    <div>
+        <h2>Login</h2>
+        <%= form_tag sessions_path do %>
+            <%= label_tag :email %>
+            <%= text_field_tag :email, params[:email]%>
+
+            <%= label_tag :password %>
+            <%= password_field_tag :password %>
+            <br>
+            <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
+        <% end %>
+
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+</div>
+
