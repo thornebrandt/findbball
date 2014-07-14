@@ -17,7 +17,7 @@
             <hr>
             <div class="courtInfo2 center">
                 <div id="courtDifficulty"><span id="difficulty">Beginner</span>
-                    <img id="difficultyImage" src="img/icon/skill_beginner.png">
+                    <%= image_tag "icon/skill_beginner.png" %>
                 </div>
                 <p id="courtPickUpGame">
                     <b>Best time for "Pick-up Game"</b> <span id="pickupTime">Sundays 10pm<span>
@@ -27,10 +27,10 @@
             <h3>PHOTOS(2)</h3>
             <div id="courtPhotos_container">
                 <p id="courtPhotos">
-                    <img class="courtPhoto" src="img/court/default.jpg">
-                    <img class="courtPhoto" src="img/court/court1.jpg">
+                    <%= image_tag "courts/default.jpg", class: "courtPhoto" %>
+                    <%= image_tag "courts/court1.jpg", class: "courtPhoto" %>
                 </p>
-                <a href="#" id="upload_court_photo"><img src="img/icon/upload.png"> Upload Photo</a>
+                <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
             </div>
             <hr>
             <h3>VIDEOS(1)</h3>
@@ -49,14 +49,14 @@
                             </div>
                         </div>
                     </div>
-                <a href="#" id="add_court_video"><img src="img/icon/upload.png"> Add Video</a>
+                <a href="#" id="add_court_video"><%= image_tag "icon/upload.png" %> Add Video</a>
             </div>
             <hr>
             <a name="reviews"></a>
             <h3>REVIEWS(15)</h3>
             <div id="reviewsContainer">
                 <div id="firstReview" class="review">
-                    <img class="review_author" src="img/user/jerry.jpg">
+                    <%= image_tag "members/jerry.jpg", id: "review_author" %>
                     <p class="review_body">
                     <a class="review_author_name">Jerry</a><br>
                     <span class="reviewBody">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span>
@@ -64,7 +64,7 @@
                     <hr>
                 </div>
                 <div class="review">
-                    <img class="review_author" src="img/user/paris_hilton.jpg">
+                    <%= image_tag "members/jerry.jpg", id: "review_author" %>
                     <p class="review_body">
                         <a class="review_author_name">Paris</a><br>
                         Nobody knows what ur talking abt. 
@@ -72,7 +72,7 @@
                     <hr>
                 </div>
                 <div class="review">
-                    <img class="review_author" src="img/user/jerry.jpg">
+                    <%= image_tag "members/jerry.jpg", id: "review_author" %>
                     <p class="review_body">
                         <a class="review_author_name">Jerry</a><br>
                         Whoa, why was I speaking in greek?
@@ -80,7 +80,7 @@
                     <hr>
                 </div>
                 <div class="review">
-                    <img class="review_author" src="img/user/jerry.jpg">
+                    <%= image_tag "members/jerry.jpg", id: "review_author" %>
                     <p class="review_body">
                     <a class="review_author_name">Jerry</a><br>
                    Duis vestibulum libero eget arcu consequat eleifend. Curabitur quis enim tincidunt, euismod neque vel, accumsan quam. Suspendisse rhoncus fringilla elit. Donec et est eu leo suscipit condimentum sed id velit. Fusce vulputate velit tincidunt lorem tempor, at porta ligula dictum. Donec vulputate urna ut lectus ultrices tempor. Maecenas facilisis hendrerit consectetur. Nullam sed tempus felis, id imperdiet diam. Praesent commodo neque eget elit porttitor blandit. In suscipit mollis augue, non elementum urna porttitor vel. Curabitur vitae erat pulvinar, hendrerit nisl eu, bibendum quam. Ut ac semper diam, consequat dignissim erat. Duis pharetra in mi ac iaculis. Cras augue lorem, tincidunt ut tristique at, eleifend at mauris. Nunc sapien nisl, egestas vitae viverra eget, sodales eu massa.
@@ -89,7 +89,7 @@
                 </div>
                 <div id="hiddenReviews" class="hide">
                     <div class="review">
-                        <img class="review_author" src="img/user/jerry.jpg">
+                       <%= image_tag "members/jerry.jpg", id: "review_author" %>
                         <p class="review_body">
                         <a class="review_author_name">Jerry</a><br>
                         Donec tempor, nisl non convallis sollicitudin, velit sapien ultricies velit, at gravida odio neque nec sem. Curabitur massa ligula, pulvinar id enim et, rutrum sollicitudin lacus. Etiam tincidunt ligula non nisl volutpat, vitae tempus lacus bibendum. Aliquam dapibus quam at massa vestibulum, vitae feugiat erat pretium. Cras sodales imperdiet nunc id rhoncus. Cras sagittis tortor eget imperdiet mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam commodo tellus arcu, non sodales quam rhoncus quis. Nam aliquam lobortis nunc vel fermentum. Quisque dictum placerat metus et faucibus. Suspendisse et neque mollis, pretium neque ac, rutrum dui. Fusce sagittis accumsan faucibus. Sed non lorem rutrum, congue urna vitae, aliquet massa. Vivamus laoreet dolor vitae elit vehicula, in blandit sem rutrum.
@@ -97,7 +97,7 @@
                         <hr>
                     </div>
                     <div class="review">
-                        <img class="review_author" src="img/user/jerry.jpg">
+                        <%= image_tag "members/jerry.jpg", id: "review_author" %>
                         <p class="review_body">
                         <a class="review_author_name">Jerry</a><br>
                         Vestibulum varius a ipsum eget dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eros dui, sodales quis cursus sed, aliquam in augue. Sed a metus augue. Quisque sollicitudin, felis at varius feugiat, dolor ligula rhoncus diam, at scelerisque ante orci ut leo. Donec eu diam non nulla faucibus egestas. Morbi eget urna elementum, volutpat sem vel, lobortis lacus. Vivamus viverra, mi eget porta venenatis, purus sem iaculis mi, id dapibus ipsum felis eu purus. Nullam pretium in lacus quis aliquet. Nam pellentesque est nibh, eget eleifend enim vehicula sit amet. Pellentesque nisi nibh, hendrerit vitae turpis ut, posuere vulputate neque. Vestibulum vulputate dignissim nibh eget sollicitudin. 
@@ -105,7 +105,7 @@
                         <hr>
                     </div>
                     <div class="review">
-                        <img class="review_author" src="img/user/jerry.jpg">
+                       <%= image_tag "members/jerry.jpg", id: "review_author" %>
                         <p class="review_body">
                         <a class="review_author_name">Jerry</a><br>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
@@ -113,7 +113,7 @@
                         <hr>
                     </div>
                     <div class="review">
-                        <img class="review_author" src="img/user/jerry.jpg">
+                       <%= image_tag "members/jerry.jpg", id: "review_author" %>
                         <p class="review_body">
                         <a class="review_author_name">Jerry</a><br>
                         Donec tempor, nisl non convallis sollicitudin, velit sapien ultricies velit, at gravida odio neque nec sem. Curabitur massa ligula, pulvinar id enim et, rutrum sollicitudin lacus. Etiam tincidunt ligula non nisl volutpat, vitae tempus lacus bibendum. Aliquam dapibus quam at massa vestibulum, vitae feugiat erat pretium. Cras sodales imperdiet nunc id rhoncus. Cras sagittis tortor eget imperdiet mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
@@ -121,7 +121,7 @@
                         <hr>
                     </div>
                      <div class="review">
-                            <img class="review_author" src="img/user/jerry.jpg">
+                            <%= image_tag "members/jerry.jpg", id: "review_author" %>
                             <p class="review_body">
                             <a class="review_author_name">Jerry</a><br>
                            Duis vestibulum libero eget arcu consequat eleifend. Curabitur quis enim tincidunt, euismod neque vel, accumsan quam. Suspendisse rhoncus fringilla elit. Donec et est eu leo suscipit condimentum sed id velit. Fusce vulputate velit tincidunt lorem tempor, at porta ligula dictum. Donec vulputate urna ut lectus ultrices tempor. Maecenas facilisis hendrerit consectetur. Nullam sed tempus felis, id imperdiet diam. Praesent commodo neque eget elit porttitor blandit. In suscipit mollis augue, non elementum urna porttitor vel. Curabitur vitae erat pulvinar, hendrerit nisl eu, bibendum quam. Ut ac semper diam, consequat dignissim erat. Duis pharetra in mi ac iaculis. Cras augue lorem, tincidunt ut tristique at, eleifend at mauris. Nunc sapien nisl, egestas vitae viverra eget, sodales eu massa.
@@ -129,7 +129,7 @@
                             <hr>
                         </div>
                         <div class="review">
-                            <img class="review_author" src="img/user/jerry.jpg">
+                           <%= image_tag "members/jerry.jpg", id: "review_author" %>
                             <p class="review_body">
                             <a class="review_author_name">Jerry</a><br>
                             Donec tempor, nisl non convallis sollicitudin, velit sapien ultricies velit, at gravida odio neque nec sem. Curabitur massa ligula, pulvinar id enim et, rutrum sollicitudin lacus. Etiam tincidunt ligula non nisl volutpat, vitae tempus lacus bibendum. Aliquam dapibus quam at massa vestibulum, vitae feugiat erat pretium. Cras sodales imperdiet nunc id rhoncus. Cras sagittis tortor eget imperdiet mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam commodo tellus arcu, non sodales quam rhoncus quis. Nam aliquam lobortis nunc vel fermentum. Quisque dictum placerat metus et faucibus. Suspendisse et neque mollis, pretium neque ac, rutrum dui. Fusce sagittis accumsan faucibus. Sed non lorem rutrum, congue urna vitae, aliquet massa. Vivamus laoreet dolor vitae elit vehicula, in blandit sem rutrum.
@@ -137,7 +137,7 @@
                             <hr>
                         </div>
                         <div class="review">
-                            <img class="review_author" src="img/user/jerry.jpg">
+                            <%= image_tag "members/jerry.jpg", id: "review_author" %>
                             <p class="review_body">
                             <a class="review_author_name">Jerry</a><br>
                             Vestibulum varius a ipsum eget dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eros dui, sodales quis cursus sed, aliquam in augue. Sed a metus augue. Quisque sollicitudin, felis at varius feugiat, dolor ligula rhoncus diam, at scelerisque ante orci ut leo. Donec eu diam non nulla faucibus egestas. Morbi eget urna elementum, volutpat sem vel, lobortis lacus. Vivamus viverra, mi eget porta venenatis, purus sem iaculis mi, id dapibus ipsum felis eu purus. Nullam pretium in lacus quis aliquet. Nam pellentesque est nibh, eget eleifend enim vehicula sit amet. Pellentesque nisi nibh, hendrerit vitae turpis ut, posuere vulputate neque. Vestibulum vulputate dignissim nibh eget sollicitudin. 
@@ -145,7 +145,7 @@
                             <hr>
                         </div>
                         <div class="review">
-                            <img class="review_author" src="img/user/jerry.jpg">
+                           <%= image_tag "members/jerry.jpg", id: "review_author" %>
                             <p class="review_body">
                             <a class="review_author_name">Jerry</a><br>
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
@@ -153,7 +153,7 @@
                             <hr>
                         </div>
                         <div class="review">
-                            <img class="review_author" src="img/user/jerry.jpg">
+                            <%= image_tag "members/jerry.jpg", id: "review_author" %>
                             <p class="review_body">
                             <a class="review_author_name">Jerry</a><br>
                             Donec tempor, nisl non convallis sollicitudin, velit sapien ultricies velit, at gravida odio neque nec sem. Curabitur massa ligula, pulvinar id enim et, rutrum sollicitudin lacus. Etiam tincidunt ligula non nisl volutpat, vitae tempus lacus bibendum. Aliquam dapibus quam at massa vestibulum, vitae feugiat erat pretium. Cras sodales imperdiet nunc id rhoncus. Cras sagittis tortor eget imperdiet mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
