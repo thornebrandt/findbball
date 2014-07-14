@@ -41,7 +41,7 @@ describe "Court pages" do
   end
   
   describe "add court page" do
-    before { visit addcourt_path }
+    before { visit new_court_path }
     it { should have_content('Add a court') }
     it { should have_title(full_title('Add a court')) }
     it { should have_field('Name') }
@@ -52,7 +52,7 @@ describe "Court pages" do
   
   describe "add court" do
     
-    before { visit addcourt_path }
+    before { visit new_court_path }
     
     let(:submit) { "Add my court" }
     
