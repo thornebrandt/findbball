@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Court do
   
-  before { @court = Court.new(name: "Courtem ipsum", address: "1408 Parkway Rd", member_id: nil) }
+  before { @court = FactoryGirl.create(:court) }
   
   subject { @court }
   

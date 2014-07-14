@@ -45,6 +45,9 @@ describe "Court pages" do
     it { should have_content('Add a court') }
     it { should have_title(full_title('Add a court')) }
     it { should have_field('Name') }
+    it { should have_field('Address') }
+    it { should have_field('City') }
+    it { should have_field('State') }
   end
   
   describe "add court" do
@@ -63,6 +66,8 @@ describe "Court pages" do
       before do
         fill_in "Name",       with: "Example Court"
         fill_in "Address",    with: "foobar"
+        fill_in "City",       with: "Atlanta"
+        fill_in "State",      with: "GA"
       end
       
       it "should create a court" do

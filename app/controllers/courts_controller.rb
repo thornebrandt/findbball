@@ -8,6 +8,9 @@ class CourtsController < ApplicationController
     @court = Court.new
   end
   
+  def index
+  end
+  
   def create
     @court = Court.new(court_params)
     if @court.save
@@ -21,6 +24,6 @@ class CourtsController < ApplicationController
   
     private
     def court_params
-        params.require(:court).permit(:name, :address, :member_id)
+        params.require(:court).permit(:name, :address, :city, :state, :member_id)
     end
 end
