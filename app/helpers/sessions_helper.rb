@@ -1,10 +1,11 @@
 module SessionsHelper
 
-    def sign_in(user)
+    def sign_in(member)
+        puts "wtf"
         remember_token = Member.new_remember_token
         cookies.permanent[:remember_token] = remember_token
-        user.update_attribute(:remember_token, Member.hash(remember_token))
-        self.current_user = user
+        member.update_attribute(:remember_token, Member.hash(remember_token))
+        self.current_user = member
     end
 
 

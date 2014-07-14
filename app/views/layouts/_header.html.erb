@@ -53,21 +53,27 @@
                                 </li>
                             </ul>
                         </li>
+                        <% if signed_in? %>
+                            <li>
+                                <a id="logoutBtn" href="#">Logout</a>
+                            </li>
+                        <% else %>
+                            <li>
+                                <a id="loginBtn" href="#">Login</a>
+                            </li>
+                        <% end %>
                         <li>
-                            <a href="#">Login</a>
-                        </li>
-                        <li>
-                            <a href="#">Signup</a>
+                            <li><%= link_to "Sign up", signup_path %></li>
                         </li>
                     </ul>
                     <div id="nav_top_right">
                         <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
                     </div>
-                </div>
+                </div>j
 	<div id="nav2_container">
 		<div id="nav2">
 		    <form id="i_want_to_form">
-    		    I want to: 
+    		    I want to:
     		    <select id="i_want_to">
     		        <option>Find Hoops</option>
     		        <option>Find Events</option>
@@ -82,7 +88,7 @@
                         <option>25 miles</option>
                         <option>10 miles</option>
         		    </select>
-        		    of 
+        		    of
         		    <input id="location_search" type="text" placeholder="Chicago" autocomplete="off"/>
         		</div>
     		    <input id="member_search" class="typeahead" type="text" style="display:none;" placeholder="Member Name" />
@@ -90,7 +96,7 @@
 	        </form>
 	        <% if @hero %>
             <span id="basketball_graphic"></span>
-            <% end %>                
+            <% end %>
 		</div>
     </div>
 </div>
