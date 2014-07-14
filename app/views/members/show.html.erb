@@ -16,6 +16,9 @@
 	<%= render '/members/profile_left' %>
   	<%= render '/members/profile_right' %>
      <div class="content">
+        <% if current_user? @member %>
+            This is your profile, <%= current_user.name %>
+        <% end %>
         <h2 id="fullname"><%= @member.name %></h2>
         <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
             <% if @member_has_schedule == true %>

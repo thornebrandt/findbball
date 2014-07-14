@@ -53,9 +53,15 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a id="loginBtn" href="#">Login</a>
-                        </li>
+                        <% if signed_in? %>
+                            <li>
+                                <a id="logoutBtn" href="#">Logout</a>
+                            </li>
+                        <% else %>
+                            <li>
+                                <a id="loginBtn" href="#">Login</a>
+                            </li>
+                        <% end %>
                         <li>
                             <li><%= link_to "Sign up", signup_path %></li>
                         </li>
@@ -63,7 +69,7 @@
                     <div id="nav_top_right">
                         <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
                     </div>
-                </div>
+                </div>j
 	<div id="nav2_container">
 		<div id="nav2">
 		    <form id="i_want_to_form">
