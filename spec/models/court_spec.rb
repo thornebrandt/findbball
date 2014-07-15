@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe Court do
   
-  before { @court = FactoryGirl.create(:court) }
+  let(:member) { @member = FactoryGirl.create(:member) }
+  
+  before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", zip: "30067",
+                                        best_time: "6 to 8 Wednesdays", skill_level: "1") }
   
   subject { @court }
   
@@ -16,6 +19,9 @@ describe Court do
   it { should respond_to(:member_id) }
   it { should respond_to(:best_time) }
   it { should respond_to(:skill_level) }
+  
+  it { should respond_to(:member) }
+  its(:member) { should eq member }
   
   it { should be_valid }
   

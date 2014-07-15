@@ -3,12 +3,17 @@ class CourtsController < ApplicationController
   def show
     @court = Court.find(params[:id])
   end
-  
-  def new
-    @court = Court.new
+
+  def index
   end
   
-  def index
+  before_action :signed_in_user
+  
+  def edit
+  end
+  
+  def new
+    @court = current_user.courts.build(court_params)
   end
   
   def create

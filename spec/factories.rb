@@ -14,5 +14,6 @@ FactoryGirl.define do
 	  country "United States"
 	  skill_level 3
 	  best_time "Thursdays 10pm to 12am"
+	  member
 	end
 end
