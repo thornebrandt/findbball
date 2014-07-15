@@ -55,21 +55,21 @@
                         </li>
                         <% if signed_in? %>
                             <li>
-                                <a id="logoutBtn" href="#">Logout</a>
+                                <%= link_to "Logout", signout_path, method: "delete" %>
                             </li>
                         <% else %>
                             <li>
                                 <a id="loginBtn" href="#">Login</a>
                             </li>
+                            <li>
+                                <li><%= link_to "Sign up", signup_path %></li>
+                            </li>
                         <% end %>
-                        <li>
-                            <li><%= link_to "Sign up", signup_path %></li>
-                        </li>
                     </ul>
                     <div id="nav_top_right">
                         <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
                     </div>
-                </div>j
+                </div>
 	<div id="nav2_container">
 		<div id="nav2">
 		    <form id="i_want_to_form">
@@ -99,4 +99,19 @@
             <% end %>
 		</div>
     </div>
+    <% if signed_in? %>
+        <div id="nav3_container">
+            <div id="nav3">
+                <a href="#">My Profile</a>
+                <a href="#">Edit Profile</a>
+                <a href="account_settings.html">Account Settings</a>
+                <a href="#">My Courts</a>
+                <a href="#">My Events</a>
+                <a href="#">My Teams</a>
+                <div id="mailbox">
+                    <a href="#">Inbox(2) <span class="mailbox_icon"></span></a>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
