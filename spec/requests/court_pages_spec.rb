@@ -6,11 +6,12 @@ describe "Court pages" do
   
   describe "profile page", :skip => true do
     let(:member) { @member = FactoryGirl.create(:member) }
-  
-    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", zip: "30067",
-                                          best_time: "6 to 8 Wednesdays", skill_level: "1") }
+    before { sign_in member }
+    # This currently refers to the sign_in method in utilities.rb. Needs to refer to the SessionsHelper one.
+    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
+                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
+
     before { visit court_path(@court) }
-    # Need to adjust tests to sign in before creating a court.
     
     it { should have_content(court.name) }
     it { should have_content(court.address) }
@@ -25,6 +26,7 @@ describe "Court pages" do
     
     describe "sidebar right" do
       it { should have_css('div.author_container') }
+      it { should have_content( court.member ) }
       it { should have_css('div.court_map') }
       it { should have_css('h4.milesAway') }
       it { should have_css('a.changeLocation') }
@@ -33,11 +35,18 @@ describe "Court pages" do
     
     describe "content" do
       it { should have_css('h2.courtName') }
+      it { should have_content(court.name) }
       it { should have_css('a.courtWebsite') }
       it { should have_css('p.courtAddress') }
+      it { should have_content(court.address) }
+      it { should have_content(court.city) }
+      it { should have_content(court.state) }
+      it { should have_content(court.zip) }
       it { should have_css('p.courtHours') }
       it { should have_css('div.courtDifficulty') }
+      it { should have_content(court.skill_level) }
       it { should have_css('p.courtPickUpGame') }
+      it { should have_content(court.best_time) }
       it { should have_css('div.courtPhotos_container') }
       it { should have_css('div.courtVideos_container') }
       it { should have_css('div.reviewsContainer') }
@@ -45,6 +54,11 @@ describe "Court pages" do
   end
   
   describe "add court page" do
+    
+    let(:member) { @member = FactoryGirl.create(:member) }
+    before { sign_in member }
+    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
+                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
     before { visit new_court_path }
     it { should have_content('Add a court') }
     it { should have_title(full_title('Add a court')) }
@@ -55,6 +69,11 @@ describe "Court pages" do
   end
   
   describe "add court" do
+    
+    let(:member) { @member = FactoryGirl.create(:member) }
+    before { sign_in member }
+    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
+                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
     
     before { visit new_court_path }
     

@@ -21,10 +21,5 @@ describe CourtsController do
       get :edit, :id => @court
       response.should be_success
     end
-
-    it "should have the right title" do
-      get :edit, :id => @court
-      response.should have_tag("title", /edit court/i)
-    end
   end
 end
