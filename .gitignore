@@ -24,3 +24,4 @@ doc/
 .idea
 .secret
 Thumbs.db
+/config/initializers/quiet_assets.rb
