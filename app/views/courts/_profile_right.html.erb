@@ -1,8 +1,8 @@
 	<div class="sidebar right">
             <div class="author_container">
                 <a href="player_profile.html"><%= image_tag "members/jerry.jpg", id: "profile_pic" %></a><br>
-                added by <b><a href="player_profile.html">Jerry</a></b><br>
-                April 2013<br>
+                added by <b><%= link_to @court.member, show_member_path(@court.member) %></a></b><br>
+                <%= @court.created_at %><br>
             </div>
         <div id="profile_right">
             <div id="court_map">
