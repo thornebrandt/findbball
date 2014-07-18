@@ -10,10 +10,10 @@ def full_title(page_title)
 end
 
 def sign_in(member)
-  visit signin_path
-  fill_in "Email",    with: member.email
-  fill_in "Password", with: member.password
-  click_button "Sign in"
-  # Sign in when not using Capybara as well.
-  cookies[:remember_token] = member.remember_token
+    visit home_path
+    fill_in "Email",    with: member.email
+    fill_in "Password", with: member.password
+    click_button "Sign in"
+    # Sign in when not using Capybara as well.
+    cookies[:remember_token] = member.remember_token
 end

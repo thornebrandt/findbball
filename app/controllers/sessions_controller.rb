@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
 	def create
 		member = Member.find_by_email(params[:email].downcase)
 		if member && member.authenticate(params[:password])
-            puts "what"
             sign_in member
             redirect_back_or member
 		else
