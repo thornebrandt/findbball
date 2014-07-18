@@ -4,12 +4,13 @@ describe "Court pages" do
   
   subject { page }
   
-  describe "profile page", :skip => true do
-    let(:member) { @member = FactoryGirl.create(:member) }
-    before { sign_in member }
-    # This currently refers to the sign_in method in utilities.rb. Needs to refer to the SessionsHelper one.
-    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
+  let(:member) { FactoryGirl.create(:member) }
+  before { sign_in member }
+  
+  before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
                                           zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
+  
+  describe "profile page", :skip => true do
 
     before { visit court_path(@court) }
     
@@ -55,11 +56,8 @@ describe "Court pages" do
   
   describe "add court page" do
     
-    let(:member) { @member = FactoryGirl.create(:member) }
-    before { sign_in member }
-    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
-                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
     before { visit new_court_path }
+    
     it { should have_content('Add a court') }
     it { should have_title(full_title('Add a court')) }
     it { should have_field('Name') }
@@ -69,11 +67,6 @@ describe "Court pages" do
   end
   
   describe "add court" do
-    
-    let(:member) { @member = FactoryGirl.create(:member) }
-    before { sign_in member }
-    before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
-                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
     
     before { visit new_court_path }
     

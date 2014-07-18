@@ -7,7 +7,8 @@
             <h2 id="courtName" class="courtH2"><%= @court.name %></h2>
             <a href="#" id="courtWebsite">court website</a>
             <p id="courtAddress" class="gray">
-                <%= @court.address %>
+                <%= @court.address %><br>
+                <%= @court.city + ", " + @court.state + " " + @court.zip %>
             </p>
             <p id="courtHours">
                 Open 10am - 8pm 
@@ -20,7 +21,7 @@
                     <%= image_tag "icon/skill_beginner.png" %>
                 </div>
                 <p id="courtPickUpGame">
-                    <b>Best time for "Pick-up Game"</b> <span id="pickupTime">Sundays 10pm<span>
+                    <b>Best time for "Pick-up Game"</b> <span id="pickupTime"><%= @court.best_time %></span>
                 </p>
             </div>
             <hr>
