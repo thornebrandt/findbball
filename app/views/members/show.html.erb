@@ -2,59 +2,13 @@
 <div class="container-fluid">
 	<%= render '/members/profile_left' %>
   	<%= render '/members/profile_right' %>
+
      <div class="content">
         <% if current_user? @member %>
-            This is your profile, <%= current_user.name %>
+            <%= render '/members/edit_profile_center_test' %>
+        <% else %>
+            <%= render '/members/profile_center' %>
         <% end %>
-        <h2 id="fullname"><%= @member.name %></h2>
-        <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
-            <% if @member_has_schedule == true %>
-            	<%= render 'members/member_headline' %>
-    		<% end %>
-        <table id="member_info">
-            <tbody>
-                <tr>
-                    <th>Plays Basketball</th>
-                    <th class="tdRightAlign">Skill Level</th>
-                </tr>
-                <tr>
-                    <td>A couple of times a month</td>
-                    <td class="tdRightAlign">beginner</td>
-                </tr>
-                <tr>
-                    <th>Height</th>
-                    <th class="tdRightAlign">Weight</th>
-                </tr>
-                <tr>
-                    <td>5'8"</td>
-                    <td class="tdRightAlign">150lbs</td>
-                </tr>
-                <tr>
-                    <th>Position</th>
-                    <th class="tdRightAlign">Highest Level of Organized Ball</th>
-                </tr>
-                <tr>
-                    <td>Center</td>
-                    <td class="tdRightAlign">Grade School</td>
-                </tr>
-                <tr>
-                    <th>Favorite Place to Play</th>
-                    <th class="tdRightAlign">Favorite member</th>
-                </tr>
-                <tr>
-                    <td>Wicker Park FieldHouse</td>
-                    <td class="tdRightAlign">Air Bud</td>
-                </tr>
-                <tr>
-                    <th colspan="2">About</th>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: justify">
-                        Bacon ipsum dolor sit amet sirloin shankle filet mignon hamburger short ribs boudin tongue ribeye tail jowl shank strip steak sausage. Chicken tail pork drumstick tri-tip, tongue boudin. Pig leberkas bacon pork chop, rump ham hock t-bone. Pig strip steak tongue, leberkas jerky flank short ribs. Turducken pork chop biltong tri-tip, ham pig pork loin t-bone strip steak corned beef tenderloin hamburger. Ball tip capicola meatball, ham short loin hamburger flank tail tongue venison sirloin. Leberkas short ribs short loin, brisket rump sausage beef ribs pig andouille tri-tip pancetta ribeye bresaola capicola. Pork chop fatback flank spare ribs pastrami leberkas beef ribs sausage ham hock shoulder shank doner chuck pork loin. Meatball tail turkey beef ball tip beef ribs sausage hamburger ham hock tenderloin chuck pancetta doner turducken. Doner tri-tip drumstick, biltong short loin pork belly meatball pig venison boudin frankfurter rump jerky. Jowl short loin tongue sausage pork venison.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <%= render 'members/member_history' %>
-     </div>
-     <%= render 'ads/placeholder' %>
+    </div>
+    <%= render '/ads/placeholder' %>
+

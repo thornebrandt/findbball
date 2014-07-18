@@ -1,0 +1,66 @@
+
+
+
+<%= f.text_field :full_name %>
+
+
+<div id="fullname">
+    <h2 id="edit_fullname" class="editable">Jerry Gurgich</h2><a href="#" class="editThis editable">edit full name</a>
+    <input style="display: none;" type="text" class="editing editInput" value="Jerry Gurgish" />
+    <button rel="edit_fullname" id="edit_fullName" type="submit" class="editing editComplete">Submit</button>
+</div>
+</form>
+<p id="home_address">
+    <div id="edit_address" class="editable">
+        2505 Old Bridge Ct
+        <br>Evansville, IN(Indiana) 47710-5229</div><a href="#" class="editThis editable">edit address</a>
+    <textarea rows="2" class="editing editInput" type="text">
+        2505 Old Bridge Ct Evansville, IN(Indiana) 47710-5229
+    </textarea>
+    <button rel="edit_address" type="submit" class="editing editComplete">Submit</button>
+    <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+</p>
+<p>
+    <span class="edit_profile_label">Nationality</span>
+    <select id="select_nationality">
+        <option>Undisclosed</option>
+        <option>Black</option>
+        <option>White</option>
+        <option>African</option>
+        <option>Asian</option>
+        <option>Native American</option>
+        <option>Other</option>
+    </select>
+</p>
+<div class="datepicker_container">
+    <span class="edit_profile_label">Birthdate</span>
+    <div class="input-append date" id="datepicker" data-date="03-21-1964" data-date-format="dd-mm-yyyy">
+        <input class="span2" size="16" type="text" value="12-02-2012">
+        <span class="add-on"><i class="icon-th"></i></span>
+    </div>
+</div>
+<br>
+<p>
+    <span class="edit_profile_label">About Me</span>
+    <br>
+    <div id="about_me">
+        <div id="edit_about_me" class="editable">
+            My actual name is Gary. I’ve just gone by Jerry because my first boss misunderstood my name and I couldn’t bear to correct him. So now I go by Jerry. Oh well. I’m not sure how I ended up on this site. I don’t understand computers very well. I’m trying to read the sports pages
+        </div>
+        <a href="#" class="editThis editable">edit about me</a>
+        <textarea rows="8" class="editing editInput" type="text">My actual name is Gary. I’ve just gone by Jerry because my first boss misunderstood my name and I couldn’t bear to correct him. So now I go by Jerry. Oh well. I’m not sure how I ended up on this site. I don’t understand computers very well. I’m trying to read the sports pages
+        </textarea>
+        <br>
+        <button rel="edit_about_me" type="submit" class="editing editComplete">Submit</button>
+        <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+    </div>
+</p>
+<p>
+    <span class="edit_profile_label">Favorite Place to Play</span>
+    <br>
+    <a href="#">Add a favorite place</a>
+</p>
+<p>
+    <span class="edit_profile_label">Teams</span>
+    <br>You are not on any teams <a href="#">manage teams</a>
+</p>

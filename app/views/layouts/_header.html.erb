@@ -66,9 +66,18 @@
                             </li>
                         <% end %>
                     </ul>
-                    <div id="nav_top_right">
-                        <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
-                    </div>
+                    <% if signed_in? %>
+                        <div id="nav_top_right">
+                            <div id="logged_in">
+                                You are logged in as <a href="#" id="nav_username"><%= current_user.name %></a>
+                                <%= image_tag "player_placeholder.png", { height: 40, width: 40 } %>
+                            </div>
+                        </div>
+                    <% else %>
+                        <div id="nav_top_right">
+                            <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+                        </div>
+                    <% end %>
                 </div>
 	<div id="nav2_container">
 		<div id="nav2">

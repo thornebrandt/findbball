@@ -607,16 +607,16 @@ $(function(){
   );
 
 
-	$(".editComplete").click(
-	  function(e){
-	    e.preventDefault();
-	    _target = "#" + $(this).attr("rel");
-	    _value = $(this).parent().children(".editInput").val();
-	    $(this).parent().children(".editable").show();
-	    $(this).parent().children(".editing").hide();
-	    $(_target).text(_value);
-	  }
-	);
+	// $(".editComplete").click(
+	//   function(e){
+	//     e.preventDefault();
+	//     _target = "#" + $(this).attr("rel");
+	//     _value = $(this).parent().children(".editInput").val();
+	//     $(this).parent().children(".editable").show();
+	//     $(this).parent().children(".editing").hide();
+	//     $(_target).text(_value);
+	//   }
+	// );
 
 
 	$(".video_title").click(

@@ -15,4 +15,5 @@ var fbb = {
 $(function(){
     fbb.nav();
     fbb.hero();
+    fbb.member_profile();
 });

@@ -14,8 +14,9 @@
   <meta name="author" content="Thorne Brandt">
 </head>
 	<% if @noHeaderFooter %>
-		<body class="gradient">
-	<% else %>
+<!-- <body class="gradient"> -->
+        <body>
+    <% else %>
 		<body class="body">
 		<%= render 'layouts/header' %>
     <% flash.each do |key, value| %>
