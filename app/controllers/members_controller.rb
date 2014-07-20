@@ -56,7 +56,18 @@ class MembersController < ApplicationController
                                             :email,
                                             :password,
                                             :password_confirmation,
-                                            :full_name
-                                            )
+                                            :full_name,
+                                            :general_location,
+                                            :nationality,
+                                            :birthdate,
+                                            :slogan,
+                                            :plays_basketball,
+                                            :skill_level,
+                                            :position,
+                                            :organized,
+                                            :favorite_player,
+                                            :about
+                                        )
 		end
+
 end

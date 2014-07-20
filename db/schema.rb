@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712141058) do
+ActiveRecord::Schema.define(version: 20140720085411) do
 
   create_table "courts", force: true do |t|
     t.string   "name"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20140712141058) do
     t.integer  "organized",                    default: -1
     t.string   "favorite_player"
     t.string   "about",            limit: 500
+    t.integer  "nationality",                  default: -1
+    t.date     "birthdate"
   end
 
   add_index "members", ["display_name"], name: "index_members_on_display_name"

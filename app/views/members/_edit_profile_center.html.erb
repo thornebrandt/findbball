@@ -1,38 +1,61 @@
+<% provide(:title, "Edit user") %>
 <%= form_for(@member) do |f| %>
 <div id="fullname">
-    <h2 id="edit_fullname" class="editable">Jerry Gurgich</h2><a href="#" class="editThis editable">edit full name</a>
+    <h2>
+        <%= best_in_place @member, :full_name, :type => :input, :activator => '#editFullName',
+            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+            :cancel_button => "Cancel", :cancel_button_class => "btn btn-danger btnMargin"
+        %>
+    </h2>
+    <a id="editFullName" href="#" class="editThis editable">edit full name</a>
     <input style="display: none;" type="text" class="editing editInput" value="Jerry Gurgish" />
     <button rel="edit_fullname" id="edit_fullName" type="submit" class="editing editComplete">Submit</button>
 </div>
 </form>
 <p id="home_address">
     <div id="edit_address" class="editable">
-        2505 Old Bridge Ct
-        <br>Evansville, IN(Indiana) 47710-5229</div><a href="#" class="editThis editable">edit address</a>
-    <textarea rows="2" class="editing editInput" type="text">
-        2505 Old Bridge Ct Evansville, IN(Indiana) 47710-5229
-    </textarea>
-    <button rel="edit_address" type="submit" class="editing editComplete">Submit</button>
-    <button rel="edit_profile_name" type="submit" class="editing editCancel">Cancel</button>
+        <span class="edit_profile_label">Location</span>
+
+        <%= best_in_place @member, :general_location, :type => :input, :activator => '#editGeneralLocation',
+            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+            :cancel_button => "Cancel", :cancel_button_class => "btn btn-danger btnMargin",
+            :nil => "General Location"
+        %>
+        <a id="editGeneralLocation" href="#" class="editThis editable">edit general location</a>
+    </div>
 </p>
 <p>
     <span class="edit_profile_label">Nationality</span>
-    <select id="select_nationality">
-        <option>Undisclosed</option>
-        <option>Black</option>
-        <option>White</option>
-        <option>African</option>
-        <option>Asian</option>
-        <option>Native American</option>
-        <option>Other</option>
-    </select>
+
+    <%= best_in_place @member, :nationality, :type => :select, :activator => '#editNationality', :collection =>
+        [
+            [-1, "Undisclosed"],
+            [1, "Black"],
+            [2, "White"],
+            [3, "African"],
+            [4, "Latino"],
+            [5, "Hispanic"],
+            [6, "Asian"],
+            [7, "Native American"],
+            [8, "Middle Eastern"],
+            [9, "Mixed"],
+            [10, "Other"]
+        ]
+    %>
+    <a id="editNationality" href="#" class="editThis editable">edit nationality</a>
 </p>
 <div class="datepicker_container">
     <span class="edit_profile_label">Birthdate</span>
-    <div class="input-append date" id="datepicker" data-date="03-21-1964" data-date-format="dd-mm-yyyy">
-        <input class="span2" size="16" type="text" value="12-02-2012">
-        <span class="add-on"><i class="icon-th"></i></span>
+    <%= best_in_place @member, :birthdate, :type => :date %>
+<!--
+    <div class="datepicker_container">
+        <span class="edit_profile_label">Birthdate</span>
+        <div class="input-append date" id="datepicker" data-date="03-21-1964" data-date-format="dd-mm-yyyy">
+          <input class="span2" size="16" type="text" value="12-02-2012">
+          <span class="add-on"><i class="icon-th"></i></span>
+        </div>
     </div>
+-->
 </div>
 <br>
 <p>
@@ -60,3 +83,4 @@
     <br>You are not on any teams <a href="#">manage teams</a>
 </p>
 <% end %>
+<%= @member.inspect %>

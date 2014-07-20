@@ -16,5 +16,5 @@ $(function(){
     $(".best_in_place").best_in_place();
     fbb.nav();
     fbb.hero();
-    fbb.member_profile();
+    // fbb.member_profile(); //looks like this is replaced by best_in_place
 });
