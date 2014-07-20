@@ -17,21 +17,24 @@ class MembersController < ApplicationController
         @member = Member.find(params[:id])
     end
 
-    def update_field()
-        @member = Member.find_by_id(params[:id])
-        puts "params[:member][:full_name]"
-        puts params[:member][:full_name]
-        if @member.update_attribute :full_name, params[:member][:full_name]
-            flash[:success] = "Profile updated"
-            #redirect_to @member
-            redirect_to show_test(params[:id])
-        else
-            render 'show'
+    def update
+        @member = Member.find(params[:id])
+        puts "member_params"
+        puts member_params
+        respond_to do |format|
+            if @member.update_attributes(member_params)
+                # format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
+                format.json { respond_with_bip(@member) }
+            else
+                # format.html { render :action => "show" }
+                format.json { respond_with_bip(@member) }
+            end
         end
     end
 
+
 	def create
-		@member = Member.new(member_params)
+		@member = Member.new(bip_params)
 		if @member.save
 			flash[:success] = "Welcome to Findbball"
 			redirect_to @member
@@ -43,12 +46,17 @@ class MembersController < ApplicationController
 	end
 
 	private
+        def bip_params
+            params.require(:member).permit(:name)
+        end
+
+
 		def member_params
-				params.require(:member).permit( :name,
-                                                :email,
-                                                :password,
-                                                :password_confirmation,
-                                                :full_name
-                                                )
+			params.require(:member).permit( :name,
+                                            :email,
+                                            :password,
+                                            :password_confirmation,
+                                            :full_name
+                                            )
 		end
 end

@@ -1,0 +1,7 @@
+<% provide(:title, "Edit user") %>
+<%= form_for(@member) do |f| %>
+    <%= @member.inspect %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <br>
+    <%= best_in_place @member, :name, :type => :input %>
+<% end %>

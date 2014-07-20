@@ -7,7 +7,7 @@ class Member < ActiveRecord::Base
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
 						uniqueness: { case_sensitive: false }
-	validates :password, length: { minimum: 6 }
+    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
 
 	def beforeSave
 		self.email.downcase!

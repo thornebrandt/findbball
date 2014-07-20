@@ -8,7 +8,7 @@ Findbball::Application.routes.draw do
   match '/home', to: 'static_pages#home',     via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
-  match '/test/:id', to: 'members#show_test', via: 'get'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

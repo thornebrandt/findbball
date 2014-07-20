@@ -13,6 +13,7 @@ var fbb = {
 }
 
 $(function(){
+    $(".best_in_place").best_in_place();
     fbb.nav();
     fbb.hero();
     fbb.member_profile();
