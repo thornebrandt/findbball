@@ -1,5 +1,6 @@
 class Court < ActiveRecord::Base
   belongs_to :member
+  has_many :reviews, dependent: :destroy
   
   validates :name,          presence: true, length: { maximum: 70 }
   validates :location,      presence: true, length: { maximum: 200 }

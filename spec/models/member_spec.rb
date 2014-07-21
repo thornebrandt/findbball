@@ -20,6 +20,7 @@ describe Member do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:courts) }
+	it { should respond_to(:reviews) }
     it { should respond_to(:general_location) }
     it { should respond_to(:full_name) }
 	it { should be_valid }

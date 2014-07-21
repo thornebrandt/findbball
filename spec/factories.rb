@@ -23,4 +23,10 @@ FactoryGirl.define do
 	  hours_closed_ampm "pm"
 	  member
 	end
+	
+	factory :review do
+	  content "It's great!"
+	  member
+	  court
+	end
 end
