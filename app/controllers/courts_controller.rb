@@ -4,11 +4,9 @@ class CourtsController < ApplicationController
     @court = Court.find(params[:id])
     @reviews = @court.reviews.paginate(page: params[:page])
   end
-
-  def index
-  end
   
   def edit
+    @court = Court.find(params[:id])
   end
   
   def new
