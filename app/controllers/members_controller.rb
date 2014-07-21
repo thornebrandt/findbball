@@ -1,6 +1,8 @@
 class MembersController < ApplicationController
 	def show
 		@member = Member.find(params["id"])
+		@courts = @member.courts.paginate(page: params[:page])
+    @reviews = @member.reviews.paginate(page: params[:page])
 	end
 
     def show_test(id)

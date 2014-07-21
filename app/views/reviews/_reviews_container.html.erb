@@ -1,8 +1,12 @@
 <div id="reviews_container">
-    <h3>REVIEWS(0)</h3>
-	    <p class="profile_subtitle"><%= @member.name %></a> hasn't written any reviews</p>
-<!--         <ul id="reviews">
-            <li><a class="review">Wicker Park Fieldhouse</a></li>
-            <li><a class="review">Wicker Park FieldHouse</a></li>
-        </ul> -->
+<% if @member.reviews.any? %>
+    	<h3>REVIEWS(<%= @member.reviews.count %>)</h3>
+    		<ul id="reviews">
+    			<%= render @reviews %>
+    		</ul>
+    		<%= will_paginate @reviews %>
+    <% else %>
+    	<h3>REVIEWS(0)</h3>
+    		<p class="profile_subtitle"><%= @member.name %> hasn't written any reviews</p>
+    <% end %>
 </div>
