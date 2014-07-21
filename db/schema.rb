@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720192629) do
+ActiveRecord::Schema.define(version: 20140721014634) do
 
   create_table "courts", force: true do |t|
     t.string   "name"
@@ -55,5 +55,15 @@ ActiveRecord::Schema.define(version: 20140720192629) do
   add_index "members", ["email"], name: "index_members_on_email", unique: true
   add_index "members", ["full_name"], name: "index_members_on_full_name"
   add_index "members", ["remember_token"], name: "index_members_on_remember_token"
+
+  create_table "reviews", force: true do |t|
+    t.string   "content"
+    t.integer  "member_id"
+    t.integer  "court_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["member_id", "created_at"], name: "index_reviews_on_member_id_and_created_at"
 
 end
