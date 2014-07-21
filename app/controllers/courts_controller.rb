@@ -7,8 +7,6 @@ class CourtsController < ApplicationController
   def index
   end
   
-  before_action :signed_in_user
-  
   def edit
   end
   

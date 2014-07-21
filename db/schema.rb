@@ -11,20 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720085411) do
+ActiveRecord::Schema.define(version: 20140720192629) do
 
   create_table "courts", force: true do |t|
     t.string   "name"
-    t.string   "address"
     t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "skill_level", default: "-1"
-    t.string   "best_time"
-    t.string   "country",     default: "United States"
+    t.integer  "skill_level",       limit: 1,   default: -1
+    t.integer  "best_time",         limit: 1
+    t.string   "location",          limit: 200
+    t.string   "website",           limit: 512
+    t.string   "best_time_ampm",    limit: 2
+    t.string   "best_day",          limit: 10
+    t.integer  "hours_open",        limit: 1
+    t.string   "hours_open_ampm",   limit: 2
+    t.integer  "hours_closed",      limit: 1
+    t.string   "hours_closed_ampm", limit: 2
   end
 
   create_table "members", force: true do |t|

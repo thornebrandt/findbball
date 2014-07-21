@@ -7,16 +7,13 @@ describe "Court pages" do
   let(:member) { FactoryGirl.create(:member) }
   before { sign_in member }
   
-  before { @court = member.courts.build(name: "Hoopz", address: "123 Fake St", city: "Atlanta", state: "GA", 
-                                          zip: "30067", best_time: "6 to 8 Wednesdays", skill_level: "1") }
+  before { @court = member.courts.build(name: "HoopZone", location: "123 Fake St, Atlanta, GA 30067", website: "http://mylifeismetal.com",
+                                         best_time: 6, best_time_ampm: "pm", best_day: "sunday",
+                                         hours_open: 9, hours_open_ampm: "am", hours_closed: 10, hours_closed_ampm: "pm", skill_level: "1") }
   
   describe "profile page", :skip => true do
 
     before { visit court_path(@court) }
-    
-    it { should have_content(court.name) }
-    it { should have_content(court.address) }
-    it { should have_title(court.name) }
     
     describe "sidebar left" do 
       it { should have_css('div.profile_pic_container') }
@@ -39,10 +36,7 @@ describe "Court pages" do
       it { should have_content(court.name) }
       it { should have_css('a.courtWebsite') }
       it { should have_css('p.courtAddress') }
-      it { should have_content(court.address) }
-      it { should have_content(court.city) }
-      it { should have_content(court.state) }
-      it { should have_content(court.zip) }
+      it { should have_content(court.location) }
       it { should have_css('p.courtHours') }
       it { should have_css('div.courtDifficulty') }
       it { should have_content(court.skill_level) }
@@ -58,12 +52,14 @@ describe "Court pages" do
     
     before { visit new_court_path }
     
-    it { should have_content('Add a court') }
-    it { should have_title(full_title('Add a court')) }
-    it { should have_field('Name') }
-    it { should have_field('Address') }
-    it { should have_field('City') }
-    it { should have_field('State') }
+    it { should have_css('div.add_court_map') }
+    it { should have_field('address_search') }
+    it { should have_field('Court Name') }
+    it { should have_field('Competition Level') }
+    it { should have_field('Best Time for a "pick-up" game')}
+    it { should have_field('Accessible Hours') }
+    it { should have_field('Court website link (if available)') }
+    it { should have_field('Details/Review') }
   end
   
   describe "add court" do
@@ -80,10 +76,8 @@ describe "Court pages" do
     
     describe "with valid information" do
       before do
-        fill_in "Name",       with: "Example Court"
-        fill_in "Address",    with: "foobar"
-        fill_in "City",       with: "Atlanta"
-        fill_in "State",      with: "GA"
+        fill_in "Court Name",       with: "Example Court"
+        fill_in "address_search",    with: "foobar"
       end
       
       it "should create a court" do
