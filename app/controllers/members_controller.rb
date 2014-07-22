@@ -19,19 +19,16 @@ class MembersController < ApplicationController
     end
 
     def update
+        puts "calling update"
         @member = Member.find(params[:id])
         if params[:member][:birthdate]
             new_birthdate = Chronic.parse(params[:member][:birthdate]).strftime('%Y-%m-%d');
             params[:member][:birthdate] = new_birthdate
         end
         respond_to do |format|
-            puts "what da format"
-            puts @member.inspect
             if @member.update_attributes(member_params)
                 # format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
                 format.json do
-                    puts "a json format"
-                    puts @member.inspect
                     respond_with_bip(@member)
                 end
             end

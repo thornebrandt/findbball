@@ -44,9 +44,9 @@
 </p>
 <div class="datepicker_container">
     <span class="edit_profile_label">Birthdate</span>
-    <%= best_in_place @member, :birthdate, :type => :input, :nil => "Not set", :activator => '#editBirthdate',
+    <%= best_in_place @member, :birthdate, :type => :date, :nil => "Not set", :activator => '#editBirthdate',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-        :inner_class => 'datepicker'
+        :classes => 'datepicker'
 
     %>
     <a id="editBirthdate" href="#" class="editThis editable">edit birthdate</a>
