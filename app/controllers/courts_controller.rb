@@ -2,14 +2,11 @@ class CourtsController < ApplicationController
   
   def show
     @court = Court.find(params[:id])
+    @reviews = @court.reviews.paginate(page: params[:page])
   end
-
-  def index
-  end
-  
-  before_action :signed_in_user
   
   def edit
+    @court = Court.find(params[:id])
   end
   
   def new
@@ -29,6 +26,7 @@ class CourtsController < ApplicationController
   
     private
     def court_params
-        params.require(:court).permit(:name, :address, :city, :state, :member_id)
+        params.require(:court).permit(:name, :location, :website, :skill_level, :hours_open, :hours_open_ampm, :hours_closed_ampm,
+                                      :best_day, :best_time, :best_time_ampm, :member_id)
     end
 end

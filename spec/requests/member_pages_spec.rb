@@ -9,6 +9,8 @@ describe "member pages: " do
 
     describe "profile page", :skip => true do
         let(:member) { FactoryGirl.create(:member) }
+        let(:court) { FactoryGirl.create(:courrt) }
+        let(:review) { FacctoryGirl.create(:review) }
         before { visit member_path(member) }
 
         describe "sidebar left" do
@@ -17,6 +19,8 @@ describe "member pages: " do
             it { should have_css('div.friends_container') }
             it { should have_css('div.teams_container') }
             it { should have_css('div.reviews_container') }
+            it { should have_content(member.reviews.count) }
+            it { should have_content(review.court) }
         end
 
         describe "sidebar right" do
@@ -32,6 +36,9 @@ describe "member pages: " do
                 it { should have_css('div.friend_feed_container') }
                 it { should have_css('div.member_events_container') }
                 it { should have_css('div.courts_container') }
+                it { should have_content(member.courts.count) }
+                it { should have_content(court.name) }
+                it { should have_content(court.location) }
         end
 
         describe "main content" do

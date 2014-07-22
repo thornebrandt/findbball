@@ -1,24 +1,143 @@
 <% provide(:title, "Add a court") %>
-<h1>Add a court</h1>
 
-<div class="row">
-	<div class="span6 offset3">
-		<%= form_for(@court) do |f| %>
-			<%= render 'shared/error_messages', object: f.object %>
-		
-			<%= f.label :name %>
-			<%= f.text_field :name %>
-			
-			<%= f.label :address %>
-			<%= f.text_field :address %>
-			
-			<%= f.label :city %>
-			<%= f.text_field :city %>
-			
-			<%= f.label :state %>
-			<%= f.text_field :state %>
-			
-			<%= f.submit "Add my court", class: "btn btn-large btn-primary" %>
-		<% end %>
-	</div>
+<div id="add_court_map"></div>
+	<div id="content_wrapper">
+        <div id="content">
+            <div id="heading_articles">
+                   <h3>ADD COURT</h3>
+            </div>
+            <div id="enter_address">
+        	    <span class="directions"></span> 
+        	    <b>New Court Location</b>
+                <input id="address_search" type="text" placeholder="1425 N Damen Ave, Chicago, IL 60622">
+                <input id="courtAddress" type="hidden">
+                <button type="submit" class="btn right_align">Map</button>
+        	</div>
+            <p id="latLng">
+            </p>
+            <div id="addCourt_add">
+            	<%= form_for(@court) do |f| %>
+                    <table id="addCourt_table">
+                        <tbody>
+                            <tr>
+                                <%= f.label :name %>
+                                <%= f.text_field :name %>
+                            </tr>
+                            <tr>
+                                <td class="td_label">Competition Level</td>
+                                <td>
+                                    <select id="competitionLevel">
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                        <option value="difficult">Difficult</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_label">Best Time for a "pick-up" game</td>
+                                <td>
+                                  <select id="pickupDay" class="day_of_week">
+                                      <option value="Sunday">Sunday</option>
+                                      <option value="Monday">Monday</option>
+                                      <option value="Tuesday">Tuesday</option>
+                                      <option value="Wednesday">Wednesday</option>
+                                      <option value="Thursday">Thursday</option>
+                                      <option value="Friday">Friday</option>
+                                  </select>
+                                  <select id="pickupTime" class="time_of_day">
+                                      <option value="12">12:00</option>
+                                      <option value="1">1:00</option>
+                                      <option value="2">2:00</option>
+                                      <option value="3">3:00</option>
+                                      <option value="4">4:00</option>
+                                      <option value="5">5:00</option>
+                                      <option value="6">6:00</option>
+                                      <option value="7">7:00</option>
+                                      <option value="8">8:00</option>
+                                      <option value="9">9:00</option>
+                                      <option selected="true" value="10">10:00</option>
+                                      <option value="11">11:00</option>
+                                  </select>
+                                  <select id="pickupAM" class="am_or_pm">
+                                      <option value="am">AM</option>
+                                      <option value="pm">PM</option>
+                                  </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_label">Accessible Hours</td>
+                                <td>
+                                    <select id="openTime1" class="time_of_day">
+                                        <option value="12">12:00</option>
+                                        <option value="1">1:00</option>
+                                        <option value="2">2:00</option>
+                                        <option value="3">3:00</option>
+                                        <option value="4">4:00</option>
+                                        <option value="5">5:00</option>
+                                        <option value="6">6:00</option>
+                                        <option value="7">7:00</option>
+                                        <option value="8">8:00</option>
+                                        <option value="9">9:00</option>
+                                        <option selected="true" value="10">10:00</option>
+                                        <option value="11">11:00</option>
+                                    </select>
+                                    <select id="openAM1" class="am_or_pm">
+                                          <option value="am">AM</option>
+                                          <option value="pm">PM</option>
+                                    </select>
+                                        to
+                                    <select id="openTime2" class="time_of_day">
+                                        <option value="12">12:00</option>
+                                        <option value="1">1:00</option>
+                                        <option value="2">2:00</option>
+                                        <option value="3">3:00</option>
+                                        <option value="4">4:00</option>
+                                        <option value="5">5:00</option>
+                                        <option value="6">6:00</option>
+                                        <option value="7">7:00</option>
+                                        <option selected="true" value="8">8:00</option>
+                                        <option value="9">9:00</option>
+                                        <option value="10">10:00</option>
+                                        <option value="11">11:00</option>
+                                    </select>
+                                    <select id="openAM2" class="am_or_pm">
+                                          <option value="am">AM</option>
+                                          <option value="pm" selected="true">PM</option>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <%= f.label :website %>
+                                <%= url_field :website %>
+                            </tr>
+                            <tr>
+                                <td class="td_label">
+                                    Details/Review
+                                </td>
+                                <td>
+                                    <textarea id="reviewDetails"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td></td><td><%= f.submit "Add my court", id: "submit_court" class: "btn right_align" %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <% end %>
+                <br>
+            </div>
+            <div id="addCourt_complete">
+                <h3 class="courtName_complete">
+                </h3>
+                <table id="courtDetails_complete">
+                
+                </table>
+            </div>
+            <div id="adspace">
+                <a href="#"><img src="img/add_placeholder.jpg"></a>
+            </div>
+        </div>
+    </div>
 </div>
+

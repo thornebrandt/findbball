@@ -1,6 +1,11 @@
 <div id="courts_container">
-    <h3>COURTS(1)</h3>
-    <p class="court"><a href="#">Wicker Park Fieldhouse</a><br>
-        1425 N. Damen Ave.<br>
-        Chicago, IL 60622
+	<% if @member.courts.any? %>
+    	<h3>COURTS(<%= @member.courts.count %>)</h3>
+    		<ul id="courts">
+    			<%= render @courts %>
+    		</ul>
+    		<%= will_paginate @courts %>
+    <% else %>
+    	<h3>COURTS(0)</h3>
+    <% end %>
 </div>

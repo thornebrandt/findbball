@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
   has_many :courts
+  has_many :reviews
 	has_secure_password
 	before_save :beforeSave
     before_validation :beforeValidation
