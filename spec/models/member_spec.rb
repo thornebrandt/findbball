@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe Member do
 
-	before do
-		@member = Member.new(
-						email: "freddy@elmstreet.com",
-						password: "inYourDreams",
-						password_confirmation: "inYourDreams"
-					)
-	end
+	before { @member = FactoryGirl.create(:member) }
 
 	subject { @member }
 

@@ -1,3 +1,5 @@
+require 'date'
+
 FactoryGirl.define do
   sequence :email do |n|
     "email#{n}@factory.com"
@@ -5,6 +7,7 @@ FactoryGirl.define do
   
 	factory :member do
 		email
+		birthdate Date.today
 		password "knownAsPrince"
 		password_confirmation "knownAsPrince"
 	end
