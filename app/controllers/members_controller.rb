@@ -15,19 +15,27 @@ class MembersController < ApplicationController
 
     def edit
         @member = Member.find(params[:id])
+        puts "eddddiiittttt"
     end
 
     def update
         @member = Member.find(params[:id])
-        puts "member_params"
-        puts member_params
+        if @member.birthdate
+            puts "before"
+            @member.birthdate = Chronic.parse(@member.birthdate).strftime('%Y-%m-%d');
+            puts "member_params"
+            puts member_params
+        end
         respond_to do |format|
+            puts "what da format"
+            puts @member.inspect
             if @member.update_attributes(member_params)
                 # format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
-                format.json { respond_with_bip(@member) }
-            else
-                # format.html { render :action => "show" }
-                format.json { respond_with_bip(@member) }
+                format.json do
+                    puts "a json format"
+                    puts @member.inspect
+                    respond_with_bip(@member)
+                end
             end
         end
     end

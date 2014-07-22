@@ -14,6 +14,10 @@ var fbb = {
 
 $(function(){
     $(".best_in_place").best_in_place();
+    $('.best_in_place').bind("ajax:success", function (data) { console.log("success"); console.log(data); });
+    $('.best_in_place').bind("ajax:error", function (data) { console.log("fail"); console.log(data); });
+    $(".datepicker").datepicker();
+    //$.extend($.fn.datepicker.defaults, { format: 'dd-mm-yy' });
     fbb.nav();
     fbb.hero();
     // fbb.member_profile(); //looks like this is replaced by best_in_place

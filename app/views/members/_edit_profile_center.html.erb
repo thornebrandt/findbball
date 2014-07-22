@@ -3,8 +3,7 @@
 <div id="fullname">
     <h2>
         <%= best_in_place @member, :full_name, :type => :input, :activator => '#editFullName',
-            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-            :cancel_button => "Cancel", :cancel_button_class => "btn btn-danger btnMargin"
+            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin"
         %>
     </h2>
     <a id="editFullName" href="#" class="editThis editable">edit full name</a>
@@ -18,7 +17,6 @@
 
         <%= best_in_place @member, :general_location, :type => :input, :activator => '#editGeneralLocation',
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-            :cancel_button => "Cancel", :cancel_button_class => "btn btn-danger btnMargin",
             :nil => "General Location"
         %>
         <a id="editGeneralLocation" href="#" class="editThis editable">edit general location</a>
@@ -46,16 +44,21 @@
 </p>
 <div class="datepicker_container">
     <span class="edit_profile_label">Birthdate</span>
-    <%= best_in_place @member, :birthdate, :type => :date %>
-<!--
-    <div class="datepicker_container">
+    <%= best_in_place @member, :birthdate, :type => :input, :nil => "Not set", :activator => '#editBirthdate',
+        :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+        :inner_class => 'datepicker'
+
+    %>
+    <a id="editBirthdate" href="#" class="editThis editable">edit birthdate</a>
+
+<!--     <div class="datepicker_container">
         <span class="edit_profile_label">Birthdate</span>
         <div class="input-append date" id="datepicker" data-date="03-21-1964" data-date-format="dd-mm-yyyy">
           <input class="span2" size="16" type="text" value="12-02-2012">
           <span class="add-on"><i class="icon-th"></i></span>
         </div>
-    </div>
--->
+    </div> -->
+
 </div>
 <br>
 <p>
