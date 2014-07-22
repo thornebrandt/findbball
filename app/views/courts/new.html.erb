@@ -1,4 +1,11 @@
 <% provide(:title, "Add a court") %>
+<% day_options = [["Sunday", "Sunday"], ["Monday", "Monday"], ["Tuesday", "Tuesday"], ["Wednesday", "Wednesday"],
+                  ["Thursday", "Thursday"], ["Friday", "Friday"], ["Saturday", "Saturday"]] %>
+                  
+<% time_options = [["12:00", 12], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
+                     ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
+                   
+<% am_options = [["AM", "am"], ["PM", "pm"]] %>
 
 <div id="add_court_map"></div>
 	<div id="content_wrapper">
@@ -24,87 +31,28 @@
                                 <%= f.text_field :name %>
                             </tr>
                             <tr>
-                                <td class="td_label">Competition Level</td>
+                                <td class="td_label"><%= f.label :skill_level "Competition Level" %></td>
                                 <td>
-                                    <select id="competitionLevel">
-                                        <option value="beginner">Beginner</option>
-                                        <option value="intermediate">Intermediate</option>
-                                        <option value="advanced">Advanced</option>
-                                        <option value="difficult">Difficult</option>
-                                    </select>
+                                	<%= f.select_tag(:skill_level, id: "competitionLevel", 
+                                	options_for_select([['Beginner', 1], ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]])) %>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label">Best Time for a "pick-up" game</td>
+                                <td class="td_label"><%= f.label :best_time 'Best Time for a "pick-up" game' %></td>
                                 <td>
-                                  <select id="pickupDay" class="day_of_week">
-                                      <option value="Sunday">Sunday</option>
-                                      <option value="Monday">Monday</option>
-                                      <option value="Tuesday">Tuesday</option>
-                                      <option value="Wednesday">Wednesday</option>
-                                      <option value="Thursday">Thursday</option>
-                                      <option value="Friday">Friday</option>
-                                  </select>
-                                  <select id="pickupTime" class="time_of_day">
-                                      <option value="12">12:00</option>
-                                      <option value="1">1:00</option>
-                                      <option value="2">2:00</option>
-                                      <option value="3">3:00</option>
-                                      <option value="4">4:00</option>
-                                      <option value="5">5:00</option>
-                                      <option value="6">6:00</option>
-                                      <option value="7">7:00</option>
-                                      <option value="8">8:00</option>
-                                      <option value="9">9:00</option>
-                                      <option selected="true" value="10">10:00</option>
-                                      <option value="11">11:00</option>
-                                  </select>
-                                  <select id="pickupAM" class="am_or_pm">
-                                      <option value="am">AM</option>
-                                      <option value="pm">PM</option>
-                                  </select>
+                                    <%= f.select_tag(:pickup_day,  id: "pickupDay",  class: "day_of_week", options_for_select(day_options)) %>                            	                    
+                                	<%= f.select_tag(:pickup_time, id: "pickupTime", class: "time_of_day", options_for_select(time_options)) %>               
+                                    <%= f.select_tag(:pickup_am,   id: "pickupAM",   class: "am_or_pm",    options_for_select(am_options)) %>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label">Accessible Hours</td>
+                                <td class="td_label"><%= f.label "Accessible Hours" %></td>
                                 <td>
-                                    <select id="openTime1" class="time_of_day">
-                                        <option value="12">12:00</option>
-                                        <option value="1">1:00</option>
-                                        <option value="2">2:00</option>
-                                        <option value="3">3:00</option>
-                                        <option value="4">4:00</option>
-                                        <option value="5">5:00</option>
-                                        <option value="6">6:00</option>
-                                        <option value="7">7:00</option>
-                                        <option value="8">8:00</option>
-                                        <option value="9">9:00</option>
-                                        <option selected="true" value="10">10:00</option>
-                                        <option value="11">11:00</option>
-                                    </select>
-                                    <select id="openAM1" class="am_or_pm">
-                                          <option value="am">AM</option>
-                                          <option value="pm">PM</option>
-                                    </select>
+                                	<%= f.select_tag(:open_time_1, id: "oepnTime1", class: "time_of_day", options_for_select(time_options)) %>
+                                    <%= f.select_tag(:open_am_1, id: "openAM1", class: "am_or_pm", options_for_select(am_options)) %>
                                         to
-                                    <select id="openTime2" class="time_of_day">
-                                        <option value="12">12:00</option>
-                                        <option value="1">1:00</option>
-                                        <option value="2">2:00</option>
-                                        <option value="3">3:00</option>
-                                        <option value="4">4:00</option>
-                                        <option value="5">5:00</option>
-                                        <option value="6">6:00</option>
-                                        <option value="7">7:00</option>
-                                        <option selected="true" value="8">8:00</option>
-                                        <option value="9">9:00</option>
-                                        <option value="10">10:00</option>
-                                        <option value="11">11:00</option>
-                                    </select>
-                                    <select id="openAM2" class="am_or_pm">
-                                          <option value="am">AM</option>
-                                          <option value="pm" selected="true">PM</option>
-                                    </select>   
+                                   	<%= f.select_tag(:open_time_2, id: "oepnTime2", class: "time_of_day", options_for_select(time_options)) %>
+                                    <%= f.select_tag(:open_am_2, id: "openAM2", class: "am_or_pm", options_for_select(am_options)) %>
                                 </td>
                             </tr>
                             <tr>
@@ -112,11 +60,9 @@
                                 <%= url_field :website %>
                             </tr>
                             <tr>
-                                <td class="td_label">
-                                    Details/Review
-                                </td>
-                                <td>
-                                    <textarea id="reviewDetails"></textarea>
+                                <td class="td_label"><%= f.label :review "Details/Review" %></td>
+                                <td> <!-- This needs to create the review's content, not the court's. -->
+                                    <%= f.text_area :review.content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
                                 </td>
                             </tr>
                             <tr>
@@ -140,4 +86,3 @@
         </div>
     </div>
 </div>
-

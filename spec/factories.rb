@@ -17,13 +17,13 @@ FactoryGirl.define do
 	  location "1408 Parkway Rd, Atlanta, GA 30067"
 	  website "http://mylifeismetal.com"
 	  skill_level 3
-	  best_time 10
-	  best_time_ampm "pm"
-	  best_day "Thursday"
-	  hours_open 6
-	  hours_open_ampm "am"
-	  hours_closed 11
-	  hours_closed_ampm "pm"
+	  pickup_time 10
+	  pickup_am "pm"
+	  pickup_day "Thursday"
+	  open_time_1 6
+	  open_am_1 "am"
+	  open_time_2 11
+	  open_am_2 "pm"
 	  member
 	end
 	

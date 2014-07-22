@@ -2,6 +2,7 @@ Findbball::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :members
   resources :courts
+  resources :reviews,  only: [:create, :edit, :destroy]
 
 
   root 'static_pages#splash'

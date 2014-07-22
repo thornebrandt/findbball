@@ -9,7 +9,7 @@ class Member < ActiveRecord::Base
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
 						uniqueness: { case_sensitive: false }
-    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
+    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: false
     validates :birthdate, presence: true, allow_nil: false
 
 	def beforeSave
