@@ -1,8 +1,6 @@
 class MembersController < ApplicationController
 	def show
 		@member = Member.find(params["id"])
-		@courts = @member.courts.paginate(page: params[:page])
-    @reviews = @member.reviews.paginate(page: params[:page])
 	end
 
     def show_test(id)
@@ -22,11 +20,9 @@ class MembersController < ApplicationController
 
     def update
         @member = Member.find(params[:id])
-        if @member.birthdate
-            puts "before"
-            @member.birthdate = Chronic.parse(@member.birthdate).strftime('%Y-%m-%d');
-            puts "member_params"
-            puts member_params
+        if params[:member][:birthdate]
+            new_birthdate = Chronic.parse(params[:member][:birthdate]).strftime('%Y-%m-%d');
+            params[:member][:birthdate] = new_birthdate
         end
         respond_to do |format|
             puts "what da format"
