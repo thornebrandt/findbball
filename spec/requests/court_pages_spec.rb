@@ -4,12 +4,8 @@ describe "Court pages" do
   
   subject { page }
   
-  let(:member) { FactoryGirl.create(:member) }
-  before { sign_in member }
-  
-  before { @court = member.courts.build(name: "HoopZone", location: "123 Fake St, Atlanta, GA 30067", website: "http://mylifeismetal.com",
-                                         best_time: 6, best_time_ampm: "pm", best_day: "sunday",
-                                         hours_open: 9, hours_open_ampm: "am", hours_closed: 10, hours_closed_ampm: "pm", skill_level: "1") }
+  before { @court = FactoryGirl.create(:court) }
+  before { sign_in @court.member }
   
   describe "profile page", :skip => true do
 
@@ -54,19 +50,23 @@ describe "Court pages" do
     
     it { should have_css('div.add_court_map') }
     it { should have_field('address_search') }
-    it { should have_field('Court Name') }
-    it { should have_field('Competition Level') }
-    it { should have_field('Best Time for a "pick-up" game')}
-    it { should have_field('Accessible Hours') }
-    it { should have_field('Court website link (if available)') }
-    it { should have_field('Details/Review') }
+    it { should have_field('name') }
+    it { should have_field('competitionLevel') }
+    it { should have_field('pickupDay') }
+    it { should have_field('pickupTime') }
+    it { should have_field('pickupAM') }
+    it { should have_field('openTime1') }
+    it { should have_field('openAM1') }
+    it { should have_field('openTime2') }
+    it { should have_field('openAM2') }
+    it { should have_field('reviewDetails') }
   end
   
   describe "add court" do
     
     before { visit new_court_path }
     
-    let(:submit) { "Add my court" }
+    let(:submit) { "submit_court" }
     
     describe "with invalid information" do
       it "should not create a court" do
@@ -76,9 +76,16 @@ describe "Court pages" do
     
     describe "with valid information" do
       before do
-        fill_in "Court Name",       with: "Example Court"
-        fill_in "address_search",   with: "123 Fake St, Marietta, GA 30327"
-        fill_in "Competition Level", with: "Difficult"
+        fill_in "courtName",               with: "Example Court"
+        fill_in "address_search",          with: "123 Fake St, Marietta, GA 30327"
+        select "Difficult",                from: "competitionLevel"
+        select "Thursday",                 from: "pickupDay"
+        select "10:00",                    from: "pickupTime"
+        select "PM",                       from: "pickupAM"
+        select "1:00",                     from: "openTime1"
+        select "PM",                       from: "openAM1"
+        select "3:00",                     from: "openTime2"
+        select "PM",                       from: "openAM2"
       end
       
       it "should create a court" do

@@ -23,12 +23,12 @@
             <p id="latLng">
             </p>
             <div id="addCourt_add">
-            	<%= form_for(@court) do |f| %>
+            	<%= forms_for([@court, @review]) do |f| %>
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
-                                <%= f.label :name %>
-                                <%= f.text_field :name %>
+                                <%= f.label :name "Name" %>
+                                <%= f.text_field :name, id: "courtName" %>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :skill_level "Competition Level" %></td>
@@ -56,13 +56,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <%= f.label :website %>
-                                <%= url_field :website %>
+                                <%= f.label :website "Court Website" %>
+                                <%= url_field :website, id: "courtWebsite" %>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :review "Details/Review" %></td>
-                                <td> <!-- This needs to create the review's content, not the court's. -->
-                                    <%= f.text_area :review.content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
+                                <td class="td_label"><%= g.label :content "Details/Review" %></td>
+                                <td>
+                                    <%= f.text_area :content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
                                 </td>
                             </tr>
                             <tr>
