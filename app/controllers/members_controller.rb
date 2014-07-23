@@ -24,10 +24,12 @@ class MembersController < ApplicationController
         if params[:member][:birthdate]
             new_birthdate = Chronic.parse(params[:member][:birthdate]).strftime('%Y-%m-%d');
             params[:member][:birthdate] = new_birthdate
+            puts "params[:member]"
+            puts params[:member]
         end
         respond_to do |format|
             if @member.update_attributes(member_params)
-                # format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
+                format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
                 format.json do
                     respond_with_bip(@member)
                 end
