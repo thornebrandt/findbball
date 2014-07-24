@@ -23,7 +23,8 @@
             <p id="latLng">
             </p>
             <div id="addCourt_add">
-            	<%= forms_for([@court, @review]) do |f| %>
+            	<!--  <%=  forms_for([@court, @review]) do |f| %> -->
+            	<%= form_for @court do |f| %>
                     <table id="addCourt_table">
                         <tbody>
                             <tr>

@@ -66,6 +66,7 @@ describe "Court pages" do
     
     before { visit new_court_path }
     
+    
     let(:submit) { "submit_court" }
     
     describe "with invalid information" do
@@ -76,7 +77,7 @@ describe "Court pages" do
     
     describe "with valid information" do
       before do
-        fill_in "courtName",               with: "Example Court"
+        fill_in "name",                    with: "Example Court"
         fill_in "address_search",          with: "123 Fake St, Marietta, GA 30327"
         select "Difficult",                from: "competitionLevel"
         select "Thursday",                 from: "pickupDay"
