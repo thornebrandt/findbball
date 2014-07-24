@@ -1,4 +1,4 @@
-class RemoveFieldNameFromTableName < ActiveRecord::Migration
+class RemoveDisplayNameFromMembers < ActiveRecord::Migration
   def change
     remove_column :members, :display_name
   end

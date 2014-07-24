@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 class MembersController < ApplicationController
 	def show
 		@member = Member.find(params["id"])
@@ -67,6 +69,8 @@ class MembersController < ApplicationController
                                             :nationality,
                                             :birthdate,
                                             :slogan,
+                                            :height,
+                                            :weight,
                                             :plays_basketball,
                                             :skill_level,
                                             :position,

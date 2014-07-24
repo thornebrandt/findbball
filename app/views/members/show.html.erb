@@ -1,14 +1,17 @@
 <% provide(:title, @member.name) %>
 <div class="container-fluid">
-	<%= render '/members/profile_left' %>
-  	<%= render '/members/profile_right' %>
-
-     <div class="content">
-        <% if current_user? @member %>
+    <% if current_user? @member %>
+        <%= render '/members/edit_profile_left' %>
+        <%= render '/members/edit_profile_right' %>
+        <div class="content">
             <%= render '/members/edit_profile_center' %>
-        <% else %>
+        </div>
+    <% else %>
+        <%= render '/members/profile_left' %>
+        <%= render '/members/profile_right' %>
+        <div class="content">
             <%= render '/members/profile_center' %>
-        <% end %>
-    </div>
+        </div>
+    <% end %>
     <%= render '/ads/placeholder' %>
 
