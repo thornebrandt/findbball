@@ -5,7 +5,7 @@ namespace :db do
   task populate: :environment do
     make_members
     make_courts
-    # make_reviews
+    make_reviews
   end
 end
 
@@ -47,5 +47,16 @@ def make_courts
                   pickup_am: pickup_am, open_time_1: open_time_1,
                   open_am_1: open_am_1, open_time_2: open_time_2,
                   open_am_2: open_am_2) }
+  end
+end
+  
+def make_reviews
+  members = Member.all(limit: 6)
+  courts = Court.all(limit: 8)
+  30.times do
+    content = Faker::Lorem.sentence(5)
+    members.each do |m|
+      courts.each { |c| c.reviews.create!(content: content, member: m) }
+    end
   end
 end
