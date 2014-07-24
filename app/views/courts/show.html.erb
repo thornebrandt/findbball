@@ -5,12 +5,12 @@
   	<%= render '/courts/profile_right' %>
 	<div class="content">
             <h2 id="courtName" class="courtH2"><%= @court.name %></h2>
-            <%= link_to_if @court.website.exists?, "court website", @court.website, id: "courtWebsite" %>
+            <%= link_to_if @court.has_attribute?(:website), "court website", @court.website, id: "courtWebsite" %>
             <p id="courtAddress" class="gray">
                 <%= @court.location %>
             </p>
             <p id="courtHours">
-                Open <%= @court.hours_open + @court.hours_open_ampm + " - " + @court.hours_closed + @court.hours_closed_ampm %>
+                Open <%= @court.open_hours %>
             </p>
             <a href="edit_court.html"><i class="icon-edit"></i> Edit</a> | <a href="#"><i class="icon-trash"></i> Delete</a><br>   
             
@@ -20,7 +20,7 @@
                     <%= image_tag "icon/skill_beginner.png" %>
                 </div>
                 <p id="courtPickUpGame">
-                    <b>Best time for "Pick-up Game"</b> <span id="pickupTime"><%= @court.best_time + @court.best_time_ampm + " " + @court.best_day %></span>
+                    <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
                 </p>
             </div>
             <hr>

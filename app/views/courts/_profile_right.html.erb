@@ -1,7 +1,7 @@
 	<div class="sidebar right">
             <div class="author_container">
                 <a href="player_profile.html"><%= image_tag "members/jerry.jpg", id: "profile_pic" %></a><br>
-                added by <b><%= link_to @court.member, show_member_path(@court.member) %></a></b><br>
+                added by <b><%= link_to @court.member.name, member_path(@court.member), class: "court" %></a></b><br>
                 <%= @court.created_at %><br>
             </div>
         <div id="profile_right">

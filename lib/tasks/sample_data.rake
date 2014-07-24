@@ -10,6 +10,11 @@ namespace :db do
 end
 
 def make_members
+  Member.create!(name: "Admin",
+                 email: "admin@findbball.com",
+                 password: "hoopz",
+                 password_confirmation: "hoopz",
+                 birthdate: Date.today)
   99.times do |n|
     name  = Faker::Name.name
     email = "example-#{n+300}@railstutorial.org"
