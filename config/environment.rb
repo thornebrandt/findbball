@@ -5,3 +5,6 @@ require File.expand_path('../application', __FILE__)
 Findbball::Application.initialize!
 
 ENV['RAILS_ENV'] ||= 'production'
+
+#Set default date display format
+Date::DATE_FORMATS.merge!(:default => "%b %d, %Y")
