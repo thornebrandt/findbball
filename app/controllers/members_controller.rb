@@ -4,6 +4,7 @@ class MembersController < ApplicationController
 	def show
 		@member = Member.find(params["id"])
 		@courts = @member.courts
+		@reviews = @member.reviews
 	end
 
     def show_test(id)

@@ -2,9 +2,8 @@
 <% if @court.reviews.any? %>
     	<h3>REVIEWS(<%= @court.reviews.count %>)</h3>
     		<ul id="reviews">
-    			<%= render @reviews %>
+    			<%= render @court_reviews %>
     		</ul>
-    		<%= will_paginate @reviews %>
     <% else %>
     	<h3>REVIEWS(0)</h3>
     		<p class="profile_subtitle"><%= @court.name %> hasn't been reviewed yet</p>

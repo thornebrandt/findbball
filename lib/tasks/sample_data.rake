@@ -53,10 +53,11 @@ end
 def make_reviews
   members = Member.all(limit: 6)
   courts = Court.all(limit: 8)
-  30.times do
     content = Faker::Lorem.sentence(5)
     members.each do |m|
-      courts.each { |c| c.reviews.create!(content: content, member: m) }
+      courts.each do |c|
+        c.reviews.create!(content: content, member: m)
+        puts "#{m}, #{c}, #{content}"
+      end
     end
   end
-end

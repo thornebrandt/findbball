@@ -2,7 +2,7 @@ class CourtsController < ApplicationController
   
   def show
     @court = Court.find(params[:id])
-    @reviews = @court.reviews
+    @court_reviews = @court.reviews
   end
   
   def edit
