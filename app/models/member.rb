@@ -12,6 +12,10 @@ class Member < ActiveRecord::Base
     validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
     validates :birthdate, presence: true, allow_nil: false
 
+    def inches
+        "#{self.about} + 3 inches"
+    end
+
 	def beforeSave
 		self.email.downcase!
 		self.name ||= "New Member"
@@ -33,11 +37,6 @@ class Member < ActiveRecord::Base
 	def Member.hash(token)
 		Digest::SHA1.hexdigest(token.to_s)
 	end
-
-    # def valiDate(date_string)
-    #     if Chronic.parse(date_string).nil?
-    #         errors.add :
-    # end
 
 	private
 		def create_remember_token

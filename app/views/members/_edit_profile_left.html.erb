@@ -1,0 +1,22 @@
+<div class="sidebar left">
+    <div id="profile_left">
+        <%= image_tag "player_placeholder.png", id: "profile_pic" %>
+        <p id="profile_name">
+            <%= best_in_place @member, :name, :type => :input, :activator => '#editName',
+                :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin"
+            %>
+        </p>
+        <a id="editName" href="#" class="editThis editable">edit user name</a>
+
+
+        <p class="profile_subtitle">
+        <%= best_in_place @member, :slogan, :type => :input, :activator => '#editSlogan',
+                :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+                :nil => 'Slogan goes here'
+
+        %>
+        <br>
+        </p>
+        <a id="editSlogan" href="#" class="editThis editable">edit slogan</a>
+    </div>
+</div>
