@@ -2,7 +2,10 @@
 <% if @member.reviews.any? %>
     	<h3>REVIEWS(<%= @member.reviews.count %>)</h3>
     		<ul id="reviews">
-    			<%= render @reviews %>
+    			<% @reviews.each do |review| %>
+    			<li>
+					<%= link_to review.court.name, court_path(review.court), class: "review" %>
+				</li>
     		</ul>
     <% else %>
     	<h3>REVIEWS(0)</h3>

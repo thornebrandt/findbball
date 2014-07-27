@@ -1,3 +1,8 @@
-<li>
-	<%= link_to review.court.name, court_path(review.court), class: "review" %>
-</li>
+    			<div class="review">
+					<%= image_tag "members/jerry.jpg", class: "review_author" %>
+					<p class="review_body">
+						<%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
+						<%= review.content %>
+    				</p>
+   					<hr>
+				</div>

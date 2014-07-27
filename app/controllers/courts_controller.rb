@@ -2,7 +2,8 @@ class CourtsController < ApplicationController
   
   def show
     @court = Court.find(params[:id])
-    @court_reviews = @court.reviews
+    @shown_reviews = @court.reviews.last(4)
+    @hidden_reviews = @court.reviews.first(@court.reviews.count - 4)
   end
   
   def edit
@@ -10,7 +11,9 @@ class CourtsController < ApplicationController
   end
   
   def new
-    @court = current_user.courts.build(court_params)
+    # Wait until current_user sessions stuff works to use this.
+    # @court = current_user.courts.build(court_params)
+    @court = Court.new(court_params)
     @review = @court.reviews.build
   end
   
@@ -40,6 +43,6 @@ class CourtsController < ApplicationController
                                       :open_time_2, 
                                       :open_am_2, 
                                       :reviews, 
-                                      :member_id)
+                                      :member)
     end
 end

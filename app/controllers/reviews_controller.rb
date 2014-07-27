@@ -1,4 +1,4 @@
-class MicropostsController < ApplicationController
+class ReviewsController < ApplicationController
   before_action :signed_in_user
   
   def create
@@ -20,6 +20,6 @@ class MicropostsController < ApplicationController
   private
   
     def review_params
-      params.require(:review).permit(:content, :court)
+      params.require(:review).permit(:content, :court, :member)
     end
 end
