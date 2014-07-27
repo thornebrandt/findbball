@@ -7,7 +7,7 @@
 						<%= court.location %>
     			<% end %>
     			<div id="hiddenCourts" class="hide">
-    				<% @hidden_courts.each do |court | %>
+    				<% @hidden_courts.each do |court| %>
     				<p class="court">
     					<%= link_to court.name, court_path(court), class: "court" %><br>
 						<%= court.location %>
