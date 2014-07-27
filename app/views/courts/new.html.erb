@@ -23,7 +23,6 @@
             <p id="latLng">
             </p>
             <div id="addCourt_add">
-            	<!--  <%=  forms_for([@court, @review]) do |f| %> -->
             	<%= form_for @court do |f| %>
                     <table id="addCourt_table">
                         <tbody>
@@ -61,9 +60,9 @@
                                 <%= url_field :website, id: "courtWebsite" %>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= g.label :content "Details/Review" %></td>
+                                <td class="td_label"><%= f.label :reviews "Details/Review" %></td>
                                 <td>
-                                    <%= f.text_area :content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
+                                    <%= f.text_area :reviews, placeholder: "What do you think of this court?", id: "reviewDetails" %>
                                 </td>
                             </tr>
                             <tr>

@@ -8,6 +8,7 @@ class CourtsController < ApplicationController
   
   def edit
     @court = Court.find(params[:id])
+    @review = @court.reviews.build
   end
   
   def new

@@ -1,10 +1,13 @@
 include ActionView::Helpers::NumberHelper
 
 class MembersController < ApplicationController
+  
 	def show
 		@member = Member.find(params["id"])
-		@courts = @member.courts
-		@reviews = @member.reviews
+		@shown_courts = @member.courts.last(5)
+		@hidden_courts = @member.courts.first(@member.courts.count - 5)
+		@shown_reviews = @member.reviews.last(5)
+    @hidden_reviews = @member.reviews.first(@member.reviews.count - 5)
 	end
 
     def show_test(id)

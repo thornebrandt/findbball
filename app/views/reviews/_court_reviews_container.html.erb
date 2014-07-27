@@ -6,7 +6,7 @@
 				<%= render @hidden_reviews %>
                 <a href="#" id="hideReviews"><b>Show fewer reviews</b></a> <!-- Isn't calling the right jquery at the moment -->
                 </div>
-    		<a href="#" id="showReviews"><b>Show all 15 reviews</b></a> <!-- Isn't calling the right jquery at the moment -->
+    		<a href="#" id="showReviews"><b>Show all <%= @court.reviews.count %> reviews</b></a> <!-- Isn't calling the right jquery at the moment -->
     <% else %>
     	<h3>REVIEWS(0)</h3>
     		<p class="profile_subtitle"><%= @court.name %> hasn't been reviewed yet</p>
