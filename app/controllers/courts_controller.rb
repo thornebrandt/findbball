@@ -14,7 +14,7 @@ class CourtsController < ApplicationController
   def new
     # Wait until current_user sessions stuff works to use this.
     # @court = current_user.courts.build(court_params)
-    @court = Court.new(court_params)
+    @court = Court.new(params[:id])
     @review = @court.reviews.build
   end
   
@@ -23,7 +23,7 @@ class CourtsController < ApplicationController
     @review = Review.create(params[:reviews])
     if @court.save
       flash[:success] = "Court created!"
-      redirect_to @court
+      redirect_to court_path(@court)
     else
       flash[:error] = "Could not create court."
       render 'new'

@@ -7,6 +7,8 @@
                    
 <% am_options = [["AM", "am"], ["PM", "pm"]] %>
 
+<% difficulty_options = [['Beginner', 1], ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
+
 <div id="add_court_map"></div>
 	<div id="content_wrapper">
         <div id="content">
@@ -27,46 +29,45 @@
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
-                                <%= f.label :name "Name" %>
+                                <%= f.label :name, "Court Name" %>
                                 <%= f.text_field :name, id: "courtName" %>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :skill_level "Competition Level" %></td>
+                                <td class="td_label"><%= f.label :skill_level, "Competition Level" %></td>
                                 <td>
-                                	<%= f.select_tag(:skill_level, id: "competitionLevel", 
-                                	options_for_select([['Beginner', 1], ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]])) %>
+                                	<%= f.select :skill_level, options_for_select(difficulty_options), id: "competitionLevel" %>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :best_time 'Best Time for a "pick-up" game' %></td>
+                                <td class="td_label"><%= f.label :best_time, 'Best Time for a "pick-up" game' %></td>
                                 <td>
-                                    <%= f.select_tag(:pickup_day,  id: "pickupDay",  class: "day_of_week", options_for_select(day_options)) %>                            	                    
-                                	<%= f.select_tag(:pickup_time, id: "pickupTime", class: "time_of_day", options_for_select(time_options)) %>               
-                                    <%= f.select_tag(:pickup_am,   id: "pickupAM",   class: "am_or_pm",    options_for_select(am_options)) %>
+                                    <%= f.select :pickup_day, options_for_select(day_options),   id: "pickupDay",  class: "day_of_week" %>                            	                    
+                                	<%= f.select :pickup_time, options_for_select(time_options), id: "pickupTime", class: "time_of_day" %>               
+                                    <%= f.select :pickup_am, options_for_select(am_options),     id: "pickupAM",   class: "am_or_pm" %>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label "Accessible Hours" %></td>
                                 <td>
-                                	<%= f.select_tag(:open_time_1, id: "oepnTime1", class: "time_of_day", options_for_select(time_options)) %>
-                                    <%= f.select_tag(:open_am_1, id: "openAM1", class: "am_or_pm", options_for_select(am_options)) %>
+                                	<%= f.select :open_time_1, options_for_select(time_options), id: "oepnTime1", class: "time_of_day" %>
+                                    <%= f.select :open_am_1, options_for_select(am_options),  id: "openAM1", class: "am_or_pm"%>
                                         to
-                                   	<%= f.select_tag(:open_time_2, id: "oepnTime2", class: "time_of_day", options_for_select(time_options)) %>
-                                    <%= f.select_tag(:open_am_2, id: "openAM2", class: "am_or_pm", options_for_select(am_options)) %>
+                                   	<%= f.select :open_time_2, options_for_select(time_options), id: "oepnTime2", class: "time_of_day" %>
+                                    <%= f.select :open_am_2, options_for_select(am_options), id: "openAM2", class: "am_or_pm"  %>
                                 </td>
                             </tr>
                             <tr>
-                                <%= f.label :website "Court Website" %>
+                                <%= f.label :website, "Court Website" %>
                                 <%= url_field :website, id: "courtWebsite" %>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :reviews "Details/Review" %></td>
+                                <td class="td_label"><%= f.label :reviews, "Details/Review" %></td>
                                 <td>
                                     <%= f.text_area :reviews, placeholder: "What do you think of this court?", id: "reviewDetails" %>
                                 </td>
                             </tr>
                             <tr>
-                            	<td></td><td><%= f.submit "Add my court", id: "submit_court" class: "btn right_align" %></td>
+                            	<td></td><td><%= f.submit "Add my court", id: "submit_court", class: "btn right_align" %></td>
                             </tr>
                         </tbody>
                     </table>
