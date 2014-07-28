@@ -29,8 +29,8 @@
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
-                                <%= f.label :name, "Court Name" %>
-                                <%= f.text_field :name, id: "courtName" %>
+                                <td class="td_label"><%= f.label :name, "Court Name" %></td>
+                                <td><%= f.text_field :name, id: "courtName", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :skill_level, "Competition Level" %></td>
@@ -57,13 +57,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <%= f.label :website, "Court Website" %>
-                                <%= url_field :website, id: "courtWebsite" %>
+                                <td class="td_label"><%= f.label :website, "Court Website" %></td>
+                                <td><%= url_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :reviews, "Details/Review" %></td>
                                 <td>
-                                    <%= f.text_area :reviews, placeholder: "What do you think of this court?", id: "reviewDetails" %>
+                                	<%= f.fields_for :reviews, @court.reviews.find_or_create_by(member: @current_user) do |r| %>
+                                	<%= r.text_area :content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
+           							<% end %>
                                 </td>
                             </tr>
                             <tr>

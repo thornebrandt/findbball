@@ -43,7 +43,7 @@ class CourtsController < ApplicationController
                                       :open_am_1, 
                                       :open_time_2, 
                                       :open_am_2, 
-                                      :reviews, 
-                                      :member)
+                                      :member,
+                                      :reveiws_attributes => [:id, :content, :member_id])
     end
 end
