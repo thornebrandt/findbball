@@ -69,6 +69,7 @@ class MembersController < ApplicationController
                                             :general_location,
                                             :nationality,
                                             :birthdate,
+                                            :courts,
                                             :slogan,
                                             :height,
                                             :weight,
