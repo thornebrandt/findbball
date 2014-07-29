@@ -2,26 +2,26 @@ class CourtsController < ApplicationController
 
   def show
     @court = Court.find(params[:id])
-    @court_reviews = @court.reviews
+    @shown_reviews = @court.reviews.last(4)
+    @hidden_reviews = @court.reviews.first(@court.reviews.count - 4)
   end
 
   def edit
     @court = Court.find(params[:id])
+    @review = @court.reviews.build
   end
 
   def new
-    puts "current_user!!!!!"
-    puts current_user.inspect
-    @court = current_user.courts.build(court_params)
+    @court = Court.new(params[:id], member: current_user)
     @review = @court.reviews.build
   end
 
   def create
     @court = Court.new(court_params)
-    @review = Review.create(params[:reviews])
+    @review = @court.reviews.build
     if @court.save
       flash[:success] = "Court created!"
-      redirect_to @court
+      redirect_to court_path(@court)
     else
       flash[:error] = "Could not create court."
       render 'new'
@@ -42,6 +42,12 @@ class CourtsController < ApplicationController
                                       :open_time_2,
                                       :open_am_2,
                                       :reviews,
-                                      :member_id)
+                                      :member_id,
+                                      :open_time_1,
+                                      :open_am_1,
+                                      :open_time_2,
+                                      :open_am_2,
+                                      :member,
+                                      reviews_attributes: [:id, :content, :court, :member])
     end
 end

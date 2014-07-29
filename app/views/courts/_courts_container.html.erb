@@ -1,9 +1,20 @@
 <div id="courts_container">
 	<% if @member.courts.any? %>
     	<h3>COURTS(<%= @member.courts.count %>)</h3>
-    		<ul id="courts">
-    			<%= render @courts %>
-    		</ul>
+    			<% @shown_courts.each do |court| %>
+    				<p class="court">
+    					<%= link_to court.name, court_path(court), class: "court" %><br>
+						<%= court.location %>
+    			<% end %>
+    			<div id="hiddenCourts" class="hide">
+    				<% @hidden_courts.each do |court| %>
+    				<p class="court">
+    					<%= link_to court.name, court_path(court), class: "court" %><br>
+						<%= court.location %>
+					<% end %>
+				<a href="#" id="hideCourts"><b>Show fewer courts</b></a>
+    			</div>
+    		<a href="#" id="showCourts"><b>Show all <%= @member.courts.count %> courts</b></a>
     <% else %>
     	<h3>COURTS(0)</h3>
     <% end %>

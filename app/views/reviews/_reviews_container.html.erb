@@ -2,8 +2,21 @@
 <% if @member.reviews.any? %>
     	<h3>REVIEWS(<%= @member.reviews.count %>)</h3>
     		<ul id="reviews">
-    			<%= render @reviews %>
+    			<% @shown_reviews.each do |review| %>
+    			<li>
+					<%= link_to review.court.name, court_path(review.court), class: "review" %>
+				</li>
+				<% end %>
+				<div id="hiddenReviews" class="hide">
+				<% @hidden_reviews.each do |review | %>
+				<li>
+					<%= link_to review.court.name, court_path(review.court), class: "review" %>
+				</li>
+				<% end %>
+				<a href="#" id="hideReviews"><b>Show fewer reviews</b></a>
+				</div>
     		</ul>
+    		<a href="#" id="showReviews"><b>Show all <%= @member.reviews.count %> reviews</b></a>
     <% else %>
     	<h3>REVIEWS(0)</h3>
     		<p class="profile_subtitle"><%= @member.name %> hasn't written any reviews</p>

@@ -77,7 +77,7 @@ describe "Court pages" do
     
     describe "with valid information" do
       before do
-        fill_in "name",                    with: "Example Court"
+        fill_in "Court Name",                    with: "Example Court" # Why can't it find this?
         fill_in "address_search",          with: "123 Fake St, Marietta, GA 30327"
         select "Difficult",                from: "competitionLevel"
         select "Thursday",                 from: "pickupDay"
