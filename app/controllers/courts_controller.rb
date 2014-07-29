@@ -12,15 +12,13 @@ class CourtsController < ApplicationController
   end
   
   def new
-    # Wait until current_user sessions stuff works to use this.
-    # @court = current_user.courts.build(court_params)
-    @court = Court.new(params[:id])
+    @court = Court.new(params[:id], member: current_user)
     @review = @court.reviews.build
   end
   
   def create
     @court = Court.new(court_params)
-    @review = Review.create(params[:reviews])
+    @review = @court.reviews.build
     if @court.save
       flash[:success] = "Court created!"
       redirect_to court_path(@court)
@@ -44,6 +42,6 @@ class CourtsController < ApplicationController
                                       :open_time_2, 
                                       :open_am_2, 
                                       :member,
-                                      :reveiws_attributes => [:id, :content, :member_id])
+                                      reviews_attributes: [:id, :content, :court, :member])
     end
 end

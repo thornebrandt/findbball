@@ -58,13 +58,13 @@
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :website, "Court Website" %></td>
-                                <td><%= url_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
+                                <td><%= f.url_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :reviews, "Details/Review" %></td>
                                 <td>
-                                	<%= f.fields_for :reviews, @court.reviews.find_or_create_by(member: @current_user) do |r| %>
-                                	<%= r.text_area :content, placeholder: "What do you think of this court?", id: "reviewDetails" %>
+                                	<%= f.fields_for :reviews, @court.reviews_for_form do |r| %>
+                                		<%= r.text_area :content, id: "reviewDetails" %>
            							<% end %>
                                 </td>
                             </tr>
