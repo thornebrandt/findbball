@@ -13,8 +13,11 @@ var fbb = {
 }
 
 $(function(){
+    fbb.lat = fbb.defaultLat;
+    fbb.lng = fbb.defaultLng;
     fbb.bestInPlace();
     fbb.nav();
     fbb.hero();
+    fbb.map();
     // fbb.member_profile(); //looks like this is replaced by best_in_place
 });

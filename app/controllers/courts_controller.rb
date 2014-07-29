@@ -12,6 +12,7 @@ class CourtsController < ApplicationController
   end
 
   def new
+    @showMap = true;
     @court = Court.new(params[:id], member: current_user)
     @review = @court.reviews.build
   end
