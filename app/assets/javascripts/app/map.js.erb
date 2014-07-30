@@ -1,41 +1,107 @@
 fbb.map = function(){
+    var self = this;
     var mapEl;
+    var $_addressInput;
+    var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
+
     var checkDom = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
             mapEl = $(".mapEl")[0];
             //prepareGoogleMap(fbb.lat, fbb.lng);
-            simpleMap();
+            prepareMap();
+            autoComplete();
         }
     }
 
-    var mapOptions = {
+    self.mapOptions = {
         center: new google.maps.LatLng(fbb.lat, fbb.lng),
         zoom: 13,
         scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var prepareGoogleMap = function(_lat, _long){
-        fbb.mapCenter = new google.maps.LatLng(_lat, _long);
-        var service = new google.maps.places.AutocompleteService();
-        var geocoder = new google.maps.Geocoder();
-        var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
-        var map_canvas = "add_court_map";
-        var map = new google.maps.Map(document.getElementById("add_court_map"), mapOptions);
-        var marker = new google.maps.Marker({
-            icon: icon_path,
-            position: fbb.mapCenter,
-            map: map
-        });
-        console.log("should be loaded");
-    }
-
     var simpleMap = function(){
         //to test that the map is working
-        var map = new google.maps.Map(mapEl, mapOptions);
+        self.map = new google.maps.Map(mapEl, self.mapOptions);
+    };
+
+    var prepareMap = function(){
+        $_addressInput = $("#courtAddress");
+        self.map = new google.maps.Map(mapEl, self.mapOptions);
+        setupMapCursor();
+    };
+
+    var setupMapCursor = function(){
+        var marker = new google.maps.Marker({
+            icon: icon_path,
+            position: self.mapOptions.center,
+            map: self.map
+        });
+    };
+
+    var setupDraggableMapCursor = function(_point){
+        var marker = new google.maps.Marker({
+            icon: icon_path,
+            draggable: true,
+            position: _point,
+            map: self.map
+        });
+        return marker;
     }
 
+
+    var autoComplete = function(){
+        var service = new google.maps.places.AutocompleteService();
+        $("#address_search").typeahead({
+            source: function(query, process) {
+                service.getPlacePredictions({
+                    input: query
+                }, function(predictions, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        process($.map(predictions, function(prediction) {
+                            return prediction.description;
+                        }));
+                    }
+                });
+            },
+            updater: function(_address) {
+                return lookUpAutoCompleteAddress(_address);
+            }
+        });
+    };
+
+
+    var lookUpAutoCompleteAddress = function(_address){
+        self.geocoder = self.geocoder || new google.maps.Geocoder();
+        self.address = _address;
+        self.geocoder.geocode({ address: _address}, displayAutoCompleteResults);
+    };
+
+    var displayAutoCompleteResults = function(results, status){
+        if( status != google.maps.GeocoderStatus.OK ){
+            return autoCompleteFailureHandler(results, status);
+        } else {
+            return autoCompleteSuccessHandler(results, status);
+        }
+    };
+
+    var autoCompleteSuccessHandler = function(results, status){
+        var _point = results[0].geometry.location;
+        console.log("success");
+        console.log(self.address);
+        self.addressInput = $("#courtAddress");
+        $_addressInput.val(self.address);
+        self.map.setCenter(_point);
+        self.map.setZoom(15);
+        var marker = setupDraggableMapCursor(_point);
+    };
+
+
+    var autoCompleteFailureHandler = function(results, status){
+        alert("Cannot find address");
+        return false;
+    };
 
     checkDom();
 }
