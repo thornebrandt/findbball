@@ -12,7 +12,7 @@ class CourtsController < ApplicationController
   end
 
   def new
-    @showMap = true;
+    @mapEl = "add_court_map"; #element of map
     @court = Court.new(params[:id], member: current_user)
     @review = @court.reviews.build
   end

@@ -1,13 +1,16 @@
 fbb.map = function(){
+    var mapEl;
     var checkDom = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
-            prepareGoogleMap(fbb.lat, fbb.lng);
+            mapEl = $(".mapEl")[0];
+            //prepareGoogleMap(fbb.lat, fbb.lng);
+            simpleMap();
         }
     }
 
     var mapOptions = {
-        center: fbb.mapCenter,
+        center: new google.maps.LatLng(fbb.lat, fbb.lng),
         zoom: 13,
         scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -19,8 +22,6 @@ fbb.map = function(){
         var geocoder = new google.maps.Geocoder();
         var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
         var map_canvas = "add_court_map";
-        console.log("icon path");
-        console.log(icon_path);
         var map = new google.maps.Map(document.getElementById("add_court_map"), mapOptions);
         var marker = new google.maps.Marker({
             icon: icon_path,
@@ -28,6 +29,11 @@ fbb.map = function(){
             map: map
         });
         console.log("should be loaded");
+    }
+
+    var simpleMap = function(){
+        //to test that the map is working
+        var map = new google.maps.Map(mapEl, mapOptions);
     }
 
 
