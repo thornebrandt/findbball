@@ -15,17 +15,17 @@
             <div id="heading_articles">
                    <h3>ADD COURT</h3>
             </div>
+            <%= form_for @court do |f| %>
             <div id="enter_address">
         	    <span class="directions"></span> 
-        	    <b>New Court Location</b>
-                <input id="address_search" type="text" placeholder="1425 N Damen Ave, Chicago, IL 60622">
+        	    <b><%= f.label :location, "New Court Location" %></b>
+        	    <%= f.text_field :location, id: "address_search", placeholder: "1425 N Damen Ave, Chicago, IL 60622" %>
                 <input id="courtAddress" type="hidden">
                 <button type="submit" class="btn right_align">Map</button>
         	</div>
             <p id="latLng">
             </p>
             <div id="addCourt_add">
-            	<%= form_for @court do |f| %>
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
@@ -61,12 +61,10 @@
                                 <td><%= f.url_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :reviews, "Details/Review" %></td>
-                                <td>
-                                	<%= f.fields_for :reviews, @court.reviews_for_form do |r| %>
-                                		<%= r.text_area :content, id: "reviewDetails" %>
-           							<% end %>
-                                </td>
+                            	<%= f.fields_for :reviews do |r| %>
+                                <td class="td_label"><%= r.label :content, "Details/Review" %></td>
+                                <td><%= r.text_area :content, id: "reviewDetails" %></td>
+           						<% end %>
                             </tr>
                             <tr>
                             	<td></td><td><%= f.submit "Add my court", id: "submit_court", class: "btn right_align" %></td>
