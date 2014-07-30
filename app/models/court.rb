@@ -22,9 +22,4 @@ class Court < ActiveRecord::Base
   def pickup_hours
     "#{self.pickup_day}s at #{self.pickup_time}:00 #{self.pickup_am.upcase}"
   end
-  
-  def reviews_for_form
-    collection = reviews.where(court_id: id)
-    collection.any? ? collection : reviews.build
-  end
 end

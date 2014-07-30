@@ -5,9 +5,9 @@ class ReviewsController < ApplicationController
     @review = current_user.reviews.build(review_params)
     if @review.save
       flash[:success] = "Review created!"
-      redirect_to root_url
+      redirect_to @review.court
     else
-      render 'static_pages/home'
+      render @review.court
     end
   end
   
@@ -20,6 +20,6 @@ class ReviewsController < ApplicationController
   private
   
     def review_params
-      params.require(:review).permit(:content, :court, :member)
+      params.require(:review).permit(:id, :content, :court_id, :member_id)
     end
 end

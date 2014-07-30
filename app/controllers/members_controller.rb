@@ -5,9 +5,9 @@ class MembersController < ApplicationController
 	def show
 		@member = Member.find(params["id"])
 		@shown_courts = @member.courts.last(5)
-		@hidden_courts = @member.courts.first(@member.courts.count - 5)
+		@hidden_courts = @member.courts - @shown_courts
 		@shown_reviews = @member.reviews.last(5)
-    @hidden_reviews = @member.reviews.first(@member.reviews.count - 5)
+    @hidden_reviews = @member.reviews - @shown_reviews
 	end
 
     def show_test(id)
