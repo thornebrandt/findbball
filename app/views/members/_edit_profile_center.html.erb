@@ -90,23 +90,37 @@
     <a id="editPosition" href="#" class="editThis editable">edit position</a>
 </p>
 <p id="organized">
-<span class="edit_profile_label">Highest Level of Organized Ball</span><br>
-    <%= best_in_place @member, :position, :type => :select, :activator => '#editOrganized', :collection =>
-        [
-            [-1, "Undisclosed"],
-            [1, "Grade School"],
-            [2, "Camp"],
-            [3, "High School"],
-            [4, "College"],
-            [5, "Proffessional"]
-        ]
-    %>
-    <a id="editOrganized" href="#" class="editThis editable">edit experience</a>
+    <span class="edit_profile_label">Highest Level of Organized Ball</span><br>
+        <%= best_in_place @member, :position, :type => :select, :activator => '#editOrganized', :collection =>
+            [
+                [-1, "Undisclosed"],
+                [1, "Grade School"],
+                [2, "Camp"],
+                [3, "High School"],
+                [4, "College"],
+                [5, "Proffessional"]
+            ]
+        %>
+        <a id="editOrganized" href="#" class="editThis editable">edit experience</a>
+</p>
+<p id="skill_level">
+    <span class="edit_profile_label">Skill Level</span><br>
+        <%= best_in_place @member, :skill_level, :type => :select, :activator => '#editSkillLevel', :collection =>
+            [
+                [-1, "Undisclosed"],
+                [1, "Never Played"],
+                [2, "Beginner"],
+                [3, "Intermediate"],
+                [4, "Advanced"],
+                [5, "Baller"]
+            ]
+        %>
+        <a id="editSkillLevel" href="#" class="editThis editable">edit skill level</a>
 </p>
 <p id="favorite_player">
     <span class="edit_profile_label">Favorite Player</span>
 
-    <%= best_in_place @member, :general_location, :type => :input, :activator => '#editFavoritePlayer',
+    <%= best_in_place @member, :favorite_player, :type => :input, :activator => '#editFavoritePlayer',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
         :nil => "Add Favorite Player"
     %>

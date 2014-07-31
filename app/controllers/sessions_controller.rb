@@ -1,7 +1,4 @@
 class SessionsController < ApplicationController
-	def new
-	end
-
 	def create
 		member = Member.find_by_email(params[:email].downcase)
 		if member && member.authenticate(params[:password])
@@ -9,7 +6,7 @@ class SessionsController < ApplicationController
             redirect_back_or member
 		else
 			flash[:error] = "Invalid email/password combination" #not right
-			render 'new'
+			redirect_to home_path
 		end
 	end
 

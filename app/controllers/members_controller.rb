@@ -45,15 +45,20 @@ class MembersController < ApplicationController
 
 
 	def create
-		@member = Member.new(bip_params)
-		if @member.save
-			flash[:success] = "Welcome to Findbball"
-			redirect_to @member
-		else
-			@noHeaderFooter = true
-			flash[:error] = "Could not create member."
-			render 'new'
-		end
+		if !signed_in?
+            @member = Member.new(member_params)
+    		if @member.save!
+                sign_in @member
+    			flash[:success] = "Welcome to Findbball"
+    			redirect_to @member
+    		else
+    			@noHeaderFooter = true
+    			flash[:error] = "Could not create member."
+    			render 'new'
+    		end
+        else
+            redirect_to current_user
+        end
 	end
 
 	private

@@ -1,6 +1,5 @@
 fbb.bestInPlace = function(){
     var bestInPlaceOptions = {
-        changeYear: true,
         changeMonth: true,
         yearRange: "-40:-10",
         dateFormat: 'MM dd, yy'
