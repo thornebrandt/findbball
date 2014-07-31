@@ -14,7 +14,7 @@ class MembersController < ApplicationController
             @shown_reviews = @member.reviews.last(5)
             @hidden_reviews = @member.reviews - @shown_reviews
         else
-            flash[:error] = "Could not find that memeber"
+            flash[:error] = "Could not find that member"
             redirect_to home_path
         end
 	end
@@ -29,14 +29,21 @@ class MembersController < ApplicationController
     end
 
     def update
-        puts "calling update"
+        # puts "calling update"
+        # puts params[:member]["photo"]
         @member = Member.find(params[:id])
         if params[:member][:birthdate]
             new_birthdate = Chronic.parse(params[:member][:birthdate]).strftime('%Y-%m-%d');
             params[:member][:birthdate] = new_birthdate
-            puts "params[:member]"
-            puts params[:member]
         end
+
+        # if params[:member]["photo"]
+        #     params[:member]["photo"] = Base64.decode64(params[:member]["photo"])
+        #     # File.open("public/images/test", "wb") do |file|
+        #     #     file.write(B))
+        #     # end
+        # end
+
         respond_to do |format|
             if @member.update_attributes(member_params)
                 format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
@@ -66,11 +73,6 @@ class MembersController < ApplicationController
 	end
 
 	private
-        def bip_params
-            params.require(:member).permit(:name)
-        end
-
-
 		def member_params
 			params.require(:member).permit( :name,
                                             :email,

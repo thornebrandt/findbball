@@ -74,7 +74,8 @@
                         </div>
                     <% else %>
                         <div id="nav_top_right">
-                            <a id="howItWorks" href="#">How It Works</a> <span>|</span> <a href="#"> Not a member yet? </a>
+                            <a id="howItWorks" href="#">How It Works</a> <span>|</span>
+                            <%= link_to "Not a member yet?", signup_path %>
                         </div>
                     <% end %>
                 </div>

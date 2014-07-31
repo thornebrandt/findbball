@@ -12,14 +12,6 @@
                 <td><%= @member.age || "Undisclosed" %></td>
             </tr>
             <tr>
-                <th>Plays Basketball</th>
-                <th class="tdRightAlign">Skill Level</th>
-            </tr>
-            <tr>
-                <td>A couple of times a month</td>
-                <td class="tdRightAlign"><%= @member.skill_level_mapped %></td>
-            </tr>
-            <tr>
                 <th>Height</th>
                 <th class="tdRightAlign">Weight</th>
             </tr>
@@ -29,18 +21,26 @@
             </tr>
             <tr>
                 <th>Nationality</th>
-                <th class="tdRightAlign">Position</th>
+                <th class="tdRightAlign">Favorite Position</th>
             </tr>
             <tr>
-                <td>White</td>
-                <td class="tdRightAlign">Center</td>
+                <td><%= @member.nationality_mapped %></td>
+                <td class="tdRightAlign"><%= @member.position_mapped %></td>
+            </tr>
+            <tr>
+                <th>Plays Basketball</th>
+                <th class="tdRightAlign">Skill Level</th>
+            </tr>
+            <tr>
+                <td><%= @member.plays_basketball_mapped %></td>
+                <td class="tdRightAlign"><%= @member.skill_level_mapped %></td>
             </tr>
             <tr>
                 <th>Highest Level of Organized Ball</th>
                 <th class="tdRightAlign">Favorite Player</th>
             </tr>
             <tr>
-                <td>High School</td>
+                <td><%= @member.organized_mapped %></td>
                 <td class="tdRightAlign"><%= @member.favorite_player || "Secret" %></td>
             </tr>
             <tr>

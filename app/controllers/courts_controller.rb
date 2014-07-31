@@ -13,11 +13,16 @@ class CourtsController < ApplicationController
   end
 
   def new
-    @showMap = true;
-    @mapEl = "add_court_map" #element of map-canvas
-    @court = current_user.courts.new(params[:id])
-    @review = @court.reviews.new(params[:id])
-    @review.member_id = current_user.id
+    if !signed_in?
+        flash[:error] = "You must be logged in to create a court"
+        redirect_to home_path
+    else
+        @showMap = true;
+        @mapEl = "add_court_map" #element of map-canvas
+        @court = current_user.courts.new(params[:id])
+        @review = @court.reviews.new(params[:id])
+        @review.member_id = current_user.id
+    end
     # @review = current_user.reviews.build(params[:id])
     # @review.court_id = @court.id
   end

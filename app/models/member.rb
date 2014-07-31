@@ -1,9 +1,7 @@
-
 class Member < ActiveRecord::Base
     has_many :courts
     has_many :reviews
 	has_secure_password
-    attr_accessor :photo_data
 	before_save :beforeSave
     before_validation :beforeValidation
 	before_create :create_remember_token
@@ -16,7 +14,8 @@ class Member < ActiveRecord::Base
     has_attached_file :photo,
         :styles => {:thumb => '40x40'},
         :url => "/system/member/:id/photo_:style.:extension",
-        :path => ":rails_root/public/system/member/:id/photo_:style.:extension"
+        :path => ":rails_root/public/system/member/:id/photo_:style.:extension",
+        :default_url => ActionController::Base.helpers.asset_path("player_missing.png")
     validates_attachment_content_type :photo, :content_type => /\Aimage/
     do_not_validate_attachment_file_type :photo
 
@@ -27,8 +26,7 @@ class Member < ActiveRecord::Base
 
     def beforeValidation
         puts self.birthdate
-
-        #decoded_data = Base64.decode64(self.photo_data)
+        decode_base64_image
     end
 
 	def Member.new_remember_token
@@ -37,11 +35,16 @@ class Member < ActiveRecord::Base
 
     def age
         now = Time.now.utc.to_date
-        _age = now.year - birthdate.year - ((now.month > birthdate.month || ( now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1 )
-        if _age < 3
-            _age = "Undisclosed"
+        if birthdate
+            _age = now.year - birthdate.year -
+            ((now.month > birthdate.month || ( now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1 )
+            if _age < 3
+                _age = "Undisclosed"
+            end
+            _age
+        else
+            "Undisclosed"
         end
-        _age
     end
 
     def profile_photo
@@ -61,7 +64,7 @@ class Member < ActiveRecord::Base
 	end
 
     def nationality_mapped
-        case skill_level
+        case nationality
             when -1 then "Undisclosed"
             when 1 then "Black"
             when 2 then "White"
@@ -69,7 +72,7 @@ class Member < ActiveRecord::Base
             when 4 then "Latino"
             when 5 then "Hispanic"
             when 6 then "Asian"
-            when 7 then "Native Amerian"
+            when 7 then "Native American"
             when 8 then "Middle Eastern"
             when 9 then "Mixed"
             when 10 then "Other"
@@ -77,27 +80,78 @@ class Member < ActiveRecord::Base
         end
     end
 
-    def skill_level_mapped
-        case skill_level
+    def position_mapped
+        case position
             when -1 then "Undisclosed"
-            when 1 then "Black"
-            when 2 then "White"
-            when 3 then "African"
-            when 4 then "Latino"
-            when 5 then "Hispanic"
-            when 6 then "Asian"
-            when 7 then "Native Amerian"
-            when 8 then "Middle Eastern"
-            when 9 then "Mixed"
+            when 1 then "Point guard"
+            when 2 then "Shooting guard"
+            when 3 then "Small forward"
+            when 4 then "Power forward"
+            when 5 then "Center"
+            when 6 then "Offense"
+            when 7 then "Defense"
+            when 8 then "Offensive"
+            when 9 then "Quarterback"
             when 10 then "Other"
+            when 11 then "Don't care"
             else "Undefined"
         end
     end
+
+    def organized_mapped
+        case organized
+            when -1 then "Undisclosed"
+            when 1 then "Grade School"
+            when 2 then "Camp"
+            when 3 then "High School"
+            when 4 then "College"
+            when 5 then "Proffessional"
+            else "Undefined"
+        end
+    end
+
+    def plays_basketball_mapped
+        case plays_basketball
+            when -1 then "Undisclosed"
+            when 1 then "Any given second"
+            when 2 then "Every day"
+            when 3 then "A few times a week"
+            when 4 then "Once a week"
+            when 5 then "A few times a month"
+            when 6 then "Once a month"
+            when 7 then "A few times a year"
+            when 8 then "Hardly ever"
+            when 9 then "I've never played"
+            else "Undefined"
+        end
+    end
+
+
+    def skill_level_mapped
+        case skill_level
+            when -1 then "Undisclosed"
+            when 1 then "Never Played"
+            when 2 then "Beginner"
+            when 3 then "Intermediate"
+            when 4 then "Advanced"
+            when 5 then "Baller"
+            else "Undefined"
+        end
+    end
+
+
+
+    protected
+        def decode_base64_image
+            # puts "ABOUT TO DECODE"
+            # puts self.inspect
+            # puts "DECODDDDAFSDFASFSDAF"
+            # sio = StringIO.new(Base64(decode64(photo))
+        end
 
 
 	private
 		def create_remember_token
 			self.remember_token = Member.hash(Member.new_remember_token)
 		end
-
 end

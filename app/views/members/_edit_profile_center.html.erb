@@ -69,6 +69,25 @@
     %>
     <a id="editNationality" href="#" class="editThis editable">edit nationality</a>
 </p>
+<p id="plays_basketball">
+    <span class="edit_profile_label">Plays Basketball About...</span>
+
+    <%= best_in_place @member, :plays_basketball, :type => :select, :activator => '#editPlaysBasketball', :collection =>
+        [
+            [-1, "Undisclosed"],
+            [1, "Any given second"],
+            [2, "Every Day"],
+            [3, "A few times a week"],
+            [4, "Once a week"],
+            [5, "A few times a month"],
+            [6, "Once a month"],
+            [7, "A few times a year"],
+            [8, "Hardly ever"],
+            [9, "I've never played"],
+        ]
+    %>
+    <a id="editPlaysBasketball" href="#" class="editThis editable">edit frequency</a>
+</p>
 <p id="position">
     <span class="edit_profile_label">Favorite Position</span>
 
@@ -82,7 +101,7 @@
             [5, "Center"],
             [6, "Offense"],
             [7, "Defense"],
-            [8, "Offsensive"],
+            [8, "Offensive"],
             [9, "Quarterback"],
             [10, "Other"],
             [11, "Don't care"]
@@ -92,7 +111,7 @@
 </p>
 <p id="organized">
     <span class="edit_profile_label">Highest Level of Organized Ball</span><br>
-        <%= best_in_place @member, :position, :type => :select, :activator => '#editOrganized', :collection =>
+        <%= best_in_place @member, :organized, :type => :select, :activator => '#editOrganized', :collection =>
             [
                 [-1, "Undisclosed"],
                 [1, "Grade School"],
