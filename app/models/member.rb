@@ -1,7 +1,9 @@
+
 class Member < ActiveRecord::Base
-  has_many :courts
-  has_many :reviews
+    has_many :courts
+    has_many :reviews
 	has_secure_password
+    attr_accessor :photo_data
 	before_save :beforeSave
     before_validation :beforeValidation
 	before_create :create_remember_token
@@ -11,10 +13,12 @@ class Member < ActiveRecord::Base
 						uniqueness: { case_sensitive: false }
     validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
     validates :birthdate, presence: true, allow_nil: false
-
-    def inches
-        "#{self.about} + 3 inches"
-    end
+    has_attached_file :photo,
+        :styles => {:thumb => '40x40'},
+        :url => "/system/member/:id/photo_:style.:extension",
+        :path => ":rails_root/public/system/member/:id/photo_:style.:extension"
+    validates_attachment_content_type :photo, :content_type => /\Aimage/
+    do_not_validate_attachment_file_type :photo
 
 	def beforeSave
 		self.email.downcase!
@@ -22,8 +26,10 @@ class Member < ActiveRecord::Base
 	end
 
     def beforeValidation
-        puts "this is what is coming in"
         puts self.birthdate
+
+        #decoded_data = Base64.decode64(self.photo_data)
+
     end
 
 	def Member.new_remember_token
@@ -42,4 +48,5 @@ class Member < ActiveRecord::Base
 		def create_remember_token
 			self.remember_token = Member.hash(Member.new_remember_token)
 		end
+
 end

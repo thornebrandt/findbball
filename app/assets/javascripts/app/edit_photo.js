@@ -66,7 +66,7 @@ fbb.edit_photo = function(){
 
 
         _input.addEventListener("change", function(evt) {
-            document.getElementById("response").innerHTML = "Uploading . . ."
+            $("#response").html("Uploading...");
             var i = 0,
                 len = this.files.length,
                 img, reader, file;
@@ -78,28 +78,20 @@ fbb.edit_photo = function(){
                     if (window.FileReader) {
                         reader = new FileReader();
                         reader.onloadend = function(e) {
+                            console.log("loaded");
+                            console.log(file.type);
                             showUploadedItem(e.target.result, file.fileName);
+                            var imageURL = e.target.result;
                         };
                         reader.readAsDataURL(file);
                     }
                     if (formdata) {
                         formdata.append("images[]", file);
                     }
+                } else {
+                    alert("That is not an image");
+                    $("#response").html("That was not an image");
                 }
-            }
-
-            if (formdata) {
-                $.ajax({
-                    url: "php/upload.php",
-                    type: "POST",
-                    data: formdata,
-                    processData: false,
-                    contentType: false,
-                    success: function(res) {
-                        $("#response").html(res);
-                        $("#upload_form").hide();
-                    }
-                });
             }
         }, false);
     }
@@ -108,11 +100,8 @@ fbb.edit_photo = function(){
     function updatePlayerProfileImages(source) {
         $("#profile_preview").attr("src", source);
         $("#confirm_image").show();
-        console.log("updating player profile images");
+        $("#member_photo").val(source); //hidden field that updates the member
     }
-
-
-
 
     domEvents();
 }

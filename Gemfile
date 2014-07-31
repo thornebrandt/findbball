@@ -9,6 +9,7 @@ gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'best_in_place', github: 'bernat/best_in_place'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 group :development, :test do
 	gem 'sqlite3'

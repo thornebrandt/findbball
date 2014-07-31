@@ -68,7 +68,7 @@
                         <div id="nav_top_right">
                             <div id="logged_in">
                                 You are logged in as
-                                <%= link_to( image_tag("player_placeholder.png", { height: 40, width: 40 }), current_user) %>
+                                <%= link_to( image_tag(@member.photo.url, { height: 40, width: 40 }), current_user) %>
                                 <%= link_to( current_user.name, current_user, id: "nav_username") %>
                             </div>
                         </div>

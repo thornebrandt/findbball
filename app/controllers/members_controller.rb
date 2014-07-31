@@ -80,7 +80,8 @@ class MembersController < ApplicationController
                                             :position,
                                             :organized,
                                             :favorite_player,
-                                            :about
+                                            :about,
+                                            :photo
                                         )
 		end
 
