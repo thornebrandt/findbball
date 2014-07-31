@@ -3,17 +3,21 @@ include ActionView::Helpers::NumberHelper
 class MembersController < ApplicationController
 
 	def show
-		@member = Member.find(params["id"])
-		@shown_courts = @member.courts.last(5)
-		@hidden_courts = @member.courts - @shown_courts
-		@shown_reviews = @member.reviews.last(5)
-        @hidden_reviews = @member.reviews - @shown_reviews
-	end
+        if Member.where(:id => params["id"]).nil?
+            redirect_to home_path
+        end
 
-    def show_test(id)
-        @noHeaderFooter = true
-        @member = Member.find(id)
-    end
+        if Member.where(:id => params["id"]).present?
+            @member = Member.find(params["id"])
+            @shown_courts = @member.courts.last(5)
+            @hidden_courts = @member.courts - @shown_courts
+            @shown_reviews = @member.reviews.last(5)
+            @hidden_reviews = @member.reviews - @shown_reviews
+        else
+            flash[:error] = "Could not find that memeber"
+            redirect_to home_path
+        end
+	end
 
 	def new
 		@noHeaderFooter = true

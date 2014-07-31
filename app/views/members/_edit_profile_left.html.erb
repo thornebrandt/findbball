@@ -1,7 +1,7 @@
 <div class="sidebar left">
     <div id="profile_left">
         <div id="profile_pic_container">
-            <%= image_tag @member.photo.url, id: "profile_pic" %>
+            <%= image_tag @member.profile_photo, id: "profile_pic" %>
             <a href="#" id="edit_photo" class="edit_player_photo">
                 edit photo
             </a>
@@ -16,7 +16,7 @@
                     <button type="submit"  id="btn1">Upload Photo</button>
                     <div id="response"></div>
                     <br>
-                    <%= image_tag @member.photo.url, id: "profile_preview" %>
+                    <%= image_tag @member.profile_photo, id: "profile_preview" %>
                     <p>
                         <%= f.submit "Confirm Image", class: "btn hide", id: "confirm_image" %>
                     </p>

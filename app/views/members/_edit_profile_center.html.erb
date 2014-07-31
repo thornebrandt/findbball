@@ -3,7 +3,8 @@
 <div id="fullname">
     <h2>
         <%= best_in_place @member, :full_name, :type => :input, :activator => '#editFullName',
-            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin"
+            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+            :nil => "Full Name Here"
         %>
     </h2>
     <a id="editFullName" href="#" class="editThis editable">edit full name</a>
