@@ -1,4 +1,4 @@
-    <h2 id="fullname"><%= @member.name %></h2>
+    <h2 id="fullname"><%= @member.full_name %></h2>
     <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
         <% if @member_has_schedule == true %>
             <%= render 'members/member_headline' %>
@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <td>A couple of times a month</td>
-                <td class="tdRightAlign">beginner</td>
+                <td class="tdRightAlign"><%= @member.skill_level_mapped %></td>
             </tr>
             <tr>
                 <th>Height</th>

@@ -44,6 +44,24 @@ class Member < ActiveRecord::Base
 		Digest::SHA1.hexdigest(token.to_s)
 	end
 
+    def skill_level_mapped
+        case skill_level
+            when -1 then "Undisclosed"
+            when 1 then "Black"
+            when 2 then "White"
+            when 3 then "African"
+            when 4 then "Latino"
+            when 5 then "Hispanic"
+            when 6 then "Asian"
+            when 7 then "Native Amerian"
+            when 8 then "Middle Eastern"
+            when 9 then "Mixed"
+            when 10 then "Other"
+            else "Undefined"
+        end
+    end
+
+
 	private
 		def create_remember_token
 			self.remember_token = Member.hash(Member.new_remember_token)
