@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724231854) do
+ActiveRecord::Schema.define(version: 20140731010550) do
 
   create_table "courts", force: true do |t|
     t.string   "name"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20140724231854) do
     t.string   "open_am_1",   limit: 2
     t.integer  "open_time_2", limit: 1
     t.string   "open_am_2",   limit: 2
+    t.float    "lat"
+    t.float    "lng"
   end
 
   create_table "members", force: true do |t|
