@@ -2,6 +2,7 @@ class CourtsController < ApplicationController
 
   def show
     @court = Court.find(params[:id])
+    @review = @court.reviews.build
     @shown_reviews = @court.reviews.last(4)
     @hidden_reviews = @court.reviews - @shown_reviews
   end
@@ -13,18 +14,16 @@ class CourtsController < ApplicationController
 
   def new
     @showMap = true;
-    @court = Court.new(params[:id])
-    # @court.member_id = current_user.id
-    @review = @court.reviews.new
+    @court = current_user.courts.new(params[:id])
+    @review = @court.reviews.new(params[:id])
     @review.member_id = current_user.id
     # @review = current_user.reviews.build(params[:id])
     # @review.court_id = @court.id
   end
 
   def create
-    @court = Court.new(court_params)
-    # @court.member_id = current_user.id
-    # @review = @court.reviews.new(params[:review])
+    @court = current_user.courts.build(court_params)
+    @review = @court.reviews.build(params[:review])
     if @court.save
       flash[:success] = "Court created!"
       redirect_to @court

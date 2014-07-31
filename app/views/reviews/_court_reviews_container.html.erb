@@ -1,5 +1,6 @@
 <div id="reviewsContainer">
 	<h3>REVIEWS(<%= @court.reviews.count %>)</h3>
+	<%= render 'reviews/review_form' %>
 	<% if @court.reviews.any? %>
     			<%= render @shown_reviews %>
 				<div id="hiddenReviews" class="hide">
