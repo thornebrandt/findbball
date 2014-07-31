@@ -14,6 +14,7 @@ class CourtsController < ApplicationController
 
   def new
     @showMap = true;
+    @mapEl = "add_court_map" #element of map-canvas
     @court = current_user.courts.new(params[:id])
     @review = @court.reviews.new(params[:id])
     @review.member_id = current_user.id
