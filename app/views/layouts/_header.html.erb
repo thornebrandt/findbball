@@ -6,7 +6,7 @@
 <div id="main"><!--<![endif]-->
 	<div id="top">
 	          <div id="nav">
-                    <a href="home.html" id="logo">Findbball</a>
+                    <a href="/home" id="logo">Findbball</a>
                     <ul id="nav_dropdown" class="dropdown">
                         <li>
                             <a href="#">Bball Courts</a>
@@ -67,8 +67,9 @@
                     <% if signed_in? %>
                         <div id="nav_top_right">
                             <div id="logged_in">
-                                You are logged in as <a href="#" id="nav_username"><%= current_user.name %></a>
-                                <%= image_tag "player_placeholder.png", { height: 40, width: 40 } %>
+                                You are logged in as
+                                <%= link_to( image_tag("player_placeholder.png", { height: 40, width: 40 }), current_user) %>
+                                <%= link_to( current_user.name, current_user, id: "nav_username") %>
                             </div>
                         </div>
                     <% else %>
@@ -101,9 +102,6 @@
     		    <input id="member_search" class="typeahead" type="text" style="display:none;" placeholder="Member Name" />
     		    <button type="submit" class="btn right_align">Go</button>
 	        </form>
-	        <% if @hero %>
-            <span id="basketball_graphic"></span>
-            <% end %>
 		</div>
     </div>
     <% if signed_in? %>

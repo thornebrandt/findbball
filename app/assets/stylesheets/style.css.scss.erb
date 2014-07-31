@@ -46,14 +46,14 @@ display: block;
 width: 225px;
 height: 55px;
 background: url(<%= asset_path "findbball.png" %>);
-font-size: 1px;
-color: black;
+font-size: 0px;
+background-repeat: no-repeat;
 }
 
 .dropdown, .dropdown * {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+margin: 0;
+padding: 0;
+list-style: none;
 }
 .dropdown li {
 	position: relative;
@@ -286,6 +286,30 @@ div.mc-image {
 
 }
 
+#content{
+position: relative;
+width: 937px;
+margin-left: auto;
+margin-right: auto;
+}
+
+#basketball_graphic_wrapper{
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+display: block;
+}
+
+#basketball_graphic_container{
+margin-left: auto;
+margin-right: auto;
+display: block;
+position: relative;
+height: 300px;
+width: 937px;
+}
+
 
 #basketball_graphic{
 width: 399px;
@@ -294,18 +318,13 @@ background-image: url(<%= asset_path "basketball_big.png" %>);
 background-repeat: no-repeat;
 display: block;
 position: absolute;
-top: 40px;
+top: 0px;
 left: 0px;
 z-index: 98;
 }
 
 
-#content{
-position: relative;
-width: 937px;
-margin-left: auto;
-margin-right: auto;
-}
+
 
 
 .featured_cell{
