@@ -3,7 +3,8 @@
 <div id="fullname">
     <h2>
         <%= best_in_place @member, :full_name, :type => :input, :activator => '#editFullName',
-            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin"
+            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
+            :nil => "Full Name Here"
         %>
     </h2>
     <a id="editFullName" href="#" class="editThis editable">edit full name</a>
@@ -68,6 +69,25 @@
     %>
     <a id="editNationality" href="#" class="editThis editable">edit nationality</a>
 </p>
+<p id="plays_basketball">
+    <span class="edit_profile_label">Plays Basketball About...</span>
+
+    <%= best_in_place @member, :plays_basketball, :type => :select, :activator => '#editPlaysBasketball', :collection =>
+        [
+            [-1, "Undisclosed"],
+            [1, "Any given second"],
+            [2, "Every Day"],
+            [3, "A few times a week"],
+            [4, "Once a week"],
+            [5, "A few times a month"],
+            [6, "Once a month"],
+            [7, "A few times a year"],
+            [8, "Hardly ever"],
+            [9, "I've never played"],
+        ]
+    %>
+    <a id="editPlaysBasketball" href="#" class="editThis editable">edit frequency</a>
+</p>
 <p id="position">
     <span class="edit_profile_label">Favorite Position</span>
 
@@ -81,7 +101,7 @@
             [5, "Center"],
             [6, "Offense"],
             [7, "Defense"],
-            [8, "Offsensive"],
+            [8, "Offensive"],
             [9, "Quarterback"],
             [10, "Other"],
             [11, "Don't care"]
@@ -90,23 +110,37 @@
     <a id="editPosition" href="#" class="editThis editable">edit position</a>
 </p>
 <p id="organized">
-<span class="edit_profile_label">Highest Level of Organized Ball</span><br>
-    <%= best_in_place @member, :position, :type => :select, :activator => '#editOrganized', :collection =>
-        [
-            [-1, "Undisclosed"],
-            [1, "Grade School"],
-            [2, "Camp"],
-            [3, "High School"],
-            [4, "College"],
-            [5, "Proffessional"]
-        ]
-    %>
-    <a id="editOrganized" href="#" class="editThis editable">edit experience</a>
+    <span class="edit_profile_label">Highest Level of Organized Ball</span><br>
+        <%= best_in_place @member, :organized, :type => :select, :activator => '#editOrganized', :collection =>
+            [
+                [-1, "Undisclosed"],
+                [1, "Grade School"],
+                [2, "Camp"],
+                [3, "High School"],
+                [4, "College"],
+                [5, "Proffessional"]
+            ]
+        %>
+        <a id="editOrganized" href="#" class="editThis editable">edit experience</a>
+</p>
+<p id="skill_level">
+    <span class="edit_profile_label">Skill Level</span><br>
+        <%= best_in_place @member, :skill_level, :type => :select, :activator => '#editSkillLevel', :collection =>
+            [
+                [-1, "Undisclosed"],
+                [1, "Never Played"],
+                [2, "Beginner"],
+                [3, "Intermediate"],
+                [4, "Advanced"],
+                [5, "Baller"]
+            ]
+        %>
+        <a id="editSkillLevel" href="#" class="editThis editable">edit skill level</a>
 </p>
 <p id="favorite_player">
     <span class="edit_profile_label">Favorite Player</span>
 
-    <%= best_in_place @member, :general_location, :type => :input, :activator => '#editFavoritePlayer',
+    <%= best_in_place @member, :favorite_player, :type => :input, :activator => '#editFavoritePlayer',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
         :nil => "Add Favorite Player"
     %>

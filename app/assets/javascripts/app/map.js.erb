@@ -3,6 +3,7 @@ fbb.map = function(){
     var mapEl;
     var $_addressInput;
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
+    self.mapOptions = {};
 
     var checkDom = function(){
         var mapScript = $("#showMap");
@@ -12,13 +13,6 @@ fbb.map = function(){
             prepareMap();
             autoComplete();
         }
-    }
-
-    self.mapOptions = {
-        center: new google.maps.LatLng(fbb.lat, fbb.lng),
-        zoom: 13,
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     var simpleMap = function(){
@@ -26,7 +20,17 @@ fbb.map = function(){
         self.map = new google.maps.Map(mapEl, self.mapOptions);
     };
 
+    var setupOptions = function(){
+        self.mapOptions = {
+            center: new google.maps.LatLng(fbb.lat, fbb.lng),
+            zoom: 13,
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+    };
+
     var prepareMap = function(){
+        setupOptions();
         $_addressInput = $("#courtAddress");
         self.map = new google.maps.Map(mapEl, self.mapOptions);
         setupMapCursor();
@@ -105,6 +109,8 @@ fbb.map = function(){
             $("#latLng").html(self.address + " (Lat: " + lat + ", Long: " + lng + ") <i>Drag for better placement</i>");
         });
     };
+
+
 
 
     var autoCompleteFailureHandler = function(results, status){

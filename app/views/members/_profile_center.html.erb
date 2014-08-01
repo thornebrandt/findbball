@@ -1,4 +1,4 @@
-    <h2 id="fullname"><%= @member.name %></h2>
+    <h2 id="fullname"><%= @member.full_name %></h2>
     <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
         <% if @member_has_schedule == true %>
             <%= render 'members/member_headline' %>
@@ -6,43 +6,49 @@
     <table id="member_info">
         <tbody>
             <tr>
-                <th>Plays Basketball</th>
-                <th class="tdRightAlign">Skill Level</th>
+                <th>Age</th>
             </tr>
             <tr>
-                <td>A couple of times a month</td>
-                <td class="tdRightAlign">beginner</td>
+                <td><%= @member.age || "Undisclosed" %></td>
             </tr>
             <tr>
                 <th>Height</th>
                 <th class="tdRightAlign">Weight</th>
             </tr>
             <tr>
-                <td>5'8"</td>
-                <td class="tdRightAlign">150lbs</td>
+                <td><%= @member.height || "a few" %> inches</td>
+                <td class="tdRightAlign"><%= @member.weight || "a few" %> lbs</td>
             </tr>
             <tr>
-                <th>Position</th>
-                <th class="tdRightAlign">Highest Level of Organized Ball</th>
+                <th>Nationality</th>
+                <th class="tdRightAlign">Favorite Position</th>
             </tr>
             <tr>
-                <td>Center</td>
-                <td class="tdRightAlign">Grade School</td>
+                <td><%= @member.nationality_mapped %></td>
+                <td class="tdRightAlign"><%= @member.position_mapped %></td>
             </tr>
             <tr>
-                <th>Favorite Place to Play</th>
-                <th class="tdRightAlign">Favorite member</th>
+                <th>Plays Basketball</th>
+                <th class="tdRightAlign">Skill Level</th>
             </tr>
             <tr>
-                <td>Wicker Park FieldHouse</td>
-                <td class="tdRightAlign">Air Bud</td>
+                <td><%= @member.plays_basketball_mapped %></td>
+                <td class="tdRightAlign"><%= @member.skill_level_mapped %></td>
+            </tr>
+            <tr>
+                <th>Highest Level of Organized Ball</th>
+                <th class="tdRightAlign">Favorite Player</th>
+            </tr>
+            <tr>
+                <td><%= @member.organized_mapped %></td>
+                <td class="tdRightAlign"><%= @member.favorite_player || "Secret" %></td>
             </tr>
             <tr>
                 <th colspan="2">About</th>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: justify">
-                    Bacon ipsum dolor sit amet sirloin shankle filet mignon hamburger short ribs boudin tongue ribeye tail jowl shank strip steak sausage. Chicken tail pork drumstick tri-tip, tongue boudin. Pig leberkas bacon pork chop, rump ham hock t-bone. Pig strip steak tongue, leberkas jerky flank short ribs. Turducken pork chop biltong tri-tip, ham pig pork loin t-bone strip steak corned beef tenderloin hamburger. Ball tip capicola meatball, ham short loin hamburger flank tail tongue venison sirloin. Leberkas short ribs short loin, brisket rump sausage beef ribs pig andouille tri-tip pancetta ribeye bresaola capicola. Pork chop fatback flank spare ribs pastrami leberkas beef ribs sausage ham hock shoulder shank doner chuck pork loin. Meatball tail turkey beef ball tip beef ribs sausage hamburger ham hock tenderloin chuck pancetta doner turducken. Doner tri-tip drumstick, biltong short loin pork belly meatball pig venison boudin frankfurter rump jerky. Jowl short loin tongue sausage pork venison.
+                    <%= @member.about %>
                 </td>
             </tr>
         </tbody>

@@ -1,6 +1,32 @@
 <div class="sidebar left">
     <div id="profile_left">
-        <%= image_tag "player_placeholder.png", id: "profile_pic" %>
+        <div id="profile_pic_container">
+            <%= image_tag @member.profile_photo, id: "profile_pic" %>
+            <a href="#" id="edit_photo" class="edit_player_photo">
+                edit photo
+            </a>
+        </div>
+        <div id="upload_photo_modal" class="modal hide fade">
+            <div id="upload_photo">
+                <h3>Upload a new Profile Image</h1>
+
+                <%= form_for @member, :url => member_path, :html => { :multipart => true } do |f| %>
+
+                    <input class="btn" type="file" name="images" id="images" />
+                    <button type="submit"  id="btn1">Upload Photo</button>
+                    <div id="response"></div>
+                    <br>
+                    <%= image_tag @member.profile_photo, id: "profile_preview" %>
+                    <p>
+                        <%= f.submit "Confirm Image", class: "btn hide", id: "confirm_image" %>
+                    </p>
+                    <%= f.hidden_field :photo %>
+
+                    <br>
+                <% end %>
+            </div>
+        </div>
+
         <p id="profile_name">
             <%= best_in_place @member, :name, :type => :input, :activator => '#editName',
                 :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin"
