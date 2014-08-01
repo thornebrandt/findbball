@@ -56,7 +56,7 @@ def make_reviews
     content = Faker::Lorem.sentence(5)
     members.each do |m|
       courts.each do |c|
-        c.reviews.create!(content: content, member: m)
+        c.reviews.create!(content: content, member_id: m.id)
         puts "#{m}, #{c}, #{content}"
       end
     end

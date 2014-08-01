@@ -1,10 +1,11 @@
 class CourtsController < ApplicationController
+  before_action :signed_in_user, only: [:edit, :update, :create, :new]
 
   def show
     @court = Court.find(params[:id])
-    @review = @court.reviews.build
     @shown_reviews = @court.reviews.last(4)
     @hidden_reviews = @court.reviews - @shown_reviews
+    @review = @court.reviews.build
   end
 
   def edit
@@ -25,6 +26,7 @@ class CourtsController < ApplicationController
   def create
     @court = current_user.courts.build(court_params)
     @review = @court.reviews.build(params[:review])
+    @review.member_id = current_user.id
     if @court.save
       flash[:success] = "Court created!"
       redirect_to @court
