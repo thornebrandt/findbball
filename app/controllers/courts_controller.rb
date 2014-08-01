@@ -24,8 +24,6 @@ class CourtsController < ApplicationController
         @review = @court.reviews.new(params[:id])
         @review.member_id = current_user.id
     end
-    # @review = current_user.reviews.build(params[:id])
-    # @review.court_id = @court.id
   end
 
   def create
