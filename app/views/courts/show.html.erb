@@ -7,7 +7,7 @@
             <h2 id="courtName" class="courtH2"><%= @court.name %></h2>
             <%= link_to_if @court.has_attribute?(:website), "court website", @court.website, id: "courtWebsite" %>
             <p id="courtAddress" class="gray">
-                <%= @court.location %>
+                <%= @court.format_location %>
             </p>
             <p id="courtHours">
                 Open <%= @court.open_hours %>

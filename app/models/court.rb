@@ -23,4 +23,8 @@ class Court < ActiveRecord::Base
   def pickup_hours
     "#{self.pickup_day}s at #{self.pickup_time}:00 #{self.pickup_am.upcase}"
   end
+  
+  def format_location
+    self.location.sub(",", ",\n")
+  end
 end

@@ -4,13 +4,13 @@
     			<% @shown_courts.each do |court| %>
     				<p class="court">
     					<%= link_to court.name, court_path(court), class: "court" %><br>
-						<%= court.location %>
+						<%= court.format_location %>
     			<% end %>
     			<div id="hiddenCourts" class="hide">
     				<% @hidden_courts.each do |court| %>
     				<p class="court">
     					<%= link_to court.name, court_path(court), class: "court" %><br>
-						<%= court.location %>
+						<%= court.format_location %>
 					<% end %>
 				<a href="#" id="hideCourts"><b>Show fewer courts</b></a>
     			</div>
