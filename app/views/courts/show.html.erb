@@ -12,13 +12,13 @@
             <p id="courtHours">
                 Open <%= @court.open_hours %>
             </p>
-            <% if current_user? @court.member %>
+            <% if current_user? @court.member %> <!-- Icons not showing up -->
             <a href="edit_court.html"><i class="icon-edit"></i> Edit</a> | <a href="#"><i class="icon-trash"></i> Delete</a><br>   
             <% end %>
             <hr>
-            <div class="courtInfo2 center"> <!-- Images are running into each other here -->
-                <div id="courtDifficulty"><span id="difficulty"><%= @court.skill_level %></span>
-                    <%= image_tag "icon/skill_beginner.png" %>
+            <div class="courtInfo2 center">
+                <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
+                    <%= image_tag @court.skill_image %>
                 </div>
                 <p id="courtPickUpGame">
                     <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>

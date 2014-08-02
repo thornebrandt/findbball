@@ -21,10 +21,27 @@ class Court < ActiveRecord::Base
   end
   
   def pickup_hours
-    "#{self.pickup_day}s at #{self.pickup_time}:00 #{self.pickup_am.upcase}"
+    "#{self.pickup_day}s #{self.pickup_time}#{self.pickup_am.upcase}"
   end
   
   def format_location
     self.location.sub(",", ",\n")
+  end
+  
+  def verbose_skill_level
+    case self.skill_level
+    when 1
+      "Beginner"
+    when 2
+      "Intermediate"
+    when 3
+      "Advanced"
+    when 4
+      "Difficult"
+    end
+  end
+  
+  def skill_image
+    "icon/skill_#{self.verbose_skill_level.downcase}.png"
   end
 end
