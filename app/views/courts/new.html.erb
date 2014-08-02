@@ -18,10 +18,12 @@
             <p id="latLng">
             </p>
             <%= form_for @court do |f| %>
+            <%= f.hidden_field :member_id %>
             <div id="enter_address">
         	    <span class="directions"></span>
-        	    <b><%= f.label :location, "New Court Location" %></b>
-        	    <%= f.text_field :location, id: "address_search", placeholder: "1425 N Damen Ave, Chicago, IL 60622" %>
+        	    <!-- ><b><%= f.label :location, "New Court Location" %></b>
+        	    <%= f.text_field :location, id: "address_search", placeholder: "1425 N Damen Ave, Chicago, IL 60622" %> -->
+        	    <%= f.hidden_field :location %>
                 <input id="courtAddress" type="hidden">
                 <button type="submit" class="btn right_align">Map</button>
         	</div>
@@ -64,6 +66,8 @@
                             	<%= f.fields_for :reviews do |r| %>
                                 <td class="td_label"><%= r.label :content, "Details/Review" %></td>
                                 <td><%= r.text_area :content, id: "reviewDetails" %></td>
+                                <%= r.hidden_field :member %>
+                                <%= r.hidden_field :court %>
            						<% end %>
                             </tr>
                             <tr>

@@ -1,7 +1,7 @@
 class Court < ActiveRecord::Base
-  belongs_to :member
+  belongs_to :member, inverse_of: :courts
   has_many :reviews, dependent: :destroy
-  accepts_nested_attributes_for :reviews
+  accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
   
   validates :name,          presence: true, length: { maximum: 70 }
   validates :location,      presence: true, length: { maximum: 200 }
