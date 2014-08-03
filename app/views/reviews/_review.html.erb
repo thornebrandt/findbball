@@ -1,5 +1,5 @@
     			<div class="review">
-					<%= image_tag "members/jerry.jpg", class: "review_author" %>
+					<%= image_tag review.member.photo, class: "review_author" %>
 					<p class="review_body">
 						<%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
 						<%= review.content %>

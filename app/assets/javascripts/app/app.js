@@ -7,7 +7,11 @@ var fbb = {
         btn.click(function(e){
             console.log("modal");
             e.preventDefault();
-            modal_el.modal();
+            var modalOptions = {
+                "backdrop" : true,
+                "keyboard" : true
+            }
+            modal_el.modal(modalOptions);
         });
     }
 }
@@ -21,4 +25,12 @@ $(function(){
     fbb.map();
     fbb.edit_photo();
     // fbb.member_profile(); //looks like this is replaced by best_in_place
+
+    $(".modal.fade").click(function(){
+      $(this).modal('hide'); //manually doing the modal hide bullshit...
+    }).children().click(function(e) {
+        e.stopPropagation();
+    });
+
 });
+

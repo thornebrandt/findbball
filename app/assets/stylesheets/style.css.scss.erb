@@ -34,7 +34,7 @@ z-index:99;
 position: relative;
 display: block;
 width: 937px;
-height: 56px;
+height: 68px;
 margin-left: auto;
 margin-right: auto;
 padding-top: 10px;
@@ -335,6 +335,8 @@ margin: 5px;
 position: relative;
 width: 222px;
 height: 150px;
+overflow-y: hidden;
+overflow-x: hidden;
 }
 
 .featured_cell:nth-of-type(1){
@@ -388,8 +390,8 @@ text-align: center;
 
 .feature_heading_container a{
 color: white;
-font-weight: bold;
-font-size: 17px;
+font-weight: 600;
+font-size: 15px;
 line-height: 10px;
 }
 
@@ -489,6 +491,7 @@ color: #333;
 
 .container-fluid > .content {
     margin: 0 240px;
+    padding-top: 10px;
 }
 
 
@@ -504,11 +507,11 @@ margin-top: 5px;
 }
 
 
+
 #profile_pic{
 margin-top: 10px;
+width: 100%;
 }
-
-
 
 
 
@@ -516,6 +519,8 @@ margin-top: 10px;
 display: inline-block;
 zoom: 1;
 *display: inline;
+height: 40px;
+width: 40px;
 }
 
 .friend img{
@@ -897,7 +902,6 @@ font-family: 'Open Sans', sans-serif;
 }
 
 #youtube_videos{
-margin-left: -5px;
 display: block;
 height: auto;
 vertical-align: text-bottom;
@@ -914,6 +918,8 @@ margin-right: 5px;
 margin-top: 5px;
 margin-bottom: 5px;
 vertical-align: top;
+overflow-y: hidden;
+overflow-x: hidden;
 }
 
 .youtube_video_container:nth-of-type(1), .article_container:nth-of-type(1){
@@ -935,6 +941,7 @@ position: relative;
 font-weight: bold;
 font-size: 16px;
 text-align: center;
+line-height: 18px;
 width: 100%;
 display: block;
 margin-bottom: 30px;
@@ -964,7 +971,7 @@ z-index: 1;
 
 .play_btn{
 width: 222px;
-height: 164px;
+height: 162px;
 z-index: 2;
 position: absolute;
 top: 0px;
@@ -1184,6 +1191,14 @@ margin-left: auto;
 margin-right: auto;
 }
 
+#signup_table input{
+margin: 5px;
+}
+
+#signup_table{
+text-align: right;
+}
+
 
 .hr{
 border-bottom: white solid 1px;
@@ -1193,6 +1208,7 @@ margin-bottom: 13px;
 }
 
 .signup_input{
+width: 200px;
 }
 
 #facebook_signup_container{
@@ -1409,10 +1425,11 @@ float: left;
 }
 
 
-#court_event_container{
-border: none;
+#court_events_container{
 width: 206px;
 position: relative;
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 .court_event{
@@ -1421,14 +1438,15 @@ position: relative;
 font-size: 13px;
 line-height: 13px;
 padding-left: 10px;
-padding-top: 10px;
+padding-top: 5px;
 background-color: #ECECEC
 }
 
-.court_event:nth-child(even){
+.court_event:nth-child(odd){
 border-top: none;
 border-bottom: none;
 background-color: white;
+background: #dde9ef;
 }
 
 .court_event a{
@@ -1438,7 +1456,7 @@ font-weight: bold;
 .join_btn{
 position: absolute;
 right: 5px;
-bottom: 15px;
+bottom: 10px;
 }
 
 .gray{
@@ -1523,12 +1541,17 @@ text-align: center;
 #courtPhotos_container img{
 }
 
+
 .courtVideo{
 height: 70px;
 width: 95px;
 position: relative;
 margin: 5px;
 display: inline-block;
+}
+
+.courtVideo img{
+width: 100%;
 }
 
 .courtVideo .play_btn{
@@ -2004,4 +2027,32 @@ display: none;
 
 .alert{
 margin-bottom: 0px;
+padding: 7px;
+}
+
+select, input{
+color: black;
+}
+
+#location_search{
+margin-top: 2px;
+}
+
+
+.modal-content{
+width: 600px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 200px;
+display: block;
+}
+
+
+#loginModal .modal-content{
+width: 300px;
+}
+
+
+#new_review textarea{
+width: 100%;
 }

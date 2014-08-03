@@ -1,17 +1,18 @@
 <div id="reviewsContainer">
 	<h3>REVIEWS(<%= @court.reviews.count %>)</h3>
-	<%= render 'reviews/review_form' %>
 	<% if @court.reviews.any? %>
     			<%= render @shown_reviews %>
-				<div id="hiddenReviews" class="hide">
+				<div id="hiddenReviews" >
 				<%= render @hidden_reviews %>
                 <a href="#" id="hideReviews"><b>Show fewer reviews</b></a> <!-- Isn't calling the right jquery at the moment -->
+                <br>
+                <a href="#" id="showReviews"><b>Show all <%= @court.reviews.count %> reviews</b></a>  ????
                 </div>
-    		<a href="#" id="showReviews"><b>Show all <%= @court.reviews.count %> reviews</b></a> <!-- Isn't calling the right jquery at the moment -->
     <% else %>
     		<p class="profile_subtitle"><%= @court.name %> hasn't been reviewed yet</p>
     <% end %>
-   
+    <%= render 'reviews/review_form' %>
+
    </div>
 
 </div>

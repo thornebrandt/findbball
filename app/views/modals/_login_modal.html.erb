@@ -1,17 +1,28 @@
-<div id="loginModal" class="footer_modal modal hide fade noScroll">
-    <div>
-        <h2>Login</h2>
-        <%= form_tag sessions_path do %>
-            <%= label_tag :email %>
-            <%= text_field_tag :email, params[:email]%>
 
-            <%= label_tag :password %>
-            <%= password_field_tag :password %>
-            <br>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-message">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel">Login</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                <%= form_tag sessions_path do %>
+                        <%= label_tag :email %>
+                        <br>
+                        <%= text_field_tag :email, params[:email]%>
+                        <br>
+                        <%= label_tag :password %>
+                        <br>
+                        <%= password_field_tag :password %>
+                        <br>
+                </div>
+            </div>
+            <div class="modal-footer">
             <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
-        <% end %>
-
-        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            <% end %>
+        </div>
     </div>
+  </div>
 </div>
-

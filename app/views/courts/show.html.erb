@@ -13,7 +13,8 @@
                 Open <%= @court.open_hours %>
             </p>
             <% if current_user? @court.member %> <!-- Icons not showing up -->
-            <a href="edit_court.html"><i class="icon-edit"></i> Edit</a> | <a href="#"><i class="icon-trash"></i> Delete</a><br>   
+            <a href="edit_court.html"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
+            <a href="#"><i class="glyphicon glyphicon-trash"></i> Delete</a><br>
             <% end %>
             <hr>
             <div class="courtInfo2 center">

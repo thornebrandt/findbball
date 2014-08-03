@@ -1,6 +1,6 @@
 	<div class="sidebar right">
             <div class="author_container">
-                <a href="player_profile.html"><%= image_tag "members/jerry.jpg", id: "profile_pic" %></a><br>
+                <a href="player_profile.html"><%= image_tag @court.member.photo %></a><br>
                 added by <b><%= link_to @court.member.name, member_path(@court.member), class: "court" %></a></b><br>
                 <%= @court.created_at %><br>
             </div>
@@ -10,6 +10,6 @@
             <h4 id="milesAway">3 miles away</h4>
             <p>Get Directions</p>
             <a href="#" id="changeLocation">Change your location</a><br>
-            <%= image_tag "courts/ad_right.jpg", id: "ad_right" %>
+            <%= image_tag "add_right_placeholder.png", id: "ad_right2" %>
         </div>
     </div>

@@ -3,10 +3,30 @@ fbb.nav = function(){
     var howItWorksModal = $("#howItWorksModal");
     var loginBtn = $("#loginBtn");
     var loginModal = $("#loginModal");
-
-    var setupDomEvents = function(){
-        fbb.modal(helpBtns, howItWorksModal);
-        fbb.modal(loginBtn, loginModal);
+    fbb.modal(helpBtns, howItWorksModal);
+    fbb.modal(loginBtn, loginModal);
+    var queryString = window.location.search;
+    var queryResult = getQueryVariable(queryString, "login");
+    if(queryResult){
+        var modalOptions = {
+            "backdrop" : true,
+            "keyboard" : true
+        }
+        loginModal.modal(modalOptions);
+        loginModal.modal('show');
     }
-    setupDomEvents();
+}
+
+
+
+function getQueryVariable(query, variable) {
+    var noQuestion = query.replace("?", "");
+    var vars = noQuestion.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return false
 }

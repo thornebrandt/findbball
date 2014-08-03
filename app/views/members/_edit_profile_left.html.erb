@@ -6,24 +6,28 @@
                 edit photo
             </a>
         </div>
-        <div id="upload_photo_modal" class="modal hide fade">
-            <div id="upload_photo">
-                <h3>Upload a new Profile Image</h1>
+        <div id="upload_photo_modal" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="upload_photo">
+                        <h3>Upload a new Profile Image</h1>
 
-                <%= form_for @member, :url => member_path, :html => { :multipart => true } do |f| %>
+                        <%= form_for @member, :url => member_path, :html => { :multipart => true } do |f| %>
 
-                    <input class="btn" type="file" name="images" id="images" />
-                    <button type="submit"  id="btn1">Upload Photo</button>
-                    <div id="response"></div>
-                    <br>
-                    <%= image_tag @member.profile_photo, id: "profile_preview" %>
-                    <p>
-                        <%= f.submit "Confirm Image", class: "btn hide", id: "confirm_image" %>
-                    </p>
-                    <%= f.hidden_field :photo %>
+                            <input class="btn" type="file" name="images" id="images" />
+                            <button type="submit"  id="btn1">Upload Photo</button>
+                            <div id="response"></div>
+                            <br>
+                            <%= image_tag @member.profile_photo, id: "profile_preview" %>
+                            <p>
+                                <%= f.submit "Confirm Image", class: "btn hide", id: "confirm_image" %>
+                            </p>
+                            <%= f.hidden_field :photo %>
 
-                    <br>
-                <% end %>
+                            <br>
+                        <% end %>
+                    </div>
+                </div>
             </div>
         </div>
 

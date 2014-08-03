@@ -99,6 +99,7 @@ fbb.edit_photo = function(){
 
     function updatePlayerProfileImages(source) {
         $("#profile_preview").attr("src", source);
+        console.log("showing this");
         $("#confirm_image").show();
         $("#member_photo").val(source); //hidden field that updates the member
     }

@@ -17,7 +17,7 @@ module SessionsHelper
       unless signed_in?
         store_location
         # Used to redirect to signin_url, but signin is now a modal
-        redirect_to home_path, notice: "Please sign in."
+        redirect_to home_path + "?login=true", notice: "Please sign in"
       end
     end
 
