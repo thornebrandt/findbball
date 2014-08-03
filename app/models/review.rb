@@ -5,6 +5,6 @@ class Review < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   
   validates :content, presence: true, length: { maximum: 1000 }
-  validates :member, presence: true
-  validates :court, presence: true
+  # validates :member_id, presence: true
+  # validates :court_id, presence: true
 end

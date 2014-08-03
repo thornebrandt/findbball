@@ -21,14 +21,11 @@ class CourtsController < ApplicationController
     @court.location = "123 Fake St, Springfield, NT"  # Until location field integrated
     
     @review = @court.reviews.build # If built on member, review doesn't show in form
-    @review.court = @court
-    @review.member = current_user
+    @review.member_id = current_user.id
   end
 
   def create
-    @court = current_user.courts.build(court_params)  # "Expected court, got string"
-    # @review = @court.reviews.build(params[:review])
-    # @review.member_id = current_user.id
+    @court = current_user.courts.build(court_params)
     if @court.save
       flash[:success] = "Court created!"
       redirect_to @court
@@ -58,6 +55,6 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
-                                      reviews_attributes: [:id, :content, :court, :member]) # "Expected court/member, got string"
+                                      reviews_attributes: [:id, :content, :court_id, :member_id]) # "Expected court/member, got string"
     end
 end

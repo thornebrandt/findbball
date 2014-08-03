@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
   
   def create
     @review = current_user.reviews.build(review_params)
+    @review.member_id = current_user.id
     if @review.save
       flash[:success] = "Review created!"
       redirect_to @review.court

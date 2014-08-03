@@ -65,8 +65,8 @@
                             	<%= f.fields_for :reviews do |r| %>
                                 <td class="td_label"><%= r.label :content, "Details/Review" %></td>
                                 <td><%= r.text_area :content, id: "reviewDetails" %></td>
-                                <%= r.hidden_field :member %>
-                                <%= r.hidden_field :court %>
+                                <%= r.hidden_field :member_id %>
+                                <%= r.hidden_field :court_id %>
            						<% end %>
                             </tr>
                             <tr>
