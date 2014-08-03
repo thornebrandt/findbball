@@ -55,6 +55,6 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
-                                      reviews_attributes: [:id, :content, :court_id, :member_id]) # "Expected court/member, got string"
+                                      reviews_attributes: [:id, :content, :court_id, :member_id])
     end
 end

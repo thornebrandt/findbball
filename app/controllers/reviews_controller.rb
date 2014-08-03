@@ -2,13 +2,13 @@ class ReviewsController < ApplicationController
   before_action :signed_in_user
   
   def create
-    @review = current_user.reviews.build(review_params)
+    @review = @court.reviews.build(review_params)
     @review.member_id = current_user.id
     if @review.save
       flash[:success] = "Review created!"
-      redirect_to @review.court
+      redirect_to @court
     else
-      render @review.court
+      render @court
     end
   end
   
