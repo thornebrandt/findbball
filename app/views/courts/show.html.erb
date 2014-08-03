@@ -12,7 +12,7 @@
             <p id="courtHours">
                 Open <%= @court.open_hours %>
             </p>
-            <% if current_user? @court.member %> <!-- Icons not showing up -->
+            <% if current_user? @court.member %>
             <a href="edit_court.html"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
             <a href="#"><i class="glyphicon glyphicon-trash"></i> Delete</a><br>
             <% end %>

@@ -6,15 +6,16 @@
     					<%= link_to court.name, court_path(court), class: "court" %><br>
 						<%= court.format_location %>
     			<% end %>
-    			<div id="hiddenCourts" class="hide">
-    				<% @hidden_courts.each do |court| %>
-    				<p class="court">
-    					<%= link_to court.name, court_path(court), class: "court" %><br>
-						<%= court.format_location %>
-					<% end %>
-				<a href="#" id="hideCourts"><b>Show fewer courts</b></a>
-    			</div>
-    		<a href="#" id="showCourts"><b>Show all <%= @member.courts.count %> courts</b></a>
+    			<% if @hidden_courts.any? %>
+    				<div id="hiddenCourts" class="hide">
+    					<% @hidden_courts.each do |court| %>
+    					<p class="court">
+    						<%= link_to court.name, court_path(court), class: "court" %><br>
+							<%= court.format_location %>
+						<% end %>
+    				</div>
+    			<a href="#" id="showCourts"><b>Show all <%= @member.courts.count %> courts</b></a>
+    			<% end %>
     <% else %>
     	<h3>COURTS(0)</h3>
     <% end %>

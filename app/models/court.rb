@@ -3,9 +3,11 @@ class Court < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
   
+  VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
+  
   validates :name,          presence: true, length: { maximum: 70 }
   validates :location,      presence: true, length: { maximum: 200 }
-  validates :website,                       length: { maximum: 512 }
+  validates :website,                       length: { maximum: 512 }, format:   { with: VALID_URL_REGEX }
   validates :pickup_time,                   length: { maximum: 12 }
   validates :pickup_am,                     length: { maximum: 2 }
   validates :pickup_day,                    length: { maximum: 10 }

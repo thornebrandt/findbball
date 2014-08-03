@@ -59,7 +59,7 @@
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :website, "Court Website" %></td>
-                                <td><%= f.url_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
+                                <td><%= f.text_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
                             	<%= f.fields_for :reviews do |r| %>
