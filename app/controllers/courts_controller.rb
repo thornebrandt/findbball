@@ -16,10 +16,10 @@ class CourtsController < ApplicationController
   def new
     @showMap = true;
     @mapEl = "add_court_map" #element of map-canvas
-    
+
     @court = current_user.courts.build
     @court.location = "123 Fake St, Springfield, NT"  # Until location field integrated
-    
+
     @review = @court.reviews.build # If built on member, review doesn't show in form
     @review.member_id = current_user.id
   end
@@ -31,8 +31,8 @@ class CourtsController < ApplicationController
       redirect_to @court
     else
       flash[:error] = "Could not create court."
-      Rails.logger.info(@court.errors.inspect) 
-      render 'new'
+      Rails.logger.info(@court.errors.inspect)
+      redirect_to action: 'new'
     end
   end
 
@@ -42,6 +42,7 @@ class CourtsController < ApplicationController
                                       :name,
                                       :location,
                                       :website,
+                                      :member_id,
                                       :skill_level,
                                       :pickup_time,
                                       :pickup_day,
@@ -50,7 +51,6 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
-                                      :member_id,
                                       :open_time_1,
                                       :open_am_1,
                                       :open_time_2,

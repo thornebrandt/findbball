@@ -7,9 +7,13 @@
 
 <% am_options = [["AM", "am"], ["PM", "pm"]] %>
 
-<% difficulty_options = [['Beginner', 1], ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
+<% difficulty_options = [['Undisclosed', -1], ["Don't Know", 0], ['Beginner', 1],
+                        ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
 
 <div id="add_court_map" class="mapEl"></div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %> </div>
+    <% end %>
 	<div id="content_wrapper">
         <div id="content">
             <div id="heading_articles">
@@ -17,21 +21,37 @@
             </div>
             <p id="latLng">
             </p>
-            <%= form_for @court do |f| %>
-            <div id="enter_address">
+            <%= form_for @court, :html => {:autocomplete => "off"} do |f| %>
         	    <span class="directions"></span>
-        	    <!-- ><b><%= f.label :location, "New Court Location" %></b>
-        	    <%= f.text_field :location, id: "address_search", placeholder: "1425 N Damen Ave, Chicago, IL 60622" %> -->
         	    <%= f.hidden_field :location %>
+                <%= f.hidden_field :lat %>
+                <%= f.hidden_field :lng %>
                 <input id="courtAddress" type="hidden">
-                <button type="submit" class="btn right_align">Map</button>
-        	</div>
             <div id="addCourt_add">
-                    <table id="addCourt_table">
+                    <table id="addCourt_table" class="create_table" >
                         <tbody>
+                            <tr style="display:none;" class="map_results_container">
+                                <td class="td_label">Court Address</td>
+                                <td width="672">
+                                    <p id="address_search_result">
+                                        Address
+                                    </p>
+                                    <button type="button" class="btn btn-warning" id="searchAgain">Wrong Address - Search Again</button>
+                                </td>
+                            </tr>
+                            <tr style="display:none;" id="addressNotFound">
+                                <td colspan="2" class="text-center"><span class="error text-center">Could not find address. Please refine your search.</span></td>
+                            </tr>
+                            <tr class="address_search_container">
+                                <td class="td_label">New Court Address</td>
+                                <td width="672">
+                                <input id="address_search", placeholder: "Enter address of court" />
+                                <button id="submitMap" type="submit" class="hidden">Map</button>
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :name, "Court Name" %></td>
-                                <td><%= f.text_field :name, id: "courtName", class: "add_court_textInput" %></td>
+                                <td width="672"><%= f.text_field :name, id: "courtName", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :skill_level, "Competition Level" %></td>

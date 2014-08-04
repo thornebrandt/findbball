@@ -5,7 +5,7 @@ fbb.map = function(){
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
     self.mapOptions = {};
 
-    var checkDom = function(){
+    var checkForMap = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
             mapEl = $(".mapEl")[0];
@@ -34,6 +34,7 @@ fbb.map = function(){
         $_addressInput = $("#courtAddress");
         self.map = new google.maps.Map(mapEl, self.mapOptions);
         setupMapCursor();
+        prepareDOM();
     };
 
     var setupMapCursor = function(){
@@ -58,18 +59,21 @@ fbb.map = function(){
     var autoComplete = function(){
         var service = new google.maps.places.AutocompleteService();
         $("#address_search").typeahead({
-            source: function(query, process) {
+            source: function(query, process){
                 service.getPlacePredictions({
                     input: query
                 }, function(predictions, status) {
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         process($.map(predictions, function(prediction) {
+                            $("#addressNotFound").fadeOut();
                             return prediction.description;
                         }));
+                    } else {
+                        $("#addressNotFound").fadeIn();
                     }
                 });
             },
-            updater: function(_address) {
+            updater: function(_address){
                 return lookUpAutoCompleteAddress(_address);
             }
         });
@@ -101,22 +105,45 @@ fbb.map = function(){
         var marker = setupDraggableMapCursor(_point);
         var lat = marker.position.lat();
         var lng = marker.position.lng();
-        //TODO - move this into it's own function
-        $("#latLng").html(self.address + " (Lat: " + lat + ", Long: " + lng + ") <i>Drag for better placement</i>");
+        populateLatLng(lat, lng);
+        $(".address_search_container").hide();
+        $(".map_results_container").show();
+        $("#addressNotFound").hide();
+        $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
         google.maps.event.addListener(marker, 'dragend', function() {
             lat = marker.position.lat();
             lng = marker.position.lng();
-            $("#latLng").html(self.address + " (Lat: " + lat + ", Long: " + lng + ") <i>Drag for better placement</i>");
+            populateLatLng(lat, lng);
+            $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
         });
     };
 
 
+    var populateLatLng = function(lat, lng){
+        $("#court_lat").val(lat);
+        $("#court_lng").val(lng);
+    }
 
 
     var autoCompleteFailureHandler = function(results, status){
-        alert("Cannot find address");
-        return false;
+        $("#addressNotFound").fadeIn();
+        var addressSearchEl = $("#address_search");
+        addressSearchEl.val("");
+        addressSearchEl.focus();
     };
 
-    checkDom();
+    var prepareDOM = function(){
+        $("#searchAgain").click(function(e){
+            e.preventDefault();
+            $(".address_search_container").show();
+            $(".map_results_container").hide();
+        });
+
+        $("#submitMap").click(function(e){
+            e.preventDefault();
+            autoCompleteFailureHandler();
+        });
+    }
+
+    checkForMap();
 }
