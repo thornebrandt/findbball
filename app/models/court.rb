@@ -21,19 +21,19 @@ class Court < ActiveRecord::Base
   validates :skill_level,                   length: { maximum: 5 }
 
   def open_hours
-    "#{self.open_time_1}:00 #{self.open_am_1.upcase} - #{self.open_time_2}:00 #{self.open_am_2.upcase}"
+    "#{open_time_1}:00 #{open_am_1.upcase} - #{open_time_2}:00 #{open_am_2.upcase}"
   end
 
   def pickup_hours
-    "#{self.pickup_day}s #{self.pickup_time}#{self.pickup_am.upcase}"
+    "#{pickup_day}s #{pickup_time}#{pickup_am.upcase}"
   end
 
   def format_location
-    self.location.sub(",", ",\n")
+    location.sub(",", ",\n")
   end
 
   def verbose_skill_level
-    case self.skill_level
+    case skill_level
     when 0
         "Don't know"
     when 1
@@ -48,6 +48,6 @@ class Court < ActiveRecord::Base
   end
 
   def skill_image
-    "icon/skill_#{self.verbose_skill_level.downcase}.png"
+    "icon/skill_#{verbose_skill_level.downcase}.png"
   end
 end
