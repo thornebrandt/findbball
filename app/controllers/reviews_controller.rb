@@ -1,18 +1,14 @@
 class ReviewsController < ApplicationController
-  before_action :signed_in_user
+  before_action :signed_in_user, only: [:create, :destroy]
   
   def create
-    @review = @court.reviews.build(review_params)
-    @review.member_id = current_user.id
+    @review = current_user.reviews.build(review_params)
     if @review.save
       flash[:success] = "Review created!"
-      redirect_to @court
+      redirect_to @review.court
     else
-      render @court
+      render @review.court
     end
-  end
-  
-  def edit
   end
   
   def destroy
