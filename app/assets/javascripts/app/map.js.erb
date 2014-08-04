@@ -9,11 +9,22 @@ fbb.map = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
             mapEl = $(".mapEl")[0];
-            //prepareGoogleMap(fbb.lat, fbb.lng);
             prepareMap();
             autoComplete();
         }
     };
+
+    var getLatLng = function(){
+        if($("#lat").length && $("#lng").length){
+            self.lat = $("#lat").val();
+            self.lng = $("#lng").val();
+            console.log("got lat lng");
+        } else {
+            //use defaults
+            self.lat = fbb.lat;
+            self.lng = fbb.lng;
+        }
+    }
 
     var simpleMap = function(){
         //to test that the map is working
@@ -22,7 +33,7 @@ fbb.map = function(){
 
     var setupOptions = function(){
         self.mapOptions = {
-            center: new google.maps.LatLng(fbb.lat, fbb.lng),
+            center: new google.maps.LatLng(self.lat, self.lng),
             zoom: 13,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -30,6 +41,7 @@ fbb.map = function(){
     };
 
     var prepareMap = function(){
+        getLatLng();
         setupOptions();
         $_addressInput = $("#courtAddress");
         self.map = new google.maps.Map(mapEl, self.mapOptions);
@@ -96,7 +108,6 @@ fbb.map = function(){
 
     var autoCompleteSuccessHandler = function(results, status){
         var _point = results[0].geometry.location;
-        console.log("success");
         console.log(self.address);
         self.addressInput = $("#courtAddress");
         $_addressInput.val(self.address);

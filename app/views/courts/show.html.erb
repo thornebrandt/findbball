@@ -1,8 +1,8 @@
 <% provide(:title, @court.name) %>
 
 <div class="container-fluid">
-	<%= render '/courts/profile_left' %>
-  	<%= render '/courts/profile_right' %>
+	<%= render '/courts/court_left' %>
+  	<%= render '/courts/court_right' %>
 	<div class="content">
             <h2 id="courtName" class="courtH2"><%= @court.name %></h2>
             <%= link_to_if @court.has_attribute?(:website), "court website", @court.website, id: "courtWebsite" %>

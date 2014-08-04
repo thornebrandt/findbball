@@ -2,6 +2,9 @@ class CourtsController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update, :create, :new]
 
   def show
+    @showMap = true;
+    @mapEl = "court_map"
+
     @court = Court.find(params[:id])
     @shown_reviews = @court.reviews.last(4)
     @hidden_reviews = @court.reviews - @shown_reviews
@@ -15,7 +18,7 @@ class CourtsController < ApplicationController
 
   def new
     @showMap = true;
-    @mapEl = "add_court_map" #element of map-canvas
+    @mapEl = "add_court_map"
 
     @court = current_user.courts.build
     @court.location = "123 Fake St, Springfield, NT"  # Until location field integrated
