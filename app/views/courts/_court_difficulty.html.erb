@@ -1,0 +1,5 @@
+<% if @court.skill_level > 0 %>
+    <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
+        <%= image_tag @court.skill_image %>
+    </div>
+<% end %>

@@ -8,7 +8,7 @@ class CourtsController < ApplicationController
     @court = Court.find(params[:id])
     @shown_reviews = @court.reviews.last(4)
     @hidden_reviews = @court.reviews - @shown_reviews
-    
+
     @review = current_user.reviews.build if signed_in?
   end
 
@@ -30,7 +30,7 @@ class CourtsController < ApplicationController
 
   def create
     @court = current_user.courts.build(court_params)
-    if @court.save
+    if @court.save!
       flash[:success] = "Court created!"
       redirect_to @court
     else
@@ -46,6 +46,8 @@ class CourtsController < ApplicationController
                                       :name,
                                       :location,
                                       :website,
+                                      :lat,
+                                      :lng,
                                       :member_id,
                                       :skill_level,
                                       :pickup_time,

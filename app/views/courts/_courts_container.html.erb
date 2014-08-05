@@ -18,5 +18,12 @@
     			<% end %>
     <% else %>
     	<h3>COURTS(0)</h3>
+            <% if current_user? @member %>
+                You haven't added any courts.
+            <% else %>
+                <%= @member.name %> hasn't added any courts.
+            <% end %>
+                <br>
+                <%= link_to "Create a court", new_court_path %>
     <% end %>
 </div>

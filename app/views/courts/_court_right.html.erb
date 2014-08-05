@@ -11,7 +11,7 @@
             <input type="hidden" id="lng" value="<%= @court.lng %>">
             <h4 id="milesAway"></h4>
             <p>
-                <a target="_blank" href="http://maps.google.com/maps?z=12&t=m&q=loc:<%=@court.lat %>+-<%= @court.lng %>">
+                <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(@court.location)%>">
                     Get Directions
                 </a>
             </p>

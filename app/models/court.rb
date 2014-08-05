@@ -10,7 +10,6 @@ class Court < ActiveRecord::Base
   validates :lat,           presence: true
   validates :lng,           presence: true
   validates :member_id,     presence: true
-  validates :website,                       length: { maximum: 512 }, format:   { with: VALID_URL_REGEX }
   validates :pickup_time,                   length: { maximum: 12 }
   validates :pickup_am,                     length: { maximum: 2 }
   validates :pickup_day,                    length: { maximum: 10 }
@@ -34,6 +33,8 @@ class Court < ActiveRecord::Base
 
   def verbose_skill_level
     case skill_level
+    when -1
+        "Undsiclosed"
     when 0
         "Don't know"
     when 1
@@ -48,6 +49,9 @@ class Court < ActiveRecord::Base
   end
 
   def skill_image
-    "icon/skill_#{verbose_skill_level.downcase}.png"
+    if skill_level > 0
+        ActionController::Base.helpers.image_tag("icon/skill_#{verbose_skill_level.downcase}.png")
+    end
   end
+
 end
