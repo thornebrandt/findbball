@@ -2,12 +2,10 @@
 	<h3>REVIEWS(<%= @court.reviews.count %>)</h3>
 	<% if @court.reviews.any? %>
     			<%= render @shown_reviews %>
-    			<% if @hidden_reviews.any? %>
 					<div id="hiddenReviews" >
-					<% render @hidden_reviews %>
+					<!-- render some partials here -->
                 	</div>
                 	<a href="#" id="showReviews"><b>Show all <%= @court.reviews.count %> reviews</b></a> <!-- jquery not getting called -->
-                <% end %>
     <% else %>
     		<p class="profile_subtitle"><%= @court.name %> hasn't been reviewed yet</p>
     <% end %>

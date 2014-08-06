@@ -7,9 +7,12 @@ class CourtsController < ApplicationController
 
     @court = Court.find(params[:id])
     @shown_reviews = @court.reviews.last(4)
-    @hidden_reviews = @court.reviews - @shown_reviews
 
     @review = current_user.reviews.build if signed_in?
+  end
+  
+  def show_all
+    @reviews = @court.reviews.all
   end
 
   def edit
