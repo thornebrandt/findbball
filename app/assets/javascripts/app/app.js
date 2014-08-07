@@ -23,7 +23,7 @@ $(function(){
     fbb.nav();
     fbb.hero();
     fbb.map();
-    fbb.edit_photo();
+    fbb.upload_photo();
     // fbb.member_profile(); //looks like this is replaced by best_in_place
 
     $(".modal.fade").click(function(){

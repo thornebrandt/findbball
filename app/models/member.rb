@@ -11,13 +11,8 @@ class Member < ActiveRecord::Base
 						uniqueness: { case_sensitive: false }
     validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
     # validates :birthdate, presence: true, allow_nil: false
-    has_attached_file :photo,
-        :styles => {:thumb => '40x40'},
-        :url => "/system/member/:id/photo_:style.:extension",
-        :path => ":rails_root/public/system/member/:id/photo_:style.:extension",
-        :default_url => ActionController::Base.helpers.asset_path("player_missing.png")
-    validates_attachment_content_type :photo, :content_type => /\Aimage/
-    do_not_validate_attachment_file_type :photo
+
+    mount_uploader :photo, PhotoUploader
 
 	def beforeSave
 		self.email.downcase!
@@ -25,8 +20,7 @@ class Member < ActiveRecord::Base
 	end
 
     def beforeValidation
-        puts self.birthdate
-        decode_base64_image
+        # puts self.birthdate
     end
 
 	def Member.new_remember_token
@@ -48,10 +42,10 @@ class Member < ActiveRecord::Base
     end
 
     def profile_photo
-        if !photo_updated_at
+        if photo.nil?
             ActionController::Base.helpers.asset_path("player_placeholder.png")
         else
-            photo.url
+            photo
         end
     end
 
@@ -138,16 +132,6 @@ class Member < ActiveRecord::Base
             else "Undefined"
         end
     end
-
-
-
-    protected
-        def decode_base64_image
-            # puts "ABOUT TO DECODE"
-            # puts self.inspect
-            # puts "DECODDDDAFSDFASFSDAF"
-            # sio = StringIO.new(Base64(decode64(photo))
-        end
 
 
 	private

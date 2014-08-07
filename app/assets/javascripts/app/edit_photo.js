@@ -1,4 +1,4 @@
-fbb.edit_photo = function(){
+fbb.upload_photo = function(){
     function domEvents(){
         //edit photo
 

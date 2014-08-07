@@ -8,9 +8,9 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
-gem 'best_in_place', github: 'bernat/best_in_place'
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'best_in_place', github: 'bernat/best_in_place', ref:'20aa450'
 gem 'rmagick', '~> 2.13.2'
+gem 'carrierwave'
 
 group :development, :test do
 	gem 'sqlite3'

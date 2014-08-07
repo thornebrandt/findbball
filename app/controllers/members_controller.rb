@@ -30,19 +30,16 @@ class MembersController < ApplicationController
 
     def update
         # puts "calling update"
-        # puts params[:member]["photo"]
         @member = Member.find(params[:id])
+
         if params[:member][:birthdate]
             new_birthdate = Chronic.parse(params[:member][:birthdate]).strftime('%Y-%m-%d');
             params[:member][:birthdate] = new_birthdate
         end
 
-        # if params[:member]["photo"]
-        #     params[:member]["photo"] = Base64.decode64(params[:member]["photo"])
-        #     # File.open("public/images/test", "wb") do |file|
-        #     #     file.write(B))
-        #     # end
-        # end
+        if params[:member][:photo]
+            @member.photo = base64_conversion
+        end
 
         respond_to do |format|
             if @member.update_attributes(member_params)
@@ -73,6 +70,17 @@ class MembersController < ApplicationController
 	end
 
 	private
+
+        def base64_conversion
+            return unless @photo
+            puts "BASE 64 CONVERSION"
+            tempfile = new Tempfile.new['upload', 'png']
+            tempfile.binmode
+            tempfile.write(Base64.decode64(@photo))
+            ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'upload.png')
+        end
+
+
 		def member_params
 			params.require(:member).permit( :name,
                                             :email,

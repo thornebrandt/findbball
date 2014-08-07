@@ -4,7 +4,7 @@
     <h2>
         <%= best_in_place @member, :full_name, :type => :input, :activator => '#editFullName',
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-            :nil => "Full Name Here"
+            :place_holder => "Full Name Here"
         %>
     </h2>
     <a id="editFullName" href="#" class="editThis editable">edit full name</a>
@@ -17,14 +17,14 @@
 
     <%= best_in_place @member, :general_location, :type => :input, :activator => '#editGeneralLocation',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-        :nil => "General Location"
+        :place_holder => "General Location"
     %>
     <a id="editGeneralLocation" href="#" class="editThis editable">edit general location</a>
 </p>
 <p id="birthdate">
     <div class="datepicker_container">
         <span class="edit_profile_label">Birthdate</span>
-        <%= best_in_place @member, :birthdate, :type => :date, :nil => "Not set", :activator => '#editBirthdate',
+        <%= best_in_place @member, :birthdate, :type => :date, :place_holder => "Not set", :activator => '#editBirthdate',
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin", :classes => 'datepicker'
         %>
         <a id="editBirthdate" href="#" class="editThis editable">edit birthdate</a>
@@ -37,7 +37,7 @@
     <span class="edit_profile_label">Height</span>
     <%= best_in_place @member, :height, :type => :input, :activator => '#editHeight',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-        :nil => "Add height"
+        :place_holder => "Add height"
     %>
     <a id="editHeight" href="#" class="editThis editable">edit height</a>
 </p>
@@ -45,7 +45,7 @@
     <span class="edit_profile_label">Weight</span>
     <%= best_in_place @member, :weight, :type => :input, :activator => '#editWeight',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-        :nil => "Add weight"
+        :place_holder => "Add weight"
     %>
     <a id="editWeight" href="#" class="editThis editable">edit weight</a>
 </p>
@@ -125,15 +125,16 @@
 </p>
 <p id="skill_level">
     <span class="edit_profile_label">Skill Level</span><br>
+
         <%= best_in_place @member, :skill_level, :type => :select, :activator => '#editSkillLevel', :collection =>
-            [
-                [-1, "Undisclosed"],
-                [1, "Never Played"],
-                [2, "Beginner"],
-                [3, "Intermediate"],
-                [4, "Advanced"],
-                [5, "Baller"]
-            ]
+            {
+                '-1'=> "Undisclosed",
+                '1' => "Never Played",
+                '2' => "Beginner",
+                '3' => 'Intermediate',
+                '4' => 'Advanced',
+                '5' => 'Baller'
+            }
         %>
         <a id="editSkillLevel" href="#" class="editThis editable">edit skill level</a>
 </p>
@@ -142,7 +143,7 @@
 
     <%= best_in_place @member, :favorite_player, :type => :input, :activator => '#editFavoritePlayer',
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-        :nil => "Add Favorite Player"
+        :place_holder => "Add Favorite Player"
     %>
     <a id="editFavoritePlayer" href="#" class="editThis editable">edit favorite player</a>
 </p>
@@ -152,7 +153,7 @@
     <div id="about_me">
         <%= best_in_place @member, :about, :type => :textarea, :activator => '#editAboutMe',
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-            :nil => "Write a short paragraph about yourself"
+            :place_holder => "Write a short paragraph about yourself"
         %><br>
         <a id="editAboutMe" href="#" class="editThis editable">edit About Me</a>
     </div>

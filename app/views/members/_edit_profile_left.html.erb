@@ -6,30 +6,7 @@
                 edit photo
             </a>
         </div>
-        <div id="upload_photo_modal" class="modal fade">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div id="upload_photo">
-                        <h3>Upload a new Profile Image</h1>
-
-                        <%= form_for @member, :url => member_path, :html => { :multipart => true } do |f| %>
-
-                            <input class="btn" type="file" name="images" id="images" />
-                            <button type="submit"  id="btn1">Upload Photo</button>
-                            <div id="response"></div>
-                            <br>
-                            <%= image_tag @member.profile_photo, id: "profile_preview" %>
-                            <p>
-                                <%= f.submit "Confirm Image", class: "btn hide", id: "confirm_image" %>
-                            </p>
-                            <%= f.hidden_field :photo %>
-
-                            <br>
-                        <% end %>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%= render "modals/upload_profile_photo_modal" %>
 
         <p id="profile_name">
             <%= best_in_place @member, :name, :type => :input, :activator => '#editName',
@@ -42,7 +19,7 @@
         <p class="profile_subtitle">
         <%= best_in_place @member, :slogan, :type => :input, :activator => '#editSlogan',
                 :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-                :nil => 'Slogan goes here'
+                :place_holder => 'Slogan goes here'
 
         %>
         <br>

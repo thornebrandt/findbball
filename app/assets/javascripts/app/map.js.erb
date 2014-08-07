@@ -32,7 +32,8 @@ fbb.map = function(){
             center: new google.maps.LatLng(self.lat, self.lng),
             zoom: 13,
             scrollwheel: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true
         };
     };
 
@@ -190,3 +191,4 @@ fbb.map = function(){
 
     checkForMap();
 }
+
