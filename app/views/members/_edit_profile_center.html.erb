@@ -5,8 +5,8 @@
         <%= best_in_place @member, :full_name, :as => :input, :activator => '#editFullName',
             :place_holder => "Full Name Here"
         %>
+        <a id="editFullName" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
     </h2>
-    <a id="editFullName" href="#" class="editThis editable">edit full name</a>
     <input style="display: none;" type="text" class="editing editInput" value="Jerry Gurgish" />
     <button rel="edit_fullname" id="edit_fullName" type="submit" class="editing editComplete">Submit</button>
 </div>
@@ -14,18 +14,18 @@
 <p id="location">
     <span class="edit_profile_label">Location</span>
 
-    <%= best_in_place @member, :general_location, :as => :input, :activator => '#editGeneralLocation',
-        :place_holder => "General Location"
+    <%= best_in_place @member, :general_location, :as => :input,
+        :activator => '#editGeneralLocation', :place_holder => "General Location"
     %>
-    <a id="editGeneralLocation" href="#" class="editThis editable">edit general location</a>
+    <a id="editGeneralLocation" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="birthdate">
     <div class="datepicker_container">
         <span class="edit_profile_label">Birthdate</span>
-        <%= best_in_place @member, :birthdate, :as => :date, :place_holder => "Not set", :activator => '#editBirthdate',
-             :class => 'datepicker'
+        <%= best_in_place @member, :birthdate, :as => :date, :place_holder => "Not set",
+            :activator => '#editBirthdate', :class => 'datepicker'
         %>
-        <a id="editBirthdate" href="#" class="editThis editable">edit birthdate</a>
+        <a id="editBirthdate" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
     </div>
     <!-- <p>
         <span class="edit_profile_lable">File Upload Test</span>
@@ -36,14 +36,14 @@
     <%= best_in_place @member, :height, :as => :input, :activator => '#editHeight',
         :place_holder => "Add height"
     %>
-    <a id="editHeight" href="#" class="editThis editable">edit height</a>
+    <a id="editHeight" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="weight">
     <span class="edit_profile_label">Weight</span>
     <%= best_in_place @member, :weight, :as => :input, :activator => '#editWeight',
         :place_holder => "Add weight"
     %>
-    <a id="editWeight" href="#" class="editThis editable">edit weight</a>
+    <a id="editWeight" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="nationality">
     <span class="edit_profile_label">Nationality</span>
@@ -63,7 +63,7 @@
             "10" => "Other"
         }
     %>
-    <a id="editNationality" href="#" class="editThis editable">edit nationality</a>
+    <a id="editNationality" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="plays_basketball">
     <span class="edit_profile_label">Plays Basketball About...</span>
@@ -82,7 +82,7 @@
             "9" => "I've never played"
         }
     %>
-    <a id="editPlaysBasketball" href="#" class="editThis editable">edit frequency</a>
+    <a id="editPlaysBasketball" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="position">
     <span class="edit_profile_label">Favorite Position</span>
@@ -103,7 +103,7 @@
             "11 "=> "Don't care"
         }
     %>
-    <a id="editPosition" href="#" class="editThis editable">edit position</a>
+    <a id="editPosition" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="organized">
     <span class="edit_profile_label">Highest Level of Organized Ball</span><br>
@@ -117,7 +117,7 @@
                 "5" => "Proffessional"
             }
         %>
-        <a id="editOrganized" href="#" class="editThis editable">edit experience</a>
+        <a id="editOrganized" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="skill_level">
     <span class="edit_profile_label">Skill Level</span><br>
@@ -132,7 +132,7 @@
                 '5' => 'Baller'
             }
         %>
-        <a id="editSkillLevel" href="#" class="editThis editable">edit skill level</a>
+        <a id="editSkillLevel" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="favorite_player">
     <span class="edit_profile_label">Favorite Player</span>
@@ -141,7 +141,7 @@
         :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
         :place_holder => "Add Favorite Player"
     %>
-    <a id="editFavoritePlayer" href="#" class="editThis editable">edit favorite player</a>
+    <a id="editFavoritePlayer" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p>
     <span class="edit_profile_label">About Me</span>
@@ -151,7 +151,7 @@
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
             :place_holder => "Write a short paragraph about yourself"
         %><br>
-        <a id="editAboutMe" href="#" class="editThis editable">edit About Me</a>
+        <a id="editAboutMe" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
     </div>
 
 </p>

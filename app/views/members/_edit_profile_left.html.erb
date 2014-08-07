@@ -9,16 +9,15 @@
         <%= render "modals/upload_profile_photo_modal" %>
 
         <p id="profile_name">
-            <%= best_in_place @member, :name, :as => :input, :activator => '#editName'%>
+            <%= best_in_place @member, :name, :as => :input,
+                :place_holder => 'username', :activator => '#editName'%>
+            <a id="editName" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
         </p>
-        <a id="editName" href="#" class="editThis editable">edit user name</a>
-
 
         <p class="profile_subtitle">
-        <%= best_in_place @member, :slogan, :as => :input, :activator => '#editSlogan',
-                :place_holder => 'Slogan goes here' %>
-        <br>
+            <%= best_in_place @member, :slogan, :as => :input, :activator => '#editSlogan',
+                    :place_holder => 'Slogan goes here' %>
+            <a id="editSlogan" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
         </p>
-        <a id="editSlogan" href="#" class="editThis editable">edit slogan</a>
     </div>
 </div>
