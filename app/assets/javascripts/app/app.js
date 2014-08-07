@@ -21,18 +21,18 @@ $(function(){
     fbb.lng = fbb.defaultLng;
     fbb.nav();
     fbb.hero();
+    fbb.youtubeModals();
     fbb.map();
     fbb.upload_photo();
-    // fbb.member_profile(); //looks like this is replaced by best_in_place
     fbb.bestInPlace();
 
-    $(".modal.fade").click(function(){
+    $(".modal.fade, .modal-message").click(function(){
       $(this).modal('hide'); //manually doing the modal hide bullshit...
-    }).children().click(function(e) {
-        e.stopPropagation();
+    }).children().click(function(e){
+        if(!$(e.target).hasClass('modal-message')){
+            e.stopPropagation();
+        }
     });
-
-
 });
 
 

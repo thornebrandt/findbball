@@ -1,24 +1,45 @@
-<div id="howItWorksModal" class="footer_modal modal-content hide fade">
-    <h2>Help</h2>
-    New to Findbball? Start with our How it works video below
-    <iframe width="560" height="315" src="//www.youtube.com/embed/_NjesuZ9wgo" frameborder="0" allowfullscreen>
-    </iframe>
-    For additional questions, email <a href="mailto:info@findbball.com">info@findbball.com</a>
+<div class="modal fade" id="howItWorksModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-message">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Help</h4>
+            </div>
+            <div class="modal-body">
+                New to Findbball? Start with our How it works video below
+                <iframe class="center" width="560" height="315" src="//www.youtube.com/embed/_NjesuZ9wgo" frameborder="0" allowfullscreen>
+                </iframe>
+                <br>
+                For additional questions, email <a href="mailto:info@findbball.com">info@findbball.com</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- <div class="modal fade" id="howItWorksModal" tabindex="-1" role="message" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-message">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h2 class="modal-title" id="myModalLabel">Login</h2>
             </div>
             <div class="modal-body">
-                <h3>Modal Body</h3>
+                <div>
+                <%= form_tag sessions_path do %>
+                        <%= label_tag :email %>
+                        <br>
+                        <%= text_field_tag :email, params[:email]%>
+                        <br>
+                        <%= label_tag :password %>
+                        <br>
+                        <%= password_field_tag :password %>
+                        <br>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
+            <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+            <% end %>
         </div>
     </div>
   </div>
-</div>
+</div> -->
