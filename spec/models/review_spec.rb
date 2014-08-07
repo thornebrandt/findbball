@@ -10,8 +10,8 @@ describe Review do
   subject { @review }
   
   it { should respond_to(:content) }
-  it { should respond_to(:member_id) }
-  it { should respond_to(:court_id) }
+  it { should respond_to(:member) }
+  it { should respond_to(:court) }
   
   it { should respond_to(:member) }
   its(:member) { should eq member }

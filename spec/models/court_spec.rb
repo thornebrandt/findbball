@@ -8,6 +8,8 @@ describe Court do
   
   it { should respond_to(:name) }
   it { should respond_to(:location) }
+  it { should respond_to(:lat) }
+  it { should respond_to(:lng) }
   it { should respond_to(:website) }
   
   it { should respond_to(:member_id) }
@@ -21,6 +23,7 @@ describe Court do
   it { should respond_to(:skill_level) }
   
   it { should respond_to(:member) }
+  it { should respond_to(:reviews) }
   
   it { should be_valid }
   
