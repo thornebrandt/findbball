@@ -1,4 +1,5 @@
 require 'date'
+require 'faker'
 
 FactoryGirl.define do
   sequence :email do |n|
@@ -15,6 +16,8 @@ FactoryGirl.define do
 	factory :court do
 	  name "Courtem ipsum"
 	  location "1408 Parkway Rd, Atlanta, GA 30067"
+	  lat Faker::Address.latitude
+	  lng Faker::Address.longitude
 	  website "http://mylifeismetal.com"
 	  skill_level 3
 	  pickup_time 10

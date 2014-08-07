@@ -42,6 +42,12 @@ class CourtsController < ApplicationController
       redirect_to action: 'new'
     end
   end
+  
+  def destroy
+    Court.find(params[:id]).destroy
+    flash[:success] = "Court deleted."
+    redirect_to root_path
+  end
 
     private
     def court_params

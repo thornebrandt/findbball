@@ -32,6 +32,8 @@ def make_courts
   50.times do
     name = Faker::Company.name
     location = Faker::Address.street_address
+    lat =  Faker::Address.latitude 
+    lng =   Faker::Address.longitude
     website = Faker::Internet.url
     skill_level = 3
     pickup_time = Faker::Number.digit
@@ -43,7 +45,7 @@ def make_courts
     open_am_2 = "pm"
     members.each { |member| member.courts.create!(name: name,
                   location: location, website: website, skill_level: skill_level,
-                  pickup_time: pickup_time, pickup_day: pickup_day,
+                  lat: lat, lng: lng, pickup_time: pickup_time, pickup_day: pickup_day,
                   pickup_am: pickup_am, open_time_1: open_time_1,
                   open_am_1: open_am_1, open_time_2: open_time_2,
                   open_am_2: open_am_2) }
