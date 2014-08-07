@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/bernat/best_in_place.git
-  revision: 20aa45006047f155a58e4f829f05e0522e0bfe60
-  ref: 20aa450
+  revision: f99be491babaf49b8b8b37db8f1fcdac555e8ca7
   specs:
     best_in_place (3.0.0.alpha)
       actionpack (>= 3.2)

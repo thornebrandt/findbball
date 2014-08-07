@@ -14,6 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /public/system/*
+/public/uploads/*
 /tmp
 gems
 database.yml

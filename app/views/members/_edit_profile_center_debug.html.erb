@@ -1,0 +1,11 @@
+<%= best_in_place @member, :skill_level, :as => :select, :activator => '#editSkillLevel', :collection =>
+    {
+        '-1'=> "Undisclosed",
+        '1' => "Never Played",
+        '2' => "Beginner",
+        '3' => 'Intermediate',
+        '4' => 'Advanced',
+        '5' => 'Baller'
+    }
+%>
+<a id="editSkillLevel" href="#" class="editThis editable">edit skill level</a>

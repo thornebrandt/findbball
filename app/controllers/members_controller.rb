@@ -47,6 +47,9 @@ class MembersController < ApplicationController
                 format.json do
                     respond_with_bip(@member)
                 end
+            else
+                format.html { render :edit }
+                format.json { respond_with_bip(@member) }
             end
         end
     end
@@ -71,14 +74,50 @@ class MembersController < ApplicationController
 
 	private
 
-        def base64_conversion
-            return unless @photo
-            puts "BASE 64 CONVERSION"
-            tempfile = new Tempfile.new['upload', 'png']
-            tempfile.binmode
-            tempfile.write(Base64.decode64(@photo))
-            ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'upload.png')
+        # def base64_conversion
+        #     return unless params[:member][:photo]
+        #     tempfile = Tempfile.new ['upload', 'png']
+        #     tempfile.binmode
+        #     tempfile.write(Base64.decode64(params[:member][:photo]))
+        #     puts "TEMP FILE"
+        #     puts tempfile.inspect
+        #     ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'upload.png')
+        # end
+
+        def split_base64(uri_str)
+            if uri_str.match(%r{^data:(.*?);(.*?),(.*)$})
+                uri = Hash.new
+                uri[:type] = $1 # "image/gif"
+                uri[:encoder] = $2 # "base64"
+                uri[:data] = $3 # data string
+                uri[:extension] = $1.split('/')[1] # "gif"
+                return uri
+            else
+                return nil
+            end
         end
+
+        def base64_conversion
+            if params[:member][:photo].try(:match, %r{^data:(.*?);(.*?),(.*)$})
+                puts "YEP IT MATCHED"
+                image_data = split_base64( params[:member][:photo] )
+                image_data_string = image_data[:data]
+                image_data_binary = Base64.decode64(image_data_string)
+
+                temp_img_file = Tempfile.new("data_uri-upload")
+                temp_img_file.binmode
+                temp_img_file << image_data_binary
+                temp_img_file.rewind
+
+                img_params = {:filename => "data-uri-img.#{image_data[:extension]}",
+                            :type => image_data[:type], :tempfile => temp_img_file}
+                uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)
+                params[:member][:photo] = uploaded_file
+                # obj_hash.delete(:remote_image_url)
+            end
+            # return obj_hash
+        end
+
 
 
 		def member_params
