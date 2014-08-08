@@ -4,9 +4,9 @@
 	<%= render '/courts/court_left' %>
   	<%= render '/courts/court_right' %>
 	<div class="content">
-            <h2 id="courtName" class="courtH2"><%= @court.name %></h2>
+            <h2 id="showCourtName" class="courtH2"><%= @court.name %></h2>
                 <%= link_to("court website", @court.website, id: "courtWebsite") if @court.website.present? %>
-            <p id="courtAddress" class="gray">
+            <p id="showCourtAddress" class="gray">
                 <%= @court.format_location %>
             </p>
             <p id="courtHours">

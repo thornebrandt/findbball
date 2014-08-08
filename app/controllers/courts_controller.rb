@@ -25,7 +25,6 @@ class CourtsController < ApplicationController
     @mapEl = "add_court_map"
 
     @court = current_user.courts.build
-
     @review = @court.reviews.build # If built on member, review doesn't show in form
     @review.member_id = current_user.id
   end

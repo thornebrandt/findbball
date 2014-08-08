@@ -6,6 +6,9 @@ fbb.map = function(){
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
     self.mapOptions = {};
 
+
+
+
     var checkForMap = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
@@ -48,8 +51,6 @@ fbb.map = function(){
     };
 
     var testDistance = function(){
-        console.log("self.map");
-        console.log(self.map);
         var service = new google.maps.DistanceMatrixService();
         var origin = new google.maps.LatLng(fbb.defaultLat, fbb.defaultLng);
         var destination = new google.maps.LatLng(self.lat, self.lng);
@@ -154,26 +155,32 @@ fbb.map = function(){
         self.map.setCenter(_point);
         self.map.setZoom(15);
         fbb.marker = setupDraggableMapCursor(_point);
-        var marker = fbb.marker;
-        var lat = marker.position.lat();
-        var lng = marker.position.lng();
-        populateLatLng(lat, lng);
-        $(".address_search_container").hide();
-        $(".map_results_container").show();
-        $("#addressNotFound").hide();
+        populateDom(fbb.marker);
         $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
-        google.maps.event.addListener(marker, 'dragend', function() {
-            lat = marker.position.lat();
-            lng = marker.position.lng();
-            populateLatLng(lat, lng);
+        google.maps.event.addListener(fbb.marker, 'dragend', function() {
+            populateDom(fbb.marker);
             $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
         });
     };
 
+    var populateDom = function(){
+        var lat = fbb.marker.position.lat();
+        var lng = fbb.marker.position.lng();
+        populateLatLng(lat, lng);
+        populateLocation($("#courtAddress").val());
+        $(".address_search_container").hide();
+        $(".map_results_container").show();
+        $("#addressNotFound").hide();
+    }
 
     var populateLatLng = function(lat, lng){
         $("#court_lat").val(lat);
         $("#court_lng").val(lng);
+    }
+
+    var populateLocation = function(location){
+        $("#court_location").val( "hey man");
+        $("#court_location").val(location);
     }
 
 
@@ -198,6 +205,12 @@ fbb.map = function(){
         });
     }
 
+    var showCourtDOM = function(){
+        var addressEl = $("#showCourtAddress");
+
+    };
+
     checkForMap();
+    showCourtDOM();
 }
 
