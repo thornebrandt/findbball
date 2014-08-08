@@ -10,7 +10,7 @@ class CourtsController < ApplicationController
 
     @review = current_user.reviews.build if signed_in?
   end
-  
+
   def show_all
     @reviews = @court.reviews.all
   end
@@ -25,7 +25,6 @@ class CourtsController < ApplicationController
     @mapEl = "add_court_map"
 
     @court = current_user.courts.build
-    @court.location = "123 Fake St, Springfield, NT"  # Until location field integrated
 
     @review = @court.reviews.build # If built on member, review doesn't show in form
     @review.member_id = current_user.id
@@ -42,11 +41,11 @@ class CourtsController < ApplicationController
       redirect_to action: 'new'
     end
   end
-  
+
   def destroy
     Court.find(params[:id]).destroy
     flash[:success] = "Court deleted."
-    redirect_to root_path
+    redirect_to home_path
   end
 
     private

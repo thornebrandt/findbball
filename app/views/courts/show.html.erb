@@ -13,7 +13,7 @@
                 Open <%= @court.open_hours %>
             </p>
             <% if current_user? @court.member %>
-            <a href="edit_court.html"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
+            <a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
             <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
                                                           data: { confirm: "You sure?" },
                                                           title: @court.name %><br>
@@ -56,5 +56,6 @@
             <hr>
             <a name="reviews"></a>
             <%= render '/reviews/court_reviews_container' %>
+            <br>
+            <%= render 'ads/placeholder' %>
      </div>
-<%= render 'ads/placeholder' %>

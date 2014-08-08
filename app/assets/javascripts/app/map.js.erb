@@ -82,8 +82,15 @@ fbb.map = function(){
         return meters *= 0.000621371192;
     }
 
+    var clearMarkers = function(){
+        if(fbb.marker){
+            fbb.marker.setMap(null);
+            fbb.marker = null;
+        }
+    }
+
     var setupMapCursor = function(){
-        var marker = new google.maps.Marker({
+        fbb.marker = new google.maps.Marker({
             icon: icon_path,
             position: self.mapOptions.center,
             map: self.map
@@ -91,13 +98,13 @@ fbb.map = function(){
     };
 
     var setupDraggableMapCursor = function(_point){
-        var marker = new google.maps.Marker({
+        fbb.marker = new google.maps.Marker({
             icon: icon_path,
             draggable: true,
             position: _point,
             map: self.map
         });
-        return marker;
+        return fbb.marker;
     }
 
 
@@ -146,7 +153,8 @@ fbb.map = function(){
         $_addressInput.val(self.address);
         self.map.setCenter(_point);
         self.map.setZoom(15);
-        var marker = setupDraggableMapCursor(_point);
+        fbb.marker = setupDraggableMapCursor(_point);
+        var marker = fbb.marker;
         var lat = marker.position.lat();
         var lng = marker.position.lng();
         populateLatLng(lat, lng);
@@ -179,6 +187,7 @@ fbb.map = function(){
     var prepareDOM = function(){
         $("#searchAgain").click(function(e){
             e.preventDefault();
+            clearMarkers();
             $(".address_search_container").show();
             $(".map_results_container").hide();
         });
