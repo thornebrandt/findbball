@@ -23,7 +23,6 @@ $(function(){
     fbb.hero();
     fbb.youtubeModals();
     fbb.map();
-    fbb.showCourt();
     fbb.upload_photo();
     fbb.bestInPlace();
 

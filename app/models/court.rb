@@ -50,7 +50,7 @@ class Court < ActiveRecord::Base
 
   def skill_image
     if skill_level > 0
-        ActionController::Base.helpers.image_tag("icon/skill_#{verbose_skill_level.downcase}.png")
+        ActionController::Base.helpers.asset_path("icon/skill_#{verbose_skill_level.downcase}.png")
     end
   end
 
