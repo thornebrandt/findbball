@@ -87,6 +87,11 @@ class MembersController < ApplicationController
             end
         end
 
+        def sanitize_filename(filename)
+            #TODO: implement this
+          filename.gsub(/[^0-9A-z.\-]/, '_')
+        end
+
         def base64_conversion
             if params[:member][:photo].try(:match, %r{^data:(.*?);(.*?),(.*)$})
                 puts "YEP IT MATCHED"

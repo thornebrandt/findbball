@@ -66,7 +66,7 @@
     <a id="editHeightInches" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="weight">
-    <span class="edit_profile_label">Weight</span>
+    <span class="edit_profile_label">Weight(lbs)</span>
     <%= best_in_place @member, :weight, :as => :input, :activator => '#editWeight',
         :place_holder => "Add weight"
     %>
@@ -176,7 +176,7 @@
     <div id="about_me">
         <%= best_in_place @member, :about, :as => :textarea, :activator => '#editAboutMe',
             :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
-            :place_holder => "Write a short paragraph about yourself"
+            :place_holder => "What do you do for a living? What are your hobbies?"
         %><br>
         <a id="editAboutMe" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
     </div>
