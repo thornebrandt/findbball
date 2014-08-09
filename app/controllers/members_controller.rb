@@ -74,16 +74,6 @@ class MembersController < ApplicationController
 
 	private
 
-        # def base64_conversion
-        #     return unless params[:member][:photo]
-        #     tempfile = Tempfile.new ['upload', 'png']
-        #     tempfile.binmode
-        #     tempfile.write(Base64.decode64(params[:member][:photo]))
-        #     puts "TEMP FILE"
-        #     puts tempfile.inspect
-        #     ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'upload.png')
-        # end
-
         def split_base64(uri_str)
             if uri_str.match(%r{^data:(.*?);(.*?),(.*)$})
                 uri = Hash.new
@@ -109,7 +99,7 @@ class MembersController < ApplicationController
                 temp_img_file << image_data_binary
                 temp_img_file.rewind
 
-                img_params = {:filename => "data-uri-img.#{image_data[:extension]}",
+                img_params = {:filename => "member#{@member.id}.#{image_data[:extension]}",
                             :type => image_data[:type], :tempfile => temp_img_file}
                 uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)
                 params[:member][:photo] = uploaded_file
@@ -117,6 +107,7 @@ class MembersController < ApplicationController
             end
             # return obj_hash
         end
+
 
 
 
@@ -131,7 +122,8 @@ class MembersController < ApplicationController
                                             :birthdate,
                                             :courts,
                                             :slogan,
-                                            :height,
+                                            :height_feet,
+                                            :height_inches,
                                             :weight,
                                             :plays_basketball,
                                             :skill_level,

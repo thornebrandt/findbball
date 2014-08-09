@@ -133,6 +133,14 @@ class Member < ActiveRecord::Base
         end
     end
 
+    def height
+        if height_feet
+            height_feet.to_s + ", dude"
+        else
+            "Undisclosed"
+        end
+    end
+
 
 	private
 		def create_remember_token

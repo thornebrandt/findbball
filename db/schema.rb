@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806082347) do
+ActiveRecord::Schema.define(version: 20140808204136) do
 
   create_table "courts", force: true do |t|
     t.string   "name"
@@ -50,9 +50,10 @@ ActiveRecord::Schema.define(version: 20140806082347) do
     t.string   "about",            limit: 500
     t.integer  "nationality",                  default: -1
     t.date     "birthdate"
-    t.integer  "height"
     t.integer  "weight"
     t.string   "photo"
+    t.integer  "height_feet"
+    t.integer  "height_inches"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

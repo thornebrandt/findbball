@@ -6,6 +6,9 @@ Findbball::Application.configure do
     # since you don't have to restart the web server when you make code changes.
     config.cache_classes = false
 
+    # Keep that friggen best-in-place error from showing up
+    config.reload_engines = true
+
     # Do not eager load code on boot.
     config.eager_load = false
 

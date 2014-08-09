@@ -21,7 +21,7 @@
 </p>
 <p id="birthdate">
     <div class="datepicker_container">
-        <span class="edit_profile_label">Birthdate</span>
+        <span class="edit_profile_label">Birthday</span>
         <%= best_in_place @member, :birthdate, :as => :date, :place_holder => "Not set",
             :activator => '#editBirthdate', :class => 'datepicker'
         %>
@@ -31,12 +31,39 @@
         <span class="edit_profile_lable">File Upload Test</span>
     </p> -->
 </p>
-<p id="height">
-    <span class="edit_profile_label">Height</span>
-    <%= best_in_place @member, :height, :as => :input, :activator => '#editHeight',
-        :place_holder => "Add height"
+<p id="heightContainer">
+    <span class="edit_profile_label">How tall are you?</span>
+    <br>
+    <%= best_in_place @member, :height_feet, :as => :select, :activator => '#editHeightFeet',
+        :place_holder => "5 feet", :collection => {
+            "3" => "3 feet",
+            "4" => "4 feet",
+            "5" => "5 feet",
+            "6" => "6 feet",
+            "7" => "7 feet",
+            "8" => "8 feet"
+        }
     %>
-    <a id="editHeight" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <a id="editHeightFeet" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @member, :height_inches, :as => :select, :activator => '#editHeightInches',
+        :place_holder => '9 inches', :collection => {
+            "0" => "0 inches",
+            "1" => "1 inches",
+            "2" => "2 inches",
+            "3" => "3 inches",
+            "4" => "4 inches",
+            "5" => "5 inches",
+            "6" => "6 inches",
+            "7" => "7 inches",
+            "8" => "8 inches",
+            "9" => "9 inches",
+            "10" => "10 inches",
+            "11" => "11 inches",
+            "12" => "12 inches"
+        }
+
+    %>
+    <a id="editHeightInches" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="weight">
     <span class="edit_profile_label">Weight</span>
