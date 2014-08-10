@@ -11,7 +11,7 @@
                         <li>
                             <a href="#">Bball Courts</a>
                             <ul>
-                                <li><a href="#">Add Court</a></li>
+                                <li><%= link_to "Add Court", new_court_path %></li>
                                 <li><a href="#">Court Profiles</a></li>
                             </ul>
                         </li>
@@ -26,13 +26,18 @@
                         <li>
                             <a href="#">My Bball</a>
                             <ul>
-                                <li><a href="#">My Profile</a></li>
+                                <li><%= link_to "My Profile", member_path(current_user) %></li>
                                 <li>
                                     <a href="#">My Courts</a>
-                                    <ul>
-                                        <li><a href="court.html">Wicker Park Fieldhouse</a></li>
-                                        <li><a href="court.html">Another Really Really Long...</a></li>
-                                    </ul>
+                                    	<% if current_user.courts.any? %>
+                                    		<ul>
+                                    		<% current_user.courts.each do |court| %>
+                                        		<li><%= link_to court.name, court_path(court.id) %></li>
+                                        	<% end %>
+                                    		</ul>
+                                    	<% else %>
+                                    		<%= link_to "Add Court", new_court_path %>
+                                    	<% end %>
                                 </li>
                                 <li>
                                     <a href="#">My Events</a>
@@ -108,7 +113,7 @@
     <% if signed_in? %>
         <div id="nav3_container">
             <div id="nav3">
-                <a href="#">My Profile</a>
+                <%= link_to "My Profile", member_path(current_user.id) %>
                 <a href="#">Edit Profile</a>
                 <a href="account_settings.html">Account Settings</a>
                 <a href="#">My Courts</a>

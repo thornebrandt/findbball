@@ -16,7 +16,7 @@ class CourtsController < ApplicationController
 
   def edit
     @court = Court.find(params[:id])
-    @review = @court.reviews.build
+    @review = Review.new if signed_in?
   end
 
   def new
