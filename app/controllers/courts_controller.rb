@@ -24,7 +24,7 @@ class CourtsController < ApplicationController
     @showMap = true;
     @mapEl = "add_court_map"
     if current_user
-        @court = current_user.courts.build
+        @court = Court.new
         @review = @court.reviews.build # If built on member, review doesn't show in form
         @review.member_id = current_user.id
     else
