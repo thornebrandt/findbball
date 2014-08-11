@@ -19,6 +19,7 @@ class MembersController < ApplicationController
         end
 	end
 
+
 	def new
 		@noHeaderFooter = true
 		@member = Member.new

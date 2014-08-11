@@ -132,6 +132,35 @@ fbb.map = function(){
         });
     };
 
+    // var autoComplete = function(){
+    //     var service = new google.maps.places.AutocompleteService();
+    //     var t = $("#address_search").typeahead({ local : [] });
+    //     t.data("ttView").datasets[0].getSuggestions = function(query, callback){
+    //         var suggestions = function(query, process){
+    //             console.log("hey");
+    //             service.getPlacePredictions({
+    //                 input: query
+    //             }, function(predictions, status) {
+    //                 if (status == google.maps.places.PlacesServiceStatus.OK) {
+    //                     process($.map(predictions, function(prediction) {
+    //                         $("#addressNotFound").fadeOut();
+    //                         return prediction.description;
+    //                     }));
+    //                 } else {
+    //                     $("#addressNotFound").fadeIn();
+    //                 }
+    //             });
+    //         };
+    //         var data = [];
+    //         for (suggestion in suggestions){
+    //             data.push(this._transformDatum(suggestion));
+    //         }
+    //         callback(data);
+    //     };
+
+    // };
+
+
 
     var lookUpAutoCompleteAddress = function(_address){
         self.geocoder = self.geocoder || new google.maps.Geocoder();

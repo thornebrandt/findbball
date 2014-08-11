@@ -15,8 +15,38 @@ fbb.nav = function(){
         loginModal.modal(modalOptions);
         loginModal.modal('show');
     }
-}
 
+    $("#i_want_to").change(
+        function() {
+            var thisVal = $(this).val();
+            switch (thisVal) {
+                case "Find Members":
+                    $("#distance").hide();
+                    $("#member_search").show();
+                    $("#member_search").focus();
+                    break;
+                default:
+                    $("#member_search").hide();
+                    $("#distance").show();
+            }
+        }
+    );
+
+    $("#member_search").typeahead({
+        // source: function(query, process) {
+        //     console.log("hi");
+        //     return $.get("data/names_filler.json", {
+        //         query: query
+        //     }, function(data) {
+        //         return process(data);
+        //     });
+        // },
+        source: fakeMembers,
+        updater: function(_member) {
+            window.location = "player_profile.html?user=" + _member;
+        }
+    });
+}
 
 
 function getQueryVariable(query, variable) {
