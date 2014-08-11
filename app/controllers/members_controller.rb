@@ -19,6 +19,15 @@ class MembersController < ApplicationController
         end
 	end
 
+    def destroy
+        @user = User.find(params[:id])
+        if @user == current_user
+            @user.destroy
+            flash[:success] = "User deleted"
+            redirect_to home_path
+            current_user = nil
+        end
+    end
 
 	def new
 		@noHeaderFooter = true

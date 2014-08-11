@@ -5,6 +5,8 @@
     			<% @shown_reviews.each do |review| %>
     			<li>
 					<%= link_to review.court.name, court_path(review.court), class: "review" %>
+                    <br>
+                    <%= link_to truncate(review.content, length: 15), court_path(review.court), class: "review_content" %>
 				</li>
 				<% end %>
 				<div id="hiddenReviews" class="hide">
