@@ -20,7 +20,11 @@
         <body class="gradient">
         <% else %>
     		<body class="body">
-    		<%= render 'layouts/header' %>
+            <% if signed_in? %>
+                <%= render 'layouts/header_signed_in' %>
+            <% else %>
+                <%= render 'layouts/header' %>
+            <% end %>
 	<% end %>
 	 <%= yield %>
 	<% unless @noHeaderFooter %>

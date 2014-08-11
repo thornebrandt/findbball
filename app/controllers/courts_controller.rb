@@ -20,12 +20,17 @@ class CourtsController < ApplicationController
   end
 
   def new
+    puts "WTF WTFSDFHASDFHASDHFASDFKHJasdfl;khasdf;lkjas;dflkjas;dflkj"
     @showMap = true;
     @mapEl = "add_court_map"
-
-    @court = current_user.courts.build
-    @review = @court.reviews.build # If built on member, review doesn't show in form
-    @review.member_id = current_user.id
+    if current_user
+        @court = current_user.courts.build
+        @review = @court.reviews.build # If built on member, review doesn't show in form
+        @review.member_id = current_user.id
+    else
+        flash[:warning] = "You are not logged in."
+        redirect_to home_path
+    end
   end
 
   def create
