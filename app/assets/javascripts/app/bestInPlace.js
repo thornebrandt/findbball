@@ -1,7 +1,8 @@
 fbb.bestInPlace = function(){
     var bestInPlaceOptions = {
         changeMonth: true,
-        yearRange: "-40:-10",
+        changeYear: true,
+        yearRange: "-60:-18",
         dateFormat: 'MM dd, yy'
     }
     $.datepicker.setDefaults(bestInPlaceOptions);

@@ -1,56 +1,73 @@
-    <h2 id="fullname"><%= @member.full_name %></h2>
+    <h2 id="fullname"><%= @member.full_name || "New Member" %></h2>
     <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
         <% if @member_has_schedule == true %>
             <%= render 'members/member_headline' %>
         <% end %>
-    <table id="member_info">
-        <tbody>
-            <tr>
-                <th>Age</th>
-            </tr>
-            <tr>
-                <td><%= @member.age || "Undisclosed" %></td>
-            </tr>
-            <tr>
-                <th>Height</th>
-                <th class="tdRightAlign">Weight</th>
-            </tr>
-            <tr>
-                <td><%= @member.height || "a few" %></td>
-                <td class="tdRightAlign"><%= @member.weight || "a few" %> lbs</td>
-            </tr>
-            <tr>
-                <th>Nationality</th>
-                <th class="tdRightAlign">Favorite Position</th>
-            </tr>
-            <tr>
-                <td><%= @member.nationality_mapped %></td>
-                <td class="tdRightAlign"><%= @member.position_mapped %></td>
-            </tr>
-            <tr>
-                <th>Plays Basketball</th>
-                <th class="tdRightAlign">Skill Level</th>
-            </tr>
-            <tr>
-                <td><%= @member.plays_basketball_mapped %></td>
-                <td class="tdRightAlign"><%= @member.skill_level_mapped %></td>
-            </tr>
-            <tr>
-                <th>Highest Level of Organized Ball</th>
-                <th class="tdRightAlign">Favorite Player</th>
-            </tr>
-            <tr>
-                <td><%= @member.organized_mapped %></td>
-                <td class="tdRightAlign"><%= @member.favorite_player || "Secret" %></td>
-            </tr>
-            <tr>
-                <th colspan="2">About</th>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: justify">
-                    <%= @member.about %>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <% if current_user? @member %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit</a>'), edit_member_path(@member) %> |
+        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete</a>'), @member, method: :delete,
+              data: { confirm: raw("Are you sure you want to delete your profile? &nbsp; &nbsp; &nbsp; This can't be undone.") }  %>
+        <br>
+    <% end %>
+
+    <div id="member_info">
+        <% if @member.birthdate %>
+            <div class="member_info_cell">
+                <h4>Age</h4>
+                <%= @member.age %>
+            </div>
+        <% end %>
+        <% if  @member.height_feet && @member.height_feet > 3 %>
+            <div class="member_info_cell">
+                <h4>Height</h4>
+                <%= @member.height %>
+            </div>
+        <% end %>
+        <% if  @member.weight %>
+            <div class="member_info_cell">
+                <h4>Weight</h4>
+                <%= @member.weight %> lbs
+            </div>
+        <% end %>
+        <% if @member.nationality != -1 %>
+            <div class="member_info_cell">
+                <h4>Nationality</h4>
+                <%= @member.nationality_verbose %>
+            </div>
+        <% end %>
+        <% if @member.skill_level != -1 %>
+            <div class="member_info_cell">
+                <h4>Skill Level</h4>
+                <%= @member.skill_level_verbose %>
+            </div>
+        <% end %>
+        <% if @member.plays_basketball != -1 %>
+            <div class="member_info_cell">
+                <h4>Plays Basketball</h4>
+                <%= @member.plays_basketball_verbose %>
+            </div>
+        <% end %>
+        <% if @member.position != -1 %>
+            <div class="member_info_cell">
+                <h4>Favorite Position</h4>
+                <%= @member.position_verbose %>
+            </div>
+        <% end %>
+        <% if @member.organized != -1 %>
+            <div class="member_info_cell">
+                <h4>Highest Level of Ball</h4>
+                <%= @member.organized_verbose %>
+            </div>
+        <% end %>
+        <% if @member.favorite_player %>
+            <div class="member_info_cell">
+                <h4>Favorite Player</h4>
+                <%= @member.favorite_player %>
+            </div>
+        <% end %>
+        <% if @member.about %>
+            <h4>About</h4>
+            <%= @member.about %>
+        <% end %>
+    </div>
     <%= render 'members/member_history' %>

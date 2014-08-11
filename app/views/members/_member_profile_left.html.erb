@@ -2,7 +2,7 @@
         <div id="profile_left">
             <%= image_tag @member.photo.url, id: "profile_pic" %>
             <p id="profile_name"><%= @member.name %></p>
-            <p class="profile_subtitle">Play with me</p>
+            <p class="profile_subtitle"><%= @member.slogan %></p>
             <%= render '/friends/friends_container' %>
             <%= render '/teams/teams_container' %>
             <%= render '/reviews/reviews_container' %>

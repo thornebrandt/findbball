@@ -23,7 +23,7 @@
     <div class="datepicker_container">
         <span class="edit_profile_label">Birthday</span>
         <%= best_in_place @member, :birthdate, :as => :date, :place_holder => "Not set",
-            :activator => '#editBirthdate', :class => 'datepicker'
+            :activator => '#editBirthdate', :class => 'datepicker', :ok_button => "Submit"
         %>
         <a id="editBirthdate" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
     </div>
@@ -35,7 +35,10 @@
     <span class="edit_profile_label">How tall are you?</span>
     <br>
     <%= best_in_place @member, :height_feet, :as => :select, :activator => '#editHeightFeet',
-        :place_holder => "5 feet", :collection => {
+        :place_holder => "0 feet", :collection => {
+            "0" => "0 feet",
+            "1" => "1 foot",
+            "2" => "2 feet",
             "3" => "3 feet",
             "4" => "4 feet",
             "5" => "5 feet",
@@ -46,7 +49,7 @@
     %>
     <a id="editHeightFeet" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
     <%= best_in_place @member, :height_inches, :as => :select, :activator => '#editHeightInches',
-        :place_holder => '9 inches', :collection => {
+        :place_holder => '0 inches', :collection => {
             "0" => "0 inches",
             "1" => "1 inches",
             "2" => "2 inches",
@@ -92,7 +95,7 @@
     <a id="editNationality" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p id="plays_basketball">
-    <span class="edit_profile_label">Plays Basketball About...</span>
+    <span class="edit_profile_label">How Often Do You Play?</span>
 
     <%= best_in_place @member, :plays_basketball, :as => :select, :activator => '#editPlaysBasketball', :collection =>
         {
@@ -170,11 +173,10 @@
     <a id="editFavoritePlayer" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
 <p>
-    <span class="edit_profile_label">About Me</span>
+    <span class="edit_profile_label">Introduce Yourself</span>
     <br>
     <div id="about_me">
         <%= best_in_place @member, :about, :as => :textarea, :activator => '#editAboutMe',
-            :ok_button => "Submit", :ok_button_class => "btn btn-primary btnMargin",
             :place_holder => "What do you do for a living? What are your hobbies?"
         %><br>
         <a id="editAboutMe" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>

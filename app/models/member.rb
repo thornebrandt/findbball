@@ -57,7 +57,7 @@ class Member < ActiveRecord::Base
 		Digest::SHA1.hexdigest(token.to_s)
 	end
 
-    def nationality_mapped
+    def nationality_verbose
         case nationality
             when -1 then "Undisclosed"
             when 1 then "Black"
@@ -74,7 +74,7 @@ class Member < ActiveRecord::Base
         end
     end
 
-    def position_mapped
+    def position_verbose
         case position
             when -1 then "Undisclosed"
             when 1 then "Point guard"
@@ -92,7 +92,7 @@ class Member < ActiveRecord::Base
         end
     end
 
-    def organized_mapped
+    def organized_verbose
         case organized
             when -1 then "Undisclosed"
             when 1 then "Grade School"
@@ -104,7 +104,7 @@ class Member < ActiveRecord::Base
         end
     end
 
-    def plays_basketball_mapped
+    def plays_basketball_verbose
         case plays_basketball
             when -1 then "Undisclosed"
             when 1 then "Any given second"
@@ -121,7 +121,7 @@ class Member < ActiveRecord::Base
     end
 
 
-    def skill_level_mapped
+    def skill_level_verbose
         case skill_level
             when -1 then "Undisclosed"
             when 1 then "Never Played"
@@ -135,12 +135,11 @@ class Member < ActiveRecord::Base
 
     def height
         if height_feet
-            height_feet.to_s + ", dude"
+            height_feet.to_s + "''" + height_inches.to_s + "'"
         else
             "Undisclosed"
         end
     end
-
 
 	private
 		def create_remember_token

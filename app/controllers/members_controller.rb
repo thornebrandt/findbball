@@ -26,11 +26,18 @@ class MembersController < ApplicationController
 	end
 
     def edit
-        @member = Member.find(params[:id])
+        if signed_in?
+            @member = current_user
+            @shown_courts = @member.courts.last(5)
+            @hidden_courts = @member.courts - @shown_courts
+            @shown_reviews = @member.reviews.last(5)
+            @hidden_reviews = @member.reviews - @shown_reviews
+        else
+            redirect_to home_path
+        end
     end
 
     def update
-        # puts "calling update"
         @member = Member.find(params[:id])
 
         if params[:member][:birthdate]
@@ -95,7 +102,6 @@ class MembersController < ApplicationController
 
         def base64_conversion
             if params[:member][:photo].try(:match, %r{^data:(.*?);(.*?),(.*)$})
-                puts "YEP IT MATCHED"
                 image_data = split_base64( params[:member][:photo] )
                 image_data_string = image_data[:data]
                 image_data_binary = Base64.decode64(image_data_string)
@@ -109,7 +115,6 @@ class MembersController < ApplicationController
                             :type => image_data[:type], :tempfile => temp_img_file}
                 uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)
                 params[:member][:photo] = uploaded_file
-                # obj_hash.delete(:remote_image_url)
             end
             # return obj_hash
         end
