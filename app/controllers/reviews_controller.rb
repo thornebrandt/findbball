@@ -13,8 +13,9 @@ class ReviewsController < ApplicationController
   end
   
   def destroy
+    @review = Review.find(params[:id])
     @court = @review.court
-    @review.destroy      # TODO: Delete the right review when multiple reviews per court/member.
+    @review.destroy
     flash[:info] = "Review deleted."
     redirect_to @court
   end

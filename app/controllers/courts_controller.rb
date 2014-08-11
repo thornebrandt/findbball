@@ -2,22 +2,21 @@ class CourtsController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update, :create, :new]
 
   def show
+    # TODO: better error handling for nonexistent court (currently default rails 404)
     @showMap = true;
     @mapEl = "court_map"
 
     @court = Court.find(params[:id])
     @shown_reviews = @court.reviews.last(4)
+    @hidden_reviews = @court.reviews - @shown_reviews
 
-    @review = current_user.reviews.build if signed_in?
-  end
-
-  def show_all
-    @reviews = @court.reviews.all
+    # @review = current_user.reviews.build if signed_in?
+    @review = Review.new if signed_in?
   end
 
   def edit
     @court = Court.find(params[:id])
-    @review = @court.reviews.build
+    @review = Review.new if signed_in?
   end
 
   def new
