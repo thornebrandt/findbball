@@ -1,0 +1,24 @@
+<h2 id="showCourtName" class="courtH2"><%= @court.name %></h2>
+                <%= link_to("court website", @court.website, id: "courtWebsite") if @court.website.present? %>
+            <p id="showCourtAddress" class="gray">
+                <%= @court.format_location %>
+            </p>
+            <p id="courtHours">
+                Open <%= @court.open_hours %>
+            </p>
+            <% if current_user? @court.member %>
+            <a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
+            <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
+                                                          data: { confirm: "You sure?" },
+                                                          title: @court.name %><br>
+            <% end %>
+            <hr>
+            <div class="courtInfo2 center">
+                <%= render '/courts/court_difficulty' %>
+                <p id="courtPickUpGame">
+                    <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
+                </p>
+            </div>
+            <hr>
+            <hr>
+            <%= render 'ads/placeholder' %>

@@ -3,7 +3,7 @@ class Court < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
 
-  VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
+  # VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
 
   validates :name,          presence: true, length: { maximum: 70 }
   validates :location,      presence: true, length: { maximum: 200 }
@@ -33,18 +33,12 @@ class Court < ActiveRecord::Base
 
   def verbose_skill_level
     case skill_level
-    when -1
-        "Undsiclosed"
-    when 0
-        "Don't know"
-    when 1
-        "Beginner"
-    when 2
-        "Intermediate"
-    when 3
-        "Advanced"
-    when 4
-        "Difficult"
+      when -1 then "Undsiclosed"
+      when  0 then "Don't know"
+      when  1 then "Beginner"
+      when  2 then "Intermediate"
+      when  3 then "Advanced"
+      when  4 then "Difficult"
     end
   end
 

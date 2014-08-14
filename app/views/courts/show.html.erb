@@ -1,61 +1,7 @@
 <% provide(:title, @court.name) %>
-
 <div class="container-fluid">
-	<%= render '/courts/court_left' %>
-  	<%= render '/courts/court_right' %>
+	<%= render '/courts/court_profile_left' %>
+  	<%= render '/courts/court_profile_right' %>
 	<div class="content">
-            <h2 id="showCourtName" class="courtH2"><%= @court.name %></h2>
-                <%= link_to("court website", @court.website, id: "courtWebsite") if @court.website.present? %>
-            <p id="showCourtAddress" class="gray">
-                <%= @court.format_location %>
-            </p>
-            <p id="courtHours">
-                Open <%= @court.open_hours %>
-            </p>
-            <% if current_user? @court.member %>
-            <a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
-            <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
-                                                          data: { confirm: "You sure?" },
-                                                          title: @court.name %><br>
-            <% end %>
-            <hr>
-            <div class="courtInfo2 center">
-                <%= render '/courts/court_difficulty' %>
-                <p id="courtPickUpGame">
-                    <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
-                </p>
-            </div>
-            <hr>
-            <h3>PHOTOS(2)</h3>
-            <div id="courtPhotos_container">
-                <p id="courtPhotos">
-                    <%= image_tag "courts/default.jpg", class: "courtPhoto" %>
-                    <%= image_tag "courts/court1.jpg", class: "courtPhoto" %>
-                </p>
-                <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
-            </div>
-            <hr>
-            <h3>VIDEOS(1)</h3>
-            <div id="courtVideos_container">
-                    <div id="courtVideos">
-                        <div class="courtVideo">
-                            <img src="http://img.youtube.com/vi/EEtpH6ZEPOc/1.jpg">
-                            <a href="http://www.youtube.com/watch?v=EEtpH6ZEPOc" class="play_btn"></a>
-                            <div class="modal hide fade youtubeModal">
-                                <div class="modal-body">
-                                    <div class="youtube_container">
-                                        <iframe width="560" height="315" src="//www.youtube.com/embed/EEtpH6ZEPOc" frameborder="0" allowfullscreen>
-                                        </iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <a href="#" id="add_court_video"><%= image_tag "icon/upload.png" %> Add Video</a>
-            </div>
-            <hr>
-            <a name="reviews"></a>
-            <%= render '/reviews/court_reviews_container' %>
-            <br>
-            <%= render 'ads/placeholder' %>
-     </div>
+    	<%= render '/courts/court_profile_center' %>
+    </div>
