@@ -60,7 +60,7 @@ class MembersController < ApplicationController
 
         respond_to do |format|
             if @member.update_attributes(member_params)
-                format.html { redirect_to(@member, :notice => 'User was successfully updated.') }
+                format.html { redirect_to(@member, :notice => 'Member was successfully updated.') }
                 format.json do
                     respond_with_bip(@member)
                 end

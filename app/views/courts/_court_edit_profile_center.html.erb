@@ -1,13 +1,30 @@
-<h2 id="showCourtName" class="courtH2"><%= @court.name %></h2>
+<%= form_for(@court) do |f| %>
+<div id="name">
+    <h2 id="showCourtName" class="courtH2">
+        <%= best_in_place @court, :name, :as => :input, :activator => '#editName',
+            :place_holder => "Court Name Here"
+        %>
+        <a id="editName" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+    </h2>
+    <input style="display: none;" type="text" class="editing editInput" value="Court Name" />
+    <button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
+</div>
+
+<div id="location"> <!-- TODO: Populate lat/lng from this new location -->
+	<p id="showCourtAddress" class="gray"></p>
+	<%= best_in_place @court, :location, :as => :input, :activator => '#editLocation',
+            :place_holder => "Court Name Here"
+        %>
+        <a id="editLocation" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+    </p>
+    <input style="display: none;" type="text" class="editing editInput" value="Court Location" />
+    <button rel="edit_location" id="edit_Location" type="submit" class="editing editComplete">Submit</button>
+</div>
+
                 <%= link_to("court website", @court.website, id: "courtWebsite") if @court.website.present? %>
-            <p id="showCourtAddress" class="gray">
-                <%= @court.format_location %>
-            </p>
             <p id="courtHours">
                 Open <%= @court.open_hours %>
             </p>
-            <% if current_user? @court.member %>
-            <a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a> |
             <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
                                                           data: { confirm: "You sure?" },
                                                           title: @court.name %><br>
@@ -19,6 +36,7 @@
                     <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
                 </p>
             </div>
+<% end %>
             <hr>
             <hr>
             <%= render 'ads/placeholder' %>

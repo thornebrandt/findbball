@@ -16,8 +16,23 @@ class CourtsController < ApplicationController
 
   def edit
     @court = Court.find(params[:id])
-    @review = Review.new if signed_in?
   end
+  
+  def update
+    @court = Court.find(params[:id])
+
+        respond_to do |format|
+            if @court.update_attributes(court_params)
+                format.html { redirect_to(@court, :notice => 'Court was successfully updated.') }
+                format.json do
+                    respond_with_bip(@court)
+                end
+            else
+                format.html { render :edit }
+                format.json { respond_with_bip(@court) }
+            end
+        end
+    end
 
   def new
     @showMap = true;
