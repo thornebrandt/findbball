@@ -10,7 +10,7 @@
     <button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
 </div>
 
-<div id="location"> <!-- TODO: Populate lat/lng from this new location -->
+<div id="location"> <!-- TODO: Populate lat/lng from this new location, display with format_location -->
 	<p id="showCourtAddress" class="gray"></p>
 	<%= best_in_place @court, :location, :as => :input, :activator => '#editLocation',
             :place_holder => "Court Name Here"
@@ -21,14 +21,75 @@
     <button rel="edit_location" id="edit_Location" type="submit" class="editing editComplete">Submit</button>
 </div>
 
-                <%= link_to("court website", @court.website, id: "courtWebsite") if @court.website.present? %>
+<div id="website">
+	<p id="courtWebsite"> <!-- TODO: Jquery url validation -->
+	<%= best_in_place @court, :website, :as => :input, :activator => '#editWebsite',
+            :place_holder => "(no website yet)"
+        %>
+        <a id="editWebsite" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+    </p>
+    <input style="display: none;" type="text" class="editing editInput" value="Court Website" />
+    <button rel="edit_website" id="edit_Website" type="submit" class="editing editComplete">Submit</button>
+</div>
+
+<p id="hoursContainer">
+    <%= best_in_place @court, :open_time_1, :as => :select, :activator => '#editTime1',
+        :place_holder => "12:00", :collection => {
+            "1" => "1:00",
+            "2" => "2:00",
+            "3" => "3:00",
+            "4" => "4:00",
+            "5" => "5:00",
+            "6" => "6:00",
+            "7" => "7:00",
+            "8" => "8:00",
+            "9" => "9:00",
+            "10" => "10:00",
+            "11" => "11:00",
+            "12" => "12:00"
+        }
+    %>
+    <a id="editTime1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @court, :open_am_1, :as => :select, :activator => '#editAM1',
+        :place_holder => 'AM', :collection => {
+            "AM" => "AM",
+            "PM" => "PM"
+        }
+    %>
+    <a id="editAM1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @court, :open_time_2, :as => :select, :activator => '#editTime2',
+        :place_holder => "12:00", :collection => {
+            "1" => "1:00",
+            "2" => "2:00",
+            "3" => "3:00",
+            "4" => "4:00",
+            "5" => "5:00",
+            "6" => "6:00",
+            "7" => "7:00",
+            "8" => "8:00",
+            "9" => "9:00",
+            "10" => "10:00",
+            "11" => "11:00",
+            "12" => "12:00"
+        }
+    %>
+    <a id="editTime2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @court, :open_am_2, :as => :select, :activator => '#editAM2',
+        :place_holder => 'AM', :collection => {
+            "AM" => "AM",
+            "PM" => "PM"
+        }
+    %>
+    <a id="editAM2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+</p>
+<hr>
+
             <p id="courtHours">
                 Open <%= @court.open_hours %>
             </p>
             <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
                                                           data: { confirm: "You sure?" },
                                                           title: @court.name %><br>
-            <% end %>
             <hr>
             <div class="courtInfo2 center">
                 <%= render '/courts/court_difficulty' %>
