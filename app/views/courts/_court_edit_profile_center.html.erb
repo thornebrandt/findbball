@@ -10,19 +10,21 @@
     <button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
 </div>
 
-<div id="location"> <!-- TODO: Populate lat/lng from this new location, display with format_location -->
+<p id="location"> <!-- TODO: Populate lat/lng from this new location, display with format_location -->
+	<span class="edit_profile_label">Location</span>
 	<p id="showCourtAddress" class="gray"></p>
 	<%= best_in_place @court, :location, :as => :input, :activator => '#editLocation',
-            :place_holder => "Court Name Here"
+            :place_holder => "Court Address Here"
         %>
         <a id="editLocation" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
     </p>
     <input style="display: none;" type="text" class="editing editInput" value="Court Location" />
     <button rel="edit_location" id="edit_Location" type="submit" class="editing editComplete">Submit</button>
-</div>
+</p>
 
 <div id="website">
 	<p id="courtWebsite"> <!-- TODO: Jquery url validation -->
+	<span class="edit_profile_label">Website</span>
 	<%= best_in_place @court, :website, :as => :input, :activator => '#editWebsite',
             :place_holder => "(no website yet)"
         %>
@@ -33,20 +35,21 @@
 </div>
 
 <p id="hoursContainer">
+	<span class="edit_profile_label">Open Hours</span>
     <%= best_in_place @court, :open_time_1, :as => :select, :activator => '#editTime1',
         :place_holder => "12:00", :collection => {
-            "1" => "1:00",
-            "2" => "2:00",
-            "3" => "3:00",
-            "4" => "4:00",
-            "5" => "5:00",
-            "6" => "6:00",
-            "7" => "7:00",
-            "8" => "8:00",
-            "9" => "9:00",
-            "10" => "10:00",
-            "11" => "11:00",
-            "12" => "12:00"
+            1 => "1:00",
+            2 => "2:00",
+            3 => "3:00",
+            4 => "4:00",
+            5 => "5:00",
+            6 => "6:00",
+            7 => "7:00",
+            8 => "8:00",
+            9 => "9:00",
+            10 => "10:00",
+            11 => "11:00",
+            12 => "12:00"
         }
     %>
     <a id="editTime1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
@@ -57,20 +60,20 @@
         }
     %>
     <a id="editAM1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
-    <%= best_in_place @court, :open_time_2, :as => :select, :activator => '#editTime2',
+    - <%= best_in_place @court, :open_time_2, :as => :select, :activator => '#editTime2',
         :place_holder => "12:00", :collection => {
-            "1" => "1:00",
-            "2" => "2:00",
-            "3" => "3:00",
-            "4" => "4:00",
-            "5" => "5:00",
-            "6" => "6:00",
-            "7" => "7:00",
-            "8" => "8:00",
-            "9" => "9:00",
-            "10" => "10:00",
-            "11" => "11:00",
-            "12" => "12:00"
+            1 => "1:00",
+            2 => "2:00",
+            3 => "3:00",
+            4 => "4:00",
+            5 => "5:00",
+            6 => "6:00",
+            7 => "7:00",
+            8 => "8:00",
+            9 => "9:00",
+            10 => "10:00",
+            11 => "11:00",
+            12 => "12:00"
         }
     %>
     <a id="editTime2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
@@ -82,22 +85,69 @@
     %>
     <a id="editAM2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
 </p>
+
+<div class="courtInfo2 center">
+<div id="courtDifficulty"><span id="difficulty"> <!-- TODO: Update image along with value -->
+	<%= best_in_place @court, :skill_level, :as => :select, :activator => '#editDifficulty',
+        :place_holder => -1, :collection => {
+            -1 => "Undiclosed",
+            0 => "Don't know",
+            1 => "Beginner",
+            2 => "Intermediate",
+            3 => "Advanced",
+            4 => "Difficult"
+        }
+    %>
+    <a id="editDifficulty" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= image_tag @court.skill_image %></span>  
+</div>
+	
+	
+<p id="courtPickUpGame">
+	<span class="edit_profile_label">Pick-up Time</span>
+	<span id="pickupTime">
+		<%= best_in_place @court, :pickup_day, :as => :select, :activator => '#editPickupDay',
+        :place_holder => "Sunday", :collection => {
+        	"Sunday" => "Sunday",
+			"Monday" => "Monday",
+			"Tuesday" => "Tuesday",
+			"Wednesday" => "Wednesday",
+			"Thursday" => "Thursday",
+			"Friday" => "Friday",
+			"Saturday" => "Saturday"
+        }
+    %>
+    <a id="editPickupDay" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @court, :pickup_time, :as => :select, :activator => '#editPickupTime',
+        :place_holder => "12:00", :collection => {
+            1 => "1:00",
+            2 => "2:00",
+            3 => "3:00",
+            4 => "4:00",
+            5 => "5:00",
+            6 => "6:00",
+            7 => "7:00",
+            8 => "8:00",
+            9 => "9:00",
+            10 => "10:00",
+            11 => "11:00",
+            12 => "12:00"
+        }
+    %>
+    <a id="editPickupTime" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    <%= best_in_place @court, :pickup_am, :as => :select, :activator => '#editPickupAM',
+        :place_holder => 'AM', :collection => {
+            "AM" => "AM",
+            "PM" => "PM"
+        }
+    %>
+    <a id="editPickupAM" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+	</span>
+</div>
 <hr>
 
-            <p id="courtHours">
-                Open <%= @court.open_hours %>
-            </p>
             <i class="glyphicon glyphicon-trash"></i> <%= link_to "Delete", @court, method: :delete,
                                                           data: { confirm: "You sure?" },
                                                           title: @court.name %><br>
-            <hr>
-            <div class="courtInfo2 center">
-                <%= render '/courts/court_difficulty' %>
-                <p id="courtPickUpGame">
-                    <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
-                </p>
-            </div>
 <% end %>
-            <hr>
-            <hr>
             <%= render 'ads/placeholder' %>

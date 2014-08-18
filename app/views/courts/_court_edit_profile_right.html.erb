@@ -11,6 +11,9 @@
             <input type="hidden" id="lng" value="<%= @court.lng %>">
             <h4 id="milesAway"></h4>
             <p>
+                <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(@court.location)%>">
+                    Get Directions
+                </a>
             </p>
             <a href="#" id="changeLocation">Change your location</a><br>
             <%= image_tag "add_right_placeholder.png", id: "ad_right2" %>
