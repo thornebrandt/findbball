@@ -7,14 +7,18 @@ fbb.map = function(){
     self.mapOptions = {};
 
 
-
+    var initialize = function(){
+        checkForMap();
+        showCourtDOM();
+    };
 
     var checkForMap = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
             mapEl = $(".mapEl")[0];
-            prepareMap();
-            autoComplete();
+            prepareMap(mapEl);
+            //autoComplete();
+            geoComplete();
         }
     };
 
@@ -23,7 +27,7 @@ fbb.map = function(){
             self.lat = $("#lat").val();
             self.lng = $("#lng").val();
         }
-    }
+    };
 
     var simpleMap = function(){
         //to test that the map is working
@@ -32,7 +36,7 @@ fbb.map = function(){
 
     var setupOptions = function(){
         self.mapOptions = {
-            center: new google.maps.LatLng(self.lat, self.lng),
+            //center: new google.maps.LatLng(self.lat, self.lng),
             zoom: 13,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -40,7 +44,7 @@ fbb.map = function(){
         };
     };
 
-    var prepareMap = function(){
+    var prepareMap = function(mapEl){
         getLatLng();
         setupOptions();
         $_addressInput = $("#courtAddress");
@@ -108,11 +112,41 @@ fbb.map = function(){
         return fbb.marker;
     }
 
+    var geoComplete = function(){
+        console.log("ok, geo-complete loaded");
+        $("#address_search").geocomplete({
+            map: ".mapEl",
+            location: new google.maps.LatLng(self.lat, self.lng),
+            mapOptions: {
+                zoom: 15,
+                scrollwheel: false,
+                mapTypeId: "roadmap",
+                disableDefaultUI: true
+            },
+            markerOptions: {
+                draggable: true,
+                icon: icon_path
+            }
+        })
+        .bind("geocode:result", geoCompleteSuccessHandler)
+        .bind("geocode:dragged", function(event, result){
+            console.log("you dragged foo");
+            console.log(event);
+            console.log(result);
+        }).bind("geocode:error", function(event, result){
+            console.log("error yo");
+            console.log(event);
+            console.log(result);
+        });
+    };
+
 
     var autoComplete = function(){
+        console.log("setting up autoComplete");
         var service = new google.maps.places.AutocompleteService();
         $("#address_search").typeahead({
             source: function(query, process){
+                console.log("source");
                 service.getPlacePredictions({
                     input: query
                 }, function(predictions, status) {
@@ -127,39 +161,11 @@ fbb.map = function(){
                 });
             },
             updater: function(_address){
+                console.log("looking up addressss");
                 return lookUpAutoCompleteAddress(_address);
             }
         });
     };
-
-    // var autoComplete = function(){
-    //     var service = new google.maps.places.AutocompleteService();
-    //     var t = $("#address_search").typeahead({ local : [] });
-    //     t.data("ttView").datasets[0].getSuggestions = function(query, callback){
-    //         var suggestions = function(query, process){
-    //             console.log("hey");
-    //             service.getPlacePredictions({
-    //                 input: query
-    //             }, function(predictions, status) {
-    //                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-    //                     process($.map(predictions, function(prediction) {
-    //                         $("#addressNotFound").fadeOut();
-    //                         return prediction.description;
-    //                     }));
-    //                 } else {
-    //                     $("#addressNotFound").fadeIn();
-    //                 }
-    //             });
-    //         };
-    //         var data = [];
-    //         for (suggestion in suggestions){
-    //             data.push(this._transformDatum(suggestion));
-    //         }
-    //         callback(data);
-    //     };
-
-    // };
-
 
 
     var lookUpAutoCompleteAddress = function(_address){
@@ -192,14 +198,24 @@ fbb.map = function(){
         });
     };
 
-    var populateDom = function(){
-        var lat = fbb.marker.position.lat();
-        var lng = fbb.marker.position.lng();
+
+    var geoCompleteSuccessHandler = function(event, result){
+       var _address = result.formatted_address;
+       self.address = _address;
+       var lat = result.geometry.location.k;
+       var lng = result.geometry.location.B;
+       console.log(lat + " , " + lng);
+       $_addressInput.val(_address);
+       populateDom(_address, lat, lng);
+    };
+
+    var populateDom = function(lat, lng){
         populateLatLng(lat, lng);
         populateLocation($("#courtAddress").val());
         $(".address_search_container").hide();
         $(".map_results_container").show();
         $("#addressNotFound").hide();
+        $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
     }
 
     var populateLatLng = function(lat, lng){
@@ -239,7 +255,7 @@ fbb.map = function(){
 
     };
 
-    checkForMap();
-    showCourtDOM();
+    initialize();
 }
+
 

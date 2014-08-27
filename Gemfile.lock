@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/bernat/best_in_place.git
-  revision: 0307038d99e0ab7ed19069903a18fe311b18a4b4
+  revision: dd5fa8f80ebf81926cd1cff50dd4927ca09bea3c
   specs:
     best_in_place (3.0.0.alpha)
       actionpack (>= 3.2)
@@ -171,7 +171,7 @@ GEM
       execjs
       rails (>= 3.1)
       railties (>= 3.1)
-    tzinfo (0.3.40)
+    tzinfo (0.3.41)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)

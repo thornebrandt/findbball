@@ -15,9 +15,11 @@ class CourtsController < ApplicationController
   end
 
   def edit
+    @showMap = true;
+    @mapEl = "edit_court_map"
     @court = Court.find(params[:id])
   end
-  
+
   def update
     @court = Court.find(params[:id])
 

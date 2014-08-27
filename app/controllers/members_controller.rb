@@ -2,6 +2,14 @@ include ActionView::Helpers::NumberHelper
 
 class MembersController < ApplicationController
 
+    def index
+        @members = Member.find(:all)
+        respond_to do |format|
+            format.html
+            format.json { render :json => @members }
+        end
+    end
+
 	def show
         if Member.where(:id => params["id"]).nil?
             redirect_to home_path

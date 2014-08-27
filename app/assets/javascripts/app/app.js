@@ -20,11 +20,11 @@ $(function(){
     fbb.helpers();
     fbb.lat = fbb.defaultLat;
     fbb.lng = fbb.defaultLng;
+    fbb.map();
     fbb.nav();
     fbb.hero();
     fbb.footer();
     fbb.youtubeModals();
-    fbb.map();
     fbb.upload_photo();
     fbb.bestInPlace();
 
