@@ -30,7 +30,9 @@ class Member < ActiveRecord::Base
 
     def unique_name_from_email(_email)
         begin
-            self.name = self.email[/[^@]+/]
+            if self.name.nil?
+                self.name = self.email[/[^@]+/]
+            end
             if Member.find_by_name(self.name)
                 i = 1
                 original_name = self.name
