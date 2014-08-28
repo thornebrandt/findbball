@@ -18,6 +18,7 @@ class CourtsController < ApplicationController
     @showMap = true;
     @mapEl = "edit_court_map"
     @court = Court.find(params[:id])
+    @review = Review.new
   end
 
   def update

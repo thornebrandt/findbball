@@ -8,105 +8,121 @@
             <div id="enter_address">
                 <span class="directions"></span>
                 New Court Location
-                <input id="address_search" type="text" value="1425 N Damen Ave, Chicago, IL 60622">
+                <%= best_in_place @court, :location, :as => :input, :activator => '#editLocation',
+            		:place_holder => "1425 N Damen Ave, Chicago, IL 60622", :id => "address_search" %>
+        		<a id="editLocation" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
                 <input id="courtAddress" type="hidden">
                 <button type="submit" class="btn right_align">Map</button>
             </div>
             <p id="latLng">
             </p>
             <div id="addCourt_add">
-                <form action="court.html" id="addCourt_form" autocomplete="off">
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
                                 <td class="td_label">Court Name</td>
                                 <td>
-                                    <input class="add_court_textInput" value="Wicker Park Fieldhouse"
-                                    name="courtName" type="text" id="input_court_name">
+        							<%= best_in_place @court, :name, :as => :input, :activator => '#editName',
+            							:place_holder => "Court Name Here" %>
+        							<a id="editName" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+    								<input style="display: none;" type="text" name="courtName" class="add_court_textInput" value="Court Name" />
+    								<button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_label">Competition Level</td>
                                 <td>
-                                    <select id="competitionLevel">
-                                        <option value="beginner">Beginner</option>
-                                        <option value="intermediate">Intermediate</option>
-                                        <option value="advanced">Advanced</option>
-                                        <option value="difficult">Difficult</option>
-                                    </select>
+                                    <%= best_in_place @court, :skill_level, :as => :select, :activator => '#editDifficulty',
+        								:place_holder => -1, :collection => {
+           								   -1 => "Undiclosed",
+            								0 => "Don't know",
+           									1 => "Beginner",
+            								2 => "Intermediate",
+            								3 => "Advanced",
+            								4 => "Difficult" } %>
+    								<a id="editDifficulty" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_label">Best Time for a "pick-up" game</td>
                                 <td>
-                                    <select id="pickupDay" class="day_of_week">
-                                        <option value="Sunday">Sunday</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                    </select>
-                                    <select id="pickupTime" class="time_of_day">
-                                        <option value="12">12:00</option>
-                                        <option value="1">1:00</option>
-                                        <option value="2">2:00</option>
-                                        <option value="3">3:00</option>
-                                        <option value="4">4:00</option>
-                                        <option value="5">5:00</option>
-                                        <option value="6">6:00</option>
-                                        <option value="7">7:00</option>
-                                        <option value="8">8:00</option>
-                                        <option value="9">9:00</option>
-                                        <option selected="true" value="10">10:00</option>
-                                        <option value="11">11:00</option>
-                                    </select>
-                                    <select id="pickupAM" class="am_or_pm">
-                                        <option value="am">AM</option>
-                                        <option value="pm">PM</option>
-                                    </select>
+                                	<span id="pickupTime">
+									<%= best_in_place @court, :pickup_day, :as => :select, :activator => '#editPickupDay',
+        								:place_holder => "Sunday", :collection => {
+        									"Sunday" => "Sunday",
+											"Monday" => "Monday",
+											"Tuesday" => "Tuesday",
+											"Wednesday" => "Wednesday",
+											"Thursday" => "Thursday",
+											"Friday" => "Friday",
+											"Saturday" => "Saturday" } %>
+    								<a id="editPickupDay" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    								
+    								<%= best_in_place @court, :pickup_time, :as => :select, :activator => '#editPickupTime',
+        								:place_holder => "12:00", :collection => {
+            							1 => "1:00",
+            							2 => "2:00",
+            							3 => "3:00",
+            							4 => "4:00",
+            							5 => "5:00",
+            							6 => "6:00",
+            							7 => "7:00",
+            							8 => "8:00",
+            							9 => "9:00",
+            							10 => "10:00",
+            							11 => "11:00",
+            							12 => "12:00" } %>
+    								<a id="editPickupTime" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    								<%= best_in_place @court, :pickup_am, :as => :select, :activator => '#editPickupAM',
+        								:place_holder => 'AM', :collection => {
+            							"AM" => "AM",
+            							"PM" => "PM" } %>
+    								<a id="editPickupAM" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_label">Accessible Hours</td>
                                 <td>
-                                    <select id="openTime1" class="time_of_day">
-                                        <option value="12">12:00</option>
-                                        <option value="1">1:00</option>
-                                        <option value="2">2:00</option>
-                                        <option value="3">3:00</option>
-                                        <option value="4">4:00</option>
-                                        <option value="5">5:00</option>
-                                        <option value="6">6:00</option>
-                                        <option value="7">7:00</option>
-                                        <option value="8">8:00</option>
-                                        <option value="9">9:00</option>
-                                        <option selected="true" value="10">10:00</option>
-                                        <option value="11">11:00</option>
-                                    </select>
-                                    <select id="openAM1" class="am_or_pm">
-                                          <option value="am">AM</option>
-                                          <option value="pm">PM</option>
-                                    </select>
-                                        to
-                                    <select id="openTime2" class="time_of_day">
-                                        <option value="12">12:00</option>
-                                        <option value="1">1:00</option>
-                                        <option value="2">2:00</option>
-                                        <option value="3">3:00</option>
-                                        <option value="4">4:00</option>
-                                        <option value="5">5:00</option>
-                                        <option value="6">6:00</option>
-                                        <option value="7">7:00</option>
-                                        <option selected="true" value="8">8:00</option>
-                                        <option value="9">9:00</option>
-                                        <option value="10">10:00</option>
-                                        <option value="11">11:00</option>
-                                    </select>
-                                    <select id="openAM2" class="am_or_pm">
-                                          <option value="am">AM</option>
-                                          <option value="pm" selected="true">PM</option>
-                                    </select>
+                                    <%= best_in_place @court, :open_time_1, :as => :select, :activator => '#editTime1',
+        								:place_holder => "12:00", :collection => {
+            							1 => "1:00",
+            							2 => "2:00",
+            							3 => "3:00",
+            							4 => "4:00",
+            							5 => "5:00",
+            							6 => "6:00",
+            							7 => "7:00",
+            							8 => "8:00",
+            							9 => "9:00",
+            							10 => "10:00",
+            							11 => "11:00",
+            							12 => "12:00" } %>
+    								<a id="editTime1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    								<%= best_in_place @court, :open_am_1, :as => :select, :activator => '#editAM1',
+        								:place_holder => 'AM', :collection => {
+            							"AM" => "AM",
+            							"PM" => "PM" } %>
+    								<a id="editAM1" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    								to <%= best_in_place @court, :open_time_2, :as => :select, :activator => '#editTime2',
+        								:place_holder => "12:00", :collection => {
+            							1 => "1:00",
+            							2 => "2:00",
+            							3 => "3:00",
+            							4 => "4:00",
+            							5 => "5:00",
+            							6 => "6:00",
+            							7 => "7:00",
+            							8 => "8:00",
+            							9 => "9:00",
+            							10 => "10:00",
+            							11 => "11:00",
+            							12 => "12:00" } %>
+    								<a id="editTime2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
+    								<%= best_in_place @court, :open_am_2, :as => :select, :activator => '#editAM2',
+        								:place_holder => 'AM', :collection => {
+            							"AM" => "AM",
+            							"PM" => "PM" } %>
+    								<a id="editAM2" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -114,7 +130,12 @@
                                     Court website link (if available)
                                 </td>
                                 <td>
-                                    <input value="http://www.chicagoparkdistrict.com/parks/Wicker-Park/" class="add_court_textInput" type="text" id="website_link"></input>
+                                    <%= best_in_place @court, :website, :as => :input, :activator => '#editWebsite',
+            							:place_holder => "(no website yet)" %>
+        							<a id="editWebsite" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+
+    								<input style="display: none;" type="text" class="editing editInput" value="Court Website" />
+    								<button rel="edit_website" id="edit_Website" type="submit" class="editing editComplete">Submit</button>
                                 </td>
                             </tr>
                             <tr>
@@ -122,15 +143,21 @@
                                     Add a new Review
                                 </td>
                                 <td>
-                                    <textarea id="reviewDetails"></textarea>
+                                	<%= form_for @review do |f| %>
+  										<%= render 'shared/error_messages', object: f.object %>
+  										<div class="field">
+  											<%= f.text_area :content, placeholder: "Write a new review...", id: "reviewDetails" %>
+    										<%= f.hidden_field :court_id, :value => @court.id %>
+  										</div>
+  									<%= f.submit "Post", class: "btn join-btn" %>
+									<% end %>
                                 </td>
                             </tr>
                             <tr>
-                                <td></td><td><input type="submit" id="submit_edited_court" class="btn right_align"></td>
+                                <td></td><td><% link_to "Return to Court Profile", court_path(@court.id) %></td>
                             </tr>
                         </tbody>
                     </table>
-                </form>
                 <br>
             </div>
             <div id="addCourt_complete">
