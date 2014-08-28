@@ -1,4 +1,4 @@
-    <h2 id="fullname"><%= @member.full_name || "New Member" %></h2>
+    <h2 id="fullname"><%= @member.full_name || @member.name %></h2>
     <p id="member_since">member since <%= member_since_date(@member.created_at) %></p>
         <% if @member_has_schedule == true %>
             <%= render 'members/member_headline' %>
