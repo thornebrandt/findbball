@@ -36,7 +36,7 @@ fbb.map = function(){
 
     var setupOptions = function(){
         self.mapOptions = {
-            //center: new google.maps.LatLng(self.lat, self.lng),
+            center: new google.maps.LatLng(self.lat, self.lng),
             zoom: 13,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -47,7 +47,6 @@ fbb.map = function(){
     var prepareMap = function(mapEl){
         getLatLng();
         setupOptions();
-        $_addressInput = $("#courtAddress");
         self.map = new google.maps.Map(mapEl, self.mapOptions);
         setupMapCursor();
         prepareDOM();
@@ -67,7 +66,8 @@ fbb.map = function(){
                 unitSystem: google.maps.UnitSystem.METRIC,
                 avoidHighways: false,
                 avoidTolls: false
-            }, foundDistance);
+            }, foundDistance
+        );
     };
 
     var foundDistance = function(response, status){
@@ -113,58 +113,63 @@ fbb.map = function(){
     }
 
     var geoComplete = function(){
-        console.log("ok, geo-complete loaded");
-        $("#address_search").geocomplete({
-            map: ".mapEl",
-            location: new google.maps.LatLng(self.lat, self.lng),
-            mapOptions: {
-                zoom: 15,
-                scrollwheel: false,
-                mapTypeId: "roadmap",
-                disableDefaultUI: true
-            },
-            markerOptions: {
-                draggable: true,
-                icon: icon_path
-            }
-        })
-        .bind("geocode:result", geoCompleteSuccessHandler)
-        .bind("geocode:dragged", function(event, result){
-            console.log("you dragged foo");
-            console.log(event);
-            console.log(result);
-        }).bind("geocode:error", function(event, result){
-            console.log("error yo");
-            console.log(event);
-            console.log(result);
-        });
+        $_addressInput = $("#courtAddress");
+        if( $("#address_search").length ){
+            console.log("yeah");
+            $("#address_search").geocomplete({
+                map: ".mapEl",
+                location: new google.maps.LatLng(self.lat, self.lng),
+                mapOptions: {
+                    zoom: 15,
+                    scrollwheel: false,
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true
+                },
+                markerOptions: {
+                    draggable: true,
+                    icon: icon_path
+                }
+            })
+            .bind("geocode:result", geoCompleteSuccessHandler)
+            .bind("geocode:dragged", function(event, result){
+                console.log("you dragged foo");
+                console.log(event);
+                console.log(result);
+            }).bind("geocode:error", function(event, result){
+                console.log("error yo");
+                console.log(event);
+                console.log(result);
+            });
+        }
     };
 
 
     var autoComplete = function(){
         console.log("setting up autoComplete");
         var service = new google.maps.places.AutocompleteService();
-        $("#address_search").typeahead({
-            source: function(query, process){
-                console.log("source");
-                service.getPlacePredictions({
-                    input: query
-                }, function(predictions, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        process($.map(predictions, function(prediction) {
-                            $("#addressNotFound").fadeOut();
-                            return prediction.description;
-                        }));
-                    } else {
-                        $("#addressNotFound").fadeIn();
-                    }
-                });
-            },
-            updater: function(_address){
-                console.log("looking up addressss");
-                return lookUpAutoCompleteAddress(_address);
-            }
-        });
+        if( $("#address_search").length ){
+            $("#address_search").typeahead({
+                source: function(query, process){
+                    console.log("source");
+                    service.getPlacePredictions({
+                        input: query
+                    }, function(predictions, status) {
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
+                            process($.map(predictions, function(prediction) {
+                                $("#addressNotFound").fadeOut();
+                                return prediction.description;
+                            }));
+                        } else {
+                            $("#addressNotFound").fadeIn();
+                        }
+                    });
+                },
+                updater: function(_address){
+                    console.log("looking up addressss");
+                    return lookUpAutoCompleteAddress(_address);
+                }
+            });
+        }
     };
 
 
@@ -200,18 +205,19 @@ fbb.map = function(){
 
 
     var geoCompleteSuccessHandler = function(event, result){
+        //TODO - make a case by case function
        var _address = result.formatted_address;
        self.address = _address;
        var lat = result.geometry.location.k;
        var lng = result.geometry.location.B;
        console.log(lat + " , " + lng);
-       $_addressInput.val(_address);
        populateDom(_address, lat, lng);
     };
 
-    var populateDom = function(lat, lng){
+    var populateDom = function(_address, lat, lng){
         populateLatLng(lat, lng);
-        populateLocation($("#courtAddress").val());
+        populateLocation( _address );
+        $_addressInput.val(_address);
         $(".address_search_container").hide();
         $(".map_results_container").show();
         $("#addressNotFound").hide();
@@ -224,7 +230,6 @@ fbb.map = function(){
     }
 
     var populateLocation = function(location){
-        $("#court_location").val( "hey man");
         $("#court_location").val(location);
     }
 
@@ -237,6 +242,7 @@ fbb.map = function(){
     };
 
     var prepareDOM = function(){
+        console.log("preparing dom");
         $("#searchAgain").click(function(e){
             e.preventDefault();
             clearMarkers();
