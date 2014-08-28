@@ -1,4 +1,4 @@
-cd findbball
+cd webapps/findbball
 git pull
 
 # directions for deployment on webfaction
