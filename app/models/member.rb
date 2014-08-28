@@ -9,6 +9,7 @@ class Member < ActiveRecord::Base
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
 						uniqueness: { case_sensitive: false }
+    validates_uniqueness_of :name
     validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
     # validates :birthdate, presence: true, allow_nil: false
 
@@ -16,7 +17,7 @@ class Member < ActiveRecord::Base
 
 	def beforeSave
 		self.email.downcase!
-		self.name ||= "New Member"
+        unique_name_from_email( self.email )
 	end
 
     def beforeValidation
@@ -26,6 +27,24 @@ class Member < ActiveRecord::Base
 	def Member.new_remember_token
 		SecureRandom.urlsafe_base64
 	end
+
+    def unique_name_from_email(_email)
+        begin
+            self.name = self.email[/[^@]+/]
+            if Member.find_by_name(self.name)
+                i = 1
+                original_name = self.name
+                loop do
+                    i += 1
+                    self.name = (original_name + i.to_s)
+                    puts "NUMBERED NAME"
+                    puts self.name
+                    unique = Member.find_by_name(self.name).nil?
+                    break if unique
+                end
+            end
+        end
+    end
 
     def age
         now = Time.now.utc.to_date

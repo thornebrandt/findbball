@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include SessionsHelper
 
+    rescue_from StandardError do |e|
+        flash[:error] = "There was an error"
+    end
+
     def handle_unverified_request
         sign_out
         super

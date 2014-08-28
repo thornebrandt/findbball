@@ -1,6 +1,6 @@
 	<div class="sidebar right">
             <div class="author_container">
-                <a href="player_profile.html"><%= image_tag @court.member.photo %></a><br>
+                <%= link_to (image_tag @court.member.photo), member_path(@court.member) %></a><br>
                 added by <b><%= link_to @court.member.name, member_path(@court.member), class: "court" %></a></b><br>
                 <%=  time_ago_in_words(@court.created_at) %> ago<br>
             </div>

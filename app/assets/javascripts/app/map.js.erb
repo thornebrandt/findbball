@@ -115,7 +115,6 @@ fbb.map = function(){
     var geoComplete = function(){
         $_addressInput = $("#courtAddress");
         if( $("#address_search").length ){
-            console.log("yeah");
             $("#address_search").geocomplete({
                 map: ".mapEl",
                 location: new google.maps.LatLng(self.lat, self.lng),
@@ -132,11 +131,9 @@ fbb.map = function(){
             })
             .bind("geocode:result", geoCompleteSuccessHandler)
             .bind("geocode:dragged", function(event, result){
-                console.log("you dragged foo");
                 console.log(event);
                 console.log(result);
             }).bind("geocode:error", function(event, result){
-                console.log("error yo");
                 console.log(event);
                 console.log(result);
             });
@@ -242,7 +239,6 @@ fbb.map = function(){
     };
 
     var prepareDOM = function(){
-        console.log("preparing dom");
         $("#searchAgain").click(function(e){
             e.preventDefault();
             clearMarkers();

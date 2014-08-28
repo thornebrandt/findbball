@@ -83,15 +83,20 @@ class MembersController < ApplicationController
 	def create
 		if !signed_in?
             @member = Member.new(member_params)
-    		if @member.save!
-                sign_in @member
-    			flash[:success] = "Welcome to Findbball"
-    			redirect_to @member
-    		else
-    			@noHeaderFooter = true
-    			flash[:error] = "Could not create member."
-    			render 'new'
-    		end
+    		begin
+                if @member.save!
+                    sign_in @member
+        			flash[:success] = "Welcome to Findbball"
+        			redirect_to @member
+        		else
+                    flash[:error] = "Could not create member."
+        			@noHeaderFooter = true
+        			render 'new'
+        		end
+            rescue => e
+                flash[:error] = "Email address is already in use"
+                redirect_to signup_path
+            end
         else
             redirect_to current_user
         end
