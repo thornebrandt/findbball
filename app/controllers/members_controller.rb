@@ -11,20 +11,19 @@ class MembersController < ApplicationController
     end
 
 	def show
-        if Member.where(:id => params["id"]).nil?
-            redirect_to home_path
-        end
-
-        if Member.where(:id => params["id"]).present?
-            @member = Member.find(params["id"])
-            @shown_courts = @member.courts.last(5)
-            @hidden_courts = @member.courts - @shown_courts
-            @shown_reviews = @member.reviews.last(5)
-            @hidden_reviews = @member.reviews - @shown_reviews
+        if Member.exists?(params[:id])
+            @member = Member.find(params[:id])
+        elsif Member.exists?(:name=> params[:id])
+            @member = Member.find_by_name(params[:id])
         else
             flash[:error] = "Could not find that member"
             redirect_to home_path
+            return
         end
+        @shown_courts = @member.courts.last(5)
+        @hidden_courts = @member.courts - @shown_courts
+        @shown_reviews = @member.reviews.last(5)
+        @hidden_reviews = @member.reviews - @shown_reviews
 	end
 
     def destroy

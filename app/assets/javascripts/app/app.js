@@ -1,6 +1,6 @@
 var fbb = {
-    defaultLat : 41.907940468646984,
-    defaultLng : -87.67672317193603,
+    defaultLat : 33.7489954,
+    defaultLng : -84.3879824 ,
     defaultCourt : "Wicker Park Fieldhouse",
     modal: function(btn, modal_el){
         //common simple modal function

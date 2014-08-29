@@ -18,6 +18,7 @@ class Member < ActiveRecord::Base
 	def beforeSave
 		self.email.downcase!
         unique_name_from_email( self.email )
+        parameterizeUsername
 	end
 
     def beforeValidation
@@ -28,21 +29,23 @@ class Member < ActiveRecord::Base
 		SecureRandom.urlsafe_base64
 	end
 
+    def parameterizeUsername
+        self.name = self.name.parameterize
+    end
+
     def unique_name_from_email(_email)
         begin
             if self.name.nil?
                 self.name = self.email[/[^@]+/]
-            end
-            if Member.find_by_name(self.name)
-                i = 1
-                original_name = self.name
-                loop do
-                    i += 1
-                    self.name = (original_name + i.to_s)
-                    puts "NUMBERED NAME"
-                    puts self.name
-                    unique = Member.find_by_name(self.name).nil?
-                    break if unique
+                if Member.find_by_name(self.name)
+                    i = 1
+                    original_name = self.name
+                    loop do
+                        i += 1
+                        self.name = (original_name + i.to_s)
+                        unique = Member.find_by_name(self.name).nil?
+                        break if unique
+                    end
                 end
             end
         end
