@@ -37,7 +37,7 @@ fbb.map = function(){
     var setupOptions = function(){
         self.mapOptions = {
             center: new google.maps.LatLng(self.lat, self.lng),
-            zoom: 13,
+            zoom: 15,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true
@@ -119,11 +119,9 @@ fbb.map = function(){
                 map: ".mapEl",
                 location: new google.maps.LatLng(self.lat, self.lng),
                 mapOptions: {
-                    zoom: 15,
+                    zoom: 13,
                     scrollwheel: false,
-                    mapTypeId: "roadmap",
-                    disableDefaultUI: true,
-                    regions: ['administrative_area1']
+                    mapTypeId: "roadmap"
                 },
                 markerOptions: {
                     draggable: true,
@@ -131,10 +129,8 @@ fbb.map = function(){
                 }
             })
             .bind("geocode:result", geoCompleteSuccessHandler)
-            .bind("geocode:dragged", function(event, result){
-                console.log(event);
-                console.log(result);
-            }).bind("geocode:error", function(event, result){
+            .bind("geocode:dragged", geoCompleteDraggedHandler)
+            .bind("geocode:error", function(event, result){
                 console.log(event);
                 console.log(result);
             });
@@ -201,6 +197,22 @@ fbb.map = function(){
         });
     };
 
+    var geoCompleteDraggedHandler = function(event, result){
+        var lat = parseFloat(result.k);
+        var lng = parseFloat(result.B);
+        var latlng = new google.maps.LatLng(lat, lng);
+        self.geocoder = self.geocoder || new google.maps.Geocoder();
+        self.geocoder.geocode({'latLng':latlng}, function(results, status){
+            if(status == google.maps.GeocoderStatus.OK){
+                if (results[0]){
+                    console.log(results[0].formatted_address);
+                    self.address = results[0].formatted_address;
+                    populateDom(self.address, lat, lng);
+                }
+            }
+        });
+    };
+
 
     var geoCompleteSuccessHandler = function(event, result){
         //TODO - make a case by case function
@@ -208,7 +220,6 @@ fbb.map = function(){
        self.address = _address;
        var lat = result.geometry.location.k;
        var lng = result.geometry.location.B;
-       console.log(lat + " , " + lng);
        populateDom(_address, lat, lng);
     };
 
