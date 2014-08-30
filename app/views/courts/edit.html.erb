@@ -5,28 +5,47 @@
             <div id="heading_articles">
                    <h3 id="edit_court_h3">EDIT COURT</h3>
             </div>
-            <div id="enter_address">
-                <span class="directions"></span>
-                New Court Location
-                <%= best_in_place @court, :location, :as => :input, :activator => '#editLocation',
-            		:place_holder => "1425 N Damen Ave, Chicago, IL 60622", :id => "address_search" %>
-        		<a id="editLocation" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
-                <input id="courtAddress" type="hidden">
-                <button type="submit" class="btn right_align">Map</button>
-            </div>
-            <p id="latLng">
-            </p>
+            <%= form_for @court, :remote => true, :html => {:autocomplete => "off"} do |f| %>
+                <%= f.hidden_field :location %>
+                <%= f.hidden_field :lat %>
+                <%= f.hidden_field :lng %>
+            <% end %>
             <div id="addCourt_add">
                     <table id="addCourt_table">
                         <tbody>
                             <tr>
+                                <td></td><td><%= link_to "Return to Court", court_path(@court.id) %></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 10px;" colspan="2"><hr></td>
+                            <tr>
+                            <tr class="map_results_container">
+                                <td class="td_label">Court Address</td>
+                                <td width="672">
+                                    <p id="address_search_result">
+                                        <%= @court.location %>
+                                    </p>
+                                    <button type="button" class="btn btn-warning" id="searchAgain">New Address</button>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="td_label">Court Name</td>
                                 <td>
-        							<%= best_in_place @court, :name, :as => :input, :activator => '#editName',
-            							:place_holder => "Court Name Here" %>
-        							<a id="editName" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
-    								<input style="display: none;" type="text" name="courtName" class="add_court_textInput" value="Court Name" />
-    								<button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
+                                    <%= best_in_place @court, :name, :as => :input, :activator => '#editName',
+                                        :place_holder => "Court Name Here" %>
+                                    <a id="editName" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <input style="display: none;" type="text" name="courtName" class="add_court_textInput" value="Court Name" />
+                                    <button rel="edit_name" id="edit_Name" type="submit" class="editing editComplete">Submit</button>
+                                </td>
+                            </tr>
+                            <tr style="display:none;" id="addressNotFound">
+                                <td colspan="2" class="text-center"><span class="error text-center">Could not find address. Please refine your search.</span></td>
+                            </tr>
+                            <tr style="display:none;" class="address_search_container">
+                                <td class="td_label">New Court Address</td>
+                                <td width="672">
+                                <input id="address_search", placeholder: "Enter address of court" />
+                                <button id="submitMap" type="submit" class="hidden">Map</button>
                                 </td>
                             </tr>
                             <tr>
@@ -57,7 +76,7 @@
 											"Friday" => "Friday",
 											"Saturday" => "Saturday" } %>
     								<a id="editPickupDay" href="#" class="editThis editable"><i class="glyphicon glyphicon-edit"></i></a>
-    								
+
     								<%= best_in_place @court, :pickup_time, :as => :select, :activator => '#editPickupTime',
         								:place_holder => "12:00", :collection => {
             							1 => "1:00",
@@ -139,22 +158,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label">
-                                    Add a new Review
-                                </td>
-                                <td>
-                                	<%= form_for @review do |f| %>
-  										<%= render 'shared/error_messages', object: f.object %>
-  										<div class="field">
-  											<%= f.text_area :content, placeholder: "Write a new review...", id: "reviewDetails" %>
-    										<%= f.hidden_field :court_id, :value => @court.id %>
-  										</div>
-  									<%= f.submit "Post", class: "btn join-btn" %>
-									<% end %>
-                                </td>
-                            </tr>
+                                <td style="padding-right: 10px;" colspan="2"><hr></td>
                             <tr>
-                                <td></td><td><% link_to "Return to Court Profile", court_path(@court.id) %></td>
+                            <tr>
+                                <td></td><td><%= link_to "Return to Court", court_path(@court.id) %></td>
                             </tr>
                         </tbody>
                     </table>
@@ -164,7 +171,6 @@
                 <h3 class="courtName_complete">
                 </h3>
                 <table id="courtDetails_complete">
-
                 </table>
             </div>
             <div id="adspace">

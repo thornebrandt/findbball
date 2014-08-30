@@ -23,9 +23,13 @@ fbb.map = function(){
     };
 
     var getLatLng = function(){
-        if($("#lat").length && $("#lng").length){
-            self.lat = $("#lat").val();
-            self.lng = $("#lng").val();
+        if($("#lat").val() && $("#lng").val()){
+            self.lat = parseFloat( $("#lat").val() );
+            self.lng = parseFloat( $("#lng").val() );
+        }
+        if($("#court_lat").val() && $("#court_lng").val()){
+            self.lat = parseFloat( $("#court_lat").val() );
+            self.lng = parseFloat( $("#court_lng").val() );
         }
     };
 
@@ -181,22 +185,6 @@ fbb.map = function(){
         }
     };
 
-    var autoCompleteSuccessHandler = function(results, status){
-        var _point = results[0].geometry.location;
-        console.log(self.address);
-        self.addressInput = $("#courtAddress");
-        $_addressInput.val(self.address);
-        self.map.setCenter(_point);
-        self.map.setZoom(15);
-        fbb.marker = setupDraggableMapCursor(_point);
-        populateDom(fbb.marker);
-        $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
-        google.maps.event.addListener(fbb.marker, 'dragend', function() {
-            populateDom(fbb.marker);
-            $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
-        });
-    };
-
     var geoCompleteDraggedHandler = function(event, result){
         var lat = parseFloat(result.k);
         var lng = parseFloat(result.B);
@@ -208,6 +196,7 @@ fbb.map = function(){
                     console.log(results[0].formatted_address);
                     self.address = results[0].formatted_address;
                     populateDom(self.address, lat, lng);
+                    $(".edit_court").submit();
                 }
             }
         });
@@ -221,6 +210,7 @@ fbb.map = function(){
        var lat = result.geometry.location.k;
        var lng = result.geometry.location.B;
        populateDom(_address, lat, lng);
+       $(".edit_court").submit();
     };
 
     var populateDom = function(_address, lat, lng){
