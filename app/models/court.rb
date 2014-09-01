@@ -1,6 +1,7 @@
 class Court < ActiveRecord::Base
   belongs_to :member, inverse_of: :courts
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, dependent: :destroy, inverse_of: :court
+  has_many :court_photos, dependent: :destroy, inverse_of: :court
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
 
   # VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i

@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
     has_many :courts
+    has_many :court_photos
     has_many :reviews
 	has_secure_password
 	before_save :beforeSave
@@ -9,7 +10,7 @@ class Member < ActiveRecord::Base
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
 						uniqueness: { case_sensitive: false }
-    validates_uniqueness_of :name
+    validates_uniqueness_of :name, :case_sensitive => false
     validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
     # validates :birthdate, presence: true, allow_nil: false
 

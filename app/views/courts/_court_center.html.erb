@@ -19,6 +19,8 @@
                     <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
                 </p>
             </div>
+
+
             <hr>
             <h3>PHOTOS(2)</h3>
             <div id="courtPhotos_container">
@@ -27,6 +29,17 @@
                     <%= image_tag "courts/court1.jpg", class: "courtPhoto" %>
                 </p>
                 <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
+                <br>
+                <br>
+
+                <% if signed_in? %>
+                    <%= form_for @court_photo, :html => { :multipart => true } do |f| %>
+                        <%= f.file_field :photo %>
+                        <%= f.hidden_field :court_id, :value => @court.id %>
+                        <%= f.hidden_field :member_id, :value => @current_user.id %>
+                        <%= f.submit "Upload" %>
+                    <% end %>
+                <% end %>
             </div>
             <hr>
             <h3>VIDEOS(1)</h3>

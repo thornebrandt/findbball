@@ -3,6 +3,7 @@ Findbball::Application.routes.draw do
   resources :members
   resources :courts
   resources :reviews,  only: [:create, :edit, :destroy]
+  resources :court_photos, only: [:create, :destroy]
 
 
   root 'static_pages#splash'

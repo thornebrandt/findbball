@@ -10,12 +10,14 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'best_in_place', github: 'bernat/best_in_place'
 #gem 'best_in_place', :path => '../best_in_place_fork'
-gem 'rmagick', '~> 2.13.2'
+gem 'rmagick', '~> 2.13.2', require: false
 gem 'carrierwave'
 
 group :development, :test do
 	gem 'sqlite3'
 	gem 'rspec-rails', '2.13.1'
+    gem 'debugger'
+    gem 'better_errors'
 end
 
 group :test do
@@ -55,4 +57,3 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]

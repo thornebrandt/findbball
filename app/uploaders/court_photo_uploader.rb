@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class PhotoUploader < CarrierWave::Uploader::Base
+class CourtPhotoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -13,7 +13,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/member_photos/#{model.id}"
+    "uploads/court_photos/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -31,7 +31,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   version :thumb do
-    process :resize_to_fill => [80, 80] #accomodates retina thumbs
+    process :resize_to_fill => [140, 140]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

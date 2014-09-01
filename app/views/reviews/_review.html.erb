@@ -1,13 +1,13 @@
-    			<div class="review">
-					<%= image_tag review.member.photo, class: "review_author" %>
-					<p class="review_body">
-						<%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
-						<%= review.content %>
-    				</p>
-    				<% if current_user?(review.member) %>
-    					<%= link_to "delete", review, method: :delete,
-                                     data: { confirm: "You sure?" },
-                                     title: review.content %>
-                    <% end %>
-   					<hr>
-				</div>
+<div class="review">
+	<%= image_tag review.member.photo, class: "review_author" %>
+	<p class="review_body">
+		<%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
+		<%= review.content %>
+	</p>
+	<% if current_user?(review.member) %>
+		<%= link_to "delete", review, method: :delete,
+                     data: { confirm: "You sure?" },
+                     title: review.content %>
+    <% end %>
+		<hr>
+</div>

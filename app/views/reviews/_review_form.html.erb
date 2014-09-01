@@ -1,5 +1,4 @@
 <%= form_for @review do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
   	<%= f.text_area :content, placeholder: "Write a new review..." %>
     <%= f.hidden_field :court_id, :value => @court.id %>

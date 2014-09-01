@@ -1,6 +1,16 @@
     <div class="sidebar left">
         <div id="profile_left">
-            <%= image_tag @member.photo.url, id: "profile_pic" %>
+            <% if signed_in? %>
+                <div id="profile_pic_container">
+                    <%= image_tag @member.profile_photo, id: "profile_pic" %>
+                    <a href="#" id="edit_photo" class="edit_player_photo">
+                        edit photo
+                    </a>
+                </div>
+                <%= render "modals/upload_profile_photo_modal" %>
+            <% else %>
+                <%= image_tag @member.photo.url, id: "profile_pic" %>
+            <% end %>
             <p id="profile_name"><%= @member.name %></p>
             <p class="profile_subtitle"><%= @member.slogan %></p>
             <%= render '/friends/friends_container' %>
