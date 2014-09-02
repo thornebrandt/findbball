@@ -12,6 +12,7 @@ gem 'best_in_place', github: 'bernat/best_in_place'
 #gem 'best_in_place', :path => '../best_in_place_fork'
 gem 'rmagick', '~> 2.13.2', require: false
 gem 'carrierwave'
+gem 'gon'
 
 group :development, :test do
 	gem 'sqlite3'

@@ -37,8 +37,15 @@ fbb.helpers = function(){
           else if (bytes==1)          {bytes=bytes+' byte';}
           else                        {bytes='0 byte';}
           return bytes;
-    }
+    };
 
 
+    this.modalLoadingAnimation = function(){
+        $(".modal-loading").show();
+    };
+
+    this.modalHideLoadingAnimation = function(){
+        $(".modal-loading").hide();
+    };
 
 }

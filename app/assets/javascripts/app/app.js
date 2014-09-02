@@ -18,14 +18,13 @@ var fbb = {
 
 $(function(){
     fbb.helpers();
-    fbb.lat = fbb.defaultLat;
-    fbb.lng = fbb.defaultLng;
+    fbb.uploadHelper();
     fbb.map();
     fbb.nav();
     fbb.hero();
     fbb.footer();
     fbb.youtubeModals();
-    fbb.upload_photo();
+    fbb.member();
     fbb.bestInPlace();
     fbb.court();
 

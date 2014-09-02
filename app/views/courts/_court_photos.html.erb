@@ -3,23 +3,18 @@
     <div id="courtPhotos_container">
         <p id="courtPhotos">
             <% for court_photo in @court.court_photos %>
-                <%= image_tag court_photo.photo.thumb.to_s, class: "courtPhoto" %>
+                <%= image_tag court_photo.photo.thumb.to_s, class: "courtPhoto", rel: court_photo.id %>
             <% end %>
         </p>
     </div>
+    <% for court_photo in @court.court_photos %>
+        <%= render :partial => "modals/gallery_modal", :locals => {:photo => court_photo} %>
+    <% end %>
 <% else %>
     <h3>No Photos Yet</h3>
 <% end %>
 
 <% if signed_in? %>
     <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
-
-    <%= form_for @court_photo, :html => { :multipart => true } do |f| %>
-        <%= f.file_field :photo %>
-        <%= f.hidden_field :court_id, :value => @court.id %>
-        <%= f.hidden_field :member_id, :value => @current_user.id %>
-        <%= f.submit "Upload" %>
-    <% end %>
+    <%= render "modals/upload_court_photo_modal" %>
 <% end %>
-
-<%= render '/modals/gallery_modal' %>

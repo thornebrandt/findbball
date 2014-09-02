@@ -1,6 +1,8 @@
 fbb.map = function(){
     var self = this;
     self.map = {};
+    fbb.lat = fbb.defaultLat;
+    fbb.lng = fbb.defaultLng;
     var mapEl;
     var $_addressInput;
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";

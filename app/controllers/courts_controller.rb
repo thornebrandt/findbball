@@ -11,6 +11,7 @@ class CourtsController < ApplicationController
         @hidden_reviews = @court.reviews - @shown_reviews
         @court_photo = CourtPhoto.new if signed_in?
         @review = Review.new if signed_in?
+        gon.court_photos = @court.court_photos.last(12)
     else
         flash[:error] = "Could not find that court"
         redirect_to home_path

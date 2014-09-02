@@ -1,18 +1,21 @@
-<div id="upload_photo_modal" class="modal fade">
+<div id="upload_court_photo_modal" class="modal fade">
     <div class="modal-content">
         <div class="modal-body">
             <div id="upload_photo">
-                <h3>Upload a new Profile Image</h1>
-                <%= form_for @member, :url => member_path, :html => { :multipart => true } do |f| %>
+                <h3>New Photo of <%= @court.name %></h1>
+                <%= form_for @court_photo, :html => { :multipart => true } do |f| %>
                     <input class="btn" type="file" name="images" id="images" />
                     <button type="submit"  id="btn1">Upload Photo</button>
                     <div id="response"></div>
                     <br>
-                    <%= image_tag @member.profile_photo, id: "profile_preview" %>
+                    <%= image_tag "white.png", id: "court_photo_preview", class: "hid" %>
+                    <br>
                     <p>
+                        <%= f.hidden_field :court_id, :value => @court.id %>
+                        <%= f.hidden_field :member_id, :value => @current_user.id %>
+                        <%= f.hidden_field :photo %>
                         <%= f.submit "Confirm Image", class: "btn hid", id: "confirm_image" %>
                     </p>
-                    <%= f.hidden_field :photo %>
                     <br>
                 <% end %>
             </div>
