@@ -4,14 +4,15 @@ class CourtsController < ApplicationController
   def show
     if Court.exists?(params[:id])
         @court = Court.find(params[:id])
+        @court_photo = CourtPhoto.new if signed_in?
+        @review = Review.new if signed_in?
         @showMap = true;
         @mapEl = "court_map"
-        @court = Court.find(params[:id])
+
         @shown_reviews = @court.reviews.last(4)
         @hidden_reviews = @court.reviews - @shown_reviews
         @court_photo = CourtPhoto.new if signed_in?
         @review = Review.new if signed_in?
-        gon.court_photos = @court.court_photos.last(12)
     else
         flash[:error] = "Could not find that court"
         redirect_to home_path
@@ -20,18 +21,22 @@ class CourtsController < ApplicationController
   end
 
   def edit
-    @showMap = true;
-    @mapEl = "edit_court_map"
     @court = Court.find(params[:id])
-    @review = Review.new
+    if current_user? @court.member
+      @showMap = true;
+      @mapEl = "edit_court_map"
+      @review = Review.new
+    else
+      flash[:error] = "You are not that court's owner"
+      redirect_to home_path
+    end
   end
 
   def update
     @court = Court.find(params[:id])
-
         respond_to do |format|
             if @court.update_attributes(court_params)
-                format.html { redirect_to(@court, :notice => 'Court was successfully updated.') }
+                format.html { redirect_to(@court, notice: 'Court was successfully updated.') }
                 format.json do
                     respond_with_bip(@court)
                 end
@@ -47,7 +52,9 @@ class CourtsController < ApplicationController
     @mapEl = "add_court_map"
     if current_user
         @court = Court.new
-        @review = @court.reviews.build # If built on member, review doesn't show in form
+
+        @review = Review.new
+        @review.court_id = @court.id
         @review.member_id = current_user.id
     else
         flash[:warning] = "You are not logged in."
