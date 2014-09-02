@@ -64,9 +64,8 @@ fbb.upload_photo = function(){
             document.getElementById(_btn).style.display = "none";
         }
 
-
         _input.addEventListener("change", function(evt) {
-            $("#response").html("Uploading...");
+
             var i = 0,
                 len = this.files.length,
                 img, reader, file;
@@ -78,10 +77,8 @@ fbb.upload_photo = function(){
                     if (window.FileReader) {
                         reader = new FileReader();
                         reader.onloadend = function(e) {
-                            console.log("loaded");
-                            console.log(file.type);
                             showUploadedItem(e.target.result, file.fileName);
-                            var imageURL = e.target.result;
+                            checkFileSize(file.size);
                         };
                         reader.readAsDataURL(file);
                     }
@@ -96,10 +93,19 @@ fbb.upload_photo = function(){
         }, false);
     }
 
+    function checkFileSize(_filesize){
+        var _units = fbb.formatSizeUnits(_filesize);
+        if (_filesize > 1000000){
+            $("#confirm_image").hide();
+            $("#response").html("<span class='error'>Your file was too big. ("+_units+"). We only allow files up to 1MB.");
+        } else {
+            $("#response").html("Your file is " + _units);
+        }
+    };
 
     function updatePlayerProfileImages(source) {
+        $("#response").html("Uploading...");
         $("#profile_preview").attr("src", source);
-        console.log("showing this");
         $("#confirm_image").show();
         $("#member_photo").val(source); //hidden field that updates the member
     }

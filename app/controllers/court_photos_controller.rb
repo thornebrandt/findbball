@@ -24,7 +24,7 @@ class CourtPhotosController < ApplicationController
     private
 
         def court_photo_params
-            params.require(:court_photo).permit(:id, :photo, :court_id, :member_id)
+            params.require(:court_photo).permit(:photo, :court_id, :member_id)
         end
 
         def correct_user

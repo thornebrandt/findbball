@@ -27,6 +27,7 @@ $(function(){
     fbb.youtubeModals();
     fbb.upload_photo();
     fbb.bestInPlace();
+    fbb.court();
 
     $(".modal.fade, .modal-message").click(function(){
       $(this).modal('hide'); //manually doing the modal hide bullshit...
