@@ -48,4 +48,23 @@ fbb.helpers = function(){
         $(".modal-loading").hide();
     };
 
+    this.cycleNext = function(i, total){
+        i++;
+        if(i >= total){
+            i = 0;
+        }
+        return i;
+    };
+
+    this.cyclePrev = function(i, total){
+        i--;
+        if(i < 0){
+            i = total - 1;
+        }
+        return i;
+    }
+
+
+
+
 }

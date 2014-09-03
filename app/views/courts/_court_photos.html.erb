@@ -7,9 +7,7 @@
             <% end %>
         </p>
     </div>
-    <% for court_photo in @court.court_photos %>
-        <%= render :partial => "modals/gallery_modal", :locals => {:photo => court_photo} %>
-    <% end %>
+    <%= render "modals/gallery_modal" %>
 <% else %>
     <h3>No Photos Yet</h3>
 <% end %>
@@ -18,3 +16,4 @@
     <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
     <%= render "modals/upload_court_photo_modal" %>
 <% end %>
+
