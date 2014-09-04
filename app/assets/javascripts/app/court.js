@@ -12,10 +12,47 @@ fbb.court = function(){
         });
 
 
+        $("#selectPhotoContainer .courtPhoto").click(function(e){
+            $(".selectedPhoto").removeClass("selectedPhoto");
+            $(this).addClass("selectedPhoto");
+            var imgSrc = $(this).attr("src");
+            var photo_id = parseInt( $(this).attr("rel") );
+            $("#main_image_src").val( photo_id );
+            loadMainPreview( { id: photo_id });
+            $(".change_image_confirm").show();
+        });
+
+        $("#cancel_main_image").click(function(e){
+            e.preventDefault();
+            console.log("hide this bitch");
+            $("#selectCourtPhotoModal").modal('hide');
+        });
+
+
+        function loadMainPreview( criteria ){
+            var photo_obj = _.where( gon.court_photos, criteria)[0];
+            var img_url = photo_obj.photo.url;
+            fbb.loading();
+            fbb.loadImageURL(img_url, function(img){
+                fbb.doneLoading();
+                $("#selectPhotoPreview").attr("src", img.attr("src"));
+            });
+        };
+
+
+        $("#court_left #edit_photo").click(function(e){
+            e.preventDefault();
+            if(fbb.galleryTotal){
+                selectCourtPhotoBtnHandler();
+            } else {
+                uploadCourtPhotoBtnHandler();
+            }
+        });
+
 
         $("#confirm_image").click(
             function(e){
-                fbb.modalLoadingAnimation();
+                fbb.loading();
             }
         );
 
@@ -28,17 +65,11 @@ fbb.court = function(){
         function loadGallery( criteria  ){
             var photo_obj = _.where( gon.court_photos, criteria)[0];
             var img_url = photo_obj.photo.url;
-            var $_galleryModal = $("#galleryModal");
-            var img = $("<img />").attr("src", img_url)
-                .load(function(){
-                    if(!this.complete || typeof this.naturalWidth === "undefined" || this.naturalWidth === 0){
-                        console.log("broken image");
-                    } else {
-                        $("#galleryModal .modal-loading").hide();
-                        $("#gallery").html(img);
-                    }
-                });
-            $("#galleryModal .modal-loading").show();
+            fbb.loading();
+            fbb.loadImageURL(img_url, function(img){
+                fbb.doneLoading();
+                $("#gallery").html(img);
+            });
             $("#galleryModal").modal();
             $("#gallery_next").attr("rel", fbb.cycleNext(photo_obj.index, photo_obj.total));
             $("#gallery_previous").attr("rel", fbb.cyclePrev(photo_obj.index, photo_obj.total));
@@ -48,19 +79,25 @@ fbb.court = function(){
         $("#gallery_next, #gallery_previous").click(function(e){
             e.preventDefault();
             var _index = parseInt($(this).attr("rel"));
-            console.log("clicked");
-            console.log(_index);
             loadGallery( { index: _index });
         });
 
 
         $("#upload_court_photo").click(function(e){
             e.preventDefault();
+            uploadCourtPhotoBtnHandler();
+        });
+
+        var uploadCourtPhotoBtnHandler = function(){
             $("#upload_court_photo_modal").modal().on('hidden', function(){
                 $("#confirm_image").hide();
             });
             prepareUploadCourtPhoto();
-        });
+        };
+
+        var selectCourtPhotoBtnHandler = function(){
+            $("#selectCourtPhotoModal").modal();
+        };
 
         function prepareUploadCourtPhoto(){
             var input = document.getElementById("images"), formdata = false;
@@ -75,7 +112,5 @@ fbb.court = function(){
             $("#confirm_image").show();
             $("#court_photo_photo").val(_source); //hidden field that updates the member
         };
-
-
     }
 };

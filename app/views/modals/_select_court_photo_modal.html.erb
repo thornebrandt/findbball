@@ -1,0 +1,24 @@
+<div id="selectCourtPhotoModal" class="modal hid fade">
+    <div class="modal-message">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Main Court Photo</h3>
+            </div>
+            <%= form_for @court do |f| %>
+                <div class="modal-body">
+                    <%= image_tag mainPhoto, id: "selectPhotoPreview" %>
+                    <div id="selectPhotoContainer">
+                        <% for court_photo in @court.court_photos %>
+                            <%= image_tag court_photo.photo.thumb.to_s, class: "courtPhoto", rel: court_photo.id %>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.hidden_field :main_photo, :value => @court.main_photo, id: "main_image_src" %>
+                    <button id="cancel_main_image" class="btn hid change_image_confirm">Cancel</button>
+                    <%= f.submit "Ok", class: "btn btn-primary hid change_image_confirm", id: "confirm_main_image" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

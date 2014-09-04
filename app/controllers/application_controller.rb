@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
     # For APIs, you may want to use :null_session instead.
     protect_from_forgery with: :exception
     include SessionsHelper
+    include CourtsHelper
 
     # rescue_from StandardError do |e|
     #     flash[:error] = "There was an error"

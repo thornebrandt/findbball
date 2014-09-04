@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831004556) do
+ActiveRecord::Schema.define(version: 20140904035138) do
 
   create_table "court_photos", force: true do |t|
     t.string   "photo"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140831004556) do
     t.string   "open_am_2",   limit: 2
     t.float    "lat"
     t.float    "lng"
+    t.integer  "main_photo"
   end
 
   create_table "members", force: true do |t|

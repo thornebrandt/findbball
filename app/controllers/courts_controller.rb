@@ -14,6 +14,9 @@ class CourtsController < ApplicationController
         @court_photo = CourtPhoto.new if signed_in?
         gon.court_photos = @court.court_photos.last(12);
         @review = Review.new if signed_in?
+        puts "IS THE COURT ID ACCESSIBLE"
+        puts @court_main_photo
+
     else
         flash[:error] = "Could not find that court"
         redirect_to home_path
@@ -102,6 +105,7 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
+                                      :main_photo,
                                       reviews_attributes: [:id, :content, :court_id, :member_id])
     end
 end

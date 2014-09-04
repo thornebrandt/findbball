@@ -1658,11 +1658,6 @@ max-height: 400px;
 }
 
 
-#selectCourtPhotoModal{
-width: 600px;
-padding: 10px;
-}
-
 #selectPhotoContainer{
 text-align: center;
 }
@@ -1671,7 +1666,11 @@ text-align: center;
 float: right;
 }
 
-.selectedPhoto, .selectedPhoto:hover{
+#selectPhotoContainer .courtPhoto{
+border: white solid 5px;
+}
+
+#selectPhotoContainer .selectedPhoto, .selectedPhoto:hover{
 border: #1f8aed solid 5px;
 }
 
@@ -2198,4 +2197,13 @@ margin-right: auto;
 display: block;
 max-width: 500px;
 max-height: 500px;
+}
+
+#selectPhotoPreview{
+max-width: 300px;
+max-height: 300px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+display: block;
 }

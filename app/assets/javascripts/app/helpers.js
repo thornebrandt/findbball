@@ -40,13 +40,25 @@ fbb.helpers = function(){
     };
 
 
-    this.modalLoadingAnimation = function(){
+    this.loading = function(){
         $(".modal-loading").show();
     };
 
-    this.modalHideLoadingAnimation = function(){
+    this.doneLoading = function(){
         $(".modal-loading").hide();
     };
+
+
+    this.loadImageURL = function(img_url, callback){
+        var img = $("<img />").attr("src", img_url).load(function(){
+            if(!this.complete || typeof this.naturalWidth === "undefined" || this.naturalWidth === 0){
+                console.log("broken image");
+            } else {
+                callback(img);
+            }
+        });
+    }
+
 
     this.cycleNext = function(i, total){
         i++;
