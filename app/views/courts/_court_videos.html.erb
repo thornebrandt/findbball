@@ -1,8 +1,17 @@
-<h3>VIDEOS(1)</h3>
-<div id="courtVideos_container">
-        <div id="courtVideos">
-            <%= render :partial => "/courts/court_video", :locals => {:vi => "EEtpH6ZEPOc"} %>
-        </div>
+<% if @court.court_videos.count %>
+    <h3>VIDEOS(<%= @court.court_videos.count %>)</h3>
+    <div id="courtVideos_container">
+            <div id="courtVideos">
+                <% for court_video in @court.court_videos %>
+                    <%= render :partial => "/courts/court_video", :locals => {:vi => court_video.vi} %>
+                <% end %>
+            </div>
+    </div>
+<% else %>
+    <h3>No Videos Yet</h3>
+<% end %>
+<% if signed_in? %>
     <a href="#" id="add_court_video"><%= image_tag "icon/upload.png" %> Add Video</a>
-</div>
-<%= render 'modals/add_court_video_modal' %>
+    <%= render 'modals/add_court_video_modal' %>
+<% end %>
+
