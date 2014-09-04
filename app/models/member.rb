@@ -1,6 +1,9 @@
 class Member < ActiveRecord::Base
     has_many :courts
     has_many :court_photos
+    has_many :court_videos
+    has_many :court_photos, dependent: :destroy, inverse_of: :member
+    has_many :court_videos, dependent: :destroy, inverse_of: :member
     has_many :reviews
 	has_secure_password
 	before_save :beforeSave

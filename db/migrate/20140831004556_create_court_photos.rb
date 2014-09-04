@@ -6,6 +6,6 @@ class CreateCourtPhotos < ActiveRecord::Migration
       t.integer :member_id
       t.timestamps
     end
-    add_index :reviews, [:court_id, :created_at]
+    add_index :court_photos, [:court_id, :created_at]
   end
 end

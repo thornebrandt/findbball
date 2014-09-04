@@ -3,7 +3,7 @@ class CourtPhotosController < ApplicationController
     before_action :correct_user, only: :destroy
 
     def create
-        @court_photo = current_user.court_photos.build(court_photo_params)
+        @court_photo = current_user.court_photos.build( court_photo_params )
 
         if params[:court_photo][:photo]
             @court_photo.photo = base64_conversion
@@ -23,7 +23,7 @@ class CourtPhotosController < ApplicationController
         @court = @court_photo.court
         @court_photo.destroy
         flash[:info] = "Court photo deleted."
-        redirect_to @court_photo
+        redirect_to @court
     end
 
     private

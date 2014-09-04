@@ -1,8 +1,10 @@
 <div id="upload_court_photo_modal" class="modal fade">
     <div class="modal-content">
+        <div class="modal-header">
+            <h3>New Photo of <%= @court.name %></h3>
+        </div>
         <div class="modal-body">
             <div id="upload_photo">
-                <h3>New Photo of <%= @court.name %></h1>
                 <%= form_for @court_photo, :html => { :multipart => true } do |f| %>
                     <input class="btn" type="file" name="images" id="images" />
                     <button type="submit"  id="btn1">Upload Photo</button>

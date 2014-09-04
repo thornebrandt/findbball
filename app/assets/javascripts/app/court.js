@@ -1,5 +1,38 @@
 fbb.court = function(){
     prepareGallery();
+    prepareVideos();
+
+    function prepareVideos(){
+        $("#courtVideos_container #add_court_video").click(function(e){
+            e.preventDefault();
+            console.log("huh");
+            var $_modal = $("#add_video_modal");
+            setTimeout( focusInput, 500 );
+            $_modal.modal();
+        });
+
+        var focusInput = function(){
+            console.log("what the lump");
+            $("#youtube_url").focus();
+        };
+
+        $("#confirm_youtube_link").click(
+            function(e) {
+                e.preventDefault();
+                var pastedLink = $("#youtube_url").val();
+                var vid = new Array();
+                var vidHtml;
+                var video_id = pastedLink.split('v=')[1];
+                if (video_id) {
+                    $("#vi").val(video_id);
+                    $("#new_court_video").submit();
+                } else {
+                    alert("not a valid youtube link");
+                    $("#youtube_url").css("border", "red solid 1px");
+                }
+            }
+        );
+    };
 
 
     function prepareGallery(){

@@ -1,0 +1,20 @@
+<div id="add_video_modal" class="modal hid fade">
+    <div class="modal-message">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Link to <b><a href="http://www.youtube.com">Youtube</a></b> Video for <%= @court.name %></h3>
+            </div>
+            <%= form_for @court_video do |f| %>
+                <div class="modal-body">
+                    <%= f.hidden_field :court_id, :value => @court.id %>
+                    <%= f.hidden_field :member_id, :value => @current_user.id %>
+                    <%= f.hidden_field :vi, id: 'vi' %>
+                    <input type="text" id="youtube_url" autocomplete="false">
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary float_right" id="confirm_youtube_link">Ok</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

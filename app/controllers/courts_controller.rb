@@ -12,10 +12,10 @@ class CourtsController < ApplicationController
         @shown_reviews = @court.reviews.last(4)
         @hidden_reviews = @court.reviews - @shown_reviews
         @court_photo = CourtPhoto.new if signed_in?
+        @court_video = CourtVideo.new if signed_in?
         gon.court_photos = @court.court_photos.last(12);
         @review = Review.new if signed_in?
-        puts "IS THE COURT ID ACCESSIBLE"
-        puts @court_main_photo
+
 
     else
         flash[:error] = "Could not find that court"
