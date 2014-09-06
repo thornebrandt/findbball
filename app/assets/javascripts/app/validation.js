@@ -1,9 +1,11 @@
 fbb.validate = {
     rules: {
-        eventName: "required"
+        "event[name]": "required",
+        event_start_datepicker: "required"
     },
     messages: {
-        eventName: "Your event must have a name"
+        "event[name]": "Your event must have a name",
+        event_start_datepicker: "Your event must have a start date"
     },
     validateForm: function($_form){
         console.log("validating form")
