@@ -2,6 +2,7 @@ Findbball::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :members
   resources :courts
+  resources :events
   resources :reviews,  only: [:create, :edit, :destroy]
   resources :court_photos, only: [:create, :destroy]
   resources :court_videos, only: [:create, :destroy]

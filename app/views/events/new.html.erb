@@ -1,0 +1,133 @@
+<% provide(:title, "Add an Event") %>
+
+<div id="add_event_map" class="mapEl"></div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %> </div>
+    <% end %>
+    <div id="content_wrapper">
+        <div id="content">
+            <div id="heading_articles">
+            <h3>ADD EVENT</h3>
+            </div>
+            <div id="addEvent_container">
+                <%= form_for @event, :html => {:autocomplete => "off"} do |f| %>
+                    <%= f.hidden_field :court_id, id: 'realCourtID' %>
+                        <table id="addEvent_table" class="create_table">
+                            <tbody>
+                                <tr>
+                                    <td class="td_label">Event Name</td>
+                                    <td>
+                                        <input class="add_court_textInput" name="eventName" type="text" id="input_court_name">
+                                    </td>
+                                </tr>
+                                <tr class="row_selectCourt">
+                                    <td class="td_label"><span class="court_search">Select</span> Court</td>
+                                    <td class="rightColumn">
+                                        <div class="court_search">
+                                             <input name="selectCourt" type="text" id="court_search" class="typeahead" placeholder="Existing Court">
+                                             <button id="selectCourt" class="btn">Select</button>
+                                        </div>
+                                        <div class="court_search_selected" style="display: none;">
+                                            <span id="selectedCourt"></span>
+                                            <a id="editCourt" class="editThis">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row_selectCourt court_search">
+                                    <td></td>
+                                    <td class="rightColumn" id="column_addCourt">
+                                        <p class='court_not_found disclaimer'>
+                                            Not finding the court?
+                                        </p>
+<!--                                    <button id="btn_addCourt" href="add_court.html" class="btn">
+                                            Add New Court
+                                        </button>
+                                        ( Cannot find this event's court in our database yet. )
+                                        </p>
+                                        <p>
+                                        <button id="oneTimeLocation" class="btn">One Time Location</button>
+                                        ( This is not a court that games are typically played at. )
+                                        </p> -->
+                                    </td>
+                                </tr>
+                                <tr class="row_addLocation" style="display: none;">
+                                    <td class="td_label">Add Location</td>
+                                    <td class="rightColumn">
+                                        <input id="address_search" name="addLocation" type="text" placeholder="1425 N Damen Ave, Chicago, IL 60622">
+                                        <button type="submit" class="btn right_align">Map</button>
+                                    </td>
+                                </tr>
+                                <tr class="row_addedLocation" style="display:none;">
+                                    <td class="td_label">Address</td>
+                                    <td>
+                                        <input id="courtAddress" type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">Date</td>
+                                    <td class="rightColumn">
+                                        <input type="text" id="event_datepicker">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">Event Hours</td>
+                                    <td class="rightColumn">
+                                        <select id="openTime1" class="time_of_day">
+                                            <option value="12">12:00</option>
+                                            <option value="1">1:00</option>
+                                        </select>
+                                        <select id="openAM1" class="am_or_pm">
+                                              <option value="am">AM</option>
+                                              <option value="pm">PM</option>
+                                        </select>
+                                            to
+                                        <select id="openTime2" class="time_of_day">
+                                            <option value="12">12:00</option>
+                                        </select>
+                                        <select id="openAM2" class="am_or_pm">
+                                              <option value="am">AM</option>
+                                              <option value="pm" selected="true">PM</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">
+                                        Event website link (if available)
+                                    </td>
+                                    <td>
+                                        <input class="add_event_textInput" type="text" id="website_link"></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">
+                                        Details/Review
+                                    </td>
+                                    <td>
+                                        <textarea id="reviewDetails"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td class="rightColumn">
+                                        <input type="submit" id="submit_court" class="btn right_align">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% end %>
+                <br>
+            </div>
+            <div id="addCourt_complete">
+                <h3 class="courtName_complete">
+                </h3>
+                <table id="courtDetails_complete">
+
+                </table>
+            </div>
+            <div id="adspace">
+                <a href="#"><img src="img/add_placeholder.jpg"></a>
+            </div>
+        </div>
+    </div>
+</div>

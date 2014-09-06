@@ -1,6 +1,10 @@
 fbb.court = function(){
-    prepareGallery();
-    prepareVideos();
+    function initialize(){
+        if ( $("#container-court").length ){
+            prepareGallery();
+            prepareVideos();
+        }
+    };
 
     function prepareVideos(){
         $("#courtVideos_container #add_court_video").click(function(e){
@@ -146,4 +150,5 @@ fbb.court = function(){
             $("#court_photo_photo").val(_source); //hidden field that updates the member
         };
     }
+    initialize();
 };

@@ -9,6 +9,4 @@ fbb.bestInPlace = function(){
     $(".best_in_place").best_in_place();
     //$('.best_in_place').bind("ajax:success", function (data) { console.log("success"); console.log(data); });
     $('.best_in_place').bind("ajax:error", function (data) { console.log("fail"); console.log(data); });
-
-
 }

@@ -5,9 +5,9 @@
 		<%= review.content %>
 	</p>
 	<% if current_user?(review.member) %>
-		<%= link_to "delete", review, method: :delete,
+		<%= link_to raw('Delete <i class="glyphicon glyphicon-trash"></i>'), review, method: :delete,
                      data: { confirm: "You sure?" },
-                     title: review.content %>
+                     class: "review_delete_link" %>
     <% end %>
 		<hr>
 </div>

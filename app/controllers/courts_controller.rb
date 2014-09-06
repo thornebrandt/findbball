@@ -54,7 +54,7 @@ class CourtsController < ApplicationController
   def new
     @showMap = true;
     @mapEl = "add_court_map"
-    if current_user
+    if signed_in?
         @court = Court.new
 
         @review = Review.new

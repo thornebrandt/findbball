@@ -1,6 +1,11 @@
 <% provide(:title, "Add a court") %>
-<% day_options = [["Sunday", "Sunday"], ["Monday", "Monday"], ["Tuesday", "Tuesday"], ["Wednesday", "Wednesday"],
-                  ["Thursday", "Thursday"], ["Friday", "Friday"], ["Saturday", "Saturday"]] %>
+<% day_options = [  ["Sunday", "Sunday"],
+                    ["Monday", "Monday"],
+                    ["Tuesday", "Tuesday"],
+                    ["Wednesday", "Wednesday"],
+                    ["Thursday", "Thursday"],
+                    ["Friday", "Friday"],
+                    ["Saturday", "Saturday"]] %>
 
 <% time_options = [["12:00", 12], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
                      ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
@@ -25,7 +30,7 @@
                 <%= f.hidden_field :lat %>
                 <%= f.hidden_field :lng %>
                 <input id="courtAddress" type="hidden">
-            <div id="addCourt_add">
+                <div id="addCourt_add">
                     <table id="addCourt_table" class="create_table" >
                         <tbody>
                             <tr style="display:none;" class="map_results_container">

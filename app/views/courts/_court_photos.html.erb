@@ -2,7 +2,7 @@
     <h3>PHOTOS(<%= @court.court_photos.count %>)</h3>
     <div id="courtPhotos_container">
         <p id="courtPhotos">
-            <% for court_photo in @court.court_photos %>
+            <% for court_photo in @court.court_photos.first(12) %>
                 <%= image_tag court_photo.photo.thumb.to_s, class: "courtPhoto", rel: court_photo.id %>
             <% end %>
         </p>

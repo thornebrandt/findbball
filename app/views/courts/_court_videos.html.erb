@@ -2,7 +2,7 @@
     <h3>VIDEOS(<%= @court.court_videos.count %>)</h3>
     <div id="courtVideos_container">
             <div id="courtVideos">
-                <% for court_video in @court.court_videos %>
+                <% for court_video in @court.court_videos.first(12) %>
                     <%= render :partial => "/courts/court_video", :locals => {:vi => court_video.vi} %>
                 <% end %>
             </div>
