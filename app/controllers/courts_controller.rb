@@ -1,27 +1,40 @@
 class CourtsController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update, :create, :new]
 
-  def show
-    if Court.exists?(params[:id])
-        @court = Court.find(params[:id])
-        @court_photo = CourtPhoto.new if signed_in?
-        @review = Review.new if signed_in?
-        @showMap = true;
-        @mapEl = "court_map"
-
-        @shown_reviews = @court.reviews.last(4)
-        @hidden_reviews = @court.reviews - @shown_reviews
-        @court_photo = CourtPhoto.new if signed_in?
-        @court_video = CourtVideo.new if signed_in?
-        gon.court_photos = @court.court_photos.last(12);
-        @review = Review.new if signed_in?
-
-
-    else
-        flash[:error] = "Could not find that court"
-        redirect_to home_path
-        return
+    def index
+        @courts = Court.find(:all)
+        render :json => @courts
     end
+
+    def show
+        if Court.exists?(params[:id])
+            @court = Court.find(params[:id])
+            @court_photo = CourtPhoto.new if signed_in?
+            @review = Review.new if signed_in?
+            @showMap = true;
+            @mapEl = "court_map"
+
+            @shown_reviews = @court.reviews.last(4)
+            @hidden_reviews = @court.reviews - @shown_reviews
+            @court_photo = CourtPhoto.new if signed_in?
+            @court_video = CourtVideo.new if signed_in?
+            gon.court_photos = @court.court_photos.last(12);
+            @review = Review.new if signed_in?
+        else
+            flash[:error] = "Could not find that court"
+            redirect_to home_path
+            return
+        end
+  end
+
+  def search
+      results = []
+      query = params[:q]
+      all = []
+      if query && query != ""
+          all = Court.where("name LIKE ?", "%#{query}%")
+      end
+      render json: all
   end
 
   def edit

@@ -20,3 +20,4 @@
 //= require best_in_place.jquery-ui
 //= require_tree ./libs
 //= require_tree ./app
+//= require_tree ./data

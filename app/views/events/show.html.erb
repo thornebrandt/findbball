@@ -1,5 +1,8 @@
 <% provide(:title, @event.name) %>
-
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %> </div>
+<% end %>
 
 <h1><%= @event.name %></h1>
+<%= search_courts_path %>
 <p>Part of this court: " <%= @court.name %></p>

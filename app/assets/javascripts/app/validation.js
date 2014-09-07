@@ -8,8 +8,6 @@ fbb.validate = {
         event_start_datepicker: "Your event must have a start date"
     },
     validateForm: function($_form){
-        console.log("validating form")
-        console.log(this);
         if($_form.length > 0){
             $_form.validate({
                 rules: this.rules,
@@ -23,11 +21,6 @@ fbb.validate = {
         } else{
             console.log("The form does not exist");
         }
-    },
-    invalidHandler: function(_event, _validator){
-        console.log("its invalid");
-        console.log(_event);
-        console.log(_validator);
     }
 };
 

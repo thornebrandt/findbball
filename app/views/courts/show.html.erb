@@ -1,4 +1,7 @@
 <% provide(:title, @court.name) %>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %> </div>
+<% end %>
 <div class="container-fluid" id="container-court">
 	<%= render '/courts/court_left' %>
   	<%= render '/courts/court_right' %>

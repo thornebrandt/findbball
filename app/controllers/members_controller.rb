@@ -4,10 +4,17 @@ class MembersController < ApplicationController
 
     def index
         @members = Member.find(:all)
-        respond_to do |format|
-            format.html
-            format.json { render :json => @members }
+        render :json => @members
+    end
+
+    def search
+        results = []
+        query = params[:q]
+        all = []
+        if query && query != ""
+            all = Member.where("name LIKE ?", "%#{query}%")
         end
+        render json: all
     end
 
 	def show

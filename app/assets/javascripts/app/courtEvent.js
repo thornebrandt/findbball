@@ -5,9 +5,43 @@ fbb.courtEvent = function(){
         if ( $("#addEvent_container").length ){
             prepareDatePicker();
             prepareTimePicker();
+            prepareCourtAutoComplete();
             validateEventForm();
         }
     };
+
+    var prepareCourtAutoComplete = function(){
+        var results = new Bloodhound({
+            datumTokenizer: function(data){
+                return Bloodhound.tokenizers.whitespace(data.name)
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: fbb.fakeCourts,
+            limit: 12,
+            remote: "/search_courts?q=%QUERY"
+        });
+        results.initialize();
+
+        $("#court_search").typeahead({
+            hint: true,
+            highlight: true,
+        },
+        {
+            source: results.ttAdapter(),
+            displayKey: "name"
+        });
+
+        $("#court_search.typeahead").unbind("typeahead:selected");
+        $("#court_search.typeahead").on("typeahead:selected", courtSelectionHandler);
+
+    };
+
+    var courtSelectionHandler = function(obj, datum){
+        console.log("court selected");
+        console.log(obj);
+        console.log(datum);
+    }
+
 
     var selectStartDate = function(e, d){
         fbb.courtEvent.start_date = fbb.time.datePickerToISO(d);
@@ -26,8 +60,6 @@ fbb.courtEvent = function(){
             var $_end = $("#realEnd");
             $_start.val(start_date_iso);
             $_end.val(end_date_iso);
-            console.log( $_start.val() );
-            console.log( $_end.val() );
         }
     };
 
