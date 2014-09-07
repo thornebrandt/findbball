@@ -13,7 +13,7 @@
             </div>
             <div id="addEvent_container">
                 <%= form_for @event, :html => {:autocomplete => "off"} do |f| %>
-                    <%= f.hidden_field :court_id, id: 'realCourtID', value: 1 %>
+                    <%= f.hidden_field :court_id, id: 'realCourtID' %>
                     <%= f.hidden_field :member_id, value: current_user.id %>
                     <%= f.hidden_field :start, id: 'realStart' %>
                     <%= f.hidden_field :end, id: 'realEnd' %>
@@ -29,7 +29,7 @@
                                     <td class="td_label">Court</td>
                                     <td class="rightColumn">
                                         <div class="court_search">
-                                             <input name="selectCourt" type="text" id="court_search" placeholder="Type name of court">
+                                             <input name="event_selectCourt" type="text" id="court_search" placeholder="Type name of court">
                                         </div>
                                         <div class="court_search_selected" style="display: none;">
                                             <span id="selectedCourt"></span>
@@ -40,6 +40,7 @@
                                 <tr class="row_selectCourt court_search">
                                     <td></td>
                                     <td class="rightColumn" id="column_addCourt">
+                                        <span id="courtNotFound" class="error hid">We can't find a court by that name.</span>
                                         <p class='court_not_found disclaimer'>
                                             Not finding the court? <%= link_to "Add court", new_court_path %>
                                         </p>
@@ -98,16 +99,5 @@
                     <% end %>
                 <br>
             </div>
-            <div id="addCourt_complete">
-                <h3 class="courtName_complete">
-                </h3>
-                <table id="courtDetails_complete">
-
-                </table>
-            </div>
-            <div id="adspace">
-                <a href="#"><img src="img/add_placeholder.jpg"></a>
-            </div>
         </div>
     </div>
-</div>

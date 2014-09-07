@@ -1,11 +1,13 @@
 fbb.validate = {
     rules: {
         "event[name]": "required",
-        event_start_datepicker: "required"
+        event_start_datepicker: "required",
+        event_selectCourt: "required"
     },
     messages: {
         "event[name]": "Your event must have a name",
-        event_start_datepicker: "Your event must have a start date"
+        event_start_datepicker: "Your event must have a start date",
+        event_selectCourt: "Your event must take place at an existing court"
     },
     validateForm: function($_form){
         if($_form.length > 0){

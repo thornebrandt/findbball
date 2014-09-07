@@ -76,7 +76,17 @@ fbb.helpers = function(){
         return i;
     }
 
+}
 
 
-
+function getQueryVariable(query, variable) {
+    var noQuestion = query.replace("?", "");
+    var vars = noQuestion.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return false
 }

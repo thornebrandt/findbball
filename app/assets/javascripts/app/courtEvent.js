@@ -16,11 +16,11 @@ fbb.courtEvent = function(){
                 return Bloodhound.tokenizers.whitespace(data.name)
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: fbb.fakeCourts,
             limit: 12,
             remote: "/search_courts?q=%QUERY"
         });
         results.initialize();
+
 
         $("#court_search").typeahead({
             hint: true,
@@ -31,23 +31,25 @@ fbb.courtEvent = function(){
             displayKey: "name"
         });
 
-        $("#court_search.typeahead").unbind("typeahead:selected");
-        $("#court_search.typeahead").on("typeahead:selected", courtSelectionHandler);
+        $("#court_search").on("typeahead:selected", courtSelectionHandler);
+
+        $("#court_search").focus(function(e){
+            $("#courtNotFound").hide();
+        });
 
     };
 
     var courtSelectionHandler = function(obj, datum){
         console.log("court selected");
-        console.log(obj);
-        console.log(datum);
+        var court_id = datum.id;
+        $("#realCourtID").val(court_id);
+        $("#court_search").blur();
     }
-
 
     var selectStartDate = function(e, d){
         fbb.courtEvent.start_date = fbb.time.datePickerToISO(d);
         calculateDates();
     };
-
 
     var calculateDates = function(){
         var start_time = calculateStartTime();
@@ -62,7 +64,6 @@ fbb.courtEvent = function(){
             $_end.val(end_date_iso);
         }
     };
-
 
     var calculateStartTime = function(){
         var timeInt = parseInt($("#start_time").val()) + parseInt( $("#start_ampm").val() );
@@ -84,11 +85,18 @@ fbb.courtEvent = function(){
         var $_form = $("#new_event");
         fbb.validate.validateForm($_form);
         $("#submit_court").click(function(e){
-            // e.preventDefault();
-            // //console.log("submit");
-            // if($("#new_event").valid()){
-            //     console.log("Valid");
-            // }
+            e.preventDefault();
+            var courtFound = false;
+            if ( $("#realCourtID").val() ){
+                console.log("court found");
+                courtFound = true;
+            } else {
+                $("#courtNotFound").fadeIn();
+            }
+
+            if($("#new_event").valid() && courtFount){
+                console.log("Valid");
+            }
         });
     };
 
