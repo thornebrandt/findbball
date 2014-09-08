@@ -1,0 +1,16 @@
+Hi there
+<br>
+<%= @ip %>
+<br>
+<%= @origin %>
+<br>
+<%= @miles %>
+
+<% if @found_hoops.any? %>
+    FOUND <%= @found_hoops.count %> HOOPS<br>
+    <% @found_hoops.each do |court| %>
+        <p><%= court.name %></p>
+    <% end %>
+<% else %>
+    NO COURTS FOUND
+<% end %>

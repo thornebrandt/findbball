@@ -14,6 +14,7 @@ Findbball::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',   via: 'delete'
   match '/search_members', to: 'members#search', via: 'get'
   match '/search_courts', to: 'courts#search', via: 'get'
+  match '/find-hoops', to: 'courts#find_hoops', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

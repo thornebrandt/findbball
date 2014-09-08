@@ -1,4 +1,8 @@
 Findbball::Application.configure do
+
+    config.lng = 33.7489954
+    config.lat = -84.3879824
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

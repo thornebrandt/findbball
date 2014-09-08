@@ -1,5 +1,5 @@
 class CourtsController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update, :create, :new]
+    before_action :signed_in_user, only: [:edit, :update, :create, :new]
 
     def index
         @courts = Court.find(:all)
@@ -25,9 +25,29 @@ class CourtsController < ApplicationController
             redirect_to home_path
             return
         end
-  end
+    end
 
-  def search
+    def find_hoops
+        @ip = request.remote_ip
+        @origin = params[:by]
+        @miles = params[:within] || 999
+
+        if !@origin
+            if geo = session[:geo_location]
+                gon.geo = geo
+                @origin = [geo.lat, geo.lng]
+            else
+                @origin = [Rails.configuration.lat, Rails.configuration.lng]
+            end
+        end
+
+        @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
+        puts "finding_hoops"
+        puts @found_hoops.count()
+
+    end
+
+    def search
       results = []
       query = params[:q]
       all = []
@@ -35,21 +55,21 @@ class CourtsController < ApplicationController
           all = Court.where("name LIKE ?", "%#{query}%")
       end
       render json: all
-  end
-
-  def edit
-    @court = Court.find(params[:id])
-    if current_user? @court.member
-      @showMap = true;
-      @mapEl = "edit_court_map"
-      @review = Review.new
-    else
-      flash[:error] = "You are not that court's owner"
-      redirect_to home_path
     end
-  end
 
-  def update
+    def edit
+        @court = Court.find(params[:id])
+    if current_user? @court.member
+        @showMap = true;
+        @mapEl = "edit_court_map"
+        @review = Review.new
+    else
+        flash[:error] = "You are not that court's owner"
+        redirect_to home_path
+    end
+    end
+
+    def update
     @court = Court.find(params[:id])
         respond_to do |format|
             if @court.update_attributes(court_params)
@@ -64,7 +84,7 @@ class CourtsController < ApplicationController
         end
     end
 
-  def new
+    def new
     @showMap = true;
     @mapEl = "add_court_map"
     if signed_in?
@@ -77,9 +97,9 @@ class CourtsController < ApplicationController
         flash[:warning] = "You are not logged in."
         redirect_to home_path
     end
-  end
+    end
 
-  def create
+    def create
     @court = current_user.courts.build(court_params)
     if @court.save!
       flash[:success] = "Court created!"
@@ -89,13 +109,13 @@ class CourtsController < ApplicationController
       Rails.logger.info(@court.errors.inspect)
       redirect_to action: 'new'
     end
-  end
+    end
 
-  def destroy
+    def destroy
     Court.find(params[:id]).destroy
     flash[:success] = "Court deleted."
     redirect_to home_path
-  end
+    end
 
     private
     def court_params

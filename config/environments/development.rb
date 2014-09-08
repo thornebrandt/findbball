@@ -1,4 +1,8 @@
 Findbball::Application.configure do
+
+    config.lng = 33.7489954
+    config.lat = -84.3879824
+
     # Settings specified here will take precedence over those in config/application.rb.
 
     # In the development environment your application's code is reloaded on
@@ -36,4 +40,10 @@ Findbball::Application.configure do
     config.autoload_paths += %W(#{config.root}/../best_in_place/lib)
     # This line tells rails to unload the root constant (module/class) for our gem on every request
     ActiveSupport::Dependencies.explicitly_unloadable_constants << 'BestInPlace'
+end
+
+class ActionDispatch::Request
+    def remote_ip
+        "50.141.192.165"
+    end
 end

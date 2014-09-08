@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include SessionsHelper
     include CourtsHelper
+    geocode_ip_address
 
     # rescue_from StandardError do |e|
     #     flash[:error] = "There was an error"

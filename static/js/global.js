@@ -12,8 +12,8 @@ fbb.lng;
 fbb.mapLoaded;
 fbb.userLat;
 fbb.userLng;
-fbb.defaultLat = 41.907940468646984;
-fbb.defaultLng = -87.67672317193603;
+fbb.defaultLat = 41.907940468646984; //Atlanta
+fbb.defaultLng = -87.67672317193603; //Atlanta
 fbb.defaultCourt = "Wicker Park Fieldhouse";
 $(function() {
     function onLoad() { //put automatic functions here
@@ -364,6 +364,7 @@ $(function() {
     $(".result_reviews").click(
         function(e) {
             e.preventDefault();
+            $(this).parent().find(".reviewsModal").modal();
         }
     );
 

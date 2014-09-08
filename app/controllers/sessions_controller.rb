@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	def create
+    def create
 		member = Member.find_by_email(params[:email].downcase)
 		if member && member.authenticate(params[:password])
             sign_in member
