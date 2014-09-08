@@ -13,6 +13,7 @@ gem 'best_in_place', github: 'bernat/best_in_place'
 gem 'rmagick', '~> 2.13.2', require: false
 gem 'carrierwave'
 gem 'gon'
+gem 'geokit-rails'
 
 group :development, :test do
 	gem 'sqlite3'
