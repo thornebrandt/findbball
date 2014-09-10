@@ -4,7 +4,7 @@
 <head>
   <title><%= full_title(yield(:title)) %></title>
   <%= include_gon %>
-  <% if @mapEl %>
+  <% if @showMap && @mapEl %>
     <script id="showMap" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4elMMkrN6j24qAKUVl7jeH1y3bS7vRqM&libraries=places&sensor=false"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

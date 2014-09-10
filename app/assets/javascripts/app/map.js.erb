@@ -7,31 +7,59 @@ fbb.map = function(){
     var $_addressInput;
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
     self.mapOptions = {};
+    self.mapObj = {};
 
 
     var initialize = function(){
         checkForMap();
+        checkForSearchResults();
         showCourtDOM();
+        geoComplete( $("#courtAddress") );
     };
+
+    var checkForSearchResults = function(){
+        if ($("#find_hoops_canvas").length){
+            console.log("found hoops");
+            populateDistances();
+        }
+    };
+
+    var populateDistances = function(){
+        $(".result_distance").each(function(i, _this){
+            var lat = $(this).children('.courtLat').val();
+            var lng = $(this).children('.courtLng').val();
+            console.log( lat + " , " + lng  );
+            getDistance(fbb.defaultLat, fbb.defaultLng, self.mapObj.lat, self.mapObj.lng, $(this));
+        });
+    };
+
 
     var checkForMap = function(){
         var mapScript = $("#showMap");
         if(mapScript.length){
             mapEl = $(".mapEl")[0];
-            prepareMap(mapEl);
-            //autoComplete();
-            geoComplete();
+            var whichMap = $(".mapEl").attr("id");
+            var mapOptions;
+            console.log("which map");
+            console.log(whichMap);
+            setupOptions();
+            fbb.map = new google.maps.Map(mapEl, self.courtMapOptions);
+            if(whichMap === "court_map" || whichMap === "add_court_map" || whichMap === "edit_court_map"){
+                setupCourtCursor();
+                addCourtDOM();
+            }
         }
     };
 
     var getLatLng = function(){
-        if($("#lat").val() && $("#lng").val()){
-            self.lat = parseFloat( $("#lat").val() );
-            self.lng = parseFloat( $("#lng").val() );
-        }
-        if($("#court_lat").val() && $("#court_lng").val()){
-            self.lat = parseFloat( $("#court_lat").val() );
-            self.lng = parseFloat( $("#court_lng").val() );
+        self.mapObj = self.mapObj || {};
+        if(typeof gon !== "undefined"){
+            if (gon.lat && gon.lng){
+                self.mapObj.lat = parseFloat( gon.lat );
+                self.mapObj.lng = parseFloat( gon.lng );
+            }
+        } else {
+            console.log("gon is not loaded");
         }
     };
 
@@ -41,28 +69,46 @@ fbb.map = function(){
     };
 
     var setupOptions = function(){
-        self.mapOptions = {
-            center: new google.maps.LatLng(self.lat, self.lng),
+        getLatLng();
+        self.courtMapOptions = {
+            center: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
             zoom: 15,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true
         };
     };
 
-    var prepareMap = function(mapEl){
-        getLatLng();
-        setupOptions();
-        self.map = new google.maps.Map(mapEl, self.mapOptions);
-        setupMapCursor();
-        prepareDOM();
-        testDistance();
+    var prepareCourtMap = function(mapEl){
+        self.map = new google.maps.Map(mapEl, self.courtMapOptions);
+        setupCourtCursor();
+        addCourtDOM();
+        //TODO - get members lat and lng, then result to thing
+        getDistance(fbb.defaultLat, fbb.defaultLng, self.mapObj.lat, self.mapObj.lng, $("#milesAway"));
     };
 
-    var testDistance = function(){
+    var getDistance = function(lat1, lng1, lat2, lng2, result_el){
+
         var service = new google.maps.DistanceMatrixService();
-        var origin = new google.maps.LatLng(fbb.defaultLat, fbb.defaultLng);
-        var destination = new google.maps.LatLng(self.lat, self.lng);
+        var origin = new google.maps.LatLng(lat1, lng1);
+        var destination = new google.maps.LatLng(lat2, lng2);
+
+        var foundDistanceHandler = function(response, status){
+            if( status != google.maps.DistanceMatrixStatus.OK){
+                console.log("Error was: " + status);
+            } else {
+                var data = response.rows[0].elements[0];
+                if(data.status === "OK"){
+                    populateDistance( data.distance.value, result_el );
+                }
+            }
+        };
+
+        var populateDistance = function( distance, result_el ){
+            var milesAway = parseFloat( parseFloat( toMiles( distance ) ).toFixed(1));
+            var milesAwayString = "mile".pluralize(milesAway);
+            result_el.text(milesAway + " " + milesAwayString + " away");
+        };
+
 
         service.getDistanceMatrix(
             {
@@ -72,22 +118,11 @@ fbb.map = function(){
                 unitSystem: google.maps.UnitSystem.METRIC,
                 avoidHighways: false,
                 avoidTolls: false
-            }, foundDistance
+            }, foundDistanceHandler
         );
+
     };
 
-    var foundDistance = function(response, status){
-        if( status != google.maps.DistanceMatrixStatus.OK){
-            console.log("Error was: " + status);
-        } else {
-            var data = response.rows[0].elements[0];
-            if(data.status === "OK"){
-                var milesAway = parseFloat(parseFloat(toMiles(data.distance.value)).toFixed(1));
-                var milesAwayString = "mile".pluralize(milesAway);
-                $("#milesAway").text(milesAway + " " + milesAwayString + " away");
-            }
-        }
-    };
 
     var toMiles = function(meters){
         return meters *= 0.000621371192;
@@ -100,7 +135,7 @@ fbb.map = function(){
         }
     }
 
-    var setupMapCursor = function(){
+    var setupCourtCursor = function(){
         fbb.marker = new google.maps.Marker({
             icon: icon_path,
             position: self.mapOptions.center,
@@ -118,14 +153,14 @@ fbb.map = function(){
         return fbb.marker;
     }
 
-    var geoComplete = function(){
-        $_addressInput = $("#courtAddress");
+    var geoComplete = function(_input){
+        $_addressInput = _input;
         if( $("#address_search").length ){
             $("#address_search").geocomplete({
                 map: ".mapEl",
-                location: new google.maps.LatLng(self.lat, self.lng),
+                location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
                 mapOptions: {
-                    zoom: 13,
+                    zoom: 15,
                     scrollwheel: false,
                     mapTypeId: "roadmap"
                 },
@@ -242,7 +277,7 @@ fbb.map = function(){
         addressSearchEl.focus();
     };
 
-    var prepareDOM = function(){
+    var addCourtDOM = function(){
         $("#searchAgain").click(function(e){
             e.preventDefault();
             clearMarkers();
