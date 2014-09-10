@@ -24,36 +24,44 @@
                             </ul>
                         </li> -->
                         <li>
-                            <a href="#">My Bball</a>
+                            <a class="noLink" href="#">My Bball</a>
                             <ul>
                                 <li><%= link_to "My Profile", member_path(current_user) %></li>
-                                <li>
-                                    <a href="#">My Courts</a>
-                                        <% if current_user.courts.any? %>
-                                            <ul>
-                                            <% current_user.courts.each do |court| %>
-                                                <li><%= link_to court.name, court_path(court.id) %></li>
-                                            <% end %>
-                                            </ul>
-                                        <% else %>
-                                            <%= link_to "Add Court", new_court_path %>
+                                <li><%= link_to "Edit Profile", edit_member_path(current_user) %></li>
+                                <% if current_user.courts.any? %>
+                                    <li>
+                                        <a class="noLink" href="#">My Courts</a>
+                                                <ul>
+                                                <% current_user.courts.each do |court| %>
+                                                    <li><%= link_to court.name, court_path(court.id) %></li>
+                                                <% end %>
+                                                </ul>
+                                    </li>
+                                <% end %>
+                                    <li>
+                                        <%= link_to "Add Court", new_court_path %>
+                                    </li>
+                                <% if current_user.events.any? %>
+                                    <li>
+                                        <ul>
+                                        <a class="noLink" href="#">My Events</a>
+                                        <% current_user.events.each do |event| %>
+                                            <li><%= link_to event.name, event_path(event.id) %></li>
                                         <% end %>
-                                </li>
-                                <li>
-                                    <a href="#">My Events</a>
-                                    <ul>
-                                        <li><a href="event.html">Roller Skate BBall</a></li>
-                                        <li><a href="event.html">Senior BBall</a></li>
-                                    </ul>
-                                </li>
-                                <li>
+                                        </ul>
+                                    </li>
+                                <% end %>
+                                    <li>
+                                        <%= link_to "Add Event", new_event_path %>
+                                    </li>
+<!--                                 <li>
                                     <a href="#">My Teams</a>
                                     <ul>
                                         <li><a href="#">Hawks</a></li>
                                         <li><a href="#">Eagles</a></li>
                                         <li><a href="#">Anonymous</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li>

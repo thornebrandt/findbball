@@ -40,11 +40,7 @@ class CourtsController < ApplicationController
                 @origin = [Rails.configuration.lat, Rails.configuration.lng]
             end
         end
-
         @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
-        puts "finding_hoops"
-        puts @found_hoops.count()
-
     end
 
     def search
@@ -138,7 +134,7 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
-                                      :main_photo,
-                                      reviews_attributes: [:id, :content, :court_id, :member_id])
+                                      :main_photo
+                                      )
     end
 end

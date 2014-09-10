@@ -14,7 +14,13 @@
 <% end %>
 <hr>
 <div class="courtInfo2 center">
-    <%= render '/courts/court_difficulty' %>
+
+    <% if @court.skill_level > 0 %>
+        <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
+            <%= image_tag @court.skill_image %>
+        </div>
+    <% end %>
+
     <p id="courtPickUpGame">
         <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
     </p>

@@ -1,7 +1,7 @@
 fbb.nav = function(){
     var helpBtns = $("#help, #howItWorks");
     var howItWorksModal = $("#howItWorksModal");
-    var loginBtn = $("#loginBtn");
+    var loginBtn = $(".loginBtn");
     var loginModal = $("#loginModal");
     fbb.modal(helpBtns, howItWorksModal);
     fbb.modal(loginBtn, loginModal);

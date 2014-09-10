@@ -1,16 +1,37 @@
-Hi there
-<br>
-<%= @ip %>
-<br>
-<%= @origin %>
-<br>
-<%= @miles %>
-
 <% if @found_hoops.any? %>
-    FOUND <%= @found_hoops.count %> HOOPS<br>
+    <div id="heading_articles">
+        <h3>RESULTS(<%= @found_hoops.count %>)</h3>
+    </div>
+    <div id="results_container">
     <% @found_hoops.each do |court| %>
-        <p><%= court.name %></p>
+        <div class="result">
+            <%= link_to court.name, court, class: "result_location" %>
+            <br>
+            <p class="result_address"><%= court.location %></a>
+            <p class="result_distance">mile</p>
+            <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(court.location)%>" class="result_directions">
+                (Get Directions)
+            </a>
+            <p class="best_time">Best time for a pickup game:</p>
+            <p class="result_time"><%= court.pickup_hours %></p>
+            <% if court.skill_level > 0 %>
+                <div id="courtDifficulty"><span id="difficulty"><%= court.verbose_skill_level %></span>
+                    <%= image_tag court.skill_image %>
+                </div>
+            <% end %>
+            <span class="result_upcoming">Upcoming Events(<%= court.events.count %>)</span>
+            <span class="result_reviews">Reviews(<%= court.reviews.count %>)</span>
+            <div class="result_author_container">
+                <%= link_to (image_tag court.member.profile_photo.thumb, class: "user_icon"), member_path(court.member) %>
+                <br>
+                Added <%= court.short_added_date %>
+                by
+                <%= link_to court.member.name, member_path(court.member) %>
+            </div>
+        </div>
     <% end %>
+    </div>
 <% else %>
     NO COURTS FOUND
 <% end %>
+

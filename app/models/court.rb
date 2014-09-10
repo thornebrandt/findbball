@@ -1,6 +1,7 @@
 class Court < ActiveRecord::Base
   belongs_to :member, inverse_of: :courts
   has_many :reviews, dependent: :destroy, inverse_of: :court
+  has_many :events, dependent: :destroy, inverse_of: :court
   has_many :court_photos, dependent: :destroy, inverse_of: :court
   has_many :court_videos, dependent: :destroy, inverse_of: :court
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
@@ -28,6 +29,10 @@ class Court < ActiveRecord::Base
 
   def pickup_hours
     "#{pickup_day}s #{pickup_time}#{pickup_am.upcase}"
+  end
+
+  def short_added_date
+    created_at.strftime("%-m/%e")
   end
 
   def format_location
