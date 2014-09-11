@@ -2,9 +2,11 @@
             <div id="court_left">
                 <div id="profile_pic_container" class="court_pic">
                     <%= image_tag @court.mainPhoto, id: "profile_pic" %>
-                    <a href="#" id="edit_photo" class="edit_court_photo">
-                        change photo
-                    </a>
+                    <% if current_user?(@court.member) %>
+                        <a href="#" id="edit_photo" class="edit_court_photo">
+                            change photo
+                        </a>
+                    <% end %>
                 </div>
                 <button id="playToday" class="btn">Play at this court today</button>
                 <div id="court_events_container">
@@ -22,4 +24,5 @@
                     <% end %>
                 </div>
             </div>
+            <%= link_to "Create an Event", new_event_path %>
     </div>

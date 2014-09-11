@@ -24,6 +24,8 @@
 <hr>
 <% if signed_in? %>
     <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
-    <%= render "modals/upload_event_photo_modal" %>
+    <% if current_user?(@court.member) %>
+        <%= render "modals/upload_event_photo_modal" %>
+    <% end %>
 <% end %>
 <%= render "modals/select_event_photo_modal" %>

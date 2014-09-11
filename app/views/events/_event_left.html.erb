@@ -2,9 +2,11 @@
     <div id="court_left">
         <div id="profile_pic_container" class="court_pic">
             <%= image_tag @event.mainPhoto, id: "profile_pic" %>
-            <a href="#" id="edit_photo" class="edit_court_photo">
-                change photo
-            </a>
+                <% if current_user?(@event.member) %>
+                    <a href="#" id="edit_photo" class="edit_court_photo">
+                        change photo
+                    </a>
+                <% end %>
         </div>
         <button id="joinEvent" class="btn">Join Event</button>
         <br>

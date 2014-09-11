@@ -27,7 +27,9 @@
 </div>
 <hr>
     <%= render '/courts/court_photos' %>
-    <%= render "modals/select_court_photo_modal" %>
+    <% if current_user?(@court.member) %>
+        <%= render "modals/select_court_photo_modal" %>
+    <% end %>
 <hr>
     <%= render '/courts/court_videos' %>
 <hr>
