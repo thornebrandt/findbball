@@ -7,7 +7,18 @@
                     </a>
                 </div>
                 <button id="playToday" class="btn">Play at this court today</button>
-                <%= render '/events/court_events_container' %>
-                <%= render '/courts/court_players' %>
+                <div id="court_events_container">
+                    <% if @court.events.any? %>
+                        <h3>EVENTS(<%= @court.events.count %>)</h3>
+                        <% @court.events.each do |event| %>
+                            <div class="court_event">
+                                <a href="#" class="court_event_title"><%= event.name %></a><br>
+                                <span class="court_event_time"><i>8:00 pm tonight</i></span><br>
+                                <a href="#" class="court_players">0 people</a> playing
+                                <button class="btn join_btn">Join</button>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
     </div>

@@ -1,0 +1,27 @@
+<h2 id="eventName" class="eventH2"><%= @event.name %></h2>
+<% if current_user? @event.member %>
+    <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_path(@event) %> |
+    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'),
+        @event, method: :delete, data: { confirm: "You sure?" }, title: @event.name %>
+    <br>
+<% end %>
+<%= link_to @event.court.name, @event.court %>
+<br>
+<p id="eventTime"><%= @event.start %></p>
+<p id="showCourtAddress" class="gray">
+    <%= @event.court.format_location %>
+</p>
+<p id="courtHours">
+    Open <%= @event.court.open_hours %>
+</p>
+<% if @court.skill_level > 0 %>
+    <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
+        <%= image_tag @court.skill_image %>
+    </div>
+<% end %>
+<hr>
+<h3>EVENT DETAILS</h3>
+    <%= @event.details %>
+<hr>
+<h3>COMMENTS(0)</h3>
+<%= render 'ads/placeholder' %>

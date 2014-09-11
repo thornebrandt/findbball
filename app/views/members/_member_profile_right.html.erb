@@ -1,14 +1,53 @@
 <div class="sidebar right">
     <div id="profile_right">
-    <% if @current_member_has_friends == true %>
-            <h3>MY FRIENDS(3)</h3>
-            <a class="friend" href="#"><img src="img/user/paris_hilton.jpg"></a>
-            <a class="friend" href="#"><img src="img/user/falcor.gif"></a>
-            <a class="friend" href="#"><img src="img/user/notacop.jpg"></a>
-    <% end %>
-    <%= render 'members/member_feed' %>
-        <button class="btn btn-primary" id="find_friends_btn">Find Friends</button>
-        <%= render 'events/member_events_container' %>
-        <%= render 'courts/courts_container' %>  
+        <div id="member_events_container">
+            <% if @member.events.any? %>
+                <h3>EVENTS(<%= @member.events.count %>)</h3>
+                    <div id="events_container">
+                    <% @member.events.each do |event| %>
+                          <div class="event">
+                              <span class="event_time">
+                                <%= event.time_in_words %>
+                              </span><br>
+                              <%= link_to event.name, event_path(event), class: "event_title" %>
+                              <br>
+                              <%= link_to event.court.name, court_path(event.court), class: "event_location" %>
+                          </div>
+                    <% end %>
+            <% else %>
+                <h3>EVENTS(0)</h3>
+            <% end %>
+
+            </div>
+        </div>
+        <div id="courts_container">
+            <% if @member.courts.any? %>
+                <h3>COURTS(<%= @member.courts.count %>)</h3>
+                        <% @shown_courts.each do |court| %>
+                            <p class="court">
+                                <%= link_to court.name, court_path(court), class: "court" %><br>
+                                <%= court.format_location %>
+                        <% end %>
+                        <% if @hidden_courts.any? %>
+                            <div id="hiddenCourts" class="hide">
+                                <% @hidden_courts.each do |court| %>
+                                <p class="court">
+                                    <%= link_to court.name, court_path(court), class: "court" %><br>
+                                    <%= court.format_location %>
+                                <% end %>
+                            </div>
+                        <a href="#" id="showCourts"><b>Show all <%= @member.courts.count %> courts</b></a>
+                        <% end %>
+            <% else %>
+                <h3>COURTS(0)</h3>
+                    <% if current_user? @member %>
+                        You haven't added any courts.
+                    <% else %>
+                        <%= @member.name %> hasn't added any courts.
+                    <% end %>
+                    <br>
+            <% end %>
+            <p><%= link_to "Create a new court", new_court_path %></p>
+        </div>
     </div>
 </div>

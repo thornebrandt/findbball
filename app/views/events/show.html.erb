@@ -2,7 +2,9 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %> </div>
 <% end %>
-
-<h1><%= @event.name %></h1>
-<%= search_courts_path %>
-<p>Part of this court: " <%= @court.name %></p>
+<div class="container-fluid" id="container-event">
+    <%= render '/events/event_left' %>
+    <%= render '/events/event_right' %>
+    <div class="content">
+        <%= render '/events/event_center' %>
+    </div>

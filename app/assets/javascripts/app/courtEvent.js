@@ -93,9 +93,9 @@ fbb.courtEvent = function(){
             } else {
                 $("#courtNotFound").fadeIn();
             }
-
-            if($("#new_event").valid() && courtFount){
+            if($("#new_event").valid() && courtFound){
                 console.log("Valid");
+                $_form.submit();
             }
         });
     };

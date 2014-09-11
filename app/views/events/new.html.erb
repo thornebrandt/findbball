@@ -55,8 +55,8 @@
                                 <tr>
                                     <td class="td_label">Start Time</td>
                                     <td class="rightColumn">
-                                        <%= select("start", "time", time_options, class: "changeTime") %>
-                                        <%= select("start", "ampm", [['AM', 0],['PM', 12]], class: "changeTime") %>
+                                        <%= select("start", "time", time_options, class: "changeTime", :selected => 8) %>
+                                        <%= select("start", "ampm", [['AM', 0],['PM', 12]], class: "changeTime", :selected => 12) %>
                                     </td>
                                 </tr>
                                 <tr>
