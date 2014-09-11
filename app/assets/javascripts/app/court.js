@@ -1,13 +1,16 @@
 fbb.court = function(){
     function initialize(){
+        console.log("initializing court.js");
         if ( $("#container-court").length ){
+            console.log("container-court");
             prepareGallery();
             prepareVideos();
         }
     };
 
     function prepareVideos(){
-        $("#courtVideos_container #add_court_video").click(function(e){
+        console.log("preparing videos");
+        $("#add_court_video").click(function(e){
             e.preventDefault();
             console.log("huh");
             var $_modal = $("#add_video_modal");
@@ -36,6 +39,12 @@ fbb.court = function(){
                 }
             }
         );
+
+        $("#cancel_youtube_link").click(function(e){
+            e.preventDefault();
+            $("#add_video_modal").modal('hide');
+        });
+
     };
 
 
