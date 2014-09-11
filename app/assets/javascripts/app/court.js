@@ -1,7 +1,7 @@
 fbb.court = function(){
     function initialize(){
         console.log("initializing court.js");
-        if ( $("#container-court").length ){
+        if ( $("#container-court").length || $("#container-event").length ){
             console.log("container-court");
             prepareGallery();
             prepareVideos();

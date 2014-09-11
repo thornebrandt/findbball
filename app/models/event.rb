@@ -51,10 +51,11 @@ class Event < ActiveRecord::Base
     end
 
     def time_in_words
-        if self.start > Time.now
-            "in about " + distance_of_time_in_words(self.start)
+        from_time = Time.now
+        if self.start > from_time
+            "in about " + distance_of_time_in_words(from_time, self.start)
         else
-            time_ago_in_words(self.start) + " ago"
+            distance_of_time_in_words(from_time, self.start) + " ago"
         end
     end
 
@@ -64,8 +65,12 @@ class Event < ActiveRecord::Base
         # elsif @event.court_photos.any?
         #     img_path = @event.court_photos.first().photo
         # else
+        if self.main_photo
+            img_path = CourtPhoto.find(self.main_photo).photo
+        end
+        if !img_path
             img_path = ActionController::Base.helpers.asset_path("events/default.jpg")
-        # end
+        end
         img_path
     end
 
