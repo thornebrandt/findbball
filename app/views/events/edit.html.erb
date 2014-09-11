@@ -1,6 +1,22 @@
-<% provide(:title, "Add an Event") %>
+<% provide(:title, @event.name) %>
 <% time_options = [["12:00", 12], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
                      ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
+<%
+    duration_options = [  ["1 hours or less", 1],
+                        ["2 hours", 2],
+                        ["3 hours", 3],
+                        ["4 hours", 4],
+                        ["5 hours", 5],
+                        ["6 hours", 6],
+                        ["7 hours", 7],
+                        ["8 hours", 8],
+                        ["All day", 24],
+                        ["2 days", 48],
+                        ["3 days", 72],
+                        ["4 days", 96],
+                        ["5 days", 120]
+                    ]
+%>
 
 <div id="add_event_map" class="mapEl"></div>
     <% flash.each do |key, value| %>
@@ -9,27 +25,31 @@
     <div id="content_wrapper">
         <div id="content">
             <div id="heading_articles">
-            <h3>ADD EVENT</h3>
+            <h3>EDIT EVENT</h3>
             </div>
             <div id="addEvent_container">
                 <%= form_for @event, :html => {:autocomplete => "off"} do |f| %>
-                    <%= f.hidden_field :court_id, id: 'realCourtID' %>
+                    <%= f.hidden_field :court_id, id: 'realCourtID', value: @event.court.id %>
                     <%= f.hidden_field :member_id, value: current_user.id %>
-                    <%= f.hidden_field :start, id: 'realStart' %>
-                    <%= f.hidden_field :end, id: 'realEnd' %>
+                    <%= f.hidden_field :start, id: 'realStart', value: @event.start %>
+                    <%= f.hidden_field :end, id: 'realEnd', value: @event.end %>
                         <table id="addEvent_table" class="create_table">
                             <tbody>
                                 <tr>
+                                    <td></td><td><%= link_to "Back to Event", event_path(@event) %></td>
+                                </tr>
+                                <tr>
                                     <td class="td_label">Event Name</td>
                                     <td>
-                                    <%= f.text_field :name, class: 'add_court_textInput' %>
+                                    <%= f.text_field :name, class: 'add_court_textInput', value: @event.name %>
                                     </td>
                                 </tr>
                                 <tr class="row_selectCourt">
                                     <td class="td_label">Court</td>
                                     <td class="rightColumn">
                                         <div class="court_search">
-                                             <input name="event_selectCourt" type="text" id="court_search" placeholder="Type name of court">
+                                             <input value="<%= @event.court.name %>" name="event_selectCourt"
+                                            type="text" id="court_search" placeholder="Type name of court">
                                         </div>
                                         <div class="court_search_selected" style="display: none;">
                                             <span id="selectedCourt"></span>
@@ -49,34 +69,20 @@
                                 <tr>
                                     <td class="td_label">Date</td>
                                     <td class="rightColumn">
-                                        <input type="text" name="event_start_datepicker" id="event_datepicker">
+                                        <input value="<%=@event.start_date_in_words %>" type="text" name="event_start_datepicker" id="event_datepicker">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="td_label">Start Time</td>
                                     <td class="rightColumn">
-                                        <%= select("start", "time", time_options, class: "changeTime", :selected => 8) %>
-                                        <%= select("start", "ampm", [['AM', 0],['PM', 12]], class: "changeTime", :selected => 12) %>
+                                        <%= select("start", "time", time_options, class: "changeTime", :selected => @event.hour_number) %>
+                                        <%= select("start", "ampm", [['AM', 0],['PM', 12]], class: "changeTime", :selected => @event.hour_offset) %>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="td_label">Duration</td>
                                     <td class="rightColumn">
-                                        <select id="event_duration" class='changeTime'>
-                                            <option value="1">1 hour or less</option>
-                                            <option value="2">2 hours</option>
-                                            <option value="3" selected>3 hours</option>
-                                            <option value="4">4 hours</option>
-                                            <option value="5">5 hours</option>
-                                            <option value="6">6 hours</option>
-                                            <option value="7">7 hours</option>
-                                            <option value="8">8 hours</option>
-                                            <option value="24">All day</option>
-                                            <option value="48">2 days</option>
-                                            <option value="72">3 days</option>
-                                            <option value="96">4 days</option>
-                                            <option value="120">5 days</option>
-                                        </select>
+                                        <%= select("event", "duration", duration_options, class: "changeTime", :selected => @event.duration_hours) %>
                                     </td>
                                 </tr>
                                 <tr>
@@ -91,7 +97,8 @@
                                     <td>
                                     </td>
                                     <td class="rightColumn">
-                                        <input type="submit" id="event" class="btn">
+                                        <input type="submit" id="submit_event" class="btn">
+                                        <%= link_to "Cancel", @event, class: "btn" %>
                                     </td>
                                 </tr>
                             </tbody>

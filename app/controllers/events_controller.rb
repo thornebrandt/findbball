@@ -29,6 +29,34 @@ class EventsController < ApplicationController
         end
     end
 
+    def edit
+        @event = Event.find(params[:id])
+        if current_user? @event.member
+            gon.lat = @event.court.lat
+            gon.lng = @event.court.lng
+            @showMap = true
+            @mapEl = "edit_court_map"
+        else
+            flash[:error] = "You are not that event's creator"
+            redirect_to home_path
+        end
+    end
+
+    def update
+        @event = Event.find(params[:id])
+        respond_to do |format|
+            if @event.update_attributes(event_params)
+                format.html { redirect_to(@event, notice: "Event was successfully updated.") }
+                format.json do
+                    respond_with_bip(@event)
+                end
+            else
+                format.html { render :edit }
+                format.json { respond_with_bip(@event) }
+            end
+        end
+    end
+
 
     def new
         puts "CALLING NEW"

@@ -83,8 +83,11 @@ fbb.courtEvent = function(){
 
     var validateEventForm = function(){
         var $_form = $("#new_event");
+        if( $_form.length === 0 ){
+            $_form = $(".edit_event");
+        }
         fbb.validate.validateForm($_form);
-        $("#submit_court").click(function(e){
+        $("#submit_event").click(function(e){
             e.preventDefault();
             var courtFound = false;
             if ( $("#realCourtID").val() ){
@@ -93,7 +96,7 @@ fbb.courtEvent = function(){
             } else {
                 $("#courtNotFound").fadeIn();
             }
-            if($("#new_event").valid() && courtFound){
+            if($_form.valid() && courtFound){
                 console.log("Valid");
                 $_form.submit();
             }

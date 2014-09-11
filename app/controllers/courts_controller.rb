@@ -48,27 +48,28 @@ class CourtsController < ApplicationController
     end
 
     def search
-      results = []
-      query = params[:q]
-      all = []
-      if query && query != ""
-          all = Court.where("name LIKE ?", "%#{query}%")
-      end
-      render json: all
+        results = []
+        query = params[:q]
+        all = []
+        if query && query != ""
+            all = Court.where("name LIKE ?", "%#{query}%")
+        end
+        render json: all
     end
 
     def edit
         @court = Court.find(params[:id])
-        gon.lat = @court.lat
-        gon.lng = @court.lng
-    if current_user? @court.member
-        @showMap = true;
-        @mapEl = "edit_court_map"
-        @review = Review.new
-    else
-        flash[:error] = "You are not that court's owner"
-        redirect_to home_path
-    end
+        if current_user? @court.member
+            gon.lat = @court.lat
+            gon.lng = @court.lng
+
+            @showMap = true;
+            @mapEl = "edit_court_map"
+            @review = Review.new
+        else
+            flash[:error] = "You are not that court's owner"
+            redirect_to home_path
+        end
     end
 
     def update
@@ -87,43 +88,43 @@ class CourtsController < ApplicationController
     end
 
     def new
-    @showMap = true;
-    @mapEl = "add_court_map"
-    if signed_in?
-        @court = Court.new
-        @review = Review.new
-        @review.court_id = @court.id
-        @review.member_id = current_user.id
-        if geo = session[:geo_location]
-            gon.geo = geo
-            gon.lat = geo.lat
-            gon.lng = geo.lng
+        @showMap = true;
+        @mapEl = "add_court_map"
+        if signed_in?
+            @court = Court.new
+            @review = Review.new
+            @review.court_id = @court.id
+            @review.member_id = current_user.id
+            if geo = session[:geo_location]
+                gon.geo = geo
+                gon.lat = geo.lat
+                gon.lng = geo.lng
+            else
+                gon.lat = Rails.configuration.lat
+                gon.lng = Rails.configuration.lng
+            end
         else
-            gon.lat = Rails.configuration.lat
-            gon.lng = Rails.configuration.lng
+            flash[:warning] = "You are not logged in."
+            redirect_to home_path
         end
-    else
-        flash[:warning] = "You are not logged in."
-        redirect_to home_path
-    end
     end
 
     def create
-    @court = current_user.courts.build(court_params)
-    if @court.save!
-      flash[:success] = "Court created!"
-      redirect_to @court
-    else
-      flash[:error] = "Could not create court."
-      Rails.logger.info(@court.errors.inspect)
-      redirect_to action: 'new'
-    end
+        @court = current_user.courts.build(court_params)
+        if @court.save!
+          flash[:success] = "Court created!"
+          redirect_to @court
+        else
+          flash[:error] = "Could not create court."
+          Rails.logger.info(@court.errors.inspect)
+          redirect_to action: 'new'
+        end
     end
 
     def destroy
-    Court.find(params[:id]).destroy
-    flash[:success] = "Court deleted."
-    redirect_to home_path
+        Court.find(params[:id]).destroy
+        flash[:success] = "Court deleted."
+        redirect_to home_path
     end
 
     private

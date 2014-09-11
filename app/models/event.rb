@@ -15,6 +15,24 @@ class Event < ActiveRecord::Base
         self.get_12hour_time(self.end)
     end
 
+    def hour_number
+        self.start.strftime("%l");
+    end
+
+    def hour_offset
+        # for populating the input
+        offset = 0;
+        if self.start.strftime("%p") == "PM"
+            offset = 12
+        end
+        offset
+    end
+
+    def duration_hours
+        # for populating the input
+        ( ( self.end - self.start ) / 1.hour ).round
+    end
+
     def date_long
         self.start_day_in_words + ", " +
         self.start_date_in_words
