@@ -50,6 +50,19 @@ class Court < ActiveRecord::Base
     end
   end
 
+  def mainPhoto
+      puts "YOYOYOYOYOY"
+      if self.main_photo
+          img_path = CourtPhoto.find(self.main_photo).photo
+      elsif self.court_photos.any?
+          img_path = self.court_photos.first().photo
+      else
+          img_path = ActionController::Base.helpers.asset_path("courts/default.jpg")
+      end
+      img_path
+  end
+
+
   def skill_image
     if skill_level > 0
         ActionController::Base.helpers.asset_path("icon/skill_#{verbose_skill_level.downcase}.png")

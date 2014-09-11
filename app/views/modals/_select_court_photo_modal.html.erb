@@ -6,7 +6,7 @@
             </div>
             <%= form_for @court do |f| %>
                 <div class="modal-body">
-                    <%= image_tag mainPhoto, id: "selectPhotoPreview" %>
+                    <%= image_tag @court.mainPhoto, id: "selectPhotoPreview" %>
                     <div id="selectPhotoContainer">
                         <% for court_photo in @court.court_photos %>
                             <%= image_tag court_photo.photo.thumb.to_s, class: "courtPhoto", rel: court_photo.id %>

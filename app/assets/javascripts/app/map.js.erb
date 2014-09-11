@@ -44,9 +44,15 @@ fbb.map = function(){
             console.log(whichMap);
             setupOptions();
             fbb.map = new google.maps.Map(mapEl, self.courtMapOptions);
-            if(whichMap === "court_map" || whichMap === "add_court_map" || whichMap === "edit_court_map"){
-                setupCourtCursor();
-                addCourtDOM();
+            switch(whichMap){
+                case "court_map":
+                    getDistance(fbb.defaultLat, fbb.defaultLng, self.mapObj.lat, self.mapObj.lng, $("#milesAway"));
+                    break;
+                case "add_court_map":
+                case "edit_court_map":
+                    setupCourtCursor();
+                    addCourtDOM();
+                break;
             }
         }
     };

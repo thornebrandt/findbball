@@ -1,7 +1,7 @@
 	<div class="sidebar left">
             <div id="court_left">
                 <div id="profile_pic_container" class="court_pic">
-                    <%= image_tag mainPhoto, id: "profile_pic" %>
+                    <%= image_tag @court.mainPhoto, id: "profile_pic" %>
                     <a href="#" id="edit_photo" class="edit_court_photo">
                         change photo
                     </a>
@@ -12,7 +12,8 @@
                         <h3>EVENTS(<%= @court.events.count %>)</h3>
                         <% @court.events.each do |event| %>
                             <div class="court_event">
-                                <a href="#" class="court_event_title"><%= event.name %></a><br>
+                                <%= link_to event.name, event, class: "court_event_title" %>
+                                <br>
                                 <span class="court_event_time"><i>8:00 pm tonight</i></span><br>
                                 <a href="#" class="court_players">0 people</a> playing
                                 <button class="btn join_btn">Join</button>

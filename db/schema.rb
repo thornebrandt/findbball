@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911031612) do
+ActiveRecord::Schema.define(version: 20140911043244) do
 
   create_table "court_photos", force: true do |t|
     t.string   "photo"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140911031612) do
     t.datetime "end"
     t.float    "lat"
     t.float    "lng"
+    t.integer  "main_photo"
   end
 
   add_index "events", ["court_id", "member_id", "created_at"], name: "index_events_on_court_id_and_member_id_and_created_at"

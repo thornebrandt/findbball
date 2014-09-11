@@ -7,6 +7,8 @@ class EventsController < ApplicationController
             @showMap = true;
             @mapEl = "court_map"
             @court = Court.find(@event.court_id)
+            gon.lat = @event.court.lat
+            gon.lng = @event.court.lng
         else
             flash[:error] = "Could not find that event."
             redirect_to home_path
@@ -47,7 +49,9 @@ class EventsController < ApplicationController
                                         :member_id,
                                         :start,
                                         :end,
-                                        :details )
+                                        :details,
+                                        :main_photo
+                                         )
         end
 
 
