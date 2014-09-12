@@ -14,7 +14,7 @@ fbb.map = function(){
         checkForMap();
         checkForSearchResults();
         showCourtDOM();
-        geoComplete( $("#courtAddress") );
+        courtSearchGeoComplete( $("#courtAddress"));
     };
 
     var checkForSearchResults = function(){
@@ -35,8 +35,8 @@ fbb.map = function(){
 
 
     var checkForMap = function(){
-        var mapScript = $("#showMap");
-        if(mapScript.length){
+        var mapEl = $(".mapEl");
+        if(mapEl.length){
             mapEl = $(".mapEl")[0];
             var whichMap = $(".mapEl").attr("id");
             var mapOptions;
@@ -159,10 +159,10 @@ fbb.map = function(){
         return fbb.marker;
     }
 
-    var geoComplete = function(_input){
-        $_addressInput = _input;
-        if( $("#address_search").length ){
-            $("#address_search").geocomplete({
+    var courtSearchGeoComplete = function(_input){
+        $_addressInput = $("#address_search");
+        if( $_addressInput.length ){
+            $_addressInput.geocomplete({
                 map: ".mapEl",
                 location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
                 mapOptions: {
@@ -175,8 +175,8 @@ fbb.map = function(){
                     icon: icon_path
                 }
             })
-            .bind("geocode:result", geoCompleteSuccessHandler)
-            .bind("geocode:dragged", geoCompleteDraggedHandler)
+            .bind("geocode:result", courtSearchSuccessHandler)
+            .bind("geocode:dragged", courtSearchDraggedHandler)
             .bind("geocode:error", function(event, result){
                 console.log(event);
                 console.log(result);
@@ -228,7 +228,7 @@ fbb.map = function(){
         }
     };
 
-    var geoCompleteDraggedHandler = function(event, result){
+    var courtSearchDraggedHandler = function(event, result){
         var lat = parseFloat(result.k);
         var lng = parseFloat(result.B);
         var latlng = new google.maps.LatLng(lat, lng);
@@ -246,7 +246,7 @@ fbb.map = function(){
     };
 
 
-    var geoCompleteSuccessHandler = function(event, result){
+    var courtSearchSuccessHandler = function(event, result){
         //TODO - make a case by case function
        var _address = result.formatted_address;
        self.address = _address;

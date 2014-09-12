@@ -14,11 +14,10 @@
                               <%= link_to event.court.name, court_path(event.court), class: "event_location" %>
                           </div>
                     <% end %>
+                    </div>
             <% else %>
                 <h3>EVENTS(0)</h3>
             <% end %>
-
-            </div>
         </div>
         <div id="courts_container">
             <% if @member.courts.any? %>
@@ -27,16 +26,7 @@
                             <p class="court">
                                 <%= link_to court.name, court_path(court), class: "court" %><br>
                                 <%= court.format_location %>
-                        <% end %>
-                        <% if @hidden_courts.any? %>
-                            <div id="hiddenCourts" class="hide">
-                                <% @hidden_courts.each do |court| %>
-                                <p class="court">
-                                    <%= link_to court.name, court_path(court), class: "court" %><br>
-                                    <%= court.format_location %>
-                                <% end %>
-                            </div>
-                        <a href="#" id="showCourts"><b>Show all <%= @member.courts.count %> courts</b></a>
+                            </p>
                         <% end %>
             <% else %>
                 <h3>COURTS(0)</h3>

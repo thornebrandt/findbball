@@ -5,113 +5,60 @@
 <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
 <div id="main"><!--<![endif]-->
     <div id="top">
-              <div id="nav">
-                    <a href="/home" id="logo">Findbball</a>
-                    <ul id="nav_dropdown" class="dropdown">
-                        <li>
-                            <a href="#">Bball Courts</a>
-                            <ul>
-                                <li><%= link_to "Add Court", new_court_path %></li>
-                                <li><a href="#">Court Profiles</a></li>
-                            </ul>
-                        </li>
-<!--                         <li>
-                            <a href="#">Community</a>
-                            <ul>
-                                <li><a href="#">Find Events</a></li>
-                                <li><a href="#">Create Event</a></li>
-                                <li><a href="#">Find Member</a></li>
-                            </ul>
-                        </li> -->
-                        <li>
-                            <a class="noLink" href="#">My Bball</a>
-                            <ul>
-                                <li><%= link_to "My Profile", member_path(current_user) %></li>
-                                <li><%= link_to "Edit Profile", edit_member_path(current_user) %></li>
-                                <% if current_user.courts.any? %>
-                                    <li>
-                                        <a class="noLink" href="#">My Courts</a>
-                                                <ul>
-                                                <% current_user.courts.each do |court| %>
-                                                    <li><%= link_to court.name, court_path(court.id) %></li>
-                                                <% end %>
-                                                </ul>
-                                    </li>
-                                <% end %>
-                                    <li>
-                                        <%= link_to "Add Court", new_court_path %>
-                                    </li>
-                                <% if current_user.events.any? %>
-                                    <li>
+      <div id="nav">
+            <a href="/home" id="logo">Findbball</a>
+            <ul id="nav_dropdown" class="dropdown">
+                <li>
+                    <a href="#">Bball Courts</a>
+                    <ul>
+                        <li><%= link_to "Add Court", new_court_path %></li>
+                        <li><a href="#">Court Profiles</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="noLink" href="#">My Bball</a>
+                    <ul>
+                        <li><%= link_to "My Profile", member_path(current_user) %></li>
+                        <li><%= link_to "Edit Profile", edit_member_path(current_user) %></li>
+                        <% if current_user.courts.any? %>
+                            <li>
+                                <a class="noLink" href="#">My Courts</a>
                                         <ul>
-                                        <a class="noLink" href="#">My Events</a>
-                                        <% current_user.events.each do |event| %>
-                                            <li><%= link_to event.name, event_path(event.id) %></li>
+                                        <% current_user.courts.each do |court| %>
+                                            <li><%= link_to court.name, court_path(court.id) %></li>
                                         <% end %>
                                         </ul>
-                                    </li>
+                            </li>
+                        <% end %>
+                            <li>
+                                <%= link_to "Add Court", new_court_path %>
+                            </li>
+                        <% if current_user.events.any? %>
+                            <li>
+                                <ul>
+                                <a class="noLink" href="#">My Events</a>
+                                <% current_user.events.each do |event| %>
+                                    <li><%= link_to event.name, event_path(event.id) %></li>
                                 <% end %>
-                                    <li>
-                                        <%= link_to "Add Event", new_event_path %>
-                                    </li>
-<!--                                 <li>
-                                    <a href="#">My Teams</a>
-                                    <ul>
-                                        <li><a href="#">Hawks</a></li>
-                                        <li><a href="#">Eagles</a></li>
-                                        <li><a href="#">Anonymous</a></li>
-                                    </ul>
-                                </li> -->
-                            </ul>
-                        </li>
-                        <li>
-                            <%= link_to "Logout", signout_path, method: "delete" %>
-                        </li>
+                                </ul>
+                            </li>
+                        <% end %>
+                            <li>
+                                <%= link_to "Add Event", new_event_path %>
+                            </li>
                     </ul>
-                    <div id="nav_top_right">
-                        <div id="logged_in">
-                            You are logged in as
-                            <%= link_to( image_tag(current_user.profile_photo.thumb, { height: 40, width: 40 }), current_user) %>
-                            <%= link_to( current_user.name, current_user, id: "nav_username") %>
-                        </div>
-                    </div>
+                </li>
+                <li>
+                    <%= link_to "Logout", signout_path, method: "delete" %>
+                </li>
+            </ul>
+            <div id="nav_top_right">
+                <div id="logged_in">
+                    You are logged in as
+                    <%= link_to( image_tag(current_user.profile_photo.thumb, { height: 40, width: 40 }), current_user) %>
+                    <%= link_to( current_user.name, current_user, id: "nav_username") %>
                 </div>
-    <div id="nav2_container">
-        <div id="nav2">
-            <form id="i_want_to_form">
-                I want to:
-                <select id="i_want_to">
-                    <option>Find Hoops</option>
-                    <option>Find Events</option>
-                    <option>Find Members</option>
-                </select>
-                <div id="distance">
-                    within
-                    <select id="within">
-                        <option>Any Distance</option>
-                        <option>100 miles</option>
-                        <option>50 miles</option>
-                        <option>25 miles</option>
-                        <option>10 miles</option>
-                    </select>
-                    of
-                    <input id="location_search" type="text" placeholder="<%= current_user.general_location %>" autocomplete="off"/>
-                </div>
-                <input id="member_search" type="text" style="display:none;" placeholder="Member Name" />
-            </form>
-        </div>
-    </div>
-<!--     <div id="nav3_container">
-        <div id="nav3">
-            <%= link_to "My Profile", member_path(current_user.id) %>
-            <%= link_to "Edit Profile", edit_member_path(current_user.id) %>
-            <a href="#">Account Settings</a>
-            <a href="#">My Courts</a>
-            <a href="#">My Events</a>
-            <a href="#">My Teams</a>
-            <div id="mailbox">
-                <a href="#">Inbox(2) <span class="mailbox_icon"></span></a>
             </div>
         </div>
-    </div> -->
+        <%= render 'shared/nav2' %>
 </div>

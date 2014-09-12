@@ -1,0 +1,29 @@
+<div id="nav2_container">
+    <div id="nav2">
+        <form id="i_want_to_form">
+            I want to:
+            <select id="i_want_to">
+                <option>Find Hoops</option>
+                <option>Find Events</option>
+                <option>Find Members</option>
+            </select>
+            <div id="distance">
+                within
+                <select id="within">
+                    <option value="">Any Distance</option>
+                    <option value="100">100 miles</option>
+                    <option value="50">50 miles</option>
+                    <option value="25">25 miles</option>
+                    <option value="10">10 miles</option>
+                </select>
+                of
+                <% if signed_in? && current_user.general_location %>
+                    <input id="location_search" type="text" placeholder="<%= current_user.general_location %>" autocomplete="off"/>
+                <% else %>
+                    <input id="location_search" type="text" placeholder="Atlanta" autocomplete="off"/>
+                <% end %>
+            </div>
+            <input id="member_search" type="text" style="display:none;" placeholder="Member Name" />
+        </form>
+    </div>
+</div>

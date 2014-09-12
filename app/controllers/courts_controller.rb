@@ -33,7 +33,7 @@ class CourtsController < ApplicationController
         @mapEl = "find_hoops_canvas";
         @ip = request.remote_ip
         @origin = params[:by]
-        @miles = params[:within] || 100
+        @miles = params[:within] || 10000
         if !@origin
             if geo = session[:geo_location]
                 gon.geo = geo

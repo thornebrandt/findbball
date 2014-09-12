@@ -15,42 +15,12 @@
                                 <li><a href="#">Court Profiles</a></li>
                             </ul>
                         </li>
-<!--                         <li>
-                            <a href="#">Community</a>
-                            <ul>
-                                <li><a href="#">Find Events</a></li>
-                                <li><a href="#">Create Event</a></li>
-                                <li><a href="#">Find Member</a></li>
-                            </ul>
-                        </li> -->
                         <li>
                             <a href="#">My Bball</a>
                             <ul>
                                 <li><a class="loginBtn" href="#">My Profile</a></li>
                                 <li><a class="loginBtn" href="#">Edit Profile</a></li>
                                 </li>
-                               <!--  <li>
-                                    <a href="#">My Courts</a>
-                                    <ul>
-                                        <li><a href="court.html">Wicker Park Fieldhouse</a></li>
-                                        <li><a href="court.html">Another Really Really Long...</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">My Events</a>
-                                    <ul>
-                                        <li><a href="event.html">Roller Skate BBall</a></li>
-                                        <li><a href="event.html">Senior BBall</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">My Teams</a>
-                                    <ul>
-                                        <li><a href="#">Hawks</a></li>
-                                        <li><a href="#">Eagles</a></li>
-                                        <li><a href="#">Anonymous</a></li>
-                                    </ul>
-                                </li> -->
                             </ul>
                         </li>
                         <li>
@@ -65,30 +35,5 @@
                         <%= link_to "Not a member yet?", signup_path %>
                     </div>
                 </div>
-    <div id="nav2_container">
-        <div id="nav2">
-            <form id="i_want_to_form">
-                I want to:
-                <select id="i_want_to">
-                    <option>Find Hoops</option>
-                    <option>Find Events</option>
-                    <option>Find Members</option>
-                </select>
-                <div id="distance">
-                    within
-                    <select id="within">
-                        <option>Any Distance</option>
-                        <option>100 miles</option>
-                        <option>50 miles</option>
-                        <option>25 miles</option>
-                        <option>10 miles</option>
-                    </select>
-                    of
-                    <input id="location_search" type="text" placeholder="Chicago" autocomplete="off"/>
-                </div>
-                <input id="member_search" />
-                <button type="submit" class="btn btn-default right_align">Go</button>
-            </form>
-        </div>
-    </div>
+    <%= render 'shared/nav2' %>
 </div>

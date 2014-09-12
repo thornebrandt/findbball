@@ -90,6 +90,10 @@ class MembersController < ApplicationController
 	def create
 		if !signed_in?
             @member = Member.new(member_params)
+            if geo = session[:geo_location]
+                @member.lat = geo.lat
+                @member.lng = geo.lng
+            end
     		begin
                 if @member.save!
                     sign_in @member
