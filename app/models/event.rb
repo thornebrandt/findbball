@@ -1,8 +1,8 @@
 class Event < ActiveRecord::Base
     include ActionView::Helpers::DateHelper
-
     belongs_to :member, inverse_of: :events
     belongs_to :court, inverse_of: :events
+    has_many :attendees, inverse_of: :event
 
     validates :name,          presence: true, length: { maximum: 150 }
     validates :court_id,      presence: true

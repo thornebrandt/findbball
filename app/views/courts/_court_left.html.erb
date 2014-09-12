@@ -17,7 +17,7 @@
                                 <%= link_to event.name, event, class: "court_event_title" %>
                                 <br>
                                 <span class="court_event_time"><i>8:00 pm tonight</i></span><br>
-                                <a href="#" class="court_players">0 people</a> playing
+                                <span href="#" class="court_players"><%= pluralize(event.attendees.count, "person")%></span> playing
                                 <button class="btn join_btn">Join</button>
                             </div>
                         <% end %>

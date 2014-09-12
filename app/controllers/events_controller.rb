@@ -7,6 +7,8 @@ class EventsController < ApplicationController
             @showMap = true;
             @mapEl = "court_map"
             @court = Court.find(@event.court_id)
+            @attendee = Attendee.new if signed_in?
+            puts @attendee.inspect
             @court_photo = CourtPhoto.new if signed_in?
             gon.court_photos = @court.court_photos.last(12);
             gon.lat = @event.court.lat

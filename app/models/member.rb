@@ -6,6 +6,7 @@ class Member < ActiveRecord::Base
     has_many :court_videos, inverse_of: :member
     has_many :reviews, inverse_of: :member
     has_many :events, inverse_of: :member
+    has_many :attendees,  dependent: :destroy, inverse_of: :member
 	has_secure_password
 	before_save :beforeSave
     before_validation :beforeValidation
@@ -19,6 +20,11 @@ class Member < ActiveRecord::Base
     # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
+
+
+    def attendingEvent(_event_id)
+        Attendee.find_by_event_id_and_member_id(_event_id, self.id)
+    end
 
 	def beforeSave
 		self.email.downcase!

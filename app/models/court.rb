@@ -4,6 +4,7 @@ class Court < ActiveRecord::Base
   has_many :events, dependent: :destroy, inverse_of: :court
   has_many :court_photos, dependent: :destroy, inverse_of: :court
   has_many :court_videos, dependent: :destroy, inverse_of: :court
+  has_many :attendees, inverse_of: :court
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
   acts_as_mappable
 

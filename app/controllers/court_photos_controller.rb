@@ -13,19 +13,14 @@ class CourtPhotosController < ApplicationController
             flash[:success] = "Court photo uploaded"
             if params[:court_photo][:event_id]
                 @event = Event.find(params[:court_photo][:event_id])
-                puts "I AM EDITING THE EVENT PHOTO"
-                puts @court_photo.id
-                puts "WHAT THE HELL"
                 if @event.update_attribute :main_photo, @court_photo.id
-                    puts "IT WORKED!!!"
-                    puts @event.inspect
                     redirect_to @event
                 end
             else
                 redirect_to @court_photo.court
             end
         else
-            flash[:error] = "Could not upload court photo.";
+            flash[:error] = "Could not upload court photo."
             redirect_to @court_photo.court;
         end
     end

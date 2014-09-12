@@ -8,10 +8,31 @@
                     </a>
                 <% end %>
         </div>
-        <button id="joinEvent" class="btn">Join Event</button>
+        <% if signed_in? %>
+            <div class="centered">
+                <% if @current_attendee = current_user.attendingEvent(@event.id) %>
+                    <span>You are attending this event.</span>
+                    <%= button_to "Leave Event", @current_attendee, method: :delete, class: "btn btn-warning" %><br>
+                <% else %>
+                    <%= form_for @attendee do |f| %>
+                        <%= f.hidden_field :court_id, :value => @event.court.id %>
+                        <%= f.hidden_field :member_id, :value => @current_user.id %>
+                        <%= f.hidden_field :event_id, :value => @event.id %>
+                        <%= f.submit "Join Event", class: "btn", id: "joinEvent" %>
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %>
         <br>
         <div id="friends_container">
-            <h4>PLAYERS(0)</h4>
+            <% if @event.attendees.any? %>
+                <h4>PLAYERS(<%= @event.attendees.count %>)</h4>
+                <% for attendee in @event.attendees.first(20) %>
+                    <%= link_to( image_tag(attendee.member.profile_photo.thumb, { height: 40, width: 40 }), attendee.member) %>
+                <% end %>
+            <% else %>
+                <h4>PLAYERS(0)</h4>
+            <% end %>
         </div>
     </div>
 </div>
