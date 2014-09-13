@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
     belongs_to :member, inverse_of: :events
     belongs_to :court, inverse_of: :events
     has_many :attendees, inverse_of: :event
+    acts_as_mappable
 
     validates :name,          presence: true, length: { maximum: 150 }
     validates :court_id,      presence: true
@@ -57,6 +58,10 @@ class Event < ActiveRecord::Base
         else
             distance_of_time_in_words(from_time, self.start) + " ago"
         end
+    end
+
+    def author
+        Member.find(self.member_id)
     end
 
     def mainPhoto

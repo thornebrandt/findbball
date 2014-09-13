@@ -1,0 +1,54 @@
+<div id="find_hoops_canvas" class="findHoops mapEl"></div>
+<div id="content" class="findHoops">
+    <% if @found_events.any? %>
+        <div id="heading_articles">
+            <h3>RESULTS(<%= @found_events.count %>)</h3>
+        </div>
+        <div id="results_container">
+            <% @found_events.each do |event| %>
+                <div class="event_result">
+                    <h2 class="event_result_title"><%= event.name %></h2>
+                    <a href="court.html" class="event_result_court"><%= event.court.name %></a>
+                    <br>
+                    <span class="event_result_time"><%= event.date_long%> <%= event.times_long %></span>
+                    <br>
+                    <span class="event_result_address gray"><%= event.court.location %></span>
+                    <div class="author_container">
+                        <%= link_to( image_tag(event.author.profile_photo.thumb, { height: 40, width: 40 }), event.author) %>
+                        <br>
+                        <div class="author_info_right">
+                        added by <b><%= link_to event.author.name, event.author %></b><br>
+                        <%= time_ago_in_words(event.created_at) %><br>
+                        </div>
+                    </div>
+                    <span class="event_result_attending"><%= event.attendees.count %>attending</span>
+                    <button class="event_result_join btn">Join Event</button>
+                </div>
+            <% end %>
+        </div>
+    <% else %>
+        <div id="heading_articles">
+            <h3>FAKE RESULTS(3)</h3>
+        </div>
+        <div id="event_result_container">
+            <div class="event_result">
+                <h2 class="event_result_title">High Heels Tournament</h2>
+                <a href="court.html" class="event_result_court">Wicker Park Fieldhouse</a>
+                <br>
+                <span class="event_result_time">Tomorrow 8pm - 10pm</span>
+                <br>
+                <span class="event_result_address gray">1425 N Damen Ave Chicago IL 606022</span>
+                <div class="author_container">
+                    <a href="player_profile.html"><img src="img/user/paris_hilton.jpg"></a>
+                    <br>
+                    <div class="author_info_right">
+                    added by <b><a href="player_profile.html">Paris</a></b><br>
+                    April 2013<br>
+                    </div>
+                </div>
+                <span class="event_result_attending">12 attending</span>
+                <button class="event_result_join btn">Join Event</button>
+            </div>
+        </div>
+    <% end %>
+</div>

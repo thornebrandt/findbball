@@ -61,6 +61,24 @@ class EventsController < ApplicationController
         end
     end
 
+    def find_events
+        @showMap = true;
+        @mapEl = "find_events_canvas";
+        @ip = request.remote_ip
+        @origin = params[:by]
+        @miles = params[:within] || 10000
+        if !@origin
+            if geo = session[:geo_location]
+                gon.geo = geo
+                gon.lat = geo.lat
+                gon.lng = geo.lng
+                @origin = [geo.lat, geo.lng]
+            else
+                @origin = [Rails.configuration.lat, Rails.configuration.lng]
+            end
+        end
+        @found_events = Event.within(@miles, :origin => @origin).limit(4)
+    end
 
     def new
         puts "CALLING NEW"
