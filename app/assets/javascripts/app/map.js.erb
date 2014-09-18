@@ -20,7 +20,25 @@ fbb.map = function(){
     var checkForSearchResults = function(){
         if ($("#find_hoops_canvas").length){
             populateDistances();
+            Arbiter.subscribe("searchLocation:fetched", function(searchLocation){
+                console.log("searchLocation");
+                console.log(searchLocation);
+                if(searchLocation){
+                    $("#thisLocation").text(searchLocation);
+                }
+            });
+            reverseGeoCode(gon.lat, gon.lng, "searchLocation:fetched");
         }
+    };
+
+    var reverseGeoCode = function(_lat, _lng, _event){
+        var _latLng = new google.maps.LatLng(parseFloat(_lat), parseFloat(_lng));
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'latLng': _latLng}, function(results, status){
+            console.log(results);
+            var _address = results[1].formatted_address;
+            Arbiter.publish(_event, _address);
+        });
     };
 
     var populateDistances = function(){
@@ -29,18 +47,15 @@ fbb.map = function(){
             var lng = parseFloat( $(this).children('.courtLng').val() );
             getDistance(gon.lat, gon.lng, lat, lng, $(this));
         });
-
-        console.log("debugging lat lng for gon");
-        debugLatLng(gon.lat, gon.lng);
-
-
     };
 
     var debugLatLng = function(_lat, _lng){ //DEBUG
         var _latLng = new google.maps.LatLng(parseFloat(_lat), parseFloat(_lng));
         var geocoder = new google.maps.Geocoder();
+        console.log("wtf");
+        console.log(_latLng);
         geocoder.geocode({'latLng': _latLng}, function(results, status){
-            console.log("origin results");
+            console.log(results);
             console.log(results[0].formatted_address);
         });
     }

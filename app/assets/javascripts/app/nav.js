@@ -37,7 +37,8 @@ fbb.nav = function(){
     var findHoopsSuccessHandler = function(event, result){
         var lat = result.geometry.location.k;
         var lng = result.geometry.location.B;
-        var _url = "/find-hoops?lat=" + lat + "&lng=" + lng
+        var searchURL = $("#i_want_to").val();
+        var _url = "/"+searchURL+"?lat=" + lat + "&lng=" + lng
         //var _url = "/find-hoops?by=" + result.formatted_address
         var _within = $("#within").val();
         if (_within){
@@ -45,7 +46,6 @@ fbb.nav = function(){
         }
         window.location = _url;
     };
-
 
     // var navFindHoopsGeoComplete = function(_input){
     //     $_addressInput = _input;

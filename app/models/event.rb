@@ -16,6 +16,10 @@ class Event < ActiveRecord::Base
         self.get_12hour_time(self.end)
     end
 
+    def start_time
+        self.get_12hour_time(self.start)
+    end
+
     def hour_number
         self.start.strftime("%l");
     end

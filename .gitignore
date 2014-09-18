@@ -26,4 +26,5 @@ doc/
 .idea
 .secret
 Thumbs.db
+/config/initializers/geokit_config.rb
 /config/initializers/quiet_assets.rb

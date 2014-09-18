@@ -19,7 +19,7 @@
                         <br>
                         <div class="author_info_right">
                         added by <b><%= link_to event.author.name, event.author %></b><br>
-                        <%= time_ago_in_words(event.created_at) %><br>
+                        <%= time_ago_in_words(event.created_at) %> ago<br>
                         </div>
                     </div>
                     <span class="event_result_attending"><%= event.attendees.count %> attending</span>
@@ -27,13 +27,14 @@
                 </div>
             <% end %>
         </div>
+        <p><%= link_to "Create A New Event", new_event_path %></p>
     <% else %>
     <div id="heading_articles">
         <h3>RESULTS(0)</h3>
     </div>
     <div id="results_container">
-        <h4>Sorry, we couldn't find any events near you.</h4>
-        You can <%= link_to "Create One", create_event_path %>
+        <h4>Sorry, we couldn't find any events near <span id='thisLocation'>this location.</span></h4>
+        You can <%= link_to "Create One", new_event_path %>
     </div>
 
     <% end %>

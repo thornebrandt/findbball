@@ -9,6 +9,7 @@ class CourtsController < ApplicationController
     def show
         if Court.exists?(params[:id])
             @court = Court.find(params[:id])
+
             @court_photo = CourtPhoto.new if signed_in?
             @review = Review.new if signed_in?
             @showMap = true
@@ -33,20 +34,25 @@ class CourtsController < ApplicationController
         if params[:lat] && params[:lng]
             @origin = [params[:lat], params[:lng]]
         elsif params[:by]
-
+            geo = params[:by]
         else
-            if geo = session[:geo_location]
+            geo = session[:geo_location]
+            if geo.lat
                 @origin = [geo.lat, geo.lng]
                 gon.geo = geo;
             else
                 @origin = [Rails.configuration.lat, Rails.configuration.lng]
             end
         end
-        puts "@origin"
-        puts @origin
-        gon.lat = @origin[0]
-        gon.lng = @origin[1]
-        @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
+        if @origin.is_a?(Array)
+            gon.lat = @origin[0]
+            gon.lng = @origin[1]
+            @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
+        else
+            @found_hoops = {}
+            gon.lat = Rails.configuration.lat
+            gon.lng = Rails.configuration.lng
+        end
     end
 
     def search

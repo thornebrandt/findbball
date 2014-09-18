@@ -62,6 +62,10 @@ fbb.courtEvent = function(){
             var $_end = $("#realEnd");
             $_start.val(start_date_iso);
             $_end.val(end_date_iso);
+            console.log("start_date_iso");
+            console.log(start_date_iso);
+            console.log("end_date_iso");
+            console.log(end_date_iso);
         }
     };
 
@@ -109,7 +113,8 @@ fbb.courtEvent = function(){
     };
 
     var prepareTimePicker = function(){
-        $("#changeTime").change(function(e){
+        $("select").change(function(e){
+            console.log("change??");
             calculateDates();
         });
     };

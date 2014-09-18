@@ -4,6 +4,8 @@ class EventsController < ApplicationController
     def show
         if Event.exists?(params[:id])
             @event = Event.find(params[:id])
+            puts "COURTTTT"
+            puts @event.inspect
             @showMap = true;
             @mapEl = "court_map"
             @court = Court.find(@event.court_id)
@@ -68,26 +70,31 @@ class EventsController < ApplicationController
     end
 
     def find_events
-        @showMap = true;
-        @mapEl = "find_events_canvas";
-        @ip = request.remote_ip
-        @origin = params[:by]
         @miles = params[:within] || 10000
-        if !@origin
-            if geo = session[:geo_location]
-                gon.geo = geo
-                gon.lat = geo.lat
-                gon.lng = geo.lng
+        if params[:lat] && params[:lng]
+            @origin = [params[:lat], params[:lng]]
+        elsif params[:by]
+            geo = params[:by]
+        else
+            geo = session[:geo_location]
+            if geo.lat
                 @origin = [geo.lat, geo.lng]
+                gon.geo = geo;
             else
                 @origin = [Rails.configuration.lat, Rails.configuration.lng]
             end
-        else
-            @origin = [Rails.configuration.lat, Rails.configuration.lng]
         end
-        @found_events = Event.within(@miles, :origin => @origin).limit(4)
-        gon.found_events = @found_events;
+        if @origin.is_a?(Array)
+            gon.lat = @origin[0]
+            gon.lng = @origin[1]
+            @found_events = Event.within(@miles, :origin => @origin).limit(4)
+        else
+            @found_events = {}
+            gon.lat = Rails.configuration.lat
+            gon.lng = Rails.configuration.lng
+        end
     end
+
 
     def new
         @showMap = true;
