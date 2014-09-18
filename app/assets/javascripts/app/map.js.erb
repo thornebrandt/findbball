@@ -19,19 +19,31 @@ fbb.map = function(){
 
     var checkForSearchResults = function(){
         if ($("#find_hoops_canvas").length){
-            console.log("found hoops");
             populateDistances();
         }
     };
 
     var populateDistances = function(){
         $(".result_distance").each(function(i, _this){
-            var lat = $(this).children('.courtLat').val();
-            var lng = $(this).children('.courtLng').val();
-            console.log( lat + " , " + lng  );
-            getDistance(fbb.defaultLat, fbb.defaultLng, self.mapObj.lat, self.mapObj.lng, $(this));
+            var lat = parseFloat( $(this).children('.courtLat').val() );
+            var lng = parseFloat( $(this).children('.courtLng').val() );
+            getDistance(gon.lat, gon.lng, lat, lng, $(this));
         });
+
+        console.log("debugging lat lng for gon");
+        debugLatLng(gon.lat, gon.lng);
+
+
     };
+
+    var debugLatLng = function(_lat, _lng){ //DEBUG
+        var _latLng = new google.maps.LatLng(parseFloat(_lat), parseFloat(_lng));
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'latLng': _latLng}, function(results, status){
+            console.log("origin results");
+            console.log(results[0].formatted_address);
+        });
+    }
 
 
     var checkForMap = function(){
@@ -40,8 +52,7 @@ fbb.map = function(){
             mapEl = $(".mapEl")[0];
             var whichMap = $(".mapEl").attr("id");
             var mapOptions;
-            console.log("which map");
-            console.log(whichMap);
+            console.log("the map is " + whichMap);
             setupOptions();
             fbb.map = new google.maps.Map(mapEl, self.courtMapOptions);
             switch(whichMap){
@@ -95,8 +106,8 @@ fbb.map = function(){
     var getDistance = function(lat1, lng1, lat2, lng2, result_el){
 
         var service = new google.maps.DistanceMatrixService();
-        var origin = new google.maps.LatLng(lat1, lng1);
-        var destination = new google.maps.LatLng(lat2, lng2);
+        var origin = new google.maps.LatLng(parseFloat(lat1), parseFloat(lng1));
+        var destination = new google.maps.LatLng(parseFloat(lat2), parseFloat(lng2));
 
         var foundDistanceHandler = function(response, status){
             if( status != google.maps.DistanceMatrixStatus.OK){

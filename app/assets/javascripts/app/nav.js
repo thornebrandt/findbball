@@ -35,11 +35,10 @@ fbb.nav = function(){
     };
 
     var findHoopsSuccessHandler = function(event, result){
-        console.log(result.k);
         var lat = result.geometry.location.k;
         var lng = result.geometry.location.B;
-        //var _url = "/find-hoops?by=["+lat+","+lng+"]"
-        var _url = "/find-hoops?by=" + result.formatted_address
+        var _url = "/find-hoops?lat=" + lat + "&lng=" + lng
+        //var _url = "/find-hoops?by=" + result.formatted_address
         var _within = $("#within").val();
         if (_within){
             _url += "&within=" + _within;
@@ -99,7 +98,6 @@ fbb.nav = function(){
 
 
         $("#member_search").on("typeahead:selected", memberSelectionHandler);
-        console.log("member search autocorrect");
     };
 
     function memberSelectionHandler(obj, datum){

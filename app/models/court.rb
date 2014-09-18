@@ -6,7 +6,8 @@ class Court < ActiveRecord::Base
   has_many :court_videos, dependent: :destroy, inverse_of: :court
   has_many :attendees, inverse_of: :court
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
-  acts_as_mappable
+
+  acts_as_mappable :distance_field_name => :distance
 
   # VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
 
@@ -52,7 +53,6 @@ class Court < ActiveRecord::Base
   end
 
   def mainPhoto
-      puts "YOYOYOYOYOY"
       if self.main_photo
           img_path = CourtPhoto.find(self.main_photo).photo
       elsif self.court_photos.any?

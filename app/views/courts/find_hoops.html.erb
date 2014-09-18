@@ -1,3 +1,4 @@
+<% provide(:title, "Find Hoops") %>
 <div id="find_hoops_canvas" class="findHoops mapEl"></div>
 <div id="content" class="findHoops">
     <% if @found_hoops.any? %>
@@ -12,7 +13,7 @@
                 <p class="result_address"><%= court.location %></p>
                 <p class="result_distance">mile
                     <input type="hidden" class="courtLat" value="<%=court.lat %>">
-                    <input type="hidden" class="courtLng" value="<%=court.lat %>">
+                    <input type="hidden" class="courtLng" value="<%=court.lng %>">
                 </p>
                 <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(court.location)%>" class="result_directions">
                     (Get Directions)

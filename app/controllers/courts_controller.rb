@@ -29,21 +29,23 @@ class CourtsController < ApplicationController
     end
 
     def find_hoops
-        @showMap = true;
-        @mapEl = "find_hoops_canvas";
-        @ip = request.remote_ip
-        @origin = params[:by]
         @miles = params[:within] || 10000
-        if !@origin
+        if params[:lat] && params[:lng]
+            @origin = [params[:lat], params[:lng]]
+        elsif params[:by]
+
+        else
             if geo = session[:geo_location]
-                gon.geo = geo
-                gon.lat = geo.lat
-                gon.lng = geo.lng
                 @origin = [geo.lat, geo.lng]
+                gon.geo = geo;
             else
                 @origin = [Rails.configuration.lat, Rails.configuration.lng]
             end
         end
+        puts "@origin"
+        puts @origin
+        gon.lat = @origin[0]
+        gon.lng = @origin[1]
         @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
     end
 

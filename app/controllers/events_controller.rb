@@ -8,7 +8,6 @@ class EventsController < ApplicationController
             @mapEl = "court_map"
             @court = Court.find(@event.court_id)
             @attendee = Attendee.new if signed_in?
-            puts @attendee.inspect
             @court_photo = CourtPhoto.new if signed_in?
             gon.court_photos = @court.court_photos.last(12);
             gon.lat = @event.court.lat
@@ -23,6 +22,10 @@ class EventsController < ApplicationController
 
     def create
         @event = current_user.events.build(event_params)
+        @court = Court.find(params[:event][:court_id])
+        @event.lat = @court.lat
+        @event.lng = @court.lng
+        #temporary solution until we can map through
         if @event.save!
             flash[:success] = "Event created!"
             redirect_to @event
@@ -36,6 +39,9 @@ class EventsController < ApplicationController
     def edit
         @event = Event.find(params[:id])
         if current_user? @event.member
+            #temporary solution until we can map through
+            @event.lat = @event.court.lat;
+            @event.lng = @event.court.lng;
             gon.lat = @event.court.lat
             gon.lng = @event.court.lng
             @showMap = true
@@ -76,12 +82,14 @@ class EventsController < ApplicationController
             else
                 @origin = [Rails.configuration.lat, Rails.configuration.lng]
             end
+        else
+            @origin = [Rails.configuration.lat, Rails.configuration.lng]
         end
         @found_events = Event.within(@miles, :origin => @origin).limit(4)
+        gon.found_events = @found_events;
     end
 
     def new
-        puts "CALLING NEW"
         @showMap = true;
         @mapEl = "add_event_map"
         if signed_in?
