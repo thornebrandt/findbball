@@ -1,4 +1,4 @@
-fbb.courtEvent = function(){
+fbb._event = function(){
     fbb.courtEvent = {};
 
     var initialize = function(){
@@ -8,6 +8,26 @@ fbb.courtEvent = function(){
             prepareCourtAutoComplete();
             validateEventForm();
         }
+
+        if( typeof gon.editEvent === "object" ){
+            prepareEditValues();
+        }
+    };
+
+
+    var prepareEditValues = function(){
+        // mind the utc...
+        var _start = moment.utc(gon.editEvent.start);
+        var _end = moment.utc(gon.editEvent.end);
+        var _diff = fbb.time.differenceHours( _end, _start );
+        $("#event_duration").val(_diff);
+        $("#start_time").val( _start.format("h") );
+        if ( _start.format("A") === "PM") {
+            $("#start_ampm").val(12);
+        } else {
+            $("#start_ampm").val(0);
+        }
+        fbb.courtEvent.start_date = _start.format("YYYY-M-D");
     };
 
     var prepareCourtAutoComplete = function(){
@@ -40,7 +60,6 @@ fbb.courtEvent = function(){
     };
 
     var courtSelectionHandler = function(obj, datum){
-        console.log("court selected");
         var court_id = datum.id;
         $("#realCourtID").val(court_id);
         $("#court_search").blur();
@@ -62,10 +81,8 @@ fbb.courtEvent = function(){
             var $_end = $("#realEnd");
             $_start.val(start_date_iso);
             $_end.val(end_date_iso);
-            console.log("start_date_iso");
-            console.log(start_date_iso);
-            console.log("end_date_iso");
-            console.log(end_date_iso);
+        } else {
+            console.log( "nothing to work with here" );
         }
     };
 
@@ -76,20 +93,20 @@ fbb.courtEvent = function(){
     };
 
     var datePickerOptions = {
-        changeMonth: false,
+        changeMonth: true,
         changeYear: false,
         dateFormat: 'MM dd',
+        duration: 'fast',
         showButtonPanel: true,
         onSelect: selectStartDate
     };
-
-
 
     var validateEventForm = function(){
         var $_form = $("#new_event");
         if( $_form.length === 0 ){
             $_form = $(".edit_event");
         }
+
         fbb.validate.validateForm($_form);
         $("#submit_event").click(function(e){
             e.preventDefault();
@@ -114,7 +131,6 @@ fbb.courtEvent = function(){
 
     var prepareTimePicker = function(){
         $("select").change(function(e){
-            console.log("change??");
             calculateDates();
         });
     };

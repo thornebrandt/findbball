@@ -39,18 +39,25 @@ class EventsController < ApplicationController
     end
 
     def edit
-        @event = Event.find(params[:id])
-        if current_user? @event.member
-            #temporary solution until we can map through
-            @event.lat = @event.court.lat;
-            @event.lng = @event.court.lng;
-            gon.lat = @event.court.lat
-            gon.lng = @event.court.lng
-            @showMap = true
-            @mapEl = "edit_court_map"
+        if Event.exists?(params[:id])
+            @event = Event.find(params[:id])
+            gon.editEvent = @event
+            if current_user? @event.member
+                #temporary solution until we can map through
+                @event.lat = @event.court.lat
+                @event.lng = @event.court.lng
+                gon.lat = @event.court.lat
+                gon.lng = @event.court.lng
+                @showMap = true
+                @mapEl = "edit_court_map"
+            else
+                flash[:error] = "You are not that event's creator"
+                redirect_to home_path
+            end
         else
-            flash[:error] = "You are not that event's creator"
+            flash[:error] = "Could not find that event."
             redirect_to home_path
+            return
         end
     end
 

@@ -27,7 +27,7 @@ $(function(){
     fbb.member();
     fbb.bestInPlace();
     fbb.court();
-    fbb.courtEvent();
+    fbb._event();
 
     $(".modal.fade, .modal-message").click(function(){
       $(this).modal('hide'); //manually doing the modal hide bullshit...
