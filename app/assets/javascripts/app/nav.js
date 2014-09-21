@@ -20,6 +20,13 @@ fbb.nav = function(){
         setupNavSearch();
         memberSearchAutoCorrect();
         findHoopsGeoComplete( $("#location_search") );
+        DOM();
+    };
+
+    var DOM = function(){
+        $(".noLink").click(function(e){
+            e.preventDefault();
+        });
     };
 
     var findHoopsGeoComplete = function(_input){
@@ -86,7 +93,6 @@ fbb.nav = function(){
 
         $("#i_want_to").change(
             function() {
-                console.log("changed");
                 var thisVal = $(this).val();
                 switch (thisVal) {
                     case "find-members":
@@ -95,8 +101,6 @@ fbb.nav = function(){
                         $("#member_search").focus();
                         break;
                     default:
-                        console.log(" hih?" );
-                        console.log( thisVal );
                         $("#member_search").hide();
                         $("#distance").show();
                 }

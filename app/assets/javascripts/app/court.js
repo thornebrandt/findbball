@@ -1,14 +1,12 @@
 fbb.court = function(){
     function initialize(){
         if ( $("#container-court").length || $("#container-event").length ){
-            console.log("container-court");
             prepareGallery();
             prepareVideos();
         }
     };
 
     function prepareVideos(){
-        console.log("preparing videos");
         $("#add_court_video").click(function(e){
             e.preventDefault();
             console.log("huh");
