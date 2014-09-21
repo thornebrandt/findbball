@@ -1,9 +1,25 @@
 <div class="review">
-	<%= image_tag review.member.photo, class: "review_author" %>
-	<p class="review_body">
-		<%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
-		<%= review.content %>
-	</p>
+    <% if review.member %>
+	   <%= image_tag review.member.photo.thumb, class: "review_author" %>
+       <p class="review_body">
+        <%= link_to review.member.name, member_path(review.member), class: "review_author_name" %><br>
+        <%= review.content %>
+       </p>
+       <div class='review_date'><%= time_ago_in_words(review.created_at) %> ago</div>
+    <% else %>
+        <p class="review_body">
+            <%= image_tag "player_missing.png", class: "review_author" %>
+            <a href="#" class="review_author_name deleted_user"><i>Deleted User</i></a>
+            <br>
+            <i><%= review.content %></i>
+            <% if signed_in? %>
+                <%= link_to raw('Delete <i class="glyphicon glyphicon-trash"></i>'), review, method: :delete,
+                             data: { confirm: "Anyone can delete this because the user no longer exists. You sure no one would find this helpful?" },
+                             class: "review_delete_link" %>
+            <% end %>
+            <div class='review_date'><%= time_ago_in_words(review.created_at) %> ago</div>
+        </p>
+    <% end %>
 	<% if current_user?(review.member) %>
 		<%= link_to raw('Delete <i class="glyphicon glyphicon-trash"></i>'), review, method: :delete,
                      data: { confirm: "You sure?" },

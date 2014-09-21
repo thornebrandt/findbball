@@ -22,6 +22,10 @@ rails s -e production
 rake assets:precompile RAILS_ENV=production
 
 
+#troubleshooting ,
+
+check the files in .gitignore
+
 
 
 
