@@ -7,11 +7,14 @@ Findbball::Application.routes.draw do
   resources :court_photos, only: [:create, :destroy]
   resources :court_videos, only: [:create, :destroy]
   resources :attendees, only: [:create, :destroy]
+  resource :contacts, only: [:new, :create]
 
 
   root 'static_pages#splash'
   match '/home', to: 'static_pages#home',     via: 'get'
   match '/test-mail', to: 'static_pages#test_mail', via: 'get'
+  match '/test_form', to: 'static_pages#test_form', via: 'post'
+  match '/test_form', to: 'static_pages#test_form', via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
   match '/search_members', to: 'members#search', via: 'get'

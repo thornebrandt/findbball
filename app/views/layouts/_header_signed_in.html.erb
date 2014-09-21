@@ -54,7 +54,8 @@
             </ul>
             <div id="nav_top_right">
                 <div id="logged_in">
-                    You are logged in as
+                    <a href="#" class="reportProblem">Report Problem</a>
+                    | You are logged in as
                     <%= link_to( image_tag(current_user.profile_photo.thumb, { height: 40, width: 40 }), current_user) %>
                     <%= link_to( current_user.name, current_user, id: "nav_username") %>
                 </div>

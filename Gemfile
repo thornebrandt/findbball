@@ -15,6 +15,12 @@ gem 'carrierwave'
 gem 'gon'
 gem 'geokit-rails'
 
+
+# Forms, mail {
+gem 'mail_form', '~> 1.5.0.rc'
+gem 'simple_form', '~> 3.0.0.rc'
+# }
+
 group :development, :test do
 	gem 'sqlite3'
 	gem 'rspec-rails', '2.13.1'

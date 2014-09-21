@@ -38,4 +38,8 @@ fbb.footer = function(){
             $("#contactModal").modal();
         }
     );
+
+    fbb.modal( $(".reportProblem"), $("#reportProblemModal") );
+
+
 }
