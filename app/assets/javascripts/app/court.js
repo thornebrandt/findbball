@@ -145,7 +145,10 @@ fbb.court = function(){
         };
 
         function prepareUploadCourtPhoto(){
+
             var input = document.getElementById("images"), formdata = false;
+            console.log("hi");
+            console.log(input);
             fbb.uploadImagePreview(input, "btn1", addCourtPhoto);
         };
 

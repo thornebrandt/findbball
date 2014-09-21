@@ -10,7 +10,6 @@ fbb.uploadHelper = function(){
         }
 
         if (window.FormData) {
-            //internet explorer
             formdata = new FormData();
             document.getElementById(_btn).style.display = "none";
         }
