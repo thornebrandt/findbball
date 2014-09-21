@@ -1,5 +1,6 @@
 Findbball::Application.configure do
 
+    #global variable of atlanta
     config.lat = 33.7489954
     config.lng = -84.3879824
 
@@ -18,10 +19,7 @@ Findbball::Application.configure do
 
     # Show full error reports and disable caching.
     config.consider_all_requests_local       = false
-    config.action_controller.perform_caching = false
-
-    # Don't care if the mailer can't send.
-    config.action_mailer.raise_delivery_errors = false
+    config.action_controller.perform_caching = false    # Don't care if the mailer can't send.
 
     # Print deprecation notices to the Rails logger.
     config.active_support.deprecation = :log
@@ -40,6 +38,15 @@ Findbball::Application.configure do
     config.autoload_paths += %W(#{config.root}/../best_in_place/lib)
     # This line tells rails to unload the root constant (module/class) for our gem on every request
     ActiveSupport::Dependencies.explicitly_unloadable_constants << 'BestInPlace'
+
+    config.action_mailer.raise_delivery_errors = true
+
+    #config.action_mailer.delivery_method = :sendmail
+    config.action_mailer.default_url_options = {host: "findbball.com"}
+    config.action_mailer.delivery_method = :smtp
+
+
+
 end
 
 class ActionDispatch::Request

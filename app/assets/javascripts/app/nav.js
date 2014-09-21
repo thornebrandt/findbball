@@ -47,31 +47,6 @@ fbb.nav = function(){
         window.location = _url;
     };
 
-    // var navFindHoopsGeoComplete = function(_input){
-    //     $_addressInput = _input;
-    //     if( $("#address_search").length ){
-    //         $("#address_search").geocomplete({
-    //             map: ".mapEl",
-    //             location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
-    //             mapOptions: {
-    //                 zoom: 15,
-    //                 scrollwheel: false,
-    //                 mapTypeId: "roadmap"
-    //             },
-    //             markerOptions: {
-    //                 draggable: true,
-    //                 icon: icon_path
-    //             }
-    //         })
-    //         .bind("geocode:result", courtSearchSuccessHandler)
-    //         .bind("geocode:dragged", courtSearchDraggedHandler)
-    //         .bind("geocode:error", function(event, result){
-    //             console.log(event);
-    //             console.log(result);
-    //         });
-    //     }
-    // };
-
 
     function memberSearchAutoCorrect(){
         var results = new Bloodhound({
@@ -111,14 +86,17 @@ fbb.nav = function(){
 
         $("#i_want_to").change(
             function() {
+                console.log("changed");
                 var thisVal = $(this).val();
                 switch (thisVal) {
-                    case "Find Members":
+                    case "find-members":
                         $("#distance").hide();
                         $("#member_search").show();
                         $("#member_search").focus();
                         break;
                     default:
+                        console.log(" hih?" );
+                        console.log( thisVal );
                         $("#member_search").hide();
                         $("#distance").show();
                 }

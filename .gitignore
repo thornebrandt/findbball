@@ -28,3 +28,4 @@ doc/
 Thumbs.db
 /config/initializers/geokit_config.rb
 /config/initializers/quiet_assets.rb
+/config/initializers/app_env_vars.rb

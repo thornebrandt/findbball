@@ -9,7 +9,7 @@ fbb._event = function(){
             validateEventForm();
         }
 
-        if( typeof gon.editEvent === "object" ){
+        if( typeof gon === "object" && typeof gon.editEvent === "object" ){
             prepareEditValues();
         }
     };

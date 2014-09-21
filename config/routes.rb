@@ -11,6 +11,7 @@ Findbball::Application.routes.draw do
 
   root 'static_pages#splash'
   match '/home', to: 'static_pages#home',     via: 'get'
+  match '/test-mail', to: 'static_pages#test_mail', via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
   match '/search_members', to: 'members#search', via: 'get'
