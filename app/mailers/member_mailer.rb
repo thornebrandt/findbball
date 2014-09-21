@@ -5,9 +5,11 @@ class MemberMailer < ActionMailer::Base
     end
 
 
-    def report_problem
-        mail to: 'thornebrandt@gmail.com, eldonnellk@gmail.com', subject: "testing multiple recipients", from: "info@findbball.com"
+    def report_problem(contact)
+        @contact = contact
+        mail to: 'thornebrandt@gmail.com',
+            subject: "Problem Reported",
+            from: "info@findbball.com"
     end
-
 
 end

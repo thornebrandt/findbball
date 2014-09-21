@@ -5,11 +5,21 @@
                 <h3>Report a Problem</h3>
             </div>
             <div class="modal-body">
-            <p>Did you experience a bug? We're currently beta-testing the site and you may encounter issues as we develop. Please be as detailed as possible about what you experienced. Your feedback is very much appreciated.</p>
+            <p>Did you experience a bug? Your feedback is very much appreciated.</p>
                 <% @contact = Contact.new %>
                 <%= form_for @contact do |f| %>
-                    <%= f.text_field :message %>
-                    <%= f.text_field :email %>
+                    <%= f.text_field :address, class: 'hid'%>
+                    <%= f.hidden_field :browser, value: request.env['HTTP_USER_AGENT'] %>
+                    <div class="form-group">
+                        <%= f.text_area :message, class: 'textArea' %>
+                    </div>
+                    <% if signed_in? %>
+                        <%= f.hidden_field :email, value: current_user.email %>
+                    <% else %>
+                        <div class="form-group">
+                            Contact: <%= f.text_field :email %>
+                        </div>
+                    <% end %>
                     <%= f.submit "Submit" %>
                 <% end %>
             </div>

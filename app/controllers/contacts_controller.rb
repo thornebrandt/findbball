@@ -6,16 +6,12 @@ class ContactsController < ApplicationController
     def create
         @contact = Contact.new(params[:contact])
         puts @contact.inspect
-        @dude = @contact
-        redirect_to test_form_path
 
-        # @contact.request = request
-        # if @contact.deliver
-        #     flash.now[:error] = nil
-        #     flash.now[:notice] = "Message Sent."
-        # else
-        #     flash.now[:error] = "Cannot send message."
-        #     render :new
-        # end
+        if MemberMailer.report_problem(@contact).deliver
+            flash[:notice] = "Message Sent."
+        else
+            flash[:notice] = "Cannot send message."
+        end
+        redirect_to request.referrer
     end
 end
