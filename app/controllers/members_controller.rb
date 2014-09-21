@@ -107,7 +107,10 @@ class MembersController < ApplicationController
         			render 'new'
         		end
             rescue => e
-                flash[:error] = "Email address is already in use"
+                puts "ERRRRROOOORRRR"
+                puts e
+                puts "END OF ERROR"
+                flash[:error] = "Sorry, #{@member.email} is already in use"
                 redirect_to signup_path
             end
         else

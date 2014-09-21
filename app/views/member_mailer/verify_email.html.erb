@@ -1,9 +1,11 @@
 Welcome to FindBball, <%= @member.name %>,
 Click the link below to verify your email.
 <br>
-<% @link = 'http://findbball.com/verify_email?i=#{@member.id}&q=#{@member.verification}' %>
-
-
+<% @link = 'http://findbball.com/verify_email?i=' +
+@member.id.to_s +
+'&q=' +
+@member.verification.to_s
+%>
 <a href="<%= @link %>">
 <%= @link %>
 </a>

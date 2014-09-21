@@ -17,6 +17,12 @@
                     </div>
             <% else %>
                 <h3>EVENTS(0)</h3>
+                <% if current_user? @member %>
+                    You haven't added any events
+                    <%= link_to "Create a new event", new_event_path %></p>
+                <% else %>
+                    <%= @member.name %> hasn't added any courts.
+                <% end %>
             <% end %>
         </div>
         <div id="courts_container">
@@ -32,12 +38,13 @@
                 <h3>COURTS(0)</h3>
                     <% if current_user? @member %>
                         You haven't added any courts.
+                        <%= link_to "Create a new court", new_court_path %></p>
                     <% else %>
                         <%= @member.name %> hasn't added any courts.
                     <% end %>
                     <br>
             <% end %>
-            <p><%= link_to "Create a new court", new_court_path %></p>
+            <p>
         </div>
     </div>
 </div>

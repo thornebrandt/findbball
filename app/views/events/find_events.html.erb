@@ -14,14 +14,16 @@
                     <span class="event_result_time"><%= event.date_long%> <%= event.times_long %></span>
                     <br>
                     <span class="event_result_address gray"><%= event.court.location %></span>
-                    <div class="author_container">
-                        <%= link_to( image_tag(event.author.profile_photo.thumb, { height: 40, width: 40 }), event.author) %>
-                        <br>
-                        <div class="author_info_right">
-                        added by <b><%= link_to event.author.name, event.author %></b><br>
-                        <%= time_ago_in_words(event.created_at) %> ago<br>
+                    <% if event.author %>
+                        <div class="author_container">
+                            <%= link_to( image_tag(event.author.profile_photo.thumb, { height: 40, width: 40 }), event.author) %>
+                            <br>
+                            <div class="author_info_right">
+                            added by <b><%= link_to event.author.name, event.author %></b><br>
+                            <%= time_ago_in_words(event.created_at) %> ago<br>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                     <span class="event_result_attending"><%= event.attendees.count %> attending</span>
                     <%= link_to "View Event", event, class: "event_result_join btn btn-info" %>
                 </div>

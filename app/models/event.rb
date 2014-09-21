@@ -69,7 +69,12 @@ class Event < ActiveRecord::Base
     end
 
     def author
-        Member.find(self.member_id)
+        self.member
+        # if Member.find(self.member_id).exists?
+        #     Member.find(self.member_id)
+        # else
+        #     false
+        # end
     end
 
     def mainPhoto

@@ -94,7 +94,7 @@ class EventsController < ApplicationController
         if @origin.is_a?(Array)
             gon.lat = @origin[0]
             gon.lng = @origin[1]
-            @found_events = Event.within(@miles, :origin => @origin).limit(4)
+            @found_events = Event.within(@miles, :origin => @origin).limit(8)
         else
             @found_events = {}
             gon.lat = Rails.configuration.lat

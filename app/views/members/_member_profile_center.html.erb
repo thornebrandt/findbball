@@ -4,8 +4,8 @@
             <%= render 'members/member_headline' %>
         <% end %>
     <% if current_user? @member %>
-        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit</a>'), edit_member_path(@member) %> |
-        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete</a>'), @member, method: :destroy,
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit Profile</a>'), edit_member_path(@member) %> |
+        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete Account</a>'), @member, method: :destroy,
               data: { confirm: raw("Are you sure you want to delete your profile? &nbsp; &nbsp; &nbsp; This can't be undone.") }  %>
         <br>
     <% end %>

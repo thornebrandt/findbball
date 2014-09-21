@@ -18,7 +18,7 @@ Findbball::Application.routes.draw do
   match '/search_courts', to: 'courts#search', via: 'get'
   match '/find-hoops', to: 'courts#find_hoops', via: 'get'
   match '/find-events', to: 'events#find_events', via: 'get'
-  match '/verify_email', to: 'contacts#verify_email', via: 'get'
+  match '/verify_email', to: 'static_pages#verify_email', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
