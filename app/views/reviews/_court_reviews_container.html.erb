@@ -10,7 +10,11 @@
     		<p class="profile_subtitle"><%= @court.name %> hasn't been reviewed yet</p>
     <% end %>
     <% if signed_in? %>
-    	<%= render 'reviews/review_form' %>
+        <% if current_user.registered? %>
+    	   <%= render 'reviews/review_form' %>
+        <% else %>
+            You must <b>verify your email</b> to post a review. <br>  <i>( Check your inbox for a verification link. )</i>
+        <% end %>
     <% end %>
    </div>
 </div>
