@@ -33,6 +33,10 @@ class Event < ActiveRecord::Base
         offset
     end
 
+    def short_date
+        self.start.strftime("%b %e")
+    end
+
     def duration_hours
         # for populating the input
         ( ( self.end - self.start ) / 1.hour ).round

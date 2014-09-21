@@ -14,4 +14,8 @@ class ContactsController < ApplicationController
         end
         redirect_to request.referrer
     end
+
+    def verify_email
+    end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911111028) do
+ActiveRecord::Schema.define(version: 20140921101658) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140911111028) do
     t.boolean  "active",                       default: true
     t.boolean  "registered"
     t.boolean  "admin"
+    t.string   "verification"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

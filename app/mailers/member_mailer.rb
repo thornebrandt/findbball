@@ -12,4 +12,12 @@ class MemberMailer < ActionMailer::Base
             from: "info@findbball.com"
     end
 
+    def verify_email(member)
+        @member = member
+        mail to: @member.email,
+            subject: "Welcome to FindBball",
+            from: "info@findbball.com"
+    end
+
+
 end

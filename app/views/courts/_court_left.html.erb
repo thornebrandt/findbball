@@ -2,21 +2,20 @@
             <div id="court_left">
                 <div id="profile_pic_container" class="court_pic">
                     <%= image_tag @court.mainPhoto, id: "profile_pic" %>
-                    <% if current_user?(@court.member) %>
+                    <% if signed_in? && current_user?(@court.member) %>
                         <a href="#" id="edit_photo" class="edit_court_photo">
                             change photo
                         </a>
                     <% end %>
                 </div>
-                <button id="playToday" class="btn">Play at this court today</button>
                 <div id="court_events_container">
                     <% if @court.events.any? %>
                         <h3>EVENTS(<%= @court.events.count %>)</h3>
-                        <% @court.events.each do |event| %>
+                        <% @court.events.last(8).each do |event| %>
                             <div class="court_event">
                                 <%= link_to event.name, event, class: "court_event_title" %>
                                 <br>
-                                <span class="court_event_time"><i><%= event.start_time %> <%= event.time_in_words %></i></span><br>
+                                <span class="court_event_time"><i><%= event.short_date %> <%= event.start_time %></i></span><br>
                                 <span href="#" class="court_players"><%= pluralize(event.attendees.count, "person")%></span> playing
                                 <%= link_to "Go", event, class: "btn btn-default join_btn" %>
                             </div>

@@ -90,12 +90,14 @@ class MembersController < ApplicationController
 	def create
 		if !signed_in?
             @member = Member.new(member_params)
+            @member.verification = SecureRandom.hex(13)
             if geo = session[:geo_location]
                 @member.lat = geo.lat
                 @member.lng = geo.lng
             end
     		begin
                 if @member.save!
+                    MemberMailer.verify_email(@member).deliver
                     sign_in @member
         			flash[:success] = "Welcome to Findbball"
         			redirect_to @member
@@ -175,7 +177,9 @@ class MembersController < ApplicationController
                                             :organized,
                                             :favorite_player,
                                             :about,
-                                            :photo
+                                            :photo,
+                                            :registerd,
+                                            :verification
                                         )
 		end
 

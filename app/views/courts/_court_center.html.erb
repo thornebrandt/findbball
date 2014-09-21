@@ -6,7 +6,7 @@
 <p id="courtHours">
     Open <%= @court.open_hours %>
 </p>
-<% if current_user? @court.member %>
+<% if signed_in? && current_user == @court.member %>
 <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_court_path(@court) %> |
 <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), @court, method: :delete,
                                               data: { confirm: "You sure?" },

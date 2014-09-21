@@ -1,9 +1,11 @@
     <div class="sidebar right">
-            <div class="author_container">
-                <%= link_to (image_tag @event.member.photo), member_path(@event.member) %></a><br>
-                added by <b><%= link_to @event.member.name, member_path(@event.member), class: "court" %></a></b><br>
-                <%=  time_ago_in_words(@event.created_at) %> ago<br>
-            </div>
+            <% if @event.member %>
+                <div class="author_container">
+                    <%= link_to (image_tag @event.member.photo), member_path(@event.member) %></a><br>
+                    added by <b><%= link_to @event.member.name, member_path(@event.member), class: "court" %></a></b><br>
+                    <%=  time_ago_in_words(@event.created_at) %> ago<br>
+                </div>
+            <% end %>
         <div id="profile_right">
             <div id="court_map" class="mapEl">
             </div>
@@ -15,7 +17,6 @@
                     Get Directions
                 </a>
             </p>
-            <a href="#" id="changeLocation">Change your location</a><br>
             <%= image_tag "add_right_placeholder.png", id: "ad_right2" %>
         </div>
     </div>

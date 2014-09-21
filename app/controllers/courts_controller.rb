@@ -9,7 +9,6 @@ class CourtsController < ApplicationController
     def show
         if Court.exists?(params[:id])
             @court = Court.find(params[:id])
-
             @court_photo = CourtPhoto.new if signed_in?
             @review = Review.new if signed_in?
             @showMap = true

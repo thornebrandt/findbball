@@ -12,15 +12,13 @@ Findbball::Application.routes.draw do
 
   root 'static_pages#splash'
   match '/home', to: 'static_pages#home',     via: 'get'
-  match '/test-mail', to: 'static_pages#test_mail', via: 'get'
-  match '/test_form', to: 'static_pages#test_form', via: 'post'
-  match '/test_form', to: 'static_pages#test_form', via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
   match '/search_members', to: 'members#search', via: 'get'
   match '/search_courts', to: 'courts#search', via: 'get'
   match '/find-hoops', to: 'courts#find_hoops', via: 'get'
   match '/find-events', to: 'events#find_events', via: 'get'
+  match '/verify_email', to: 'contacts#verify_email', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

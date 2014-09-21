@@ -12,16 +12,18 @@
 <p id="courtHours">
     Open <%= @event.court.open_hours %>
 </p>
-<% if current_user? @event.member %>
+<% if signed_in? && current_user == @event.member %>
     <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_path(@event) %> |
     <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'),
         @event, method: :delete, data: { confirm: "You sure?" }, title: @event.name %>
     <br>
 <% end %>
 <hr>
-<h4>EVENT DETAILS</h4>
-    <%= @event.details %>
-<hr>
+<% if !@event.details.empty? %>
+    <h4>EVENT DETAILS</h4>
+        <%= @event.details %>
+    <hr>
+<% end %>
 <% if signed_in? %>
     <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
     <% if current_user?(@court.member) %>
