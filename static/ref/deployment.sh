@@ -1,3 +1,14 @@
+
+#local production server:
+
+rails s -e production
+
+#production assets ( do locally )
+
+rake assets:precompile RAILS_ENV=production
+
+
+
 cd webapps/findbball_rails/findbball
 git pull
 
@@ -12,14 +23,6 @@ cd findbball
 bundle install
 rake db:migrate RAILS_ENV=production
 ../bin/restart
-
-#local production server:
-
-rails s -e production
-
-#production assets ( do locally )
-
-rake assets:precompile RAILS_ENV=production
 
 
 #troubleshooting ,
