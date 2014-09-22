@@ -26,7 +26,9 @@ fbb.court = function(){
                 var pastedLink = $("#youtube_url").val();
                 var vid = new Array();
                 var vidHtml;
-                var video_id = pastedLink.split('v=')[1];
+                var _regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+                var _match = pastedLink.match(_regex);
+                var video_id = _match[1];
                 if (video_id) {
                     $("#vi").val(video_id);
                     $("#new_court_video").submit();

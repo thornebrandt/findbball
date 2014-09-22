@@ -1,7 +1,7 @@
     <div class="sidebar right">
             <% if @event.member %>
                 <div class="author_container">
-                    <%= link_to (image_tag @event.member.photo), member_path(@event.member) %></a><br>
+                    <%= link_to (image_tag @event.member.profile_photo_thumb), member_path(@event.member) %></a><br>
                     added by <b><%= link_to @event.member.name, member_path(@event.member), class: "court" %></a></b><br>
                     <%=  time_ago_in_words(@event.created_at) %> ago<br>
                 </div>

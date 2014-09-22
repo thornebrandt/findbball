@@ -84,6 +84,14 @@ class Member < ActiveRecord::Base
         end
     end
 
+    def profile_photo_thumb
+        if photo.nil?
+            ActionController::Base.helpers.asset_path("player_placeholder.png")
+        else
+            photo.thumb
+        end
+    end
+
 	def Member.encrypt(token)
 		Digest::SHA1.hexdigest(token.to_s)
 	end
