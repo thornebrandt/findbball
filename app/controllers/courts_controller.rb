@@ -46,7 +46,7 @@ class CourtsController < ApplicationController
         if @origin.is_a?(Array)
             gon.lat = @origin[0]
             gon.lng = @origin[1]
-            @found_hoops = Court.within(@miles, :origin => @origin).limit(4)
+            @found_hoops = Court.within(@miles, :origin => @origin).limit(8)
         else
             @found_hoops = {}
             gon.lat = Rails.configuration.lat
