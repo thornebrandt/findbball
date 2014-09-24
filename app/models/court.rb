@@ -7,7 +7,11 @@ class Court < ActiveRecord::Base
   has_many :attendees, inverse_of: :court
   accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
 
-  acts_as_mappable :distance_field_name => :distance
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :lat,
+                   :lng_column_name => :lng
 
   # VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
 

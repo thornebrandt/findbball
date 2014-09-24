@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
     include ActionView::Helpers::DateHelper
     belongs_to :member, inverse_of: :events
-    belongs_to :court, inverse_of: :events
+    belongs_to :court, dependent: :destroy, inverse_of: :events
     has_many :attendees, inverse_of: :event
     acts_as_mappable
 
