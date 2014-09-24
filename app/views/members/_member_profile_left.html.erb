@@ -3,9 +3,11 @@
             <% if signed_in? %>
                 <div id="profile_pic_container">
                     <%= image_tag @member.profile_photo, id: "profile_pic" %>
-                    <a href="#" id="edit_photo" class="edit_player_photo">
-                        edit photo
-                    </a>
+                    <% if signed_in? && current_user == @member %>
+                        <a href="#" id="edit_photo" class="edit_player_photo">
+                            edit photo
+                        </a>
+                    <% end %>
                 </div>
                 <%= render "modals/upload_profile_photo_modal" %>
             <% else %>
