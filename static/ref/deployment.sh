@@ -31,6 +31,11 @@ check the files in .gitignore
 
 
 
+on production
+
+tail -f /home/thornybranch/webapps/findbball_rails/nginx/logs/error.log
+
+
 
 
 

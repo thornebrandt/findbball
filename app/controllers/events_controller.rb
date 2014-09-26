@@ -4,8 +4,6 @@ class EventsController < ApplicationController
     def show
         if Event.exists?(params[:id])
             @event = Event.find(params[:id])
-            puts "COURTTTT"
-            puts @event.inspect
             @showMap = true;
             @mapEl = "court_map"
             @court = Court.find(@event.court_id)
