@@ -227,6 +227,7 @@ DEPENDENCIES
   debugger
   factory_girl_rails (= 4.2.1)
   faker (= 1.4.2)
+  ffi (= 1.9.4)
   geokit-rails
   gon
   jbuilder (~> 1.0.2)
