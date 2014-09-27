@@ -1,4 +1,4 @@
-var fbb = {
+window.fbb = {
     defaultLat : 33.7489954,
     defaultLng : -84.3879824 ,
     defaultCourt : "Wicker Park Fieldhouse",
@@ -14,12 +14,19 @@ var fbb = {
             modal_el.modal(modalOptions);
         });
     }
-}
+};
 
-$(function(){
+
+
+var pageLoad = function(){
+    initialize();
+};
+
+var initialize = function(){
+    var fbb = window.fbb;
     fbb.helpers();
     fbb.uploadHelper();
-    fbb.map();
+    fbb._map();
     fbb.nav();
     fbb.hero();
     fbb.footer();
@@ -36,5 +43,8 @@ $(function(){
             e.stopPropagation();
         }
     });
+};
 
-});
+
+$(document).on('page:load', pageLoad);
+$(document).ready(pageLoad);
