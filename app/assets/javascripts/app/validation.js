@@ -1,7 +1,10 @@
 fbb.validate = {
     rules: {
         "event[name]": "required",
-        event_start_datepicker: "required",
+        event_start_datepicker: {
+            required: true,
+            date: true
+        },
         event_selectCourt: "required"
     },
     messages: {

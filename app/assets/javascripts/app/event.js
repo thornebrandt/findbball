@@ -101,15 +101,28 @@ fbb._event = function(){
         onSelect: selectStartDate
     };
 
+    var blurEvents = function(){
+        console.log("not a valid date blur");
+        $("input").blur(function(){
+            if ( !$("#realStart").val() ){
+                $("#event_datepicker").val("");
+            }
+        });
+
+    };
+
     var validateEventForm = function(){
         var $_form = $("#new_event");
         if( $_form.length === 0 ){
             $_form = $(".edit_event");
         }
 
+        blurEvents();
+
         fbb.validate.validateForm($_form);
         $("#submit_event").click(function(e){
             e.preventDefault();
+            //validate court
             var courtFound = false;
             if ( $("#realCourtID").val() ){
                 console.log("court found");
