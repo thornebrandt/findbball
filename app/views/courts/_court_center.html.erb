@@ -4,7 +4,7 @@
     <%= @court.format_location %>
 </p>
 <p id="courtHours">
-    Open <%= @court.open_hours %>
+    <%= @court.open_hours %>
 </p>
 <% if signed_in? && current_user == @court.member %>
 <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_court_path(@court) %> |
@@ -22,7 +22,9 @@
     <% end %>
 
     <p id="courtPickUpGame">
-        <b>Best time for "Pick-up Game:"</b> <span id="pickupTime"><%= @court.pickup_hours %></span>
+        <% for pickup_game in @court.pickup_games %>
+            Day: <%= pickup_game.day %> - <%= pickup_game.time %>
+        <% end %>
     </p>
 </div>
 <hr>

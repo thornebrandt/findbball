@@ -7,6 +7,7 @@ class Member < ActiveRecord::Base
     has_many :reviews, inverse_of: :member
     has_many :events, inverse_of: :member
     has_many :attendees,  dependent: :destroy, inverse_of: :member
+    has_many :pickup_games, inverse_of: :member
 	has_secure_password
 	before_save :beforeSave
     before_validation :beforeValidation

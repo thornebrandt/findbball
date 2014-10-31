@@ -101,6 +101,11 @@ class CourtsController < ApplicationController
         @mapEl = "add_court_map"
         if signed_in?
             @court = Court.new
+            i = 0
+            3.times do
+                @court.pickup_games.build(:day => i, :time => 5, :member_id => current_user.id)
+                i += 1
+            end
             @review = Review.new
             @review.court_id = @court.id
             @review.member_id = current_user.id
@@ -146,9 +151,6 @@ class CourtsController < ApplicationController
                                       :lng,
                                       :member_id,
                                       :skill_level,
-                                      :pickup_time,
-                                      :pickup_day,
-                                      :pickup_am,
                                       :open_time_1,
                                       :open_am_1,
                                       :open_time_2,
@@ -157,7 +159,8 @@ class CourtsController < ApplicationController
                                       :open_am_1,
                                       :open_time_2,
                                       :open_am_2,
-                                      :main_photo
+                                      :main_photo,
+                                      :pickup_games_attributes => [ :day, :time, :member_id, :court_id]
                                       )
     end
 end

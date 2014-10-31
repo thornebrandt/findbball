@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
     validates :start,         presence: true
     validates :end,           presence: true
 
+    scope :future, ->(time) { where("start > ?", time) }
+
     def times_long
         self.get_12hour_time(self.start) + " - " +
         self.get_12hour_time(self.end)

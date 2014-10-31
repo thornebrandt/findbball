@@ -21,7 +21,8 @@ export PATH=$PWD/bin:$PATH
 gem install bundle
 cd findbball
 bundle install
-rake db:migrate RAILS_ENV=production
+#rake db:migrate RAILS_ENV=production    not doing this anymore
+rake db:schema:load
 ../bin/restart
 
 

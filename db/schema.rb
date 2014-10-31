@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140921101658) do
+ActiveRecord::Schema.define(version: 20141023052213) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
+    t.integer  "court_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pickup_attendees", force: true do |t|
+    t.integer  "pickup_game_id"
     t.integer  "court_id"
     t.integer  "member_id"
     t.datetime "created_at"
@@ -45,11 +53,8 @@ ActiveRecord::Schema.define(version: 20140921101658) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "skill_level", limit: 1,   default: -1
-    t.integer  "pickup_time", limit: 1
     t.string   "location",    limit: 200
     t.string   "website",     limit: 512
-    t.string   "pickup_am",   limit: 2
-    t.string   "pickup_day",  limit: 10
     t.integer  "open_time_1", limit: 1
     t.string   "open_am_1",   limit: 2
     t.integer  "open_time_2", limit: 1
@@ -57,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140921101658) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "main_photo"
+    t.decimal  "distance"
   end
 
   create_table "events", force: true do |t|
@@ -73,7 +79,9 @@ ActiveRecord::Schema.define(version: 20140921101658) do
     t.integer  "main_photo"
   end
 
-  add_index "events", ["court_id", "member_id", "created_at"], name: "index_events_on_court_id_and_member_id_and_created_at"
+  add_index "events", ["court_id"], name: "index_events_on_court_id"
+  add_index "events", ["member_id"], name: "index_events_on_member_id"
+
 
   create_table "members", force: true do |t|
     t.string   "name"
@@ -109,6 +117,18 @@ ActiveRecord::Schema.define(version: 20140921101658) do
   add_index "members", ["full_name"], name: "index_members_on_full_name"
   add_index "members", ["name"], name: "index_members_on_name", unique: true
   add_index "members", ["remember_token"], name: "index_members_on_remember_token"
+
+  create_table "pickup_games", force: true do |t|
+    t.integer  "day"
+    t.float    "time"
+    t.integer  "member_id"
+    t.integer  "court_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pickup_games", ["court_id"], name: "index_pickup_games_on_court_id"
+  add_index "pickup_games", ["day"], name: "index_pickup_games_on_day"
 
   create_table "reviews", force: true do |t|
     t.string   "content"

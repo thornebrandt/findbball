@@ -63,21 +63,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :best_time, 'Best Time for a "pick-up" game' %></td>
+                                <td class="td_label"><%= f.label :best_time, 'Best Times for a "pick-up" game' %></td>
                                 <td>
-                                    <%= f.select :pickup_day, options_for_select(day_options),   id: "pickupDay",  class: "day_of_week" %>
-                                	<%= f.select :pickup_time, options_for_select(time_options), id: "pickupTime", class: "time_of_day" %>
-                                    <%= f.select :pickup_am, options_for_select(am_options),     id: "pickupAM",   class: "am_or_pm" %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td_label"><%= f.label "Accessible Hours" %></td>
-                                <td>
-                                	<%= f.select :open_time_1, options_for_select(time_options), id: "oepnTime1", class: "time_of_day" %>
-                                    <%= f.select :open_am_1, options_for_select(am_options),  id: "openAM1", class: "am_or_pm"%>
-                                        to
-                                   	<%= f.select :open_time_2, options_for_select(time_options), id: "oepnTime2", class: "time_of_day" %>
-                                    <%= f.select :open_am_2, options_for_select(am_options), id: "openAM2", class: "am_or_pm"  %>
+                                    Here we go
+                                    <%= f.fields_for :pickup_games do |builder| %>
+                                        <p>
+                                            <%= builder.label :day, 'Day' %>
+                                            <%= builder.text_field :day %>
+                                            <%= builder.hidden_field :member_id, :value => current_user.id %>
+                                            <%= builder.hidden_field :time, :value => "5" %>
+                                        </p>
+                                    <% end %>
                                 </td>
                             </tr>
                             <tr>

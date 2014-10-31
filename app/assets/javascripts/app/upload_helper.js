@@ -20,7 +20,7 @@ fbb.uploadHelper = function(){
                 len = this.files.length,
                 img, reader, file;
 
-            for (; i < len; i++) {
+            for (i; i < len; i++) {
                 file = this.files[i];
 
                 if (!!file.type.match(/image.*/)) {
