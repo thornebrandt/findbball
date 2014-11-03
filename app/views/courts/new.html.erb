@@ -1,13 +1,15 @@
 <% provide(:title, "Add a court") %>
-<% day_options = [  ["Sunday", "Sunday"],
-                    ["Monday", "Monday"],
-                    ["Tuesday", "Tuesday"],
-                    ["Wednesday", "Wednesday"],
-                    ["Thursday", "Thursday"],
-                    ["Friday", "Friday"],
-                    ["Saturday", "Saturday"]] %>
+<% day_options = [
+                    ["Select a Day", ""],
+                    ["Sunday", 0],
+                    ["Monday", 1],
+                    ["Tuesday", 2],
+                    ["Wednesday", 3],
+                    ["Thursday", 4],
+                    ["Friday", 5],
+                    ["Saturday", 6]] %>
 
-<% time_options = [["12:00", 12], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
+<% time_options = [["12:00", 0], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
                      ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
 
 <% am_options = [["AM", "am"], ["PM", "pm"]] %>
@@ -48,7 +50,7 @@
                             <tr class="address_search_container">
                                 <td class="td_label">New Court Address</td>
                                 <td width="672">
-                                <input id="address_search", placeholder: "Enter address of court" />
+                                <input id="address_search", name="court_address" placeholder: "Enter address of court" />
                                 <button id="submitMap" type="submit" class="hidden">Map</button>
                                 </td>
                             </tr>
@@ -65,15 +67,18 @@
                             <tr>
                                 <td class="td_label"><%= f.label :best_time, 'Best Times for a "pick-up" game' %></td>
                                 <td>
-                                    Here we go
                                     <%= f.fields_for :pickup_games do |builder| %>
                                         <p>
-                                            <%= builder.label :day, 'Day' %>
-                                            <%= builder.text_field :day %>
+                                            <%= builder.select :day, options_for_select(day_options) %>
+                                            <%= builder.select :time, options_for_select(time_options, 6), { :include_blank=>false }, { :class => 'courtTime' } %>
+                                            <select class="selectCourtAMPM">
+                                                <option value="0">AM</option>
+                                                <option value="12" selected>PM</option>
+                                            </select>
                                             <%= builder.hidden_field :member_id, :value => current_user.id %>
-                                            <%= builder.hidden_field :time, :value => "5" %>
                                         </p>
                                     <% end %>
+                                    <a href="#">Add another time</a>
                                 </td>
                             </tr>
                             <tr>

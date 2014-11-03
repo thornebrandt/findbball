@@ -33,6 +33,7 @@ var initialize = function(){
     fbb.youtubeModals();
     fbb.member();
     fbb.bestInPlace();
+    fbb.newCourt();
     fbb.court();
     fbb._event();
 

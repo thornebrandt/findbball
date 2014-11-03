@@ -24,6 +24,23 @@ fbb.time = {
     differenceHours: function(_start, _end){
         var difference = _start.diff(_end) / 1000 / 60 / 60;
         return difference;
-    }
+    },
+
+    generateTimesArray: function(){
+        //TODO - make times array easier to deal with
+        var times = [];
+        for (var i=0;i<24;i++) {
+            for (var j=0; j === 3; j++) {
+                var hour = (i>12?(i-12)+"":(i===0?"12":i)+"");
+                var mins = "00"; var AMPM = (i>=12?" PM":" AM");
+                if(j===0) { mins="00"; }
+                if(j===1) { mins="15"; }
+                if(j===2) { mins="30"; }
+                if(j===3) { mins="45"; }
+                times.push(hour+":"+mins+AMPM);
+            }
+        }
+        return times;
+    },
 
 }

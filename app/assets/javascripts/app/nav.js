@@ -18,7 +18,7 @@ fbb.nav = function(){
 
     function initialize(){
         setupNavSearch();
-        memberSearchAutoCorrect();
+        memberSearchAutoComplete();
         findHoopsGeoComplete( $("#location_search") );
         DOM();
     };
@@ -55,7 +55,7 @@ fbb.nav = function(){
     };
 
 
-    function memberSearchAutoCorrect(){
+    function memberSearchAutoComplete(){
         var results = new Bloodhound({
             datumTokenizer: function(data){
                 console.log("datum");

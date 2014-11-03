@@ -101,11 +101,7 @@ class CourtsController < ApplicationController
         @mapEl = "add_court_map"
         if signed_in?
             @court = Court.new
-            i = 0
-            3.times do
-                @court.pickup_games.build(:day => i, :time => 5, :member_id => current_user.id)
-                i += 1
-            end
+            @court.pickup_games.build(:member_id => current_user.id)
             @review = Review.new
             @review.court_id = @court.id
             @review.member_id = current_user.id
