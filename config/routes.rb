@@ -8,7 +8,7 @@ Findbball::Application.routes.draw do
   resources :court_videos, only: [:create, :destroy]
   resources :pickup_games, only: [:create, :edit, :destory]
   resources :attendees, only: [:create, :destroy]
-  resource :contacts, only: [:new, :create]
+  resource  :contacts, only: [:new, :create]
 
 
   root 'static_pages#splash'

@@ -9,7 +9,7 @@
                 <%= f.hidden_field :location %>
                 <%= f.hidden_field :lat %>
                 <%= f.hidden_field :lng %>
-                <div id="addCourt_add">
+                <div id="editCourt">
                         <table id="addCourt_table">
                             <tbody>
                                 <tr>
@@ -67,6 +67,9 @@
                                         <%= f.fields_for :pickup_games do |builder| %>
                                             <%= render 'courts/pickup_game_fields', :f => builder %>
                                         <% end %>
+                                        <div id="savePickUpGames" style="display:none;">
+                                            <a href="#"><i class="glyphicon glyphicon-check"></i>
+                                        </div>
                                         <%= link_to_add_fields "Add additional day/time for pickup game", f, :pickup_games %>
                                     </td>
                                 </tr>
@@ -81,6 +84,15 @@
 
         								<input style="display: none;" type="text" class="editing editInput" value="Court Website" />
         								<button rel="edit_website" id="edit_Website" type="submit" class="editing editComplete">Submit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">
+                                        Details
+                                    </td>
+                                    <td>
+                                        <%= best_in_place @court, :details, :as => :textarea, :activator => '#editDetails', :place_holder => "(No Details Yet)" %>
+                                        <a id="editDetails" href="#" class="editThis"><i class="glyphicon glyphicon-edit"></i></a>
                                     </td>
                                 </tr>
                                 <tr>

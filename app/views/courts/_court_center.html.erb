@@ -12,7 +12,6 @@
                                               data: { confirm: "You sure?" },
                                               title: @court.name %><br>
 <% end %>
-<hr>
 <div class="courtInfo2 center">
     <% if @court.skill_level > 0 %>
         <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
@@ -20,6 +19,8 @@
         </div>
     <% end %>
 </div>
+<p><%= @court.details %></p>
+<hr>
     <%= render '/courts/court_photos' %>
     <% if signed_in? %>
         <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>

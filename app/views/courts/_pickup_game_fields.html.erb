@@ -15,7 +15,7 @@
                      ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
 
 <% am_options = [["AM", "am"], ["PM", "pm"]] %>
-<%= f.select :day, day_options, {:include_blank=>false}, { :class => 'courtDay' } %>
+<%= f.select :day, day_options, {:include_blank=>false}, { :class => 'selectCourtPickupDay', :class=> 'selectCourtPickupDay' } %>
 <select class="selectCourtPickupTime">
     <option value="0">12:00</option>
     <option value="1">1:00</option>
@@ -34,6 +34,6 @@
     <option value="0">AM</option>
     <option value="12" selected>PM</option>
 </select>
-<%= f.text_field :time, :class => 'selectCourtTime' %>
+<%= f.hidden_field :time, :class => 'selectCourtTime' %>
 <%= f.hidden_field :member_id, :value => current_user.id %>
 </p>

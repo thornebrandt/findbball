@@ -5,7 +5,6 @@ class PickupGame < ActiveRecord::Base
     validates   :day,       presence: true
     validates   :time,      presence: true
     validates   :member_id, presence: true
-    validates   :member,    presence: true
 
 
     def verbose_day

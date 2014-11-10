@@ -71,6 +71,7 @@ class CourtsController < ApplicationController
         if current_user? @court.member
             gon.lat = @court.lat
             gon.lng = @court.lng
+            gon.court = @court
             @showMap = true;
             @mapEl = "edit_court_map"
             @review = Review.new
