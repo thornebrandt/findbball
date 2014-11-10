@@ -1,18 +1,4 @@
 <% provide(:title, "Add a court") %>
-<% day_options = [
-                    ["Select a Day", ""],
-                    ["Sunday", 0],
-                    ["Monday", 1],
-                    ["Tuesday", 2],
-                    ["Wednesday", 3],
-                    ["Thursday", 4],
-                    ["Friday", 5],
-                    ["Saturday", 6]] %>
-
-<% time_options = [["12:00", 0], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6],
-                     ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11]] %>
-
-<% am_options = [["AM", "am"], ["PM", "pm"]] %>
 
 <% difficulty_options = [['Undisclosed', -1], ["Don't Know", 0], ['Beginner', 1],
                         ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
@@ -65,20 +51,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_label"><%= f.label :best_time, 'Best Times for a "pick-up" game' %></td>
+                                <td class="td_label"><%= f.label :best_time, 'Best Times for a Pickup Games' %></td>
                                 <td>
                                     <%= f.fields_for :pickup_games do |builder| %>
-                                        <p>
-                                            <%= builder.select :day, options_for_select(day_options) %>
-                                            <%= builder.select :time, options_for_select(time_options, 6), { :include_blank=>false }, { :class => 'courtTime' } %>
-                                            <select class="selectCourtAMPM">
-                                                <option value="0">AM</option>
-                                                <option value="12" selected>PM</option>
-                                            </select>
-                                            <%= builder.hidden_field :member_id, :value => current_user.id %>
-                                        </p>
+                                        <%= render 'courts/pickup_game_fields', :f => builder %>
                                     <% end %>
-                                    <a href="#">Add another time</a>
+                                    <p class="error" style="display:none;" id="pickupGameError">You must include one time for a pickup game</p>
+                                    <%= link_to_add_fields "Add additional day/time for pickup game", f, :pickup_games %>
                                 </td>
                             </tr>
                             <tr>
@@ -86,12 +65,12 @@
                                 <td><%= f.text_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
                             </tr>
                             <tr>
-                            	<%= f.fields_for :reviews do |r| %>
-                                <td class="td_label"><%= r.label :content, "Details/Review" %></td>
-                                <td><%= r.text_area :content, id: "reviewDetails" %></td>
-                                <%= r.hidden_field :member_id %>
-                                <%= r.hidden_field :court_id %>
-           						<% end %>
+                                <td class="td_label">
+                                    Details
+                                </td>
+                                <td>
+                                    <%= f.text_area :details, id: "reviewDetails" %>
+                                </td>
                             </tr>
                             <tr>
                             	<td></td><td><%= f.submit "Add my court", id: "submit_court", class: "btn right_align" %></td>

@@ -89,4 +89,11 @@ function getQueryVariable(query, variable) {
         }
     }
     return false
-}
+};
+
+function add_fields(link, association, content){
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g")
+    $(link).parent().append( content.replace(regexp, new_id) );
+    $(link).parent().append( $(link) );
+};

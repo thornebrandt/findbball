@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20141023052213) do
     t.float    "lng"
     t.integer  "main_photo"
     t.decimal  "distance"
+    t.text     "details"
   end
 
   create_table "events", force: true do |t|

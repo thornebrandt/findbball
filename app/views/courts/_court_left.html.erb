@@ -9,8 +9,8 @@
                     <% end %>
                 </div>
                 <div id="court_events_container">
+                    <h4>EVENTS(<%= @court.events.count %>)</h4>
                     <% if @court.events.any? %>
-                        <h3>EVENTS(<%= @court.events.count %>)</h3>
                         <% @court.events.last(8).each do |event| %>
                             <div class="court_event">
                                 <%= link_to event.name, event, class: "court_event_title" %>
@@ -21,7 +21,22 @@
                             </div>
                         <% end %>
                     <% end %>
+                    <%= link_to "Create an Event", new_event_path %>
+                    <hr>
+                    <b>PICKUP GAME TIMES(<%= @court.pickup_games.count %>)</b>
+                    <% if @court.pickup_games.any? %>
+                        <% @court.pickup_games.last(3).each do |pickup_game| %>
+                            <p>
+                                <%= pickup_game.verbose_day %> at <%= pickup_game.verbose_time %>
+                                <% if pickup_game.member_id === current_user.id %>
+                                    <% if @court.pickup_games.count > 1 %>
+                                        <a href='#'><i class="glyphicon glyphicon-edit"></i></a>
+                                    <% end %>
+                                <% end %>
+
+                            </p>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
-            <%= link_to "Create an Event", new_event_path %>
     </div>

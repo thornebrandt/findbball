@@ -71,7 +71,6 @@ class CourtsController < ApplicationController
         if current_user? @court.member
             gon.lat = @court.lat
             gon.lng = @court.lng
-
             @showMap = true;
             @mapEl = "edit_court_map"
             @review = Review.new
@@ -156,6 +155,7 @@ class CourtsController < ApplicationController
                                       :open_time_2,
                                       :open_am_2,
                                       :main_photo,
+                                      :details,
                                       :pickup_games_attributes => [ :day, :time, :member_id, :court_id]
                                       )
     end

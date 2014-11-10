@@ -14,20 +14,12 @@
 <% end %>
 <hr>
 <div class="courtInfo2 center">
-
     <% if @court.skill_level > 0 %>
         <div id="courtDifficulty"><span id="difficulty"><%= @court.verbose_skill_level %></span>
             <%= image_tag @court.skill_image %>
         </div>
     <% end %>
-
-    <p id="courtPickUpGame">
-        <% for pickup_game in @court.pickup_games %>
-            Day: <%= pickup_game.day %> - <%= pickup_game.time %>
-        <% end %>
-    </p>
 </div>
-<hr>
     <%= render '/courts/court_photos' %>
     <% if signed_in? %>
         <a href="#" id="upload_court_photo"><%= image_tag "icon/upload.png" %> Upload Photo</a>
