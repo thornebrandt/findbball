@@ -1,8 +1,28 @@
 fbb.newCourt = function(){
     var isEditCourt = $("#editCourt").length;
     var initialize = function(){
-
         DOMEvents();
+        checkPickupGames();
+    };
+
+    var checkPickupGames = function(){
+        $(".pickupGameCreateContainer").each(function(i, el){
+            var time_el = $(el).find('.selectCourtPickupTime');
+            var ampm_el = $(el).find('.selectCourtPickupAMPM');
+            var _time = $(el).find(".selectCourtTime").val();
+            var amPM = 0;
+            var parsedTime = parseInt(_time);
+            window.parsedTime = parsedTime;
+            window.time_el = time_el;
+            if(_time > 12 ){
+                amPM = 12;
+                parsedTime = parseInt(_time -12);
+                _time = _time - 12;
+            }
+            console.log(parsedTime);
+            time_el.val(parsedTime);
+            ampm_el.val(amPM);
+        });
     };
 
     var validatePickupGames = function(){
@@ -26,7 +46,7 @@ fbb.newCourt = function(){
             type: "POST",
             url: "/pickup_games",
             dataType: "json",
-            data: _obj,
+            data: JSON.stringify(_obj),
             success: function(response){
                 console.log("success");
                 console.log(response);
@@ -38,6 +58,33 @@ fbb.newCourt = function(){
         });
     };
 
+    var patchPickupGame = function(_id, _obj){
+        var _pickup_game = {
+            time: _obj.pickup_game.time,
+            day: _obj.pickup_game.day
+        }
+        console.log("but this");
+        console.log(_pickup_game);
+        var _data = { pickup_game: _pickup_game };
+        $.ajax({
+            type: "PATCH",
+            url: "/pickup_games/" + _id,
+            dataType: "json",
+            data: _data,
+            success: function(response){
+                console.log("we patched");
+                console.log(response);
+            },
+            error: function(error){
+                console.log("we errored");
+                console.log(error);
+            }
+        });
+    }
+
+
+
+
     var DOMEvents = function(){
         $("body").on("change", ".selectCourtPickupTime, .selectCourtPickupAMPM, .selectCourtPickupDay", function(e){
             e.preventDefault();
@@ -46,9 +93,11 @@ fbb.newCourt = function(){
             var minutes_el = container.find( $(".selectCourtPickupAMPM"));
             var day_el = container.find( $(".selectCourtPickupDay"));
             var time_el = container.find( $(".selectCourtTime"));
+            var id_el = container.find( $(".selectCourtPickupID"));
             var hours = parseFloat(hours_el.val());
             var minutes = parseFloat(minutes_el.val());
             var day = parseInt(day_el.val());
+            var _id = parseInt(id_el.val());
             var _time = hours + minutes;
             time_el.val(_time);
             $("#pickupGameError").hide();
@@ -61,9 +110,13 @@ fbb.newCourt = function(){
                         member_id: gon.court.member_id
                     }
                 }
-                console.log("about to pass:");
-                console.log(pickupObj);
-                savePickupGame( pickupObj );
+                if(_id){
+                    patchPickupGame( _id, pickupObj );
+                }else{
+                    console.log( "nope, it's a new guy");
+                }
+
+                //savePickupGame( pickupObj );
             } else {
                 console.log("not editing, but still placing the value");
             }
