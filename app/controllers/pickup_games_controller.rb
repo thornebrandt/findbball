@@ -1,6 +1,5 @@
 class PickupGamesController < ApplicationController
     before_action :signed_in_user, only: [:edit, :update, :create, :destroy]
-    before_action :correct_user, only: :destroy
 
     def index
         @pickup_games = PickupGame.find(:all)
@@ -21,15 +20,19 @@ class PickupGamesController < ApplicationController
 
     def update
         @pickup_game = PickupGame.find(params[:id])
-        puts "PICKUP GAME!!"
-        puts params[:pickup_game]
-        if @pickup_game.update_attributes({ time: 11.0 })
+        if @pickup_game.update_attributes(pickup_game_params)
             render :json => @pickup_game
-        else
-            p "ERROWEROWEROWEROWEROWER"
-            p current_user.errors.inspect
         end
     end
+
+    def destroy
+        @pickup_game = PickupGame.find(params[:id])
+        @court = @pickup_game.court
+        if @pickup_game.destroy
+            render :json => @pickup_game
+        end
+    end
+
 
     # def update
     #    @resource = Resource.find(params[:id])

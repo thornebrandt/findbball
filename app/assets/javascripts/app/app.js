@@ -34,6 +34,7 @@ var initialize = function(){
     fbb.member();
     fbb.bestInPlace();
     fbb.newCourt();
+    fbb.editCourt();
     fbb.court();
     fbb._event();
 

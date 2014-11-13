@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td_label">Best times to play pickup games</td>
-                                    <td>
+                                    <td class='#pickupGamesContainer'>
                                         <%= f.fields_for :pickup_games do |builder| %>
                                             <%= render 'courts/pickup_game_fields', :f => builder %>
                                         <% end %>

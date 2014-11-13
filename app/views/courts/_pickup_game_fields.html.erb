@@ -34,6 +34,11 @@
     <option value="0">AM</option>
     <option value="12" selected>PM</option>
 </select>
+<% if @court.pickup_games.count > 1 %>
+    <a href='#' class='deleteCourtPickup'>
+        <i class="glyphicon glyphicon-trash"></i>
+    </a>
+<% end %>
 <%= f.hidden_field :time, :class => 'selectCourtTime' %>
 <%= f.hidden_field :member_id, :value => current_user.id %>
 <%= f.hidden_field :id, :class => 'selectCourtPickupID' %>
