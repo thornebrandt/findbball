@@ -23,6 +23,7 @@ fbb.editCourt = function(){
             var _time = hours + minutes;
             time_el.val(_time);
             $("#pickupGameError").hide();
+
             var pickupObj = {
                 pickup_game: {
                     day: day,
@@ -34,7 +35,7 @@ fbb.editCourt = function(){
             if(_id){
                 patchPickupGame( pickupObj, _id);
             }else{
-                savePickupGame( pickupObj );
+                savePickupGame( pickupObj, container);
             }
         });
 
@@ -73,14 +74,20 @@ fbb.editCourt = function(){
     };
 
 
-    var savePickupGame = function(_obj, callback){
+    var savePickupGame = function(_obj, container){
+        var saveID = function(response){
+            var _id = response.id;
+            var id_el = container.find( $(".selectCourtPickupID"));
+            id_el.val(_id);
+        }
+
         $.ajax({
             type: "POST",
             url: "/pickup_games",
             dataType: "json",
             data: _obj,
             success: function(response){
-                callback(response);
+                saveID(response);
             },
             error: function(error){
                 console.log("error, yo");

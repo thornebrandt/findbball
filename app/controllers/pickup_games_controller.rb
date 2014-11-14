@@ -53,4 +53,14 @@ class PickupGamesController < ApplicationController
         def pickup_game_params
             params.require(:pickup_game).permit(:day, :time, :member_id, :court_id)
         end
+
+        def correct_user
+            @pickup_game = PikcupGame.find(params[:id])
+            @court = Court.find(@pickup_game.court_id)
+            if(@court.user_id != current_user.id && @pickup_game.user_id != current_user.id)
+                flash[:info] = "That pickup game didn't belong to you"
+                redirect_to root_url
+            end
+        end
+
 end
