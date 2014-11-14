@@ -1,30 +1,5 @@
 <div class="sidebar right">
     <div id="profile_right">
-        <div id="member_events_container">
-            <% if @member.events.any? %>
-                <h3>EVENTS(<%= @member.events.count %>)</h3>
-                    <div id="events_container">
-                    <% @member.events.each do |event| %>
-                          <div class="event">
-                              <span class="event_time">
-                                <%= event.time_in_words %>
-                              </span><br>
-                              <%= link_to event.name, event_path(event), class: "event_title" %>
-                              <br>
-                              <%= link_to event.court.name, court_path(event.court), class: "event_location" %>
-                          </div>
-                    <% end %>
-                    </div>
-            <% else %>
-                <h3>EVENTS(0)</h3>
-                <% if current_user? @member %>
-                    You haven't added any events
-                    <%= link_to "Create a new event", new_event_path %></p>
-                <% else %>
-                    <%= @member.name %> hasn't added any events.
-                <% end %>
-            <% end %>
-        </div>
         <div id="courts_container">
             <% if @member.courts.any? %>
                 <h3>COURTS(<%= @member.courts.count %>)</h3>

@@ -21,22 +21,8 @@
                             </div>
                         <% end %>
                     <% end %>
-                    <%= link_to "Create an Event", new_event_path %>
+                    <%= link_to "Create an Event", new_event_path, class: "btn btn-primary center" %>
                     <hr>
-                    <b>PICKUP GAME TIMES(<%= @court.pickup_games.count %>)</b>
-                    <% if @court.pickup_games.any? %>
-                        <% @court.pickup_games.last(3).each do |pickup_game| %>
-                            <p>
-                                <%= pickup_game.verbose_day %> at <%= pickup_game.verbose_time %>
-                                <% if pickup_game.member_id === current_user.id %>
-                                    <% if @court.pickup_games.count > 1 %>
-                                        <a href='#'><i class="glyphicon glyphicon-edit"></i></a>
-                                    <% end %>
-                                <% end %>
-
-                            </p>
-                        <% end %>
-                    <% end %>
                 </div>
             </div>
     </div>

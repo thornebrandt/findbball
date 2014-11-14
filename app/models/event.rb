@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
     validates :start,         presence: true
     validates :end,           presence: true
 
+    accepts_nested_attributes_for :attendees
+
     scope :future, ->(time) { where("start > ?", time) }
 
     def times_long
@@ -72,19 +74,9 @@ class Event < ActiveRecord::Base
 
     def author
         self.member
-        # if Member.find(self.member_id).exists?
-        #     Member.find(self.member_id)
-        # else
-        #     false
-        # end
     end
 
     def mainPhoto
-        # if @event.main_photo
-        #     img_path = CourtPhoto.find(@event.main_photo).photo
-        # elsif @event.court_photos.any?
-        #     img_path = @event.court_photos.first().photo
-        # else
         if self.main_photo
             img_path = CourtPhoto.find(self.main_photo).photo
         end

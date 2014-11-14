@@ -6,6 +6,7 @@ class Court < ActiveRecord::Base
   has_many :court_videos, dependent: :destroy, inverse_of: :court
   has_many :attendees, inverse_of: :court
   has_many :pickup_games, inverse_of: :court, dependent: :destroy
+  has_many :pickup_attendees, inverse_of: :court, dependent: :destroy
 
   accepts_nested_attributes_for :pickup_games, :allow_destroy => true, reject_if: proc { |attributes| attributes[:day].blank? }
   accepts_nested_attributes_for :reviews, :allow_destroy => true, reject_if: proc { |attributes| attributes['content'].blank? }

@@ -7,6 +7,7 @@ class Member < ActiveRecord::Base
     has_many :reviews, inverse_of: :member
     has_many :events, inverse_of: :member
     has_many :attendees,  dependent: :destroy, inverse_of: :member
+    has_many :pickup_attendees,  dependent: :destroy, inverse_of: :member
     has_many :pickup_games, inverse_of: :member
 	has_secure_password
 	before_save :beforeSave
@@ -25,6 +26,10 @@ class Member < ActiveRecord::Base
 
     def attendingEvent(_event_id)
         Attendee.find_by_event_id_and_member_id(_event_id, self.id)
+    end
+
+    def attendingPickupGame(_pickup_game_id)
+        PickupAttendee.find_by_pickup_game_id_and_member_id(_pickup_game_id, self.id)
     end
 
 	def beforeSave

@@ -16,5 +16,33 @@
             <p id="profile_name"><%= @member.name %></p>
             <p class="profile_subtitle"><%= @member.slogan %></p>
             <%= render '/reviews/reviews_container' %>
+            <div id="member_events_container">
+                <% if @member.events.any? %>
+                    <h3>EVENTS(<%= @member.events.count %>)</h3>
+                        <div id="events_container">
+                        <% @member.events.each do |event| %>
+                            <div class="court_event">
+                                <%= link_to event.name, event, class: "court_event_title" %>
+                                <br>
+                                <span class="court_event_time"><i><%= event.short_date %> <%= event.start_time %></i></span><br>
+                                <span href="#" class="court_players"><%= pluralize(event.attendees.count, "player")%></span>
+                                <% if @current_attendee = current_user.attendingEvent(event.id) %>
+                                    <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
+                                <% else %>
+                                    <%= link_to "Go", event, class: "btn btn-default join_btn" %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        </div>
+                <% else %>
+                    <h3>EVENTS(0)</h3>
+                    <% if current_user? @member %>
+                        You haven't added any events
+                        <%= link_to "Create a new event", new_event_path %></p>
+                    <% else %>
+                        <%= @member.name %> hasn't added any events.
+                    <% end %>
+                <% end %>
+            </div>
         </div>
     </div>

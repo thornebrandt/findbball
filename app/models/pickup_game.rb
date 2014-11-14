@@ -1,10 +1,13 @@
 class PickupGame < ActiveRecord::Base
     belongs_to :court, inverse_of: :pickup_games
     belongs_to :member, inverse_of: :pickup_games
+    has_many :pickup_attendees, inverse_of: :pickup_game, dependent: :destroy
 
     validates   :day,       presence: true
     validates   :time,      presence: true
     validates   :member_id, presence: true
+
+    accepts_nested_attributes_for :pickup_attendees
 
 
     def verbose_day
