@@ -35,7 +35,7 @@ fbb.editCourt = function(){
             if(_id){
                 patchPickupGame( pickupObj, _id);
             }else{
-                savePickupGame( pickupObj, container);
+                createPickupGame( pickupObj, container);
             }
         });
 
@@ -44,17 +44,11 @@ fbb.editCourt = function(){
             var container = $(e.currentTarget).parent();
             var id_el = container.find( $(".selectCourtPickupID") );
             var _id = parseInt(id_el.val());
-            var hidePickupGame = function(response){
-                container.fadeOut();
-            }
-            deletePickupGame(_id, hidePickupGame);
+            deletePickupGame(_id, container);
         });
 
     };
 
-    var hidePickupGame = function(_el){
-        _el.fadeOut();
-    };
 
     var checkPickupGamesOnLoad = function(){
         $(".pickupGameCreateContainer").each(function(i, el){
@@ -74,12 +68,12 @@ fbb.editCourt = function(){
     };
 
 
-    var savePickupGame = function(_obj, container){
-        var saveID = function(response){
-            var _id = response.id;
-            var id_el = container.find( $(".selectCourtPickupID"));
-            id_el.val(_id);
-        }
+    var createPickupGame = function(_obj, container){
+        // var saveID = function(response){
+        //     var _id = response.id;
+        //     var id_el = container.find( $(".selectCourtPickupID"));
+        //     id_el.val(_id);
+        // }
 
         $.ajax({
             type: "POST",
@@ -87,7 +81,7 @@ fbb.editCourt = function(){
             dataType: "json",
             data: _obj,
             success: function(response){
-                saveID(response);
+                reloadForm();
             },
             error: function(error){
                 console.log("error, yo");
@@ -103,8 +97,9 @@ fbb.editCourt = function(){
             dataType: "json",
             data: pickup_game_obj,
             success: function(response){
-                console.log("we patched");
                 console.log(response);
+                reloadForm();
+
             },
             error: function(error){
                 console.log("we errored");
@@ -113,15 +108,28 @@ fbb.editCourt = function(){
         });
     };
 
-    var deletePickupGame = function(_id, _callback){
+    var reloadForm = function(){
+        var court_id = gon.court.id;
+        var formReloaded = function(response){
+            checkPickupGamesOnLoad();
+        };
+        $('#courtEditForm').load('/courts/'+court_id+'/reload_edit_form', formReloaded);
+    };
+
+    var deletePickupGame = function(_id, container){
+        var hidePickupGame = function(){
+            container.fadeOut("300", function(){
+                reloadForm();
+            });
+        };
+
         $.ajax({
             url: "/pickup_games/" + _id,
             type: "post",
             dataType: "json",
             data: {"_method":"delete"},
             success: function(response){
-                console.log("we deleted");
-                _callback(response);
+                hidePickupGame();
             },
             error: function(error){
                 console.log("error on deletion");

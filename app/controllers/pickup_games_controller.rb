@@ -33,6 +33,12 @@ class PickupGamesController < ApplicationController
         end
     end
 
+    def court_pickup_games
+        @court = Court.find(params[:court_id])
+        @pickup_games = @court.pickup_games
+        render :json => @pickup_games
+    end
+
 
     # def update
     #    @resource = Resource.find(params[:id])

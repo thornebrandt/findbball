@@ -28,6 +28,12 @@ class CourtsController < ApplicationController
         end
     end
 
+    def reload_edit_form
+        @court = Court.find(params[:court_id])
+        render :partial => 'courts/court_edit_form'
+    end
+
+
     def find_hoops
         @miles = params[:within] || 10000
         if params[:lat] && params[:lng]
