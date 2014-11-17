@@ -83,6 +83,14 @@ ActiveRecord::Schema.define(version: 20141023052213) do
   add_index "events", ["court_id"], name: "index_events_on_court_id"
   add_index "events", ["member_id"], name: "index_events_on_member_id"
 
+  create_table "member_actions", force: true do |t|
+    t.integer "member_id"
+    t.string "action_text"
+    t.string "link_type"
+    t.integer "link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "members", force: true do |t|
     t.string   "name"
@@ -101,7 +109,7 @@ ActiveRecord::Schema.define(version: 20141023052213) do
     t.string   "favorite_player"
     t.string   "about",            limit: 500
     t.integer  "nationality",                  default: -1
-    t.date     "birthdate"
+    t.date     "birthdate"x
     t.integer  "weight"
     t.string   "photo"
     t.integer  "height_feet"

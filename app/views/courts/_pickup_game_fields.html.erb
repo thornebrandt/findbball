@@ -1,4 +1,5 @@
 <p class='pickupGameCreateContainer'>
+<% popular_game = 3 %>
 <% day_options = [
                     ["Select a Day", ""],
                     ["Sundays", 0],
@@ -42,4 +43,7 @@
 <%= f.hidden_field :time, :class => 'selectCourtTime' %>
 <%= f.hidden_field :member_id, :value => current_user.id %>
 <%= f.hidden_field :id, :class => 'selectCourtPickupID' %>
+<% if f.object.pickup_attendees_count >= popular_game %>
+    <span class = "error"><%= pluralize(f.object.pickup_attendees_count, "players") %></span>
+<% end %>
 </p>

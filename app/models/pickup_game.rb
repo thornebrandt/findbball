@@ -10,6 +10,12 @@ class PickupGame < ActiveRecord::Base
     accepts_nested_attributes_for :pickup_attendees
 
 
+    def pickup_attendees_count
+        if self.pickup_attendees.count
+            self.pickup_attendees.count
+        end
+    end
+
     def verbose_day
         case day
             when 0 then "Sundays"
