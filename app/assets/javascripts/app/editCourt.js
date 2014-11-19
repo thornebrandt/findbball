@@ -27,14 +27,14 @@ fbb.editCourt = function(){
             var pickupObj = {
                 pickup_game: {
                     day: day,
-                    time: _time,
-                    court_id: gon.court.id,
-                    member_id: gon.court.member_id
+                    time: _time
                 }
             }
             if(_id){
                 patchPickupGame( pickupObj, _id);
             }else{
+                pickupObj.pickup_game.court_id = gon.court.id;
+                pickupObj.pickup_game.member_id = gon.court.member_id;
                 createPickupGame( pickupObj, container);
             }
         });
@@ -57,11 +57,13 @@ fbb.editCourt = function(){
             var _time = $(el).find(".selectCourtTime").val();
             var amPM = 0;
             var parsedTime = parseInt(_time);
-            if(_time > 12 ){
+            if(_time > 11 ){
                 amPM = 12;
-                parsedTime = parseInt(_time -12);
+                parsedTime = parseInt(parseInt(_time) - 12);
                 _time = _time - 12;
             }
+            console.log("parsedTime");
+            console.log(parsedTime);
             time_el.val(parsedTime);
             ampm_el.val(amPM);
         });
@@ -112,6 +114,7 @@ fbb.editCourt = function(){
         var court_id = gon.court.id;
         var formReloaded = function(response){
             checkPickupGamesOnLoad();
+            $(".best_in_place").best_in_place();
         };
         $('#courtEditForm').load('/courts/'+court_id+'/reload_edit_form', formReloaded);
     };

@@ -79,4 +79,19 @@ class Court < ActiveRecord::Base
     end
   end
 
+  def pickup_day_options
+      day_options = [
+                          ["Select a Day", ""],
+                          ["Sundays", 0],
+                          ["Mondays", 1],
+                          ["Tuesdays", 2],
+                          ["Wednesdays", 3],
+                          ["Thursdays", 4],
+                          ["Fridays", 5],
+                          ["Saturdays", 6],
+                          ["Daily", 7]
+                      ]
+      day_options
+  end
+
 end

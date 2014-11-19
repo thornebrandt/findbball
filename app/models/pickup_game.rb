@@ -10,6 +10,9 @@ class PickupGame < ActiveRecord::Base
     accepts_nested_attributes_for :pickup_attendees
 
 
+
+
+
     def pickup_attendees_count
         if self.pickup_attendees.count
             self.pickup_attendees.count

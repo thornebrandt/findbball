@@ -1,15 +1,191 @@
 fbb.court = function(){
-    function initialize(){
+    var isCourt = $("#container-court").length;
+    var lotsOfPeople = 3;
+    var initialize = function(){
         if ( $("#container-court").length || $("#container-event").length ){
-            prepareGallery();
-            prepareVideos();
+            if(isCourt){
+                prepareGallery();
+                prepareVideos();
+                checkPickupGamesOnLoad();
+                DOMEvents();
+            }
         }
     };
 
-    function prepareVideos(){
+    var checkPickupGamesOnLoad = function(){
+        $(".court_pickup_game").each(function(i, el){
+            var el = $(el);
+            var pickup_id = el.attr("data-id");
+            if(pickup_id){
+                var time_el = el.find(".pickupTimeMini");
+                var day_el = el.find(".pickupDayMini");
+                var time = parseInt(time_el.attr("data-time"));
+                var day = parseInt(day_el.attr("data-day"));
+                time_el.val(time);
+                day_el.val(day);
+            }
+        });
+    };
+
+    var DOMEvents = function(){
+        $("#container-court").on("click", ".editPickupGameMini", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent().parent();
+            hideEditPickup();
+            var show_el = container.find('.pickup_game_show');
+            var edit_el = container.find('.pickup_game_edit');
+            edit_el.show();
+            show_el.hide();
+        });
+
+        $("#container-court").on("click", ".cancel_pickup", function(e){
+            e.preventDefault();
+            hideEditPickup();
+        });
+
+        $("#container-court").on("click", "#newPickupGameMini_btn", function(e){
+            e.preventDefault();
+            hideEditPickup();
+            $("#newPickupGameMini_btn").hide();
+            $("#newPickupGameMini").show();
+        });
+
+        $("#container-court").on("click", ".pickupEditSaveMini", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent().parent();
+            var time_el = container.find(".pickupTimeMini");
+            var day_el = container.find(".pickupDayMini");
+            var _id = container.attr("data-id");
+            var _time = parseInt(time_el.val());
+            var _day = parseInt(day_el.val());
+            var pickupObj = {
+                pickup_game: {
+                    day: _day,
+                    time: _time
+                }
+            }
+            patchPickupGame(pickupObj, _id);
+        });
+
+        $("#container-court").on("click", "#savePickupGameMini", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent().parent();
+            var day_el = $("#newPickupGameDay");
+            var time_el = $("#newPickupGameTime");
+            var _day = parseInt(day_el.val());
+            var _time = parseInt(time_el.val());
+            var pickupObj = {
+                pickup_game: {
+                    day: _day,
+                    time: _time,
+                    court_id: gon.court.id,
+                    member_id: gon.member_id
+                }
+            }
+            createPickupGame(pickupObj);
+        });
+
+        $("#container-court").on("click", ".deletePickupGameMini", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent().parent();
+            var _id = container.attr("data-id");
+            var attendees_el = container.find(".pickup_attendees");
+            var attendees = parseInt(attendees_el.val());
+            if(attendees >= lotsOfPeople){
+                console.log("about to delete??");
+                var warning = "Are you sure you want to delete this pickup game with " + attendees + " players?"
+                var confirmDelete = window.confirm(warning);
+                if(confirmDelete){
+                    deletePickupGame(_id, container);
+                }
+            } else {
+                deletePickupGame(_id, container);
+            }
+        });
+    };
+
+
+
+    var deletePickupGame = function(_id, container){
+        var hidePickupGame = function(){
+            container.fadeOut('300', function(){
+                reloadPickupGameContainer();
+            });
+        };
+
+        $.ajax({
+            url: "/pickup_games/" + _id,
+            type: "post",
+            dataType: "json",
+            data: {"_method":"delete"},
+            success: function(response){
+                hidePickupGame();
+            },
+            error: function(error){
+                console.log("error on deletion");
+                console.log(error);
+            }
+        });
+
+    };
+
+
+    var createPickupGame = function(_obj){
+        $.ajax({
+            type: "POST",
+            url: "/pickup_games",
+            dataType: "json",
+            data: _obj,
+            success: function(response){
+                reloadPickupGameContainer();
+            },
+            error: function(error){
+                console.log("error, yo");
+                console.log(error);
+            }
+        });
+    }
+
+    var reloadPickupGameContainer = function(){
+        var court_id = gon.court.id;
+        var sideBarReloaded = function(response){
+            checkPickupGamesOnLoad();
+        };
+        $("#court_pickup_games_container").load('/courts/'+court_id+'/reload_pickup_games',
+            function(e){
+                console.log("loaded");
+                checkPickupGamesOnLoad();
+            }
+        );
+    };
+
+
+    var patchPickupGame = function(pickup_game_obj, _id){
+        $.ajax({
+            type: "PATCH",
+            url: "/pickup_games/" + _id,
+            dataType: "json",
+            data: pickup_game_obj,
+            success: function(response){
+                reloadPickupGameContainer();
+            },
+            error: function(error){
+                console.log("we errored");
+                console.log(error);
+            }
+        });
+    }
+
+    var hideEditPickup = function(){
+        $(".pickup_game_edit").hide();
+        $(".pickup_game_show").show();
+        $("#newPickupGameMini_btn").show();
+    };
+
+
+    var prepareVideos = function(){
         $("#add_court_video").click(function(e){
             e.preventDefault();
-            console.log("huh");
             var $_modal = $("#add_video_modal");
             setTimeout( focusInput, 500 );
             $_modal.modal();
@@ -47,7 +223,7 @@ fbb.court = function(){
     };
 
 
-    function prepareGallery(){
+    var prepareGallery = function(){
         fbb.galleryTotal = gon.court_photos.length;
         fbb.galleryIndex = "";
 
@@ -69,12 +245,11 @@ fbb.court = function(){
 
         $("#cancel_main_image").click(function(e){
             e.preventDefault();
-            console.log("hide this bitch");
             $("#selectCourtPhotoModal").modal('hide');
         });
 
 
-        function loadMainPreview( criteria ){
+        var loadMainPreview = function( criteria ){
             var photo_obj = _.where( gon.court_photos, criteria)[0];
             var img_url = photo_obj.photo.url;
             fbb.loading();
@@ -107,7 +282,7 @@ fbb.court = function(){
             loadGallery( { id: photo_id });
         });
 
-        function loadGallery( criteria  ){
+        var loadGallery = function( criteria  ){
             var photo_obj = _.where( gon.court_photos, criteria)[0];
             var img_url = photo_obj.photo.url;
             fbb.loading();
@@ -144,12 +319,12 @@ fbb.court = function(){
             $("#selectCourtPhotoModal").modal();
         };
 
-        function prepareUploadCourtPhoto(){
+        var prepareUploadCourtPhoto = function(){
             var input = document.getElementById("images"), formdata = false;
             fbb.uploadImagePreview(input, "btn1", addCourtPhoto);
         };
 
-        function addCourtPhoto(_source){
+        var addCourtPhoto = function(_source){
             var $_courtPhoto = $("#court_photo_preview");
             $_courtPhoto.attr("src", _source);
             $_courtPhoto.hide();

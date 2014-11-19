@@ -54,7 +54,8 @@
                                 <td class="td_label"><%= f.label :best_time, 'Best Times for a Pickup Games' %></td>
                                 <td>
                                     <%= f.fields_for :pickup_games do |builder| %>
-                                        <%= render 'courts/pickup_game_fields', :f => builder %>
+                                        <%= render 'courts/court_new_pickup_game
+                                        ', :f => builder %>
                                     <% end %>
                                     <p class="error" style="display:none;" id="pickupGameError">You must include one time for a pickup game</p>
                                     <%= link_to_add_fields "Add additional day/time for pickup game", f, :pickup_games %>

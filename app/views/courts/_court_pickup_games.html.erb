@@ -1,0 +1,84 @@
+<% if @court.pickup_games.any? %>
+    <% @court.pickup_games.last(3).each do |pickup_game| %>
+        <div data-id="<%= pickup_game.id %>" class="court_pickup_game">
+            <div class="pickup_game_show">
+                <strong>
+                    <%= pickup_game.verbose_day %>
+                </strong> -
+                <strong>
+                    <%= pickup_game.verbose_time %>
+                </strong>
+                <br>
+                <span href="#" class="court_players">
+                    <%= pluralize(pickup_game.pickup_attendees.count, "player") %>
+                </span>
+                <% if pickup_game.member_id == current_user.id %>
+                    <a class="editPickupGameMini" href="#">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <% if @court.pickup_games.count > 1 %>
+                        <a class="deletePickupGameMini" href="#">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    <% end %>
+                <% end %>
+                <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>
+                    <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
+                <% else %>
+                    <a href='#' class='joinPickupGame btn btn-default join_btn'>Go</a>
+                <% end %>
+                <br>
+            </div>
+            <div class="pickup_game_edit" style="display:none;">
+                <%= render :partial => "courts/court_pickup_edit", :locals => {:pickup_game => pickup_game } %>
+                <br>
+            </div>
+        </div>
+    <% end %>
+    <div id="newPickupGameMini" style="display:none;" class="pickup_game_edit court_pickup_game">
+        <a href="#" class="top_right cancel_pickup">cancel</a>
+        <p>
+            What's a good time?
+        </p>
+        <p>
+            <select id="newPickupGameDay">
+                <option value="7">Daily</option>
+                <option value="0">Sun</option>
+                <option value="1">Mon</option>
+                <option value="2">Tue</option>
+                <option value="3">Wed</option>
+                <option value="4">Thu</option>
+                <option value="5">Fri</option>
+                <option value="6">Sat</option>
+            </select>
+            <select id="newPickupGameTime">
+                <option value="0">12 am</option>
+                <option value="1">1 am</option>
+                <option value="2">2 am</option>
+                <option value="3">3 am</option>
+                <option value="4">4 am</option>
+                <option value="5">5 am</option>
+                <option value="6">6 am</option>
+                <option value="7">7 am</option>
+                <option value="8">8 am</option>
+                <option value="9">9 am</option>
+                <option value="10">10 am</option>
+                <option value="11">11 am</option>
+                <option value="12">12 pm</option>
+                <option value="13">1 pm</option>
+                <option value="14">2 pm</option>
+                <option value="15">3 pm</option>
+                <option value="16">4 pm</option>
+                <option value="17">5 pm</option>
+                <option value="18">6 pm</option>
+                <option value="19">7 pm</option>
+                <option value="20">8 pm</option>
+                <option value="21">9 pm</option>
+                <option value="22">10 pm</option>
+                <option value="23">11 pm</option>
+            </select>
+            <a href="#" id="savePickupGameMini" class="btn btn-default">Save</a>
+        </p>
+    </div>
+<% end %>
+<a href="#" id="newPickupGameMini_btn" class="btn btn-primary center">Create Pickup Game</a>

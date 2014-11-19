@@ -1,58 +1,25 @@
-	<div class="sidebar right">
-            <% if @court.member %>
-                <div class="author_container">
-                        <%= link_to (image_tag @court.member.profile_photo_thumb), member_path(@court.member) %></a><br>
-                        added by <b><%= link_to @court.member.name, member_path(@court.member), class: "court" %></a></b><br>
-                        <%=  time_ago_in_words(@court.created_at) %> ago<br>
-                </div>
-            <% end %>
-        <div id="profile_right">
-            <div id="court_map" class="mapEl">
+<div class="sidebar right">
+        <% if @court.member %>
+            <div class="author_container">
+                    <%= link_to (image_tag @court.member.profile_photo_thumb), member_path(@court.member) %></a><br>
+                    added by <b><%= link_to @court.member.name, member_path(@court.member), class: "court" %></a></b><br>
+                    <%=  time_ago_in_words(@court.created_at) %> ago<br>
             </div>
-            <input type="hidden" id="lat" value="<%=@court.lat %>">
-            <input type="hidden" id="lng" value="<%= @court.lng %>">
-            <h4 id="milesAway"></h4>
-            <p>
-                <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(@court.location)%>">
-                    Get Directions
-                </a>
-            </p>
-            <h4>PICKUP GAMES(<%= @court.pickup_games.count %>)</h4>
-            <div id="court_pickup_games_container">
-                <% if @court.pickup_games.any? %>
-                    <% @court.pickup_games.last(3).each do |pickup_game| %>
-                        <div class="court_pickup_game">
-                            <strong><%= pickup_game.verbose_day %></strong> - <strong><%= pickup_game.verbose_time %></strong>
-                            <br>
-                            <span href="#" class="court_players">
-                                <%= pluralize(pickup_game.pickup_attendees.count, "player") %>
-                            </span>
-                            <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>
-                                <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
-                            <% else %>
-                                <a href='#' class='joinPickupGame btn btn-default join_btn'>Go</a>
-                            <% end %>
-                            <br>
-                            <i class="glyphicon glyphicon-edit "></i>
-                        </div>
-                    <% end %>
-                    <div class="court_pickup_game">
-                        <a href="#" class="top_right cancel_pickup">cancel</a>
-                        <p>
-                            Good time to play
-                        </p>
-                        <p>
-                            <select>
-                                <option>Sun</option>
-                            </select>
-                            <select>
-                                <option>12 am</option>
-                            </select>
-                        </p>
-                        <a href="#" class="btn btn-default bottom_right">Save</a>
-                    </div>
-                <% end %>
-                <a href="#" class="btn btn-primary center newPickupGameMini">New Pickup Game</a>
-            </div>
+        <% end %>
+    <div id="profile_right">
+        <div id="court_map" class="mapEl">
+        </div>
+        <input type="hidden" id="lat" value="<%=@court.lat %>">
+        <input type="hidden" id="lng" value="<%= @court.lng %>">
+        <h4 id="milesAway"></h4>
+        <p>
+            <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(@court.location)%>">
+                Get Directions
+            </a>
+        </p>
+        <h4>PICKUP GAMES(<%= @court.pickup_games.count %>)</h4>
+        <div id="court_pickup_games_container">
+            <%= render "courts/court_pickup_games" %>
         </div>
     </div>
+</div>

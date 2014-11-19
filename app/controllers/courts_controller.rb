@@ -17,7 +17,9 @@ class CourtsController < ApplicationController
             @hidden_reviews = @court.reviews - @shown_reviews
             @court_photo = CourtPhoto.new if signed_in?
             @court_video = CourtVideo.new if signed_in?
-            gon.court_photos = @court.court_photos.last(12);
+            gon.court = @court
+            gon.member_id = current_user.id
+            gon.court_photos = @court.court_photos.last(12)
             gon.lat = @court.lat
             gon.lng = @court.lng
             @review = Review.new if signed_in?
@@ -29,8 +31,15 @@ class CourtsController < ApplicationController
     end
 
     def reload_edit_form
+        flash[:success] = "Success"
         @court = Court.find(params[:court_id])
         render :partial => 'courts/court_edit_form'
+    end
+
+    def reload_pickup_games
+        flash[:success] = "Success"
+        @court = Court.find(params[:court_id])
+        render :partial => 'courts/court_pickup_games'
     end
 
 
