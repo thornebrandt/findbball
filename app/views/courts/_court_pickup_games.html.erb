@@ -23,6 +23,9 @@
                     <% end %>
                 <% end %>
                 <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>
+                    <a data-id="<%= @current_pickup_attendee.id %>" class="leavePickupGameMini" href="#">
+                        <i class="glyphicon glyphicon-minus-sign"></i>
+                    </a>
                     <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
                 <% else %>
                     <a href='#' class='joinPickupGame btn btn-default join_btn'>Go</a>

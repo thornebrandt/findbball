@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023052213) do
+ActiveRecord::Schema.define(version: 20141119071012) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
-    t.integer  "court_id"
-    t.integer  "member_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pickup_attendees", force: true do |t|
-    t.integer  "pickup_game_id"
     t.integer  "court_id"
     t.integer  "member_id"
     t.datetime "created_at"
@@ -84,10 +76,10 @@ ActiveRecord::Schema.define(version: 20141023052213) do
   add_index "events", ["member_id"], name: "index_events_on_member_id"
 
   create_table "member_actions", force: true do |t|
-    t.integer "member_id"
-    t.string "action_text"
-    t.string "link_type"
-    t.integer "link_id"
+    t.integer  "member_id"
+    t.string   "action_text"
+    t.string   "link_type"
+    t.integer  "link_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,7 +101,7 @@ ActiveRecord::Schema.define(version: 20141023052213) do
     t.string   "favorite_player"
     t.string   "about",            limit: 500
     t.integer  "nationality",                  default: -1
-    t.date     "birthdate"x
+    t.date     "birthdate"
     t.integer  "weight"
     t.string   "photo"
     t.integer  "height_feet"
@@ -120,12 +112,21 @@ ActiveRecord::Schema.define(version: 20141023052213) do
     t.boolean  "registered"
     t.boolean  "admin"
     t.string   "verification"
+    t.datetime "lastLogin"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true
   add_index "members", ["full_name"], name: "index_members_on_full_name"
   add_index "members", ["name"], name: "index_members_on_name", unique: true
   add_index "members", ["remember_token"], name: "index_members_on_remember_token"
+
+  create_table "pickup_attendees", force: true do |t|
+    t.integer  "pickup_game_id"
+    t.integer  "court_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pickup_games", force: true do |t|
     t.integer  "day"

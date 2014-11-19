@@ -62,8 +62,6 @@ fbb.editCourt = function(){
                 parsedTime = parseInt(parseInt(_time) - 12);
                 _time = _time - 12;
             }
-            console.log("parsedTime");
-            console.log(parsedTime);
             time_el.val(parsedTime);
             ampm_el.val(amPM);
         });
@@ -99,7 +97,6 @@ fbb.editCourt = function(){
             dataType: "json",
             data: pickup_game_obj,
             success: function(response){
-                console.log(response);
                 reloadForm();
 
             },

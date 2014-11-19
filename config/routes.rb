@@ -8,6 +8,7 @@ Findbball::Application.routes.draw do
   resources :court_videos, only: [:create, :destroy]
   resources :pickup_games
   resources :attendees, only: [:create, :destroy]
+  resources :pickup_attendees, only: [:create, :destroy]
   resource  :contacts, only: [:new, :create]
 
 

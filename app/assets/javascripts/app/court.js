@@ -102,8 +102,29 @@ fbb.court = function(){
                 deletePickupGame(_id, container);
             }
         });
-    };
 
+        $("#container-court").on("click", ".joinPickupGame", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent().parent();
+            var _id = container.attr("data-id");
+            var attendeeObj = {
+                pickup_attendee: {
+                    pickup_game_id: _id,
+                    court_id: gon.court.id,
+                    member_id: gon.member_id
+                }
+            };
+            joinPickupGame(attendeeObj);
+        });
+
+
+        $("#container-court").on("click", ".leavePickupGameMini", function(e){
+            e.preventDefault();
+            var _id = $(e.currentTarget).attr("data-id");
+            leavePickupGame(_id);
+        });
+
+    };
 
 
     var deletePickupGame = function(_id, container){
@@ -127,6 +148,39 @@ fbb.court = function(){
             }
         });
 
+    };
+
+    var leavePickupGame = function(_id){
+        $.ajax({
+            url: "/pickup_attendees/" + _id,
+            type: "post",
+            dataType: "json",
+            data: {"_method":"delete"},
+            success: function(response){
+                reloadPickupGameContainer();
+            },
+            error: function(error){
+                console.log("error on deletion");
+                console.log(error);
+            }
+        });
+    };
+
+
+    var joinPickupGame = function(_obj){
+        $.ajax({
+            type: "POST",
+            url: "/pickup_attendees",
+            dataType: "json",
+            data: _obj,
+            success: function(response){
+                reloadPickupGameContainer();
+            },
+            error: function(error){
+                console.log("error joining pickup game");
+                console.log(error);
+            }
+        });
     };
 
 
@@ -153,7 +207,6 @@ fbb.court = function(){
         };
         $("#court_pickup_games_container").load('/courts/'+court_id+'/reload_pickup_games',
             function(e){
-                console.log("loaded");
                 checkPickupGamesOnLoad();
             }
         );

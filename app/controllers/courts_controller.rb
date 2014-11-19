@@ -31,13 +31,11 @@ class CourtsController < ApplicationController
     end
 
     def reload_edit_form
-        flash[:success] = "Success"
         @court = Court.find(params[:court_id])
         render :partial => 'courts/court_edit_form'
     end
 
     def reload_pickup_games
-        flash[:success] = "Success"
         @court = Court.find(params[:court_id])
         render :partial => 'courts/court_pickup_games'
     end

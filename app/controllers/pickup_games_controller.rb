@@ -39,22 +39,6 @@ class PickupGamesController < ApplicationController
         render :json => @pickup_games
     end
 
-
-    # def update
-    #    @resource = Resource.find(params[:id])
-
-    #    respond_to do |format|
-    #      if @resource.update_attributes(params[:resource])
-    #        format.html { redirect_to @resource, notice: 'successfully updated.' }
-    #        format.js
-    #      else
-    #        format.html { render action: "edit" }
-    #        format.js
-    #      end
-    #    end
-    #  end
-
-
     private
         def pickup_game_params
             params.require(:pickup_game).permit(:day, :time, :member_id, :court_id)
@@ -63,7 +47,7 @@ class PickupGamesController < ApplicationController
         def correct_user
             @pickup_game = PikcupGame.find(params[:id])
             @court = Court.find(@pickup_game.court_id)
-            if(@court.user_id != current_user.id && @pickup_game.user_id != current_user.id)
+            if(@court.member_id != current_user.id && @pickup_game.member_id != current_user.id)
                 flash[:info] = "That pickup game didn't belong to you"
                 redirect_to root_url
             end

@@ -5,4 +5,5 @@ class PickupAttendee < ActiveRecord::Base
 
     validates :pickup_game_id, presence: true
     validates :member_id, presence: true
+    validates_uniqueness_of :member_id, :scope => :court_id
 end

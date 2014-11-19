@@ -5,5 +5,4 @@ class Contact < MailForm::Base
     attribute :browser
     attribute :message
     attribute :address,     :captcha => true
-
 end
