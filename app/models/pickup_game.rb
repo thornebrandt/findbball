@@ -9,15 +9,13 @@ class PickupGame < ActiveRecord::Base
 
     accepts_nested_attributes_for :pickup_attendees
 
+    default_scope { order('pickup_attendees_count DESC') }
 
-
-
-
-    def pickup_attendees_count
-        if self.pickup_attendees.count
-            self.pickup_attendees.count
-        end
-    end
+    # def pickup_attendees_count
+    #     if self.pickup_attendees.count
+    #         self.pickup_attendees.count
+    #     end
+    # end
 
     def verbose_day
         case day
@@ -40,13 +38,5 @@ class PickupGame < ActiveRecord::Base
         read_time
     end
 
-
-
-    # function minTommss(minutes){
-    #  var sign = minutes < 0 ? "-" : "";
-    #  var min = Math.floor(Math.abs(minutes))
-    #  var sec = Math.floor((Math.abs(minutes) * 60) % 60);
-    #  return sign + (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
-    # }
 
 end

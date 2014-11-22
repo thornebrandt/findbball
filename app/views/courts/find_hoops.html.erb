@@ -18,8 +18,6 @@
                 <a target="_blank" href="http://maps.google.com/?q=<%=URI::encode(court.location)%>" class="result_directions">
                     (Get Directions)
                 </a>
-                <p class="best_time">Best time for a pickup game:</p>
-                <p class="result_time"><%= court.pickup_hours %></p>
                 <% if court.skill_level > 0 %>
                     <div id="courtDifficulty"><span id="difficulty"><%= court.verbose_skill_level %></span>
                         <%= image_tag court.skill_image %>

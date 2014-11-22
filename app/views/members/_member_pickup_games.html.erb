@@ -1,0 +1,9 @@
+<%if @member.pickup_games.any? %>
+    <h3>PICKUP GAMES</h3>
+        <% @member.pickup_games.each do |pickup_game| %>
+            <p>
+                There is one
+                <%= pickup_game.pickup_attendees.count %>
+            </p>
+        <% end %>
+<% end %>

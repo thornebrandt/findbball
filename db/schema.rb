@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119071012) do
+ActiveRecord::Schema.define(version: 20141122202109) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20141119071012) do
     t.integer  "court_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pickup_attendees_count", default: 0, null: false
   end
 
   add_index "pickup_games", ["court_id"], name: "index_pickup_games_on_court_id"

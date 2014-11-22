@@ -11,6 +11,8 @@ class PickupAttendeesController < ApplicationController
         @pickup_attendee = current_user.pickup_attendees.build( pickup_attendee_params )
         if @pickup_attendee.save
             render :json => @pickup_attendee
+        else
+            false
         end
     end
 
