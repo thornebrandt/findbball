@@ -61,6 +61,24 @@ fbb.member = function(){
             leavePickupGame(_id);
         });
 
+        $el.on("click", ".deletePickupGameMini", function(e){
+            e.preventDefault();
+            var container = $(e.currentTarget).parent();
+            var _id = container.attr("data-id");
+            var attendees_el = container.find(".pickup_attendees");
+            var attendees = parseInt(attendees_el.val());
+            if(attendees >= fbb.lotsOfPeople){
+                console.log("about to delete??");
+                var warning = "Are you sure you want to delete this pickup game with " + attendees + " players?"
+                var confirmDelete = window.confirm(warning);
+                if(confirmDelete){
+                    deletePickupGame(_id, container);
+                }
+            } else {
+                deletePickupGame(_id, container);
+            }
+        });
+
     }
 
     var joinPickupGame = function(_obj){
@@ -94,6 +112,30 @@ fbb.member = function(){
             }
         });
     };
+
+    var deletePickupGame = function(_id, container){
+        var hidePickupGame = function(){
+            container.fadeOut('300', function(){
+                reloadPickupGameContainer();
+            });
+        };
+
+        $.ajax({
+            url: "/pickup_games/" + _id,
+            type: "post",
+            dataType: "json",
+            data: {"_method":"delete"},
+            success: function(response){
+                hidePickupGame();
+            },
+            error: function(error){
+                console.log("error on deletion");
+                console.log(error);
+            }
+        });
+    };
+
+
 
     var reloadPickupGameContainer = function(){
         var member_id = gon.member_id;

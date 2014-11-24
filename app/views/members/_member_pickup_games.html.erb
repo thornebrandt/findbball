@@ -15,10 +15,10 @@
                 </strong>
                 <br>
                 <span href="#" class="court_players">
-                    <%= pluralize(pickup_game.pickup_attendees.count, "player") %>
+                    <%= pluralize(pickup_game.pickup_attendees_count, "player") %>
                 </span>
                 <% if signed_in? %>
-                    <% if pickup_game.member_id == current_user.id %>
+                    <% if @member == current_user && pickup_game.member_id == current_user.id %>
                         <a class="editPickupGameMini" href="#">
                             <i class="glyphicon glyphicon-edit"></i>
                         </a>
@@ -27,6 +27,7 @@
                             <a class="deletePickupGameMini" href="#">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
+                            <input class="pickup_attendees" type="hidden" value="<%= pickup_game.pickup_attendees_count %>" />
                         <% end %>
                     <% end %>
                     <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>

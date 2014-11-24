@@ -1,7 +1,6 @@
 fbb.court = function(){
     var $el = $("#container-court");
     var isCourt = $el.length;
-    var lotsOfPeople = 3;
     var initialize = function(){
         if(isCourt){
             prepareGallery();
@@ -27,7 +26,7 @@ fbb.court = function(){
     };
 
     var DOMEvents = function(){
-        $("#container-court").on("click", ".editPickupGameMini", function(e){
+        $el.on("click", ".editPickupGameMini", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent().parent();
             hideEditPickup();
@@ -37,19 +36,19 @@ fbb.court = function(){
             show_el.hide();
         });
 
-        $("#container-court").on("click", ".cancel_pickup", function(e){
+        $el.on("click", ".cancel_pickup", function(e){
             e.preventDefault();
             hideEditPickup();
         });
 
-        $("#container-court").on("click", "#newPickupGameMini_btn", function(e){
+        $el.on("click", "#newPickupGameMini_btn", function(e){
             e.preventDefault();
             hideEditPickup();
             $("#newPickupGameMini_btn").hide();
             $("#newPickupGameMini").show();
         });
 
-        $("#container-court").on("click", ".pickupEditSaveMini", function(e){
+        $el.on("click", ".pickupEditSaveMini", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent().parent();
             var time_el = container.find(".pickupTimeMini");
@@ -66,7 +65,7 @@ fbb.court = function(){
             patchPickupGame(pickupObj, _id);
         });
 
-        $("#container-court").on("click", "#savePickupGameMini", function(e){
+        $el.on("click", "#savePickupGameMini", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent().parent();
             var day_el = $("#newPickupGameDay");
@@ -84,13 +83,13 @@ fbb.court = function(){
             createPickupGame(pickupObj);
         });
 
-        $("#container-court").on("click", ".deletePickupGameMini", function(e){
+        $el.on("click", ".deletePickupGameMini", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent().parent();
             var _id = container.attr("data-id");
             var attendees_el = container.find(".pickup_attendees");
             var attendees = parseInt(attendees_el.val());
-            if(attendees >= lotsOfPeople){
+            if(attendees >= fbb.lotsOfPeople){
                 console.log("about to delete??");
                 var warning = "Are you sure you want to delete this pickup game with " + attendees + " players?"
                 var confirmDelete = window.confirm(warning);
@@ -146,7 +145,6 @@ fbb.court = function(){
                 console.log(error);
             }
         });
-
     };
 
     var leavePickupGame = function(_id){
