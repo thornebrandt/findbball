@@ -1,14 +1,13 @@
 fbb.court = function(){
-    var isCourt = $("#container-court").length;
+    var $el = $("#container-court");
+    var isCourt = $el.length;
     var lotsOfPeople = 3;
     var initialize = function(){
-        if ( $("#container-court").length || $("#container-event").length ){
-            if(isCourt){
-                prepareGallery();
-                prepareVideos();
-                checkPickupGamesOnLoad();
-                DOMEvents();
-            }
+        if(isCourt){
+            prepareGallery();
+            prepareVideos();
+            checkPickupGamesOnLoad();
+            DOMEvents();
         }
     };
 
@@ -103,7 +102,7 @@ fbb.court = function(){
             }
         });
 
-        $("#container-court").on("click", ".joinPickupGame", function(e){
+        $el.on("click", ".joinPickupGame", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent().parent();
             var _id = container.attr("data-id");
@@ -118,7 +117,7 @@ fbb.court = function(){
         });
 
 
-        $("#container-court").on("click", ".leavePickupGameMini", function(e){
+        $el.on("click", ".leavePickupGameMini", function(e){
             e.preventDefault();
             var _id = $(e.currentTarget).attr("data-id");
             leavePickupGame(_id);

@@ -29,7 +29,6 @@ class Member < ActiveRecord::Base
     end
 
     def attendingPickupGame(_pickup_game_id)
-        p "WTF : #{_pickup_game_id}"
         PickupAttendee.find_by_pickup_game_id_and_member_id(_pickup_game_id, self.id)
     end
 

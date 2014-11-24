@@ -32,8 +32,12 @@ class MembersController < ApplicationController
         @shown_reviews = @member.reviews.last(5)
         @hidden_reviews = @member.reviews - @shown_reviews
         #or statement in query, very nice...
-        @pickup_games = PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", @member.id).references(:pickup_attendees) |
-                        PickupGame.where(:member_id => @member.id)
+        @pickup_games = PickupGame.where(:member_id => @member.id) |
+            PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", @member.id).references(:pickup_attendees)
+
+        @pickup_games = @pickup_games.sort_by(&:pickup_attendees_count).reverse()
+        gon.member_id = @member.id
+        gon.current_member_id = current_user.id if signed_in?
     end
 
     def destroy
@@ -157,6 +161,14 @@ class MembersController < ApplicationController
         end
     end
 
+    def reload_pickup_games
+        @member = Member.find(params[:member_id])
+        p "WHAT IS THIS???"
+        @pickup_games = PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", params[:member_id]).references(:pickup_attendees) |
+                        PickupGame.where(:member_id => params[:member_id])
+        @pickup_games = @pickup_games.sort_by(&:pickup_attendees_count).reverse()
+        render :partial => 'members/member_pickup_games'
+    end
 
 	private
 

@@ -38,6 +38,7 @@ class CourtsController < ApplicationController
 
     def reload_pickup_games
         @court = Court.find(params[:court_id])
+        @pickup_games = @court.pickup_games
         render :partial => 'courts/court_pickup_games'
     end
 
