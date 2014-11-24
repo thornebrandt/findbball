@@ -1,5 +1,6 @@
 fbb.editCourt = function(){
-    var isEditCourt = $("#editCourt").length;
+    var $el = $("#courtEditForm");
+    var isEditCourt = $el.length;
     var initialize = function(){
         if(isEditCourt){
             DOMEvents();
@@ -8,7 +9,15 @@ fbb.editCourt = function(){
     }
 
     var DOMEvents = function(){
-        $("body").on("change", ".selectCourtPickupTime, .selectCourtPickupAMPM, .selectCourtPickupDay", function(e){
+        $el.on("change", ".selectCourtPickupTime, .selectCourtPickupAMPM, .selectCourtPickupDay", function(e){
+            e.preventDefault();
+            var container = $(e.target).parent();
+            var save_btn = container.find( $(".saveCourtPickup") );
+            console.log("yo fade this shit in holmes");
+            save_btn.fadeIn();
+        });
+
+        $el.on("click", ".saveCourtPickup", function(e){
             e.preventDefault();
             var container = $(e.target).parent();
             var hours_el = container.find( $(".selectCourtPickupTime"));
@@ -39,7 +48,8 @@ fbb.editCourt = function(){
             }
         });
 
-        $("body").on("click", ".deleteCourtPickup", function(e){
+
+        $el.on("click", ".deleteCourtPickup", function(e){
             e.preventDefault();
             var container = $(e.currentTarget).parent();
             var id_el = container.find( $(".selectCourtPickupID") );
@@ -114,6 +124,7 @@ fbb.editCourt = function(){
             $(".best_in_place").best_in_place();
         };
         $('#courtEditForm').load('/courts/'+court_id+'/reload_edit_form', formReloaded);
+        $(".saveCourtPickup").show();
     };
 
     var deletePickupGame = function(_id, container){

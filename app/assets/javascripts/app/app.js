@@ -3,6 +3,7 @@ window.fbb = {
     defaultLng : -84.3879824 ,
     defaultCourt : "Wicker Park Fieldhouse",
     lotsOfPeople: 3,
+    lotsOfDistance: 100000,
     modal: function(btn, modal_el){
         //common simple modal function
         btn.click(function(e){
