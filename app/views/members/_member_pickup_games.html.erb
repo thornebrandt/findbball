@@ -3,16 +3,16 @@
     <div id="member_pickup_games">
         <% @pickup_games.each do |pickup_game| %>
             <div data-id="<%= pickup_game.id %>" data-court="<%= pickup_game.court_id %>" class="court_pickup_game">
-                <span class="pickupGameCourt">
-                    <%= link_to pickup_game.court.name, pickup_game.court %>
-                </span>
-                <br>
                 <strong>
                     <%= pickup_game.verbose_day %>
                 </strong> -
                 <strong>
                     <%= pickup_game.verbose_time %>
                 </strong>
+                <br>
+                <span class="pickupGameCourt">
+                    <%= link_to pickup_game.court.name, pickup_game.court %>
+                </span>
                 <br>
                 <span href="#" class="court_players">
                     <%= pluralize(pickup_game.pickup_attendees_count, "player") %>

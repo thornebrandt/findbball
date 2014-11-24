@@ -7,7 +7,7 @@
         </div>
         <div id="results_container">
             <% @found_events.each do |event| %>
-                <div class="event_result">
+                <div class="result event_result">
                     <h2 class="event_result_title"><%= link_to event.name, event %></h2>
                     <%= link_to event.court.name, event.court, class: "event_result_court" %>
                     <br>
@@ -25,6 +25,10 @@
                         </div>
                     <% end %>
                     <span class="event_result_attending"><%= event.attendees.count %> attending</span>
+                    <p class="result_distance">-
+                        <input type="hidden" class="courtLat" value="<%=event.lat %>">
+                        <input type="hidden" class="courtLng" value="<%=event.lng %>">
+                    </p>
                     <%= link_to "View Event", event, class: "event_result_join btn btn-info" %>
                 </div>
             <% end %>

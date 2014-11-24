@@ -7,7 +7,7 @@
         </div>
         <div id="results_container">
         <% @found_hoops.each do |court| %>
-            <div class="result">
+            <div class="result find_hoops_result" data-court="<%= court.id %>">
                 <%= link_to court.name, court, class: "result_location" %>
                 <br>
                 <p class="result_address"><%= court.location %></p>
@@ -23,6 +23,7 @@
                         <%= image_tag court.skill_image %>
                     </div>
                 <% end %>
+                <span class="result_pickup">Pickup Games(3)</span>
                 <span class="result_upcoming">Upcoming Events(<%= court.events.count %>)</span>
                 <span class="result_reviews">Reviews(<%= court.reviews.count %>)</span>
                 <% if court.member %>

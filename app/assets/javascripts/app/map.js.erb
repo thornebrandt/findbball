@@ -18,9 +18,10 @@ fbb._map = function(){
         findHoopsGeoComplete( $("#location_search") );
     };
 
+
     var checkForSearchResults = function(){
         if ($("#find_hoops_canvas").length){
-            populateDistances();
+            populateDistancesAndMarkers();
             Arbiter.subscribe("searchLocation:fetched", function(searchLocation){
                 if(searchLocation){
                     $("#thisLocation").text(searchLocation);
@@ -42,28 +43,61 @@ fbb._map = function(){
         });
     };
 
-    var populateDistances = function(){
+    var populateDistancesAndMarkers = function(){
         var _markers= [];
-        $(".result_distance").each(function(i, _this){
-            var lat = parseFloat( $(this).children('.courtLat').val() );
-            var lng = parseFloat( $(this).children('.courtLng').val() );
+        $(".result").each(function(i, _this){
+            //this works on find_events as well
+            var result_el = $(this);
+            var distance_el = result_el.find('.result_distance');
+            var court_el = result_el.find('.result_location');
+            var event_el = result_el.find('.event_result_join');
+            var lat = parseFloat( result_el.find('.courtLat').val() );
+            var lng = parseFloat( result_el.find('.courtLng').val() );
             var latLng = new google.maps.LatLng(lat,lng);
             var _marker = new google.maps.Marker({
-                       position: latLng,
-                       map: fbb.map
+                icon: icon_path,
+                position: latLng,
+                map: fbb.map
             });
-            getDistance(gon.lat, gon.lng, lat, lng, $(this));
+
+            _marker.addListener('click', function(){
+                if(court_el.length){
+                    console.log("there is a court el");
+                    console.log(court_el);
+                    var _url = court_el.attr("href");
+                    window.location = _url;
+                } else {
+                    if(event_el.length){
+                        var _url = event_el.attr("href");
+                        window.location = _url;
+                    }
+                }
+            });
+
+            _marker.addListener('mouseover', function(){
+                result_el.addClass('highlight');
+            });
+
+            _marker.addListener('mouseout', function(){
+                result_el.removeClass('highlight');
+            });
+
+
+            getDistance(gon.lat, gon.lng, lat, lng, distance_el);
             var _quick_distance = quick_distance(gon.lat, gon.lng, lat, lng);
             if(_quick_distance < fbb.lotsOfDistance){
                 //don't include other countries, basically.
                 _markers.push(_marker);
             }
         });
-        var _bounds = new google.maps.LatLngBounds();
-        for(var i=0; i<_markers.length; i++) {
-            _bounds.extend(_markers[i].getPosition());
+
+        if(_markers.length){
+            var _bounds = new google.maps.LatLngBounds();
+            for(var i=0; i<_markers.length; i++) {
+                _bounds.extend(_markers[i].getPosition());
+            }
+            fbb.map.fitBounds(_bounds);
         }
-        fbb.map.fitBounds(_bounds);
     };
 
     var debugLatLng = function(_lat, _lng){ //DEBUG
@@ -146,6 +180,8 @@ fbb._map = function(){
                 var data = response.rows[0].elements[0];
                 if(data.status === "OK"){
                     distance = populateDistance( data.distance.value, result_el );
+                } else {
+                    result_el.text("Very Far");
                 }
             }
         };

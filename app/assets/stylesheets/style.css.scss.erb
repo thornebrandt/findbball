@@ -1092,7 +1092,7 @@ width: 950px;
 margin-left: -6px;
 }
 
-.result{
+.find_hoops_result{
 background: #dee8ed;
 width: 219px;
 display: inline-block;
@@ -1101,12 +1101,18 @@ text-align: center;
 line-height: 12px;
 padding-top: 10px;
 margin-left: 14px;
-height: 370px;
+min-height: 310px;
 margin-left: 7px;
 margin-right: 7px;
 margin-bottom: 20px;
 vertical-align: top;
+cursor: pointer;
 }
+
+.result.highlight{
+background: orange;
+}
+
 
 #result p{
 margin: 5 0 5 0;
@@ -1126,9 +1132,10 @@ height: 40px;
 
 .result_author_container{
 text-align: right;
-margin-right: 7px;
-margin-bottom: 10px;
 font-size: 12px;
+position: absolute;
+bottom: 10px;
+right: 10px;
 }
 
 
@@ -1155,7 +1162,7 @@ font-weight: bold;
 }
 
 
-.result_time, .result_upcoming, .result_reviews{
+.result_time, .result_upcoming, .result_reviews, .result_pickup{
 font-weight: bold;
 background: url(<%= asset_path "icon/clock.png" %>) no-repeat center left;
 display: block;
@@ -1175,14 +1182,18 @@ color: gray;
 text-decoration: none;
 }
 
-.result_upcoming{
+.result_pickup{
 background-image: url(<%= asset_path "icon/ball.png" %>);
 }
+
+.result_upcoming{
+background-image: url(<%= asset_path "icon/calendar.png" %>);
+}
+
 
 .result_reviews{
 background-image: url(<%= asset_path "icon/speech.png" %>);
 }
-
 
 .result_skill{
 color: #22639f;
@@ -1556,6 +1567,7 @@ font-size: 25px;
 
 #showCourtName{
 margin-bottom: 10px;
+text-transform: capitalize;
 }
 
 #courtWebsite{
@@ -1801,6 +1813,7 @@ line-height: 12px;
 
 .result_location{
 display: block;
+text-transform: capitalize;
 }
 
 .event_result_address{
