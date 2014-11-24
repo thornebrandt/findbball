@@ -21,7 +21,9 @@
                             </div>
                         <% end %>
                     <% end %>
+                    <% if signed_in? %>
                     <%= link_to "Create an Event", new_event_path, class: "btn btn-primary center" %>
+                    <% end %>
                     <hr>
                 </div>
             </div>

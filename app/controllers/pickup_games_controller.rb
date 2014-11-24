@@ -14,7 +14,14 @@ class PickupGamesController < ApplicationController
     def create
         @pickup_game = current_user.pickup_games.build(pickup_game_params)
         if @pickup_game.save!
-            render :json => @pickup_game
+            #also create a pickup_attendee
+            @pickup_attendee = PickupAttendee.new
+            @pickup_attendee.pickup_game_id = @pickup_game.id
+            @pickup_attendee.court_id = @pickup_game.court_id
+            @pickup_attendee.member_id = @pickup_game.member_id
+            if @pickup_attendee.save!
+                render :json => @pickup_game
+            end
         end
     end
 
@@ -45,7 +52,7 @@ class PickupGamesController < ApplicationController
         end
 
         def correct_user
-            @pickup_game = PikcupGame.find(params[:id])
+            @pickup_game = PickupGame.find(params[:id])
             @court = Court.find(@pickup_game.court_id)
             if(@court.member_id != current_user.id && @pickup_game.member_id != current_user.id)
                 flash[:info] = "That pickup game didn't belong to you"

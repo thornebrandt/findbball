@@ -30,6 +30,11 @@ class PickupGame < ActiveRecord::Base
         end
     end
 
+    # def court
+    #     Court.find(self.court_id)
+    # end
+
+
     def verbose_time
         #no minutes right now
         hour = Integer(time)

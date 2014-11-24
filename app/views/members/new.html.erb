@@ -49,3 +49,13 @@
         <p class="signup_disclaimer text-center">By joining, you agree to the <a href="#">Terms and conditions</a></p>
     </div>
 </div>
+<div id="nav">
+  <a href="/home" id="logo">Findbball</a>
+  <div id="nav_top_right">
+      <a id="howItWorks" href="#">How It Works</a> <span>|</span>
+      <%= link_to "Login", home_path(:login => true) %> <span>|</span>  <a href="#" class='reportProblem'>Report a problem</a>
+  </div>
+</div>
+<%= render 'modals/how_it_works_modal' %>
+<%= render 'modals/report_problem_modal' %>
+

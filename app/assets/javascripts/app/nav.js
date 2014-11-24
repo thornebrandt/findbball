@@ -19,7 +19,6 @@ fbb.nav = function(){
     function initialize(){
         setupNavSearch();
         memberSearchAutoComplete();
-        findHoopsGeoComplete( $("#location_search") );
         DOM();
     };
 
@@ -27,31 +26,6 @@ fbb.nav = function(){
         $(".noLink").click(function(e){
             e.preventDefault();
         });
-    };
-
-    var findHoopsGeoComplete = function(_input){
-        var map = new google.maps.Map(document.getElementById("noMap"));
-        if (_input.length){
-            _input.geocomplete()
-            .bind("geocode:result", findHoopsSuccessHandler)
-            .bind("geocodeLerror", function(event, result){
-                console.log(event);
-                console.log(result);
-            });
-        }
-    };
-
-    var findHoopsSuccessHandler = function(event, result){
-        var lat = result.geometry.location.k;
-        var lng = result.geometry.location.B;
-        var searchURL = $("#i_want_to").val();
-        var _url = "/"+searchURL+"?lat=" + lat + "&lng=" + lng
-        //var _url = "/find-hoops?by=" + result.formatted_address
-        var _within = $("#within").val();
-        if (_within){
-            _url += "&within=" + _within;
-        }
-        window.location = _url;
     };
 
 

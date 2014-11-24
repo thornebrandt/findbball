@@ -31,7 +31,10 @@ class MembersController < ApplicationController
         @hidden_courts = @member.courts - @shown_courts
         @shown_reviews = @member.reviews.last(5)
         @hidden_reviews = @member.reviews - @shown_reviews
-	end
+        #or statement in query, very nice...
+        @pickup_games = PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", @member.id).references(:pickup_attendees) |
+                        PickupGame.where(:member_id => @member.id)
+    end
 
     def destroy
         @user = User.find(params[:id])

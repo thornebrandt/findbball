@@ -1,5 +1,5 @@
-<% if @court.pickup_games.any? %>
-    <% @court.pickup_games.last(3).each do |pickup_game| %>
+<% if @pickup_games.any? %>
+    <% @pickup_games.each do |pickup_game| %>
         <div data-id="<%= pickup_game.id %>" class="court_pickup_game">
             <div class="pickup_game_show">
                 <strong>
@@ -12,23 +12,25 @@
                 <span href="#" class="court_players">
                     <%= pluralize(pickup_game.pickup_attendees.count, "player") %>
                 </span>
-                <% if pickup_game.member_id == current_user.id %>
-                    <a class="editPickupGameMini" href="#">
-                        <i class="glyphicon glyphicon-edit"></i>
-                    </a>
-                    <% if @court.pickup_games.count > 1 %>
-                        <a class="deletePickupGameMini" href="#">
-                            <i class="glyphicon glyphicon-trash"></i>
+                <% if signed_in? %>
+                    <% if pickup_game.member_id == current_user.id %>
+                        <a class="editPickupGameMini" href="#">
+                            <i class="glyphicon glyphicon-edit"></i>
                         </a>
+                        <% if @court.pickup_games.count > 1 %>
+                            <a class="deletePickupGameMini" href="#">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        <% end %>
                     <% end %>
-                <% end %>
-                <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>
-                    <a data-id="<%= @current_pickup_attendee.id %>" class="leavePickupGameMini" href="#">
-                        <i class="glyphicon glyphicon-minus-sign"></i>
-                    </a>
-                    <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
-                <% else %>
-                    <a href='#' class='joinPickupGame btn btn-default join_btn'>Go</a>
+                    <% if @current_pickup_attendee = current_user.attendingPickupGame(pickup_game.id) %>
+                        <a data-id="<%= @current_pickup_attendee.id %>" class="leavePickupGameMini" href="#">
+                            <i class="glyphicon glyphicon-minus-sign"></i>
+                        </a>
+                        <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
+                    <% else %>
+                        <a href='#' class='joinPickupGame btn btn-default join_btn'>Go</a>
+                    <% end %>
                 <% end %>
                 <br>
             </div>
@@ -84,4 +86,8 @@
         </p>
     </div>
 <% end %>
-<a href="#" id="newPickupGameMini_btn" class="btn btn-primary center">Create Pickup Game</a>
+<% if signed_in? %>
+    <a href="#" id="newPickupGameMini_btn" class="btn btn-primary center">
+        Create Pickup Game
+    </a>
+<% end %>

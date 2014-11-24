@@ -26,21 +26,21 @@
                                 <br>
                                 <span class="court_event_time"><i><%= event.short_date %> <%= event.start_time %></i></span><br>
                                 <span href="#" class="court_players"><%= pluralize(event.attendees.count, "player")%></span>
-                                <% if @current_attendee = current_user.attendingEvent(event.id) %>
-                                    <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
-                                <% else %>
-                                    <%= link_to "Go", event, class: "btn btn-default join_btn" %>
+                                <% if signed_in? %>
+                                    <% if @current_attendee = current_user.attendingEvent(event.id) %>
+                                        <div class="checkmark"><i class="glyphicon glyphicon-ok "></i></div>
+                                    <% else %>
+                                        <%= link_to "Go", event, class: "btn btn-default join_btn" %>
+                                    <% end %>
                                 <% end %>
                             </div>
                         <% end %>
                         </div>
                 <% else %>
-                    <h3>EVENTS(0)</h3>
                     <% if current_user? @member %>
+                    <h3>EVENTS(0)</h3>
                         You haven't added any events
                         <%= link_to "Create a new event", new_event_path %></p>
-                    <% else %>
-                        <%= @member.name %> hasn't added any events.
                     <% end %>
                 <% end %>
             </div>
