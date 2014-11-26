@@ -3,7 +3,8 @@ module SessionsHelper
     def sign_in(member)
         remember_token = Member.new_remember_token
         cookies.permanent[:remember_token] = remember_token
-        member.update_attribute(:remember_token, Member.hash(remember_token))
+        member.update_attributes(:remember_token => Member.hash(remember_token), :lastLogin => DateTime.now)
+        member.save
         self.current_user = member
     end
 

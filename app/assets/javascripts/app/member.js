@@ -14,7 +14,7 @@ fbb.member = function(){
 
         $("#confirm_image").click(
             function(e){
-                fbb.modalLoadingAnimation();
+                fbb.loading();
             }
         );
 

@@ -1,5 +1,9 @@
     <h2 id="fullname"><%= @member.full_name || @member.name %></h2>
-    <p id="member_since">member since <%= member_since_date(@member.created_at) %>,
+    <p id="member_since">
+        <% if @member.lastLogin %>
+        <strong>last online <%= member_since_date(@member.lastLogin) %></strong><br>
+        <% end %>
+        member since <%= member_since_date(@member.created_at) %>,<br>
         <% if @member.registered %>
             <i class="glyphicon glyphicon-star"></i> Verified email
         <% else %>

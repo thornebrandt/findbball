@@ -64,7 +64,6 @@ class CourtPhotosController < ApplicationController
                 temp_img_file << image_data_binary
                 temp_img_file.rewind
                 _timestamp = DateTime.now.strftime('%Q')
-                puts _timestamp
                 img_params = {:filename => "court_photo_#{_timestamp}.#{image_data[:extension]}",
                             :type => image_data[:type], :tempfile => temp_img_file}
                 uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)

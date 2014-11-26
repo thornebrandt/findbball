@@ -114,9 +114,6 @@ class MembersController < ApplicationController
         			render 'new'
         		end
             rescue => e
-                puts "ERRRRROOOORRRR"
-                puts e
-                puts "END OF ERROR"
                 flash[:error] = "Sorry, #{@member.email} is already in use"
                 redirect_to signup_path
             end
@@ -163,7 +160,6 @@ class MembersController < ApplicationController
 
     def reload_pickup_games
         @member = Member.find(params[:member_id])
-        p "WHAT IS THIS???"
         @pickup_games = PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", params[:member_id]).references(:pickup_attendees) |
                         PickupGame.where(:member_id => params[:member_id])
         @pickup_games = @pickup_games.sort_by(&:pickup_attendees_count).reverse()
@@ -234,7 +230,8 @@ class MembersController < ApplicationController
                                             :about,
                                             :photo,
                                             :registerd,
-                                            :verification
+                                            :verification,
+                                            :lastLogin
                                         )
 		end
 

@@ -11,7 +11,7 @@ module ApplicationHelper
 	def member_since_date(datetime)
 		# formatted_date = Date.strptime(datetime).strftime("%m/%d/%Y")
 		# formatted_date.to_s
-		datetime.strftime("%B %-d, %Y")
+		datetime.strftime("%b %-d, %Y")
 	end
 
     def link_to_add_fields(name, f, association)

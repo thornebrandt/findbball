@@ -45,10 +45,10 @@ fbb.uploadHelper = function(){
 
     this.checkFileSize = function(_filesize){
         var _units = fbb.formatSizeUnits(_filesize);
-        if (_filesize > 1000000){
-            $("#confirm_image").hide();
-            $("#response").html("<span class='error'>Your file was too big. ("
-                +_units+"). We only allow files up to 1MB. <br>Please choose a new file.</span>");
+        if (_filesize > 5000000){
+            // $("#confirm_image").hide();
+            $("#response").html("<span class='error'>Your file is big. ("
+                +_units+"). This might take a while.</span>");
         } else {
             $("#response").html("Your file is " + _units);
         }
