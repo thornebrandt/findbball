@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
     @review = current_user.reviews.build(review_params)
     if @review.save
         flash[:success] = "Review created!"
+        current_user.log_action("wrote a ", "review", @review.court_id)
         redirect_to @review.court
     else
         flash[:error] = "Could not create review";

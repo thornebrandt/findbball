@@ -77,6 +77,7 @@ class MembersController < ApplicationController
 
         if params[:member][:photo]
             @member.photo = base64_conversion
+            @member.log('changed their photo')
         end
 
         respond_to do |format|
@@ -86,6 +87,7 @@ class MembersController < ApplicationController
                     flash[:notice] = "Your profile was updated successfully!"
                     respond_with_bip(@member)
                 end
+                @member.log('edited their profile')
             else
                 format.html { render :edit }
                 format.json { respond_with_bip(@member) }
@@ -107,6 +109,7 @@ class MembersController < ApplicationController
                     MemberMailer.verify_email(@member).deliver
                     sign_in @member
         			flash[:success] = "Welcome to Findbball"
+                    @member.log_action("signed up");
         			redirect_to @member
         		else
                     flash[:error] = "Could not create member."
@@ -133,6 +136,7 @@ class MembersController < ApplicationController
                     flash[:notice] = "Thank you for registering your email, #{@member.name}!"
                     if signed_in?
                         if current_user == @member
+                            @member.log("Verified email.");
                             redirect_to @member
                         else
                             sign_out

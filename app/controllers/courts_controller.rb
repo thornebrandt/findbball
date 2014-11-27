@@ -104,6 +104,7 @@ class CourtsController < ApplicationController
                 format.json do
                     respond_with_bip(@court)
                 end
+                current_user.log("edited a ", "court", @court.id, 1)
             else
                 format.html { render :edit }
                 format.json { respond_with_bip(@court) }
@@ -138,6 +139,7 @@ class CourtsController < ApplicationController
         @court = current_user.courts.build(court_params)
         if @court.save!
           flash[:success] = "Court created!"
+          current_user.log_action("created a court, ", "court", @court.id)
           redirect_to @court
         else
           flash[:error] = "Could not create court."

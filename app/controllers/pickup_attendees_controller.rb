@@ -10,6 +10,7 @@ class PickupAttendeesController < ApplicationController
     def create
         @pickup_attendee = current_user.pickup_attendees.build( pickup_attendee_params )
         if @pickup_attendee.save
+            current_user.log_action('joined a pickup game at ', 'pickup game', @pickup_attendee.court_id)
             render :json => @pickup_attendee
         else
             false
@@ -19,6 +20,7 @@ class PickupAttendeesController < ApplicationController
     def destroy
         @pickup_attendee = PickupAttendee.find(params[:id])
         if @pickup_attendee.destroy
+            current_user.log_action('left a pickup game at ', 'pickup game', @pickup_attendee.court_id)
             render :json => @pickup_attendee
         end
     end

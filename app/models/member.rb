@@ -6,9 +6,10 @@ class Member < ActiveRecord::Base
     has_many :court_videos, inverse_of: :member
     has_many :reviews, inverse_of: :member
     has_many :events, inverse_of: :member
-    has_many :attendees,  dependent: :destroy, inverse_of: :member
-    has_many :pickup_attendees,  dependent: :destroy, inverse_of: :member
-    has_many :pickup_games, inverse_of: :member
+    has_many :attendees,  dependent: :delete_all, inverse_of: :member
+    has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
+    has_many :pickup_games, inverse_of: :member, dependent: :delete_all
+    has_many :member_actions, inverse_of: :member, dependent: :delete_all
 	has_secure_password
 	before_save :beforeSave
     before_validation :beforeValidation
@@ -22,6 +23,21 @@ class Member < ActiveRecord::Base
     # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
+
+    def log(_text, _type = nil, _id = nil, _level = nil)
+        #log level defaults to 3
+        member_action = MemberAction.new
+        member_action.member_id = self.id
+        if defined?(_text) then member_action.action_text = _text end
+        if defined?(_type) then member_action.linkType = _type end
+        if defined?(_id) then member_action.link_id = _id end
+        if defined?(_level) then member_action.level = _level end
+        member_action.save
+    end
+
+    def log_action(_text, _type = nil, _id = nil)
+        log(_text, _type, _id, 3)
+    end
 
 
     def attendingEvent(_event_id)

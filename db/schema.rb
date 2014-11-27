@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122202109) do
+ActiveRecord::Schema.define(version: 20141126061425) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
@@ -78,11 +78,14 @@ ActiveRecord::Schema.define(version: 20141122202109) do
   create_table "member_actions", force: true do |t|
     t.integer  "member_id"
     t.string   "action_text"
-    t.string   "link_type"
     t.integer  "link_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level",       default: 0, null: false
+    t.string   "linkType"
   end
+
+  add_index "member_actions", ["member_id"], name: "index_member_actions_on_member_id"
 
   create_table "members", force: true do |t|
     t.string   "name"

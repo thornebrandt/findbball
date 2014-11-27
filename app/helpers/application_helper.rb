@@ -22,4 +22,33 @@ module ApplicationHelper
         link_to name, '#', :onclick =>  h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"), remote: true
     end
 
+    def link_to_member_action(member_action)
+        case member_action.linkType
+            when "court" then
+                if court = Court.where({id: member_action.link_id}).first
+                    link_to court.name, court
+                else
+                    "(deleted)"
+                end
+            when "pickup game" then
+                if court = Court.where({id: member_action.link_id}).first
+                    link_to court.name, court
+                else
+                    "(deleted)"
+                end
+
+            when "event" then
+                if event = Event.where({id: member_action.link_id}).first
+                    link_to event.name, event
+                else
+                    "(deleted)"
+                end
+
+            else
+                member_action.linkType
+        end
+
+    end
+
+
 end

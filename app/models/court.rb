@@ -1,12 +1,12 @@
 class Court < ActiveRecord::Base
   belongs_to :member, inverse_of: :courts
-  has_many :reviews, dependent: :destroy, inverse_of: :court
-  has_many :events, dependent: :destroy, inverse_of: :court
-  has_many :court_photos, dependent: :destroy, inverse_of: :court
-  has_many :court_videos, dependent: :destroy, inverse_of: :court
-  has_many :attendees, inverse_of: :court
-  has_many :pickup_games, inverse_of: :court, dependent: :destroy
-  has_many :pickup_attendees, inverse_of: :court, dependent: :destroy
+  has_many :reviews, dependent: :delete_all, inverse_of: :court
+  has_many :events, dependent: :delete_all, inverse_of: :court
+  has_many :court_photos, dependent: :delete_all, inverse_of: :court
+  has_many :court_videos, dependent: :delete_all, inverse_of: :court
+  has_many :attendees, inverse_of: :court, dependent: :delete_all
+  has_many :pickup_games, inverse_of: :court, dependent: :delete_all
+  has_many :pickup_attendees, inverse_of: :court, dependent: :delete_all
 
   accepts_nested_attributes_for :pickup_games, :allow_destroy => true, reject_if: proc { |attributes| attributes[:day].blank? }
   accepts_nested_attributes_for :reviews, :allow_destroy => true, reject_if: proc { |attributes| attributes['content'].blank? }

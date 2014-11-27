@@ -1,0 +1,23 @@
+<% provide(:title, "Member Log") %>
+<div id="memberActions">
+    <h2>Findbball | Member Log</h2>
+    <table id="memberActionsTable">
+<% @member_actions.each do |member_action| %>
+    <tr>
+        <td><%= member_action.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td></td>
+        <td>
+            <% if member_action.member.present? %>
+                <%= link_to member_action.member.name, member_action.member %>
+            <% else %>
+                Member <%= mebmer_action.member_id %>
+            <% end %>
+            <%= member_action.action_text %>
+            <% if member_action.linkType %>
+                <%= link_to_member_action(member_action) %>
+            <% end %>
+        </td>
+    </tr>
+<% end %>
+    </table>
+</div>

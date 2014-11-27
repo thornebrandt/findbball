@@ -39,8 +39,10 @@
                 <% else %>
                     <% if current_user? @member %>
                     <h3>EVENTS(0)</h3>
-                        You haven't added any events
-                        <%= link_to "Create a new event", new_event_path %></p>
+                    <p>
+                        You haven't added any events<br>
+                        <%= link_to "Create a new event", new_event_path %>
+                    </p>
                     <% end %>
                 <% end %>
             </div>

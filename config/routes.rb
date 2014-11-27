@@ -8,6 +8,7 @@ Findbball::Application.routes.draw do
   resources :court_videos, only: [:create, :destroy]
   resources :pickup_games
   resources :attendees, only: [:create, :destroy]
+  resources :member_actions, only: [:create, :destroy]
   resources :pickup_attendees
   resource  :contacts, only: [:new, :create]
 
@@ -27,6 +28,9 @@ Findbball::Application.routes.draw do
   match '/courts/:court_id/reload_pickup_games', to: 'courts#reload_pickup_games', via: 'get'
 
   match '/members/:member_id/reload_pickup_games', to: 'members#reload_pickup_games', via: 'get'
+
+  match '/admin/log', to: 'member_actions#log', via: 'get'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

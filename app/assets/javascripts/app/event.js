@@ -1,5 +1,6 @@
 fbb._event = function(){
     fbb.courtEvent = {};
+    //var courtQuery = getQueryVariable
 
     var initialize = function(){
         if ( $("#addEvent_container").length ){

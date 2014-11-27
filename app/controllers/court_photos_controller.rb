@@ -14,6 +14,7 @@ class CourtPhotosController < ApplicationController
             if params[:court_photo][:event_id]
                 @event = Event.find(params[:court_photo][:event_id])
                 if @event.update_attribute :main_photo, @court_photo.id
+                    current_user.log_action("uploaded a ", "photo", @court_photo.id)
                     redirect_to @event
                 end
             else

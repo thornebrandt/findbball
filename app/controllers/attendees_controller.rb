@@ -7,6 +7,7 @@ class AttendeesController < ApplicationController
         @event = @attendee.event
         if @attendee.save
             flash[:success] = "You have successfully signed up for " + @event.name
+            cuurent_user.log_action("Signed up for ", "event", @event.id)
             redirect_to @attendee.event
         else
             flash[:error] = "Could not sign up for " + @event.name

@@ -3,7 +3,7 @@
         <% if @member.lastLogin %>
         <strong>last online <%= member_since_date(@member.lastLogin) %></strong><br>
         <% end %>
-        member since <%= member_since_date(@member.created_at) %>,<br>
+        member since <%= member_since_date(@member.created_at) %><br>
         <% if @member.registered %>
             <i class="glyphicon glyphicon-star"></i> Verified email
         <% else %>

@@ -9,4 +9,6 @@ class StaticPagesController < ApplicationController
     	@noHeaderFooter = true
     end
 
+
+
 end

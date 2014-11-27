@@ -20,6 +20,7 @@ class PickupGamesController < ApplicationController
             @pickup_attendee.court_id = @pickup_game.court_id
             @pickup_attendee.member_id = @pickup_game.member_id
             if @pickup_attendee.save!
+                current_user.log_action('created a pickup game at ', 'pickup game', @pickup_attendee.court_id)
                 render :json => @pickup_game
             end
         end

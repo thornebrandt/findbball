@@ -6,6 +6,7 @@ class CourtVideosController < ApplicationController
         @court_video = current_user.court_videos.build( court_video_params )
         if @court_video.save
             flash[:success] = "Court video updated"
+            current_user.log_action("posted a ", "video", @court_video.court.id)
             redirect_to @court_video.court
         else
             flash[:error] = "Could not save court video.";

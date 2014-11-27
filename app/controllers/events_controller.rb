@@ -28,6 +28,7 @@ class EventsController < ApplicationController
         #temporary solution until we can map through
         if @event.save!
             flash[:success] = "Event created!"
+            current_user.log_action("created an ", "event", @event.id)
             redirect_to @event
         else
             flash[:error] = "Could not create event."
@@ -67,6 +68,7 @@ class EventsController < ApplicationController
                 format.json do
                     respond_with_bip(@event)
                 end
+                current_user.log("edited an ", "event", @event.id, 1)
             else
                 format.html { render :edit }
                 format.json { respond_with_bip(@event) }

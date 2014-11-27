@@ -22,7 +22,7 @@
                         <% end %>
                     <% end %>
                     <% if signed_in? %>
-                    <%= link_to "Create an Event", new_event_path, class: "btn btn-primary center" %>
+                    <%= link_to "Create an Event", new_event_path(:court => @court.id), class: "btn btn-primary center" %>
                     <% end %>
                     <hr>
                 </div>
