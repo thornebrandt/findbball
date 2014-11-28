@@ -200,16 +200,17 @@ class Member < ActiveRecord::Base
 	end
 
     def member_actions
-        MemberAction.where("level <=  1 AND member_id == ?", self.id)
+        MemberAction.where("level <=  1 AND member_id = ?", self.id)
     end
 
     def friends
-        #BUG maybe
         if Rails.env.production?
             Member.where('id != ?', self.id).limit(8).order("RAND()")
         else
             Member.where('id != ?', self.id).limit(8).order("RANDOM()")
         end
+        #BUG maybe
+        Member.where('id != ?', self.id).limit(8).order("RANDOM()")
     end
 
 
