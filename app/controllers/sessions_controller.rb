@@ -5,6 +5,9 @@ class SessionsController < ApplicationController
             if sign_in member
                 member.log("signed in")
                 redirect_back_or member
+            else
+                flash[:error] = "Your account has been deactivated" #not right
+                redirect_to home_path
             end
 		else
 			flash[:error] = "Invalid email/password combination" #not right

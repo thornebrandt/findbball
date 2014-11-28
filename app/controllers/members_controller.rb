@@ -17,6 +17,11 @@ class MembersController < ApplicationController
         render json: all
     end
 
+    def profile
+        redirect_to current_user
+    end
+
+
 	def show
         if Member.exists?(params[:id])
             @member = Member.find(params[:id])
@@ -62,6 +67,10 @@ class MembersController < ApplicationController
             @hidden_courts = @member.courts - @shown_courts
             @shown_reviews = @member.reviews.last(5)
             @hidden_reviews = @member.reviews - @shown_reviews
+            @pickup_games = PickupGame.where(:member_id => @member.id) |
+                PickupGame.includes(:pickup_attendees).where("pickup_attendees.member_id = ?", @member.id).references(:pickup_attendees)
+
+            @pickup_games = @pickup_games.sort_by(&:pickup_attendees_count).reverse()
         else
             redirect_to home_path
         end
@@ -127,7 +136,6 @@ class MembersController < ApplicationController
 
 
     def verify_email
-        #localhost:3000/verify_email?i=13&q=60d39f4b37803e2c569829bb64
         @member = Member.find(params[:i])
         if @member
             @email_verification = params[:q]

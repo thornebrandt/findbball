@@ -1,0 +1,18 @@
+<span id="profile_completion_h3">PROFILE COMPLETION</span>
+<div id="progbar">
+    <div id="progbar_fill">
+        <span id="progbar_indicator"><%= @member.profile_completion[:percent] %>%</span>
+    </div>
+</div>
+<div id="next_step">
+Next Step:
+<% if @member.profile_completion[:edit_link] == "profile" %>
+    <%= link_to @member.profile_completion[:next_action], edit_member_path(@member) %>
+<% elsif @member.profile_completion[:edit_link] == "find_hoops" %>
+    <%= link_to @member.profile_completion[:next_action], "/find-hoops" %>
+<% else %>
+    <strong>
+        <span href="#"><%= @member.profile_completion[:next_action] %></span>
+    </strong>
+<% end %>
+</div>

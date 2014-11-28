@@ -44,8 +44,7 @@ fbb._event = function(){
 
 
         $("#court_search").typeahead({
-            hint: true,
-            highlight: true,
+            hint: false
         },
         {
             source: results.ttAdapter(),
@@ -58,13 +57,51 @@ fbb._event = function(){
             $("#courtNotFound").hide();
         });
 
+        $("#re_search_court").click( courtReSearchHandler );
+
+        if(gon.court){
+            courtSelectionHandler(null, gon.court);
+        }
+    };
+
+    var courtReSearchHandler = function(e){
+        e.preventDefault();
+        $(".court_display").hide();
+        $(".court_search").show();
+        $("#court_search").focus();
+        $("#court_search").val("");
+        $("#realCourtID").val("");
+        $('#court_search').typeahead("val", "");
+        hideCourtMap();
     };
 
     var courtSelectionHandler = function(obj, datum){
         var court_id = datum.id;
+        var court_name = datum.name;
+        loadCourt(datum);
         $("#realCourtID").val(court_id);
-        $("#court_search").blur();
+        $(".court_display").show();
+        $("#court_display").text(court_name);
+        $("#court_display").attr("href", "/courts/" + court_id);
+        $(".court_search").hide();
+        // $("#court_search").blur();
     }
+
+    var loadCourt = function(_court){
+        gon.lat = _court.lat;
+        gon.lng = _court.lng;
+        showCourtMap();
+        fbb.checkForMap();
+    };
+
+    var showCourtMap = function(){
+        $("#add_event_map").css("height", "200px");
+    };
+
+    var hideCourtMap = function(){
+        $("#add_event_map").css("height", "0px");
+    };
+
 
     var selectStartDate = function(e, d){
         fbb.courtEvent.start_date = fbb.time.datePickerToISO(d);
@@ -99,11 +136,13 @@ fbb._event = function(){
         dateFormat: 'MM dd',
         duration: 'fast',
         showButtonPanel: true,
-        onSelect: selectStartDate
+        onSelect: selectStartDate,
+        beforeShow: function(){
+            $(".ui-datepicker").removeClass("hide");
+        }
     };
 
     var blurEvents = function(){
-        console.log("not a valid date blur");
         $("input").blur(function(){
             if ( !$("#realStart").val() ){
                 $("#event_datepicker").val("");

@@ -4,6 +4,8 @@ fbb.member = function(){
     var initialize = function(){
         if(isMemberPage){
             DOMEvents();
+            setupProgBar();
+            prepareCourtAutoComplete();
         }
     };
 
@@ -78,8 +80,25 @@ fbb.member = function(){
                 deletePickupGame(_id, container);
             }
         });
-
     }
+
+    var setupProgBar = function(){
+        if ($("#progbar_fill").length) {
+            //animate progbar if it exists
+            var progbarFill = $("#progbar_fill");
+            var indicator = $("#progbar_indicator");
+            var percentComplete = indicator.text();
+
+            progbarFill.animate({
+                width: percentComplete
+            }, 1200, fadeIndicator);
+
+            function fadeIndicator() {
+                indicator.fadeIn();
+            }
+        }
+    };
+
 
     var joinPickupGame = function(_obj){
         $.ajax({
@@ -135,7 +154,33 @@ fbb.member = function(){
         });
     };
 
+    var prepareCourtAutoComplete = function(){
+        var results = new Bloodhound({
+            datumTokenizer: function(data){
+                return Bloodhound.tokenizers.whitespace(data.name)
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            limit: 12,
+            remote: "/search_courts?q=%QUERY"
+        });
+        results.initialize();
 
+
+        $("#play_search").typeahead({
+            hint: true,
+            highlight: true
+        },
+        {
+            source: results.ttAdapter(),
+            displayKey: "name"
+        });
+
+        $("#play_search").on("typeahead:selected", courtSelectionHandler);
+    };
+
+    var courtSelectionHandler = function(obj, datum){
+        window.location = "/courts/" + datum.id;
+    };
 
     var reloadPickupGameContainer = function(){
         var member_id = gon.member_id;

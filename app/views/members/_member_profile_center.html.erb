@@ -1,24 +1,29 @@
     <h2 id="fullname"><%= @member.full_name || @member.name %></h2>
-    <p id="member_since">
-        <% if @member.lastLogin %>
-        <strong>last online <%= member_since_date(@member.lastLogin) %></strong><br>
-        <% end %>
-        member since <%= member_since_date(@member.created_at) %><br>
-        <% if @member.registered %>
-            <i class="glyphicon glyphicon-star"></i> Verified email
-        <% else %>
-            has not verified email.
-        <% end %>
-    </p>
-        <% if @member_has_schedule == true %>
-            <%= render 'members/member_headline' %>
-        <% end %>
     <% if current_user? @member %>
+    <p id="member_play_review">
         <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit Profile</a>'), edit_member_path(@member) %> |
         <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete Account</a>'), @member, method: :destroy,
               data: { confirm: raw("Are you sure you want to delete your profile? &nbsp; &nbsp; &nbsp; This can't be undone.") }  %>
         <br>
+        <%= render 'members/member_play_review' %>
+    </p>
+    <% else %>
+        <p id="member_since">
+            <% if @member.lastLogin %>
+            <strong>last online <%= member_since_date(@member.lastLogin) %></strong><br>
+            <% end %>
+            member since <%= member_since_date(@member.created_at) %><br>
+            <% if @member.registered %>
+                <i class="glyphicon glyphicon-star"></i> Verified email
+            <% else %>
+                has not verified email.
+            <% end %>
+        </p>
     <% end %>
+
+        <% if @member_has_schedule == true %>
+            <%= render 'members/member_headline' %>
+        <% end %>
 
     <div id="member_info">
         <% if @member.birthdate %>
@@ -80,4 +85,6 @@
             <%= @member.about %>
         <% end %>
     </div>
-    <%= render 'members/member_history' %>
+    <% if !current_user? @member %>
+        <%= render 'members/member_history' %>
+    <% end %>

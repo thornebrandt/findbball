@@ -9,4 +9,21 @@
             <td class="tdRightAlign italics"><%= time_ago_in_words(@member.created_at) %> ago</td>
             <td><b><%= @member.name %></b> signed up</td>
         </tr>
-</table>    
+        <% if @member.member_actions.any? %>
+            <% @member.member_actions.each do |member_action| %>
+                <tr>
+                    <td class="tdRightAlign italics">
+                        <%= time_ago_in_words(member_action.created_at) %> ago
+                    </td>
+                    <td>
+                    <%= member_action.action_text %>
+                    <% if member_action.linkType %>
+                        <strong><%= link_to_member_action(member_action) %></strong>
+                    <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        <tr>
+        </tr>
+        <% end %>
+</table>

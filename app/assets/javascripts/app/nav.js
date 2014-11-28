@@ -32,7 +32,6 @@ fbb.nav = function(){
     function memberSearchAutoComplete(){
         var results = new Bloodhound({
             datumTokenizer: function(data){
-                console.log("datum");
                 return Bloodhound.tokenizers.whitespace(data.name)
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,

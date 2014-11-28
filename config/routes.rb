@@ -31,6 +31,8 @@ Findbball::Application.routes.draw do
 
   match '/admin/log', to: 'member_actions#log', via: 'get'
 
+  match '/profile', to: 'members#profile', via: 'get'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

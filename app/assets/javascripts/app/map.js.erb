@@ -124,15 +124,20 @@ fbb._map = function(){
             switch(whichMap){
                 case "court_map":
                     getDistance(fbb.defaultLat, fbb.defaultLng, self.mapObj.lat, self.mapObj.lng, $("#milesAway"));
+                    setupCourtCursor();
                     break;
                 case "add_court_map":
                 case "edit_court_map":
+                case "add_event_map":
                     setupCourtCursor();
                     addCourtDOM();
                 break;
             }
         }
     };
+
+    fbb.checkForMap = checkForMap;
+
 
     var getLatLng = function(){
         self.mapObj = self.mapObj || {};
@@ -144,7 +149,10 @@ fbb._map = function(){
         } else {
             console.log("gon is not loaded");
         }
+
     };
+
+
 
     var simpleMap = function(){
         //to test that the map is working
@@ -219,9 +227,13 @@ fbb._map = function(){
     }
 
     var setupCourtCursor = function(){
+        if(self.mapOptions.center){
+            console.log("there is mapOptions.center");
+        }
+        var latLng = self.mapOptions.center || new google.maps.LatLng(gon.lat, gon.lng);
         fbb.marker = new google.maps.Marker({
             icon: icon_path,
-            position: self.mapOptions.center,
+            position: latLng,
             map: self.map
         });
     };

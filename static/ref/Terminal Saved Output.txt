@@ -1,0 +1,413 @@
+Last login: Tue Nov 25 21:44:43 on ttys000
+RVM used your Gemfile for selecting Ruby, it is all fine - Heroku does that too,
+you can ignore these warnings with 'rvm rvmrc warning ignore /Library/WebServer/Documents/findbball/Gemfile'.
+To ignore the warning for all files run 'rvm rvmrc warning ignore allGemfiles'.
+
+ThorneBrandt-Bullpen:findbball thornebrandt$ newcolor
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > m = Member.find(1)
+  Member Load (1.3ms)  SELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT 1  [["id", 1]]
+ => #<Member id: 1, name: "thornebrandt", email: "thornebrandt@gmail.com", created_at: "2014-11-17 04:46:48", updated_at: "2014-11-26 04:22:16", password_digest: "$2a$10$q/Ge/EBUw4Gc8I.x6WNa0ez.zsLFjtBigdsr3R1QFRBK...", remember_token: "9c73cb9903c27fb8a2a3d05a092c99d0029d9590", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: nil, height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cbe4cac99a9730b8ddf1d162c4", lastLogin: "2014-11-26 04:22:15"> 
+2.0.0-p451 :002 > m.lastLogin
+ => Wed, 26 Nov 2014 04:22:15 UTC +00:00 
+2.0.0-p451 :003 > ma = MemberAction.new
+NameError: uninitialized constant MemberAction
+	from (irb):3
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :004 > ^C
+2.0.0-p451 :004 > quit
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > ma = MemberAction.new
+LoadError: Unable to autoload constant MemberAction, expected /Library/WebServer/Documents/findbball/app/models/member_action.rb to define it
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:464:in `load_missing_constant'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:184:in `const_missing'
+	from (irb):1
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :002 > ma = MemberAction.new
+RuntimeError: Circular dependency detected while autoloading constant MemberAction
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:461:in `load_missing_constant'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:184:in `const_missing'
+	from (irb):2
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :003 > ma = MemberAction.new
+RuntimeError: Circular dependency detected while autoloading constant MemberAction
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:461:in `load_missing_constant'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activesupport-4.0.4/lib/active_support/dependencies.rb:184:in `const_missing'
+	from (irb):3
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :004 > quit
+ThorneBrandt-Bullpen:findbball thornebrandt$ quit
+-bash: quit: command not found
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > ma = MemberAction.new
+ => #<MemberAction id: nil, member_id: nil, action_text: nil, link_id: nil, created_at: nil, updated_at: nil, level: 0, linkType: nil> 
+2.0.0-p451 :002 > ma = MemberAction.new(:member_id => 2)
+ => #<MemberAction id: nil, member_id: 2, action_text: nil, link_id: nil, created_at: nil, updated_at: nil, level: 0, linkType: nil> 
+2.0.0-p451 :003 > ma
+ => #<MemberAction id: nil, member_id: 2, action_text: nil, link_id: nil, created_at: nil, updated_at: nil, level: 0, linkType: nil> 
+2.0.0-p451 :004 > ma = MemberAction.new({member_id: 2})
+ => #<MemberAction id: nil, member_id: 2, action_text: nil, link_id: nil, created_at: nil, updated_at: nil, level: 0, linkType: nil> 
+2.0.0-p451 :005 > ^C
+2.0.0-p451 :005 > ms = MemberAction.find_all
+NoMethodError: undefined method `find_all' for #<Class:0x00000101790318>
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activerecord-4.0.4/lib/active_record/dynamic_matchers.rb:22:in `method_missing'
+	from (irb):5
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :006 > ms = MemberAction.all
+  MemberAction Load (0.2ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation []> 
+2.0.0-p451 :007 > quit
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails s
+=> Booting WEBrick
+=> Rails 4.0.4 application starting in development on http://0.0.0.0:3000
+=> Run `rails server -h` for more startup options
+=> Ctrl-C to shutdown server
+A server is already running. Check /Library/WebServer/Documents/findbball/tmp/pids/server.pid.
+Exiting
+ThorneBrandt-Bullpen:findbball thornebrandt$ 
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > m = MemberAction.new
+ => #<MemberAction id: nil, member_id: nil, action_text: nil, link_id: nil, created_at: nil, updated_at: nil, level: 0, linkType: nil> 
+2.0.0-p451 :002 > ms = MemberAction.all
+  MemberAction Load (0.2ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation []> 
+2.0.0-p451 :003 > quit
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > quit
+ThorneBrandt-Bullpen:findbball thornebrandt$ rails c
+Loading production environment (Rails 4.0.4)
+2.0.0-p451 :001 > ms = MemberAction.all
+  MemberAction Load (1.6ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation []> 
+2.0.0-p451 :002 > ms = MemberAction.all
+  MemberAction Load (0.3ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation [#<MemberAction id: 1, member_id: 1, action_text: "Signed In", link_id: nil, created_at: "2014-11-26 08:09:38", updated_at: "2014-11-26 08:09:38", level: 3, linkType: nil>]> 
+2.0.0-p451 :003 > MemberAction.delete_all
+  SQL (2.1ms)  DELETE FROM "member_actions"
+ => 1 
+2.0.0-p451 :004 > ms = MemberAction.all
+  MemberAction Load (0.2ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation [#<MemberAction id: 2, member_id: 1, action_text: "Signed In", link_id: nil, created_at: "2014-11-26 08:13:50", updated_at: "2014-11-26 08:13:50", level: 3, linkType: nil>]> 
+2.0.0-p451 :005 > o = Object.const.get("Court")
+NoMethodError: undefined method `const' for Object:Class
+	from (irb):5
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :006 > o = Object.const_get("Court")
+ => Court(id: integer, name: string, member_id: integer, created_at: datetime, updated_at: datetime, skill_level: integer, location: string, website: string, open_time_1: integer, open_am_1: string, open_time_2: integer, open_am_2: string, lat: float, lng: float, main_photo: integer, distance: decimal, details: text) 
+2.0.0-p451 :007 > o
+ => Court(id: integer, name: string, member_id: integer, created_at: datetime, updated_at: datetime, skill_level: integer, location: string, website: string, open_time_1: integer, open_am_1: string, open_time_2: integer, open_am_2: string, lat: float, lng: float, main_photo: integer, distance: decimal, details: text) 
+2.0.0-p451 :008 > o.find(1)
+  Court Load (4.6ms)  SELECT "courts".* FROM "courts" WHERE "courts"."id" = ? LIMIT 1  [["id", 1]]
+ => #<Court id: 1, name: "wicker park", member_id: 1, created_at: "2014-11-17 04:47:18", updated_at: "2014-11-17 04:47:18", skill_level: -1, location: "Wicker Park, Chicago, IL, USA", website: "", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: 41.9088028, lng: -87.6795985, main_photo: nil, distance: nil, details: ""> 
+2.0.0-p451 :009 > ms
+ => #<ActiveRecord::Relation [#<MemberAction id: 2, member_id: 1, action_text: "Signed In", link_id: nil, created_at: "2014-11-26 08:13:50", updated_at: "2014-11-26 08:13:50", level: 3, linkType: nil>]> 
+2.0.0-p451 :010 > ms[0]
+ => #<MemberAction id: 2, member_id: 1, action_text: "Signed In", link_id: nil, created_at: "2014-11-26 08:13:50", updated_at: "2014-11-26 08:13:50", level: 3, linkType: nil> 
+2.0.0-p451 :011 > ms[1]
+ => nil 
+2.0.0-p451 :012 > ms[2]
+ => nil 
+2.0.0-p451 :013 > ms = MemberAction.find_all
+NoMethodError: undefined method `find_all' for #<Class:0x00000101c983d8>
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activerecord-4.0.4/lib/active_record/dynamic_matchers.rb:22:in `method_missing'
+	from (irb):13
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :014 > ms = MemberAction.all
+  MemberAction Load (0.3ms)  SELECT "member_actions".* FROM "member_actions"
+ => #<ActiveRecord::Relation [#<MemberAction id: 2, member_id: 1, action_text: "Signed In", link_id: nil, created_at: "2014-11-26 08:13:50", updated_at: "2014-11-26 08:13:50", level: 3, linkType: nil>, #<MemberAction id: 3, member_id: 1, action_text: "created a ", link_id: nil, created_at: "2014-11-26 08:51:25", updated_at: "2014-11-26 08:51:25", level: 3, linkType: "court">, #<MemberAction id: 4, member_id: 1, action_text: "created a ", link_id: nil, created_at: "2014-11-26 08:51:25", updated_at: "2014-11-26 08:51:25", level: 3, linkType: "court">]> 
+2.0.0-p451 :015 > ms[1]
+ => #<MemberAction id: 3, member_id: 1, action_text: "created a ", link_id: nil, created_at: "2014-11-26 08:51:25", updated_at: "2014-11-26 08:51:25", level: 3, linkType: "court"> 
+2.0.0-p451 :016 > MemberAction.delete_all
+  SQL (1.8ms)  DELETE FROM "member_actions"
+ => 3 
+2.0.0-p451 :017 > Court.all
+  Court Load (0.3ms)  SELECT "courts".* FROM "courts"
+ => #<ActiveRecord::Relation [#<Court id: 1, name: "wicker park", member_id: 1, created_at: "2014-11-17 04:47:18", updated_at: "2014-11-17 04:47:18", skill_level: -1, location: "Wicker Park, Chicago, IL, USA", website: "", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: 41.9088028, lng: -87.6795985, main_photo: nil, distance: nil, details: "">, #<Court id: 2, name: "BummerVille", member_id: 3, created_at: "2014-11-24 03:21:48", updated_at: "2014-11-24 07:31:28", skill_level: 3, location: "Australia", website: "bi,,", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: -25.274398, lng: 133.77513599999997, main_photo: nil, distance: nil, details: "bummer dude\r\n">, #<Court id: 3, name: "Wrigley Field", member_id: 3, created_at: "2014-11-24 07:46:53", updated_at: "2014-11-24 07:46:53", skill_level: 3, location: "1060 W Addison St, Chicago, IL 60613, United States...", website: "", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: 41.948438, lng: -87.65533299999998, main_photo: nil, distance: nil, details: "">, #<Court id: 4, name: "San Dude School", member_id: 1, created_at: "2014-11-26 08:51:48", updated_at: "2014-11-26 08:51:48", skill_level: -1, location: "Odessa, TX, United States", website: "", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: 31.877968, lng: -102.37986799999999, main_photo: nil, distance: nil, details: "">]> 
+2.0.0-p451 :018 > Court.count
+   (0.1ms)  SELECT COUNT(*) FROM "courts"
+ => 4 
+2.0.0-p451 :019 > Court.delete(3)
+  SQL (1.3ms)  DELETE FROM "courts" WHERE "courts"."id" = 3
+ => 1 
+2.0.0-p451 :020 > Court.delete(1)
+  SQL (2.0ms)  DELETE FROM "courts" WHERE "courts"."id" = 1
+ => 1 
+2.0.0-p451 :021 > Member.delete_all
+  SQL (2.1ms)  DELETE FROM "members"
+ => 4 
+2.0.0-p451 :022 > Court.delete_all
+  SQL (1.9ms)  DELETE FROM "courts"
+ => 2 
+2.0.0-p451 :023 > Court.delete_all
+  SQL (2.4ms)  DELETE FROM "courts"
+ => 1 
+2.0.0-p451 :024 > PickupGame.delete_all
+  SQL (3.0ms)  DELETE FROM "pickup_games"
+ => 9 
+2.0.0-p451 :025 > Court.delete_all
+  SQL (1.9ms)  DELETE FROM "courts"
+ => 1 
+2.0.0-p451 :026 > PickupGame.all
+  PickupGame Load (0.5ms)  SELECT "pickup_games".* FROM "pickup_games" ORDER BY pickup_attendees_count DESC
+ => #<ActiveRecord::Relation [#<PickupGame id: 27, day: 5, time: 18.0, member_id: 5, court_id: 6, created_at: "2014-11-26 22:15:53", updated_at: "2014-11-26 22:15:53", pickup_attendees_count: 0>]> 
+2.0.0-p451 :027 > PickupGame.delete_all
+  SQL (1.8ms)  DELETE FROM "pickup_games"
+ => 1 
+2.0.0-p451 :028 > Court.delete_all
+  SQL (1.8ms)  DELETE FROM "courts"
+ => 1 
+2.0.0-p451 :029 > PickupGame.all
+  PickupGame Load (0.3ms)  SELECT "pickup_games".* FROM "pickup_games" ORDER BY pickup_attendees_count DESC
+ => #<ActiveRecord::Relation [#<PickupGame id: 28, day: 4, time: 18.0, member_id: 5, court_id: 7, created_at: "2014-11-26 22:19:59", updated_at: "2014-11-26 22:19:59", pickup_attendees_count: 0>]> 
+2.0.0-p451 :030 > Court.all
+  Court Load (0.6ms)  SELECT "courts".* FROM "courts"
+ => #<ActiveRecord::Relation []> 
+2.0.0-p451 :031 > PickupGame.delete_all
+  SQL (2.0ms)  DELETE FROM "pickup_games"
+ => 1 
+2.0.0-p451 :032 > PickupAttendee.all
+  PickupAttendee Load (0.2ms)  SELECT "pickup_attendees".* FROM "pickup_attendees"
+ => #<ActiveRecord::Relation [#<PickupAttendee id: 5, pickup_game_id: 6, court_id: 1, member_id: 1, created_at: "2014-11-19 08:43:36", updated_at: "2014-11-19 08:43:36">, #<PickupAttendee id: 7, pickup_game_id: 7, court_id: 1, member_id: 2, created_at: "2014-11-19 09:01:56", updated_at: "2014-11-19 09:01:56">, #<PickupAttendee id: 9, pickup_game_id: 8, court_id: 1, member_id: 2, created_at: "2014-11-24 00:51:55", updated_at: "2014-11-24 00:51:55">, #<PickupAttendee id: 10, pickup_game_id: 8, court_id: 1, member_id: 1, created_at: "2014-11-24 01:37:28", updated_at: "2014-11-24 01:37:28">, #<PickupAttendee id: 11, pickup_game_id: 10, court_id: 1, member_id: 1, created_at: "2014-11-24 01:45:05", updated_at: "2014-11-24 01:45:05">, #<PickupAttendee id: 24, pickup_game_id: 13, court_id: 2, member_id: 3, created_at: "2014-11-24 06:39:52", updated_at: "2014-11-24 06:39:52">, #<PickupAttendee id: 25, pickup_game_id: 23, court_id: 2, member_id: 3, created_at: "2014-11-24 07:34:54", updated_at: "2014-11-24 07:34:54">]> 
+2.0.0-p451 :033 > PickupAttendee.delete_all
+  SQL (1.5ms)  DELETE FROM "pickup_attendees"
+ => 7 
+2.0.0-p451 :034 > Court.destroy_all
+  Court Load (0.3ms)  SELECT "courts".* FROM "courts"
+   (0.5ms)  begin transaction
+  Review Load (0.3ms)  SELECT "reviews".* FROM "reviews" WHERE "reviews"."court_id" = ? ORDER BY created_at DESC  [["court_id", 8]]
+  Event Load (0.1ms)  SELECT "events".* FROM "events" WHERE "events"."court_id" = ?  [["court_id", 8]]
+  CourtPhoto Load (0.1ms)  SELECT "court_photos".* FROM "court_photos" WHERE "court_photos"."court_id" = ? ORDER BY created_at DESC  [["court_id", 8]]
+  CourtVideo Load (0.1ms)  SELECT "court_videos".* FROM "court_videos" WHERE "court_videos"."court_id" = ? ORDER BY created_at DESC  [["court_id", 8]]
+  PickupGame Load (0.1ms)  SELECT "pickup_games".* FROM "pickup_games" WHERE "pickup_games"."court_id" = ? ORDER BY pickup_attendees_count DESC  [["court_id", 8]]
+  PickupAttendee Load (0.1ms)  SELECT "pickup_attendees".* FROM "pickup_attendees" WHERE "pickup_attendees"."pickup_game_id" = ?  [["pickup_game_id", 29]]
+  SQL (0.3ms)  DELETE FROM "pickup_games" WHERE "pickup_games"."id" = ?  [["id", 29]]
+  PickupAttendee Load (0.1ms)  SELECT "pickup_attendees".* FROM "pickup_attendees" WHERE "pickup_attendees"."court_id" = ?  [["court_id", 8]]
+  SQL (0.1ms)  DELETE FROM "courts" WHERE "courts"."id" = ?  [["id", 8]]
+   (0.9ms)  commit transaction
+ => [#<Court id: 8, name: "Another Hole in the Wall", member_id: 5, created_at: "2014-11-26 22:21:37", updated_at: "2014-11-26 22:21:37", skill_level: -1, location: "3236 Union Ave, Steger, IL 60475, United States", website: "", open_time_1: nil, open_am_1: nil, open_time_2: nil, open_am_2: nil, lat: 41.472124, lng: -87.63318800000002, main_photo: nil, distance: nil, details: "">] 
+2.0.0-p451 :035 > MemberActions.delete_all
+NameError: uninitialized constant MemberActions
+	from (irb):35
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :036 > MemberAction.delete_all
+  SQL (1.9ms)  DELETE FROM "member_actions"
+ => 5 
+2.0.0-p451 :037 > has = {percent: 34, percent2: 25}
+ => {:percent=>34, :percent2=>25} 
+2.0.0-p451 :038 > has
+ => {:percent=>34, :percent2=>25} 
+2.0.0-p451 :039 > has.percent
+NoMethodError: undefined method `percent' for {:percent=>34, :percent2=>25}:Hash
+	from (irb):39
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :040 > has[:percent]
+ => 34 
+2.0.0-p451 :041 > Member.find_all
+NoMethodError: undefined method `find_all' for #<Class:0x000001047bdf40>
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activerecord-4.0.4/lib/active_record/dynamic_matchers.rb:22:in `method_missing'
+	from (irb):41
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :042 > Member.all
+  Member Load (0.3ms)  SELECT "members".* FROM "members"
+ => #<ActiveRecord::Relation [#<Member id: 5, name: "thornebrandt", email: "thornebrandt@gmail.com", created_at: "2014-11-26 09:23:10", updated_at: "2014-11-26 09:23:11", password_digest: "$2a$10$bG.Dd1bUJy7ewEKI.RI7A.H8dLDoXL9qR677tYRucSIs...", remember_token: "2f3d51d3c596bbe5d5620f4ecd7b21750566cb6e", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: nil, height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "23598522331c2152068f8820bc", lastLogin: "2014-11-26 09:23:11">, #<Member id: 6, name: "dude", email: "dude@duder.com", created_at: "2014-11-27 10:57:39", updated_at: "2014-11-28 10:16:54", password_digest: "$2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMr...", remember_token: "51786ccdc0a66e272193e6f0a32b28baaa79b741", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: "member6.png", height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cb0fa3e9be75ec4ec9c82f3ed2", lastLogin: "2014-11-27 10:57:40">]> 
+2.0.0-p451 :043 > f Member.all
+NoMethodError: undefined method `f' for main:Object
+	from (irb):43
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :044 > Member.all f
+NameError: undefined local variable or method `f' for main:Object
+	from (irb):44
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :045 > d = Member.all
+  Member Load (0.3ms)  SELECT "members".* FROM "members"
+ => #<ActiveRecord::Relation [#<Member id: 5, name: "thornebrandt", email: "thornebrandt@gmail.com", created_at: "2014-11-26 09:23:10", updated_at: "2014-11-26 09:23:11", password_digest: "$2a$10$bG.Dd1bUJy7ewEKI.RI7A.H8dLDoXL9qR677tYRucSIs...", remember_token: "2f3d51d3c596bbe5d5620f4ecd7b21750566cb6e", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: nil, height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "23598522331c2152068f8820bc", lastLogin: "2014-11-26 09:23:11">, #<Member id: 6, name: "dude", email: "dude@duder.com", created_at: "2014-11-27 10:57:39", updated_at: "2014-11-28 10:16:54", password_digest: "$2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMr...", remember_token: "51786ccdc0a66e272193e6f0a32b28baaa79b741", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: "member6.png", height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cb0fa3e9be75ec4ec9c82f3ed2", lastLogin: "2014-11-27 10:57:40">]> 
+2.0.0-p451 :046 > d
+ => #<ActiveRecord::Relation [#<Member id: 5, name: "thornebrandt", email: "thornebrandt@gmail.com", created_at: "2014-11-26 09:23:10", updated_at: "2014-11-26 09:23:11", password_digest: "$2a$10$bG.Dd1bUJy7ewEKI.RI7A.H8dLDoXL9qR677tYRucSIs...", remember_token: "2f3d51d3c596bbe5d5620f4ecd7b21750566cb6e", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: nil, height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "23598522331c2152068f8820bc", lastLogin: "2014-11-26 09:23:11">, #<Member id: 6, name: "dude", email: "dude@duder.com", created_at: "2014-11-27 10:57:39", updated_at: "2014-11-28 10:16:54", password_digest: "$2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMr...", remember_token: "51786ccdc0a66e272193e6f0a32b28baaa79b741", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: "member6.png", height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cb0fa3e9be75ec4ec9c82f3ed2", lastLogin: "2014-11-27 10:57:40">]> 
+2.0.0-p451 :047 > f d
+NoMethodError: undefined method `f' for main:Object
+	from (irb):47
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :048 > s d
+NoMethodError: undefined method `s' for main:Object
+	from (irb):48
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :049 > y d
+--- !ruby/object:ActiveRecord::Relation
+klass: &1 !ruby/class 'Member'
+table: &2 !ruby/object:Arel::Table
+  name: members
+  engine: *1
+  columns: 
+  aliases: []
+  table_alias: 
+  primary_key: 
+values: {}
+implicit_readonly: 
+loaded: true
+default_scoped: true
+arel: !ruby/object:Arel::SelectManager
+  engine: *1
+  ctx: &3 !ruby/object:Arel::Nodes::SelectCore
+    source: !ruby/object:Arel::Nodes::JoinSource
+      left: *2
+      right: []
+    top: 
+    set_quantifier: 
+    projections:
+    - !ruby/struct:Arel::Attributes::Attribute
+      relation: *2
+      name: !ruby/object:Arel::Nodes::SqlLiteral '*'
+    wheres: []
+    groups: []
+    having: 
+    windows: []
+  ast: !ruby/object:Arel::Nodes::SelectStatement
+    cores:
+    - *3
+    orders: []
+    limit: 
+    lock: 
+    offset: 
+    with: 
+should_eager_load: false
+records:
+- !ruby/object:Member
+  attributes:
+    id: 5
+    name: thornebrandt
+    email: thornebrandt@gmail.com
+    created_at: 2014-11-26 09:23:10.279377000 Z
+    updated_at: 2014-11-26 09:23:11.259442000 Z
+    password_digest: $2a$10$bG.Dd1bUJy7ewEKI.RI7A.H8dLDoXL9qR677tYRucSIsFozhQ2IJe
+    remember_token: 2f3d51d3c596bbe5d5620f4ecd7b21750566cb6e
+    general_location: 
+    full_name: 
+    slogan: 
+    plays_basketball: -1
+    skill_level: -1
+    position: -1
+    organized: -1
+    favorite_player: 
+    about: 
+    nationality: -1
+    birthdate: 
+    weight: 
+    photo: 
+    height_feet: 
+    height_inches: 
+    lat: 41.844601
+    lng: -87.717102
+    active: true
+    registered: 
+    admin: 
+    verification: 23598522331c2152068f8820bc
+    lastLogin: 2014-11-26 09:23:11.255488000 Z
+- !ruby/object:Member
+  attributes:
+    id: 6
+    name: dude
+    email: dude@duder.com
+    created_at: 2014-11-27 10:57:39.812894000 Z
+    updated_at: 2014-11-28 10:16:54.300465000 Z
+    password_digest: $2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMrZvT33glMK
+    remember_token: 51786ccdc0a66e272193e6f0a32b28baaa79b741
+    general_location: 
+    full_name: 
+    slogan: 
+    plays_basketball: -1
+    skill_level: -1
+    position: -1
+    organized: -1
+    favorite_player: 
+    about: 
+    nationality: -1
+    birthdate: 
+    weight: 
+    photo: member6.png
+    height_feet: 
+    height_inches: 
+    lat: 41.844601
+    lng: -87.717102
+    active: true
+    registered: 
+    admin: 
+    verification: cb0fa3e9be75ec4ec9c82f3ed2
+    lastLogin: 2014-11-27 10:57:40.771473000 Z
+ => nil 
+2.0.0-p451 :050 > m = Member.find(6)
+  Member Load (0.4ms)  SELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT 1  [["id", 6]]
+ => #<Member id: 6, name: "dude", email: "dude@duder.com", created_at: "2014-11-27 10:57:39", updated_at: "2014-11-28 10:16:54", password_digest: "$2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMr...", remember_token: "51786ccdc0a66e272193e6f0a32b28baaa79b741", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: "member6.png", height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cb0fa3e9be75ec4ec9c82f3ed2", lastLogin: "2014-11-27 10:57:40"> 
+2.0.0-p451 :051 > m
+ => #<Member id: 6, name: "dude", email: "dude@duder.com", created_at: "2014-11-27 10:57:39", updated_at: "2014-11-28 10:16:54", password_digest: "$2a$10$QFzfgytyuN0o/5fynH4gzONW6uVUlgVeYYQZO28O7UMr...", remember_token: "51786ccdc0a66e272193e6f0a32b28baaa79b741", general_location: nil, full_name: nil, slogan: nil, plays_basketball: -1, skill_level: -1, position: -1, organized: -1, favorite_player: nil, about: nil, nationality: -1, birthdate: nil, weight: nil, photo: "member6.png", height_feet: nil, height_inches: nil, lat: 41.844601, lng: -87.717102, active: true, registered: nil, admin: nil, verification: "cb0fa3e9be75ec4ec9c82f3ed2", lastLogin: "2014-11-27 10:57:40"> 
+2.0.0-p451 :052 > m.registed = true
+NoMethodError: undefined method `registed=' for #<Member:0x00000102cde378>
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activemodel-4.0.4/lib/active_model/attribute_methods.rb:439:in `method_missing'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/activerecord-4.0.4/lib/active_record/attribute_methods.rb:167:in `method_missing'
+	from (irb):52
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:90:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/thornebrandt/.rvm/gems/ruby-2.0.0-p451/gems/railties-4.0.4/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p451 :053 > m.registered = true

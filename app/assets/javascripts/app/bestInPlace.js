@@ -3,7 +3,10 @@ fbb.bestInPlace = function(){
         changeMonth: true,
         changeYear: true,
         yearRange: "-60:-18",
-        dateFormat: 'MM dd, yy'
+        dateFormat: 'MM dd, yy',
+        beforeShow: function(){
+            $(".ui-datepicker").addClass("hide");
+        }
     }
     $.datepicker.setDefaults(bestInPlaceOptions);
     $(".best_in_place").best_in_place();

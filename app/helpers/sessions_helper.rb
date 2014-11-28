@@ -5,17 +5,23 @@ module SessionsHelper
         cookies.permanent[:remember_token] = remember_token
         member.update_attributes(:remember_token => Member.hash(remember_token), :lastLogin => DateTime.now)
         member.save
-        self.current_user = member
+        unless member.active == false
+            self.current_user = member
+        end
     end
 
 
     def signed_in?
-        !current_user.nil?
+        if !current_user.nil? && current_user.active
+            true
+        else
+            false
+        end
     end
 
 
     def signed_in_user
-      unless signed_in?
+      unless signed_in? || current_user.active == false
         store_location
         # Used to redirect to signin_url, but signin is now a modal
         redirect_to home_path + "?login=true", notice: "Please sign in"

@@ -18,7 +18,6 @@ fbb.validate = {
     },
     validateForm: function($_form){
         if($_form.length > 0){
-            console.log(this.rules);
             $_form.validate({
                 rules: this.rules,
                 messages: this.messages,

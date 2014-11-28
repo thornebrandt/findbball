@@ -28,7 +28,7 @@ class EventsController < ApplicationController
         #temporary solution until we can map through
         if @event.save!
             flash[:success] = "Event created!"
-            current_user.log_action("created an ", "event", @event.id)
+            current_user.log_action("created an event", "event", @event.id)
             redirect_to @event
         else
             flash[:error] = "Could not create event."
@@ -105,10 +105,18 @@ class EventsController < ApplicationController
 
 
     def new
-        @showMap = true;
-        @mapEl = "add_event_map"
         if signed_in?
+            @showMap = true;
+            @mapEl = "add_event_map"
             @event = Event.new
+            if params[:court] && @event.court = Court.find(params[:court])
+                gon.court = @event.court
+                gon.lat = @event.court.lat
+                gon.lng = @event.court.lng
+            else
+                gon.lat = Rails.configuration.lat
+                gon.lng = Rails.configuration.lng
+            end
         else
             flash[:warning] = "You are not logged in."
             redirect_to home_path

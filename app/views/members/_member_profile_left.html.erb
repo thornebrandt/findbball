@@ -15,6 +15,11 @@
             <% end %>
             <p id="profile_name"><%= @member.name %></p>
             <p class="profile_subtitle"><%= @member.slogan %></p>
+            <% if signed_in? && current_user == @member %>
+                <div class="rounded" id="profile_completion_container">
+                    <%= render 'members/member_profile_completion' %>
+                </div>
+            <% end %>
             <%= render '/reviews/reviews_container' %>
             <div id="member_events_container">
                 <% if @member.events.any? %>
@@ -45,6 +50,9 @@
                     </p>
                     <% end %>
                 <% end %>
+            </div>
+            <div id="member_friends_container">
+                <%= render('members/member_friends') %>
             </div>
         </div>
     </div>

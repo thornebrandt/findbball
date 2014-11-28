@@ -24,7 +24,7 @@ class Member < ActiveRecord::Base
 
     mount_uploader :photo, PhotoUploader
 
-    def log(_text, _type = nil, _id = nil, _level = nil)
+    def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3
         member_action = MemberAction.new
         member_action.member_id = self.id
@@ -32,13 +32,150 @@ class Member < ActiveRecord::Base
         if defined?(_type) then member_action.linkType = _type end
         if defined?(_id) then member_action.link_id = _id end
         if defined?(_level) then member_action.level = _level end
-        member_action.save
+        puts "LOGGING"
+        if member_action.save!
+            puts "SAVED"
+        else
+            puts "SPMETHIG WNET WRONG"
+        end
     end
 
     def log_action(_text, _type = nil, _id = nil)
-        log(_text, _type, _id, 3)
+        log(_text, _type, _id, 1)
     end
 
+    def profile_completion
+        total = 0
+        completed = 0
+        next_action = "Complete!"
+        edit_link = false;
+
+        puts "What is happening here"
+
+        total += 1
+        if self.pickup_games.count < 1
+            next_action = "Attend pickup game"
+            edit_link = "find_hoops"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.about
+            next_action = "Introduce yourself"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.favorite_player
+            next_action = "Add favorite player"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if self.skill_level == -1
+            next_action = "Add skill level"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if self.organized == -1
+            next_action = "Level of organized ball"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if self.position == -1
+            next_action = "Add favorite position"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if self.plays_basketball == -1
+            next_action = "How often do you play?"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if self.nationality == -1
+            next_action = "Add nationality"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.weight
+            next_action = "Add weight"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.height_feet
+            next_action = "Add height"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.birthdate
+            next_action = "Add birthdate"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+
+        total += 1
+        if !self.full_name
+            next_action = "Add full name"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.general_location
+            next_action = "Add general location"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.photo.file
+            next_action = "Upload a photo"
+            edit_link = "profile"
+        else
+            completed += 1
+        end
+
+        total += 1
+        if !self.registered
+            next_action = "Verify Email."
+        else
+            completed += 1
+        end
+
+
+        percent = (((completed.to_f/total.to_f) * 100).to_i).to_s
+        {percent: percent, next_action: next_action, edit_link: edit_link}
+    end
 
     def attendingEvent(_event_id)
         Attendee.find_by_event_id_and_member_id(_event_id, self.id)
@@ -61,6 +198,15 @@ class Member < ActiveRecord::Base
 	def Member.new_remember_token
 		SecureRandom.urlsafe_base64
 	end
+
+    def member_actions
+        MemberAction.where("level <=  1 AND member_id == ?", self.id)
+    end
+
+    def friends
+        Member.where('id != ?', self.id)
+    end
+
 
     def parameterizeUsername
         self.name = self.name.parameterize
