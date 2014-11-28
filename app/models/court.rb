@@ -79,6 +79,10 @@ class Court < ActiveRecord::Base
     end
   end
 
+  def players
+      Member.includes(:pickup_attendees).where("pickup_attendees.court_id = ?", self.id).references(:pickup_attendees)
+  end
+
   def pickup_day_options
       day_options = [
                           ["Select a Day", ""],

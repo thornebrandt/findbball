@@ -1,1 +1,8 @@
-hey
+<% if @member.friends.any? %>
+    <h3>BBALLERS</h3>
+    <div id="member_friends">
+        <% @member.friends.each do |friend| %>
+            <%= link_to( image_tag(friend.profile_photo.thumb, { height: 40, width: 40 }), friend) %>
+        <% end %>
+    </div>
+<% end %>

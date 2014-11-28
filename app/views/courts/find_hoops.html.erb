@@ -23,7 +23,8 @@
                         <%= image_tag court.skill_image %>
                     </div>
                 <% end %>
-                <span class="result_pickup">Pickup Games(3)</span>
+                <span class="result_pickup">Pickup Games(<%= court.pickup_games.count %>)</span>
+                <br>
                 <span class="result_upcoming">Upcoming Events(<%= court.events.count %>)</span>
                 <span class="result_reviews">Reviews(<%= court.reviews.count %>)</span>
                 <% if court.member %>

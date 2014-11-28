@@ -104,7 +104,7 @@ class CourtsController < ApplicationController
                 format.json do
                     respond_with_bip(@court)
                 end
-                current_user.log("edited a ", "court", @court.id, 1)
+                current_user.log("edited the court ", "court", @court.id, 1)
             else
                 format.html { render :edit }
                 format.json { respond_with_bip(@court) }

@@ -1,5 +1,8 @@
 <div class="sidebar right">
     <div id="profile_right">
+        <div id="member_friends_container">
+            <%= render('members/member_friends') %>
+        </div>
         <div id="courts_container">
             <% if @member.courts.any? %>
                 <h3>COURTS(<%= @member.courts.count %>)</h3>

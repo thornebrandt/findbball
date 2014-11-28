@@ -68,7 +68,7 @@ class EventsController < ApplicationController
                 format.json do
                     respond_with_bip(@event)
                 end
-                current_user.log("edited an ", "event", @event.id, 1)
+                current_user.log("edited the event ", "event", @event.id, 1)
             else
                 format.html { render :edit }
                 format.json { respond_with_bip(@event) }

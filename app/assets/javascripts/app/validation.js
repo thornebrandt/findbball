@@ -30,6 +30,11 @@ fbb.validate = {
         } else{
             console.log("The form does not exist");
         }
+        this.customValidations();
+    },
+
+
+    customValidations: function(){
     }
 };
 

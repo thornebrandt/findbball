@@ -1,8 +1,9 @@
+<% if @court.players.any? %>
 <h3>PLAYERS</h3>
 <div id="friends">
-    <a class="friend" href="#"><%= image_tag "members/paris_hilton.jpg", id: "profile_pic" %></a>
-    <a class="friend" href="#"><%= image_tag "members/falcor.gif", id: "profile_pic" %></a>
-    <a class="friend" href="#"><%= image_tag "members/notacop.jpg", id: "profile_pic" %></a>
+    <% @court.players.each do |player| %>
+        <%= link_to( image_tag(player.profile_photo.thumb, { height: 40, width: 40 }), player) %>
+    <% end %>
 </div>
+<% end %>
 <br>
-<span class="smaller gray">See who's playing at this court.</span>
