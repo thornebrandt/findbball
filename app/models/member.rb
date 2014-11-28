@@ -210,7 +210,7 @@ class Member < ActiveRecord::Base
             Member.where('id != ?', self.id).limit(8).order("RANDOM()")
         end
         #BUG maybe
-        Member.where('id != ?', self.id).limit(8).order("RANDOM()")
+        #Member.where('id != ?', self.id).limit(8).order("RANDOM()")
     end
 
 
