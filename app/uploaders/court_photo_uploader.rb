@@ -30,9 +30,6 @@ class CourtPhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
   process resize_to_limit: [600, 600]
-  process :quality => 30
-
-
 
   version :thumb do
     process :resize_to_fill => [140, 140]
