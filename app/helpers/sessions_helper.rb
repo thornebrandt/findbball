@@ -21,7 +21,7 @@ module SessionsHelper
 
 
     def signed_in_user
-      unless signed_in? || current_user.active == false
+      unless signed_in?
         store_location
         # Used to redirect to signin_url, but signin is now a modal
         redirect_to home_path + "?login=true", notice: "Please sign in"
