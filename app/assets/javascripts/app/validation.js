@@ -3,11 +3,12 @@ fbb.validate = {
         "court[name]": "required",
         "court_address": "required",
         "event[name]": "required",
+        "court[website]": "url",
         event_start_datepicker: {
             required: true,
             date: true
         },
-        event_selectCourt: "required"
+        event_selectCourt: "required",
     },
     messages: {
         "court[name]" : "Your court must have a name",
@@ -35,6 +36,14 @@ fbb.validate = {
 
 
     customValidations: function(){
+        $.validator.addMethod('phone_format', function (value) {
+            return /^[01]?[- .]?\(?[2-9]\d{2}\)?[- .]?\d{3}[- .]?\d{4}$/.test(value);
+        }, "Please enter a valid phonenumber");
+
+        $.validator.addMethod('url', function(value){
+            return /^%w(http https)/.test(value)
+        }, "Please enter a valid URL");
+
     }
 };
 
