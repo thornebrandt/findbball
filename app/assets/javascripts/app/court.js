@@ -1,8 +1,9 @@
 fbb.court = function(){
     var $el = $("#container-court");
     var isCourt = $el.length;
+    var isEvent = $("#container-event").length;
     var initialize = function(){
-        if(isCourt){
+        if(isCourt || isEvent){
             prepareGallery();
             prepareVideos();
             checkPickupGamesOnLoad();
