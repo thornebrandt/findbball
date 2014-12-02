@@ -133,7 +133,7 @@ fbb._event = function(){
     var datePickerOptions = {
         changeMonth: true,
         changeYear: false,
-        dateFormat: 'MM dd',
+        dateFormat: 'MM dd, yy',
         duration: 'fast',
         showButtonPanel: true,
         onSelect: selectStartDate,

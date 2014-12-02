@@ -1,8 +1,9 @@
 fbb.member = function(){
     var $el = $("#container-member");
     var isMemberPage = $el.length;
+    var isEditMember = $("#editMember").length;
     var initialize = function(){
-        if(isMemberPage){
+        if(isMemberPage || isEditMember){
             DOMEvents();
             setupProgBar();
             prepareCourtAutoComplete();
@@ -89,13 +90,15 @@ fbb.member = function(){
             var indicator = $("#progbar_indicator");
             var percentComplete = indicator.text();
 
+            function fadeIndicator() {
+                indicator.fadeIn();
+            }
+
             progbarFill.animate({
                 width: percentComplete
             }, 1200, fadeIndicator);
 
-            function fadeIndicator() {
-                indicator.fadeIn();
-            }
+
         }
     };
 
