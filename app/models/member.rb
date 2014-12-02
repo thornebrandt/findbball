@@ -110,7 +110,7 @@ class Member < ActiveRecord::Base
 
         total += 1
         if self.nationality == -1
-            next_action = "Add nationality"
+            next_action = "Add ethnicity"
             edit_link = "profile"
         else
             completed += 1
@@ -316,7 +316,7 @@ class Member < ActiveRecord::Base
             when 2 then "Camp"
             when 3 then "High School"
             when 4 then "College"
-            when 5 then "Proffessional"
+            when 5 then "Professional"
             else "Undefined"
         end
     end
