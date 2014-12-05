@@ -10,7 +10,9 @@ Findbball::Application.routes.draw do
   resources :attendees, only: [:create, :destroy]
   resources :member_actions, only: [:create, :destroy]
   resources :pickup_attendees
-  resource  :contacts, only: [:new, :create]
+  resources :contacts, only: [:new, :create]
+  resources :video_articles
+
 
 
   root 'static_pages#splash'
@@ -30,6 +32,7 @@ Findbball::Application.routes.draw do
   match '/members/:member_id/reload_pickup_games', to: 'members#reload_pickup_games', via: 'get'
 
   match '/admin/log', to: 'member_actions#log', via: 'get'
+  match '/admin/videoArticles/new', to: 'video_articles#new',   via: 'get'
 
   match '/profile', to: 'members#profile', via: 'get'
 

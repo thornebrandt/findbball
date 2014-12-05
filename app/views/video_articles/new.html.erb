@@ -1,0 +1,14 @@
+<div id="content_wrapper">
+    <div id="content">
+        <h1>New Video Article</h1>
+        <%= form_for @video_article, :html => {:autocomplete => "off"} do |f| %>
+            <%= f.hidden_field :member_id, :value => @current_user.id %>
+            <%= f.hidden_field :vi, id: 'vi' %>
+            <table>
+
+            </table>
+            <label>Youtube URL: </label><input type="text" id="youtube_url" autocomplete="false">
+            <br>
+        <% end %>
+    </div>
+</div>

@@ -19,6 +19,14 @@ module SessionsHelper
         end
     end
 
+    def admin?
+        if current_user.admin
+            true
+        else
+            false
+        end
+    end
+
 
     def signed_in_user
       unless signed_in?
@@ -28,6 +36,12 @@ module SessionsHelper
       end
     end
 
+    def admin_user
+        unless admin?
+            store_location
+            redirect_to home_path + "?login=true", notice: "Admin account required"
+        end
+    end
 
     def current_user=(user)
         @current_user = user

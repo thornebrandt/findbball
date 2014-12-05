@@ -40,10 +40,6 @@ fbb.validate = {
             return /^[01]?[- .]?\(?[2-9]\d{2}\)?[- .]?\d{3}[- .]?\d{4}$/.test(value);
         }, "Please enter a valid phonenumber");
 
-        $.validator.addMethod('url', function(value){
-            return /^%w(http https)/.test(value)
-        }, "Please enter a valid URL");
-
     }
 };
 
