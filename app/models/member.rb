@@ -200,7 +200,7 @@ class Member < ActiveRecord::Base
 	end
 
     def member_actions
-        MemberAction.where("level <=  1 AND member_id = ?", self.id)
+        MemberAction.where("level <=  1 AND member_id = ?", self.id).order("created_at DESC").limit(10)
     end
 
     def friends

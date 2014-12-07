@@ -5,10 +5,6 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="tdRightAlign italics"><%= time_ago_in_words(@member.created_at) %> ago</td>
-            <td><b><%= @member.name %></b> signed up</td>
-        </tr>
         <% if @member.member_actions.any? %>
             <% @member.member_actions.each do |member_action| %>
                 <tr>
