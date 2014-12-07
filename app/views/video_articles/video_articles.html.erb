@@ -1,0 +1,69 @@
+<div id="content_wrapper">
+    <div id="content">
+        <table id="edit_video_articles">
+            <% @video_articles.each do |video_article| %>
+                <tr>
+                    <td>
+                        <div class="video_article_container">
+                            <div class="youtube_video">
+                                <img src="http://img.youtube.com/vi/<%= video_article.vi %>/0.jpg">
+                                <a href="http://www.youtube.com/watch?v=<%= video_article.vi %>" class="play_btn"></a>
+                                <%= render :partial => "modals/youtube_modal", :locals => {:vi => video_article.vi} %>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        Title: <input type="text" class="edit_video_article_title" value="<%= video_article.title %>" />
+                        <br>
+                        Order:
+                        <input type="text" class="video_order" value="<%= video_article.priority %>"/>
+                        <br>
+                        <a href="#" class="btn btn-primary">Save</a>
+
+                        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), video_article, method: :delete,
+                                                                      data: { confirm: "You sure?" },
+                                                                      title: video_article.title %><br>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+
+        <div id="newVideoContainer">
+            <h1>New Video Article</h1>
+            <%= form_for @video_article, :html => {:autocomplete => "off"} do |f| %>
+                <%= f.hidden_field :member_id, :value => @current_user.id %>
+                <%= f.hidden_field :vi, id: 'vi' %>
+                <table id="newVideoArticleTable">
+                    <tr>
+                        <td class="td_l abel">Youtube URL</td>
+                        <td class="wide_cell">
+                            <input type="text" id="youtube_article_url" autocomplete="false">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_label">
+                            Title
+                        </td>
+                        <td>
+                            <%= f.text_field :title %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_label">
+                            Priority
+                        </td>
+                        <td>
+                            <%= f.text_field :priority %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a id="confirm_video_article" class="btn btn-primary float_right">Save</a>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            <% end %>
+        </div>
+    </div>
+</div>

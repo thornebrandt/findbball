@@ -39,6 +39,7 @@ var initialize = function(){
     fbb.editCourt();
     fbb.court();
     fbb._event();
+    fbb.video_article();
 
     $(".modal.fade, .modal-message").click(function(){
       $(this).modal('hide'); //manually doing the modal hide bullshit...

@@ -1,22 +1,27 @@
 fbb.validate = {
+
     rules: {
         "court[name]": "required",
         "court_address": "required",
         "event[name]": "required",
         "court[website]": "url",
+        "video_article[title]": "required",
         event_start_datepicker: {
             required: true,
             date: true
         },
         event_selectCourt: "required",
     },
+
     messages: {
         "court[name]" : "Your court must have a name",
         court_address : "Your court must have an address",
         "event[name]": "Your event must have a name",
+        "video_article[title]" : "Your video article requires a title",
         event_start_datepicker: "Your event must have a start date",
         event_selectCourt: "Your event must take place at an existing court"
     },
+
     validateForm: function($_form){
         if($_form.length > 0){
             $_form.validate({

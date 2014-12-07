@@ -97,3 +97,24 @@ function add_fields(link, association, content){
     $(link).parent().append( content.replace(regexp, new_id) );
     $(link).parent().append( $(link) );
 };
+
+
+function parseVideoLink(youtube_link){
+    var video_id;
+    var vid = new Array();
+    var vidHtml;
+    var _regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+    var _match = youtube_link.match(_regex);
+    if(_match){
+        video_id = _match[1];
+    }
+    if(video_id){
+        return video_id;
+    } else {
+        return false;
+    }
+}
+
+
+
+

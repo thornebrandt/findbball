@@ -270,7 +270,6 @@ fbb.court = function(){
             e.preventDefault();
             $("#add_video_modal").modal('hide');
         });
-
     };
 
 

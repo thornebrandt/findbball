@@ -13,8 +13,6 @@ Findbball::Application.routes.draw do
   resources :contacts, only: [:new, :create]
   resources :video_articles
 
-
-
   root 'static_pages#splash'
   match '/home', to: 'static_pages#home',     via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
@@ -32,9 +30,10 @@ Findbball::Application.routes.draw do
   match '/members/:member_id/reload_pickup_games', to: 'members#reload_pickup_games', via: 'get'
 
   match '/admin/log', to: 'member_actions#log', via: 'get'
-  match '/admin/videoArticles/new', to: 'video_articles#new',   via: 'get'
+  match '/admin/videoArticles', to: 'video_articles#video_articles',   via: 'get'
 
   match '/profile', to: 'members#profile', via: 'get'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

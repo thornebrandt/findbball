@@ -7,8 +7,6 @@ rails s -e production
 
 rake assets:precompile RAILS_ENV=production
 
-
-
 cd webapps/findbball_rails/findbball
 git pull
 
