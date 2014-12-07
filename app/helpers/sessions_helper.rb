@@ -20,7 +20,7 @@ module SessionsHelper
     end
 
     def admin?
-        if current_user.admin
+        if !current_user.nil? && current_user.admin
             true
         else
             false
