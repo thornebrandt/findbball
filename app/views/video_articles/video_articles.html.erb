@@ -2,29 +2,31 @@
     <div id="content">
         <table id="edit_video_articles">
             <% @video_articles.each do |video_article| %>
-                <tr>
-                    <td>
-                        <div class="video_article_container">
-                            <div class="youtube_video">
-                                <img src="http://img.youtube.com/vi/<%= video_article.vi %>/0.jpg">
-                                <a href="http://www.youtube.com/watch?v=<%= video_article.vi %>" class="play_btn"></a>
-                                <%= render :partial => "modals/youtube_modal", :locals => {:vi => video_article.vi} %>
+                <%= form_for video_article do |f| %>
+                    <tr>
+                        <td>
+                            <div class="video_article_container">
+                                <div class="youtube_video">
+                                    <img src="http://img.youtube.com/vi/<%= video_article.vi %>/0.jpg">
+                                    <a href="http://www.youtube.com/watch?v=<%= video_article.vi %>" class="play_btn"></a>
+                                    <%= render :partial => "modals/youtube_modal", :locals => {:vi => video_article.vi} %>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        Title: <input type="text" class="edit_video_article_title" value="<%= video_article.title %>" />
-                        <br>
-                        Order:
-                        <input type="text" class="video_order" value="<%= video_article.priority %>"/>
-                        <br>
-                        <a href="#" class="btn btn-primary">Save</a>
+                        </td>
+                        <td>
+                            Title:<%= f.text_field :title, class: "edit_video_article_title" %>
 
-                        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), video_article, method: :delete,
-                                                                      data: { confirm: "You sure?" },
-                                                                      title: video_article.title %><br>
-                    </td>
-                </tr>
+                            <br>
+                            Order:
+                            <%= f.text_field :priority, class: "video_order" %>
+                            <br>
+                            <%= f.submit "Save", class: "btn btn-primary" %>
+                            <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), video_article, method: :delete,
+                                                                          data: { confirm: "You sure?" },
+                                                                          title: video_article.title %>
+                        </td>
+                    </tr>
+                <% end %>
             <% end %>
         </table>
 

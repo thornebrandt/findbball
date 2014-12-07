@@ -9,8 +9,13 @@ class VideoArticlesController < ApplicationController
     def create
         @video_article = VideoArticle.new(video_article_params)
         if @video_article.save!
-            if @video_article.update_attribute(:priority, @video_article.id)
-                current_user.log("created a video article")
+            if !@video_article.priority
+                if @video_article.update_attribute(:priority, @video_article.id)
+                    current_user.log("created a video article")
+                    redirect_to action: 'video_articles'
+                end
+            else
+                current_user.log("created a video article with priority #{@video_article.priority}")
                 redirect_to action: 'video_articles'
             end
         end
@@ -19,7 +24,7 @@ class VideoArticlesController < ApplicationController
     def update
         @video_article = VideoArticle.find(params[:id])
         respond_to do |format|
-            if @video_article.update_attributes(court_params)
+            if @video_article.update_attributes(video_article_params)
                 format.html { redirect_to action: 'video_articles', notice: "Video article successfully updates." }
                 current_user.log("edit a video article")
             else
