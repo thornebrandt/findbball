@@ -55,62 +55,12 @@
     </div>
     <%= render 'ads/placeholder' %>
     <div id="heading_articles">
-        <h3>ARTICLES</h3>  <a href="articles.html" class="more"> More >></a>
-    </div>
+        <h3>VIDEOS</h3>
+        <%= link_to "More >>", {:controller => "video_articles", :action => "index"}, class: "more" %>
 
-      <div id="youtube_videos">
-	        <div class="youtube_video_container">
-	            <div class="youtube_video">
-	                <img src="http://img.youtube.com/vi/kdb3vv-5ygI/0.jpg">
-	                <a href="http://www.youtube.com/watch?v=kdb3vv-5ygI" class="play_btn"></a>
-	                <%= render :partial => "modals/youtube_modal", :locals => {:vi => "kdb3vv-5ygI"} %>
-	            </div>
-	            <a class="video_title">
-	                Javale Mcgee Bloopers Highlights
-	            </a>
-	            <p class="video_date">
-	                Today
-	            </p>
-	        </div>
-	        <div class="youtube_video_container">
-	            <div class="youtube_video">
-	                <img src="http://img.youtube.com/vi/zclIeiWhwCo/0.jpg">
-	                <a href="http://www.youtube.com/watch?v=zclIeiWhwCo" class="play_btn"></a>
-	                <%= render :partial => "modals/youtube_modal", :locals => {:vi => "zclIeiWhwCo"} %>
-	            </div>
-	            <a class="video_title">
-	                Motivation - What Is Your Excuse?
-	            </a>
-	            <p class="video_date">
-	                Yesterday
-	            </p>
-	        </div>
-	        <div class="youtube_video_container">
-	            <div class="youtube_video">
-	                <img src="http://img.youtube.com/vi/JJWNJbPcS4I/0.jpg">
-	                <a href="http://www.youtube.com/watch?v=JJWNJbPcS4I" class="play_btn"></a>
-	                <%= render :partial => "modals/youtube_modal", :locals => {:vi => "JJWNJbPcS4I"} %>
-	            </div>
-	            <a class="video_title">
-	                Pittsburgh Commit Damon Wilson AAU MIX
-	            </a>
-	            <p class="video_date">
-	                2 days ago
-	            </p>
-	        </div>
-	        <div class="youtube_video_container">
-	            <div class="youtube_video">
-	                <img src="http://img.youtube.com/vi/EEtpH6ZEPOc/0.jpg">
-	                <a href="http://www.youtube.com/watch?v=EEtpH6ZEPOc" class="play_btn"></a>
-	                <%= render :partial => "modals/youtube_modal", :locals => {:vi => "EEtpH6ZEPOc"} %>
-	            </div>
-	            <a class="video_title">
-	                10000 Hours episode 1
-	            </a>
-	            <p class="video_date">
-	               1 month ago
-	            </p>
-	        </div>
-	    </div>
+    </div>
+    <% @video_articles.each do |video_article| %>
+        <%= render :partial => '/video_articles/video_article', :locals => {:video_article => video_article} %>
+    <% end %>
 </div>
 <div id="noMap"></div>

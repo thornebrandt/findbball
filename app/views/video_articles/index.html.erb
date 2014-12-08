@@ -1,0 +1,11 @@
+<div id="content">
+    <div id="youtube_videos">
+        <div id="heading_articles">
+            <h3>VIDEO ARTICLES</h3>
+        </div>
+
+        <% @video_articles.each do |video_article| %>
+            <%= render :partial => '/video_articles/video_article', :locals => {:video_article => video_article} %>
+        <% end %>
+    </div>
+</div>

@@ -1,10 +1,15 @@
 class VideoArticlesController < ApplicationController
-    before_action :admin_user
+    before_action :admin_user, only: [:edit, :update, :create, :video_articles]
 
     def video_articles
         @video_article = VideoArticle.new
-        @video_articles = VideoArticle.order('priority').limit(16)
+        @video_articles = VideoArticle.limit(16)
     end
+
+    def index
+        @video_articles = VideoArticle.limit(16)
+    end
+
 
     def create
         @video_article = VideoArticle.new(video_article_params)

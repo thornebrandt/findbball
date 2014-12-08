@@ -1,0 +1,13 @@
+<div class="youtube_video_container">
+    <div class="youtube_video">
+        <img src="http://img.youtube.com/vi/<%= video_article.vi %>/0.jpg">
+        <a href="http://www.youtube.com/watch?v=<%= video_article.vi %>" class="play_btn"></a>
+        <%= render :partial => "modals/youtube_modal", :locals => {:vi => video_article.vi } %>
+    </div>
+    <a class="video_title">
+        <%= video_article.title %>
+    </a>
+    <p class="video_date">
+        <%= time_ago_in_words(video_article.created_at) %> ago
+    </p>
+</div>
