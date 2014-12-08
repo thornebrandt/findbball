@@ -53,7 +53,9 @@
               </div>
         </div>
     </div>
-    <%= render 'ads/placeholder' %>
+    <div id="adspace_center">
+        <%= render 'ads/ad_728x90' %>
+    </div>
     <div id="heading_articles">
         <h3>VIDEOS</h3>
         <%= link_to "More >>", {:controller => "video_articles", :action => "index"}, class: "more" %>
