@@ -32,7 +32,7 @@ class Court < ActiveRecord::Base
   validates :open_time_2,                   length: { maximum: 12 }
   validates :open_am_2,                     length: { maximum: 2 }
   validates :skill_level,                   length: { maximum: 5 }
-  validates_format_of :website, :with => URI::regexp(%w(http https))
+  validates_format_of :website, :with => URI::regexp(%w(http https)), :allow_blank => true
 
   def open_hours
     if open_am_1
