@@ -38,8 +38,12 @@ fbb._map = function(){
         var _latLng = new google.maps.LatLng(parseFloat(_lat), parseFloat(_lng));
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'latLng': _latLng}, function(results, status){
-            var _address = results[1].formatted_address;
-            Arbiter.publish(_event, _address);
+            console.log("reverse geocoding");
+            console.log(status);
+            if(results.length){
+                var _address = results[1].formatted_address;
+                Arbiter.publish(_event, _address);
+            }
         });
     };
 
@@ -406,16 +410,21 @@ fbb._map = function(){
     };
 
     var findHoopsSuccessHandler = function(event, result){
-        var lat = result.geometry.location.k;
-        var lng = result.geometry.location.B;
-        var searchURL = $("#i_want_to").val();
-        var _url = "/"+searchURL+"?lat=" + lat + "&lng=" + lng
-        //var _url = "/find-hoops?by=" + result.formatted_address
-        var _within = $("#within").val();
-        if (_within){
-            _url += "&within=" + _within;
+        var lat = result.geometry.location.lat();
+        var lng = result.geometry.location.lng();
+        if(lat && lng){
+            var searchURL = $("#i_want_to").val();
+            var _url = "/"+searchURL+"?lat=" + lat + "&lng=" + lng
+            //var _url = "/find-hoops?by=" + result.formatted_address
+            var _within = $("#within").val();
+            if (_within){
+                _url += "&within=" + _within;
+            }
+            window.location = _url;
+        } else {
+            console.log("Something went wrong with getting the lat & lng");
         }
-        window.location = _url;
+
     };
 
     function quick_distance(lat1, lon1, lat2, lon2){
