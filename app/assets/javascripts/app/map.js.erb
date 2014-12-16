@@ -324,8 +324,9 @@ fbb._map = function(){
     };
 
     var courtSearchDraggedHandler = function(event, result){
-        var lat = parseFloat(result.k);
-        var lng = parseFloat(result.B);
+        console.log(result.lat());
+        var lat = parseFloat(result.lat());
+        var lng = parseFloat(result.lng());
         var latlng = new google.maps.LatLng(lat, lng);
         self.geocoder = self.geocoder || new google.maps.Geocoder();
         self.geocoder.geocode({'latLng':latlng}, function(results, status){
@@ -345,8 +346,8 @@ fbb._map = function(){
         //TODO - make a case by case function
        var _address = result.formatted_address;
        self.address = _address;
-       var lat = result.geometry.location.k;
-       var lng = result.geometry.location.B;
+       var lat = result.geometry.location.lat();
+       var lng = result.geometry.location.lng();
        populateDom(_address, lat, lng);
        $(".edit_court").submit();
     };
@@ -362,6 +363,7 @@ fbb._map = function(){
     }
 
     var populateLatLng = function(lat, lng){
+        console.log("populating...?");
         $("#court_lat").val(lat);
         $("#court_lng").val(lng);
     }
