@@ -7,30 +7,32 @@
         </div>
         <div id="results_container">
             <% @found_events.each do |event| %>
-                <div class="result event_result">
-                    <h2 class="event_result_title"><%= link_to event.name, event %></h2>
-                    <%= link_to event.court.name, event.court, class: "event_result_court" %>
-                    <br>
-                    <span class="event_result_time"><%= event.date_long%> <%= event.times_long %></span>
-                    <br>
-                    <span class="event_result_address gray"><%= event.court.location %></span>
-                    <% if event.author %>
-                        <div class="author_container">
-                            <%= link_to( image_tag(event.author.profile_photo.thumb, { height: 40, width: 40 }), event.author) %>
-                            <br>
-                            <div class="author_info_right">
-                            added by <b><%= link_to event.author.name, event.author %></b><br>
-                            <%= time_ago_in_words(event.created_at) %> ago<br>
+                <% unless event.court.nil? %>
+                    <div class="result event_result">
+                        <h2 class="event_result_title"><%= link_to event.name, event %></h2>
+                        <%= link_to event.court.name, event.court, class: "event_result_court" %>
+                        <br>
+                        <span class="event_result_time"><%= event.date_long%> <%= event.times_long %></span>
+                        <br>
+                        <span class="event_result_address gray"><%= event.court.location %></span>
+                        <% if event.author %>
+                            <div class="author_container">
+                                <%= link_to( image_tag(event.author.profile_photo.thumb, { height: 40, width: 40 }), event.author) %>
+                                <br>
+                                <div class="author_info_right">
+                                added by <b><%= link_to event.author.name, event.author %></b><br>
+                                <%= time_ago_in_words(event.created_at) %> ago<br>
+                                </div>
                             </div>
-                        </div>
-                    <% end %>
-                    <span class="event_result_attending"><%= event.attendees.count %> attending</span>
-                    <p class="result_distance">-
-                        <input type="hidden" class="courtLat" value="<%=event.lat %>">
-                        <input type="hidden" class="courtLng" value="<%=event.lng %>">
-                    </p>
-                    <%= link_to "View Event", event, class: "event_result_join btn btn-info" %>
-                </div>
+                        <% end %>
+                        <span class="event_result_attending"><%= event.attendees.count %> attending</span>
+                        <p class="result_distance">-
+                            <input type="hidden" class="courtLat" value="<%=event.lat %>">
+                            <input type="hidden" class="courtLng" value="<%=event.lng %>">
+                        </p>
+                        <%= link_to "View Event", event, class: "event_result_join btn btn-info" %>
+                    </div>
+                <% end %>
             <% end %>
         </div>
         <p><%= link_to "Create A New Event", new_event_path %></p>
