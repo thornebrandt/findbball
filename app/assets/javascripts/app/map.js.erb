@@ -152,9 +152,15 @@ fbb._map = function(){
     var addDoubleClickListener = function(){
         google.maps.event.addListener(fbb.map, "dblclick", function(e){
             var latLng = e.latLng;
-            //clearMarkers();
-            console.log(fbb.map);
-
+            window.LAT = latLng;
+            fbb.marker.setPosition(latLng);
+            fbb.map.panTo(latLng);
+            self.geocoder = self.geocoder || new google.maps.Geocoder();
+            self.geocoder.geocode({'latLng':latLng}, function(results, status){
+                self.address = results[0].formatted_address;
+                populateDom(self.address, latLng.lat(), latLng.lng());
+                $(".edit_court").submit();
+            });
         });
     };
 
@@ -286,6 +292,7 @@ fbb._map = function(){
                 console.log(event);
                 console.log(result);
             });
+            fbb.marker = $_addressInput.geocomplete("marker");
         }
 
     };
@@ -369,7 +376,7 @@ fbb._map = function(){
         $(".address_search_container").hide();
         $(".map_results_container").show();
         $("#addressNotFound").hide();
-        $("#address_search_result").html(self.address + "<br><i>Drag basketball for better court placement</i>");
+        $("#address_search_result").html(self.address + "<br><i class='orange'>Double-click map or drag basketball for better court placement</i>");
     }
 
     var populateLatLng = function(lat, lng){
