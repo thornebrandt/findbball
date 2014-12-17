@@ -135,8 +135,8 @@ fbb._map = function(){
                 case "add_court_map":
                 case "edit_court_map":
                     addDoubleClickListener();
-                    // setupCourtCursor();
-                    // addCourtDOM();
+                    setupCourtCursor();
+                    addCourtDOM();
                     break;
                 case "add_event_map":
                     setupCourtCursor();
@@ -153,7 +153,17 @@ fbb._map = function(){
         google.maps.event.addListener(fbb.map, "dblclick", function(e){
             var latLng = e.latLng;
             window.LAT = latLng;
-            fbb.marker.setPosition(latLng);
+            if(fbb.marker){
+                fbb.marker.setPosition(latLng);
+            }else{
+                clearMarkers();
+                fbb.marker = new google.maps.Marker({
+                    icon: icon_path,
+                    position: latLng,
+                    map: self.map
+                    //draggable is not setup at this point in time.
+                });
+            }
             fbb.map.panTo(latLng);
             self.geocoder = self.geocoder || new google.maps.Geocoder();
             self.geocoder.geocode({'latLng':latLng}, function(results, status){
@@ -292,6 +302,7 @@ fbb._map = function(){
                 console.log(event);
                 console.log(result);
             });
+            clearMarkers();
             fbb.marker = $_addressInput.geocomplete("marker");
         }
 
@@ -398,6 +409,7 @@ fbb._map = function(){
 
     var addCourtDOM = function(){
         $("#searchAgain").click(function(e){
+            console.log("searching again");
             e.preventDefault();
             clearMarkers();
             $(".address_search_container").show();
