@@ -6,16 +6,18 @@ fbb._map = function(){
     var mapEl;
     var $_addressInput;
     var icon_path = "<%= image_path 'icon/ball_pointer.png' %>";
-    self.mapOptions = {};
+    self.mapOptions = {}
     self.mapObj = {};
 
 
     var initialize = function(){
-        checkForMap();
-        checkForSearchResults();
-        showCourtDOM();
-        courtSearchGeoComplete( $("#courtAddress"));
-        findHoopsGeoComplete( $("#location_search") );
+        google.maps.event.addDomListener(window, 'load', function(){
+            checkForMap();
+            checkForSearchResults();
+            showCourtDOM();
+            courtSearchGeoComplete( $("#courtAddress"));
+            findHoopsGeoComplete( $("#location_search") );
+        });
     };
 
 
@@ -61,7 +63,8 @@ fbb._map = function(){
             var _marker = new google.maps.Marker({
                 icon: icon_path,
                 position: latLng,
-                map: fbb.map
+                map: fbb.map,
+                animation: google.maps.Animation.DROP
             });
 
             _marker.addListener('click', function(){
@@ -122,7 +125,6 @@ fbb._map = function(){
             mapEl = $(".mapEl")[0];
             var whichMap = $(".mapEl").attr("id");
             var mapOptions;
-            console.log("the map is " + whichMap);
             setupOptions();
             fbb.map = new google.maps.Map(mapEl, self.courtMapOptions);
             switch(whichMap){
@@ -132,15 +134,29 @@ fbb._map = function(){
                     break;
                 case "add_court_map":
                 case "edit_court_map":
+                    addDoubleClickListener();
+                    // setupCourtCursor();
+                    // addCourtDOM();
+                    break;
                 case "add_event_map":
                     setupCourtCursor();
                     addCourtDOM();
                 break;
             }
+
         }
     };
 
     fbb.checkForMap = checkForMap;
+
+    var addDoubleClickListener = function(){
+        google.maps.event.addListener(fbb.map, "dblclick", function(e){
+            var latLng = e.latLng;
+            //clearMarkers();
+            console.log(fbb.map);
+
+        });
+    };
 
 
     var getLatLng = function(){
@@ -160,7 +176,7 @@ fbb._map = function(){
 
     var simpleMap = function(){
         //to test that the map is working
-        self.map = new google.maps.Map(mapEl, self.mapOptions);
+        fbb.map = new google.maps.Map(mapEl, self.mapOptions);
     };
 
     var setupOptions = function(){
@@ -168,13 +184,14 @@ fbb._map = function(){
         self.courtMapOptions = {
             center: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
             zoom: 15,
+            disableDoubleClickZoom: true,
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
     };
 
     var prepareCourtMap = function(mapEl){
-        self.map = new google.maps.Map(mapEl, self.courtMapOptions);
+        fbb.map = new google.maps.Map(mapEl, self.courtMapOptions);
         setupCourtCursor();
         addCourtDOM();
         //TODO - get members lat and lng, then result to thing
@@ -231,9 +248,6 @@ fbb._map = function(){
     }
 
     var setupCourtCursor = function(){
-        if(self.mapOptions.center){
-            console.log("there is mapOptions.center");
-        }
         var latLng = self.mapOptions.center || new google.maps.LatLng(gon.lat, gon.lng);
         fbb.marker = new google.maps.Marker({
             icon: icon_path,
@@ -256,17 +270,14 @@ fbb._map = function(){
         $_addressInput = $("#address_search");
         if( $_addressInput.length ){
             $_addressInput.geocomplete({
-                map: ".mapEl",
+                map: fbb.map,
                 types: ['establishment'],
                 location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
-                mapOptions: {
-                    zoom: 15,
-                    scrollwheel: false,
-                    mapTypeId: "roadmap"
-                },
+                mapOptions: fbb.courtMapOptions,
                 markerOptions: {
                     draggable: true,
-                    icon: icon_path
+                    icon: icon_path,
+                    animation: google.maps.Animation.DROP,
                 }
             })
             .bind("geocode:result", courtSearchSuccessHandler)
@@ -276,6 +287,7 @@ fbb._map = function(){
                 console.log(result);
             });
         }
+
     };
 
 
@@ -324,7 +336,6 @@ fbb._map = function(){
     };
 
     var courtSearchDraggedHandler = function(event, result){
-        console.log(result.lat());
         var lat = parseFloat(result.lat());
         var lng = parseFloat(result.lng());
         var latlng = new google.maps.LatLng(lat, lng);
@@ -332,7 +343,6 @@ fbb._map = function(){
         self.geocoder.geocode({'latLng':latlng}, function(results, status){
             if(status == google.maps.GeocoderStatus.OK){
                 if (results[0]){
-                    console.log(results[0].formatted_address);
                     self.address = results[0].formatted_address;
                     populateDom(self.address, lat, lng);
                     $(".edit_court").submit();
@@ -363,7 +373,6 @@ fbb._map = function(){
     }
 
     var populateLatLng = function(lat, lng){
-        console.log("populating...?");
         $("#court_lat").val(lat);
         $("#court_lng").val(lng);
     }
@@ -441,9 +450,8 @@ fbb._map = function(){
         return d * 1000; // meters
     }
 
-
-
     initialize();
+
 }
 
 
