@@ -302,7 +302,9 @@ fbb._map = function(){
                 console.log(event);
                 console.log(result);
             });
-            clearMarkers();
+            if(fbb.marker){
+                clearMarkers();
+            }
             fbb.marker = $_addressInput.geocomplete("marker");
         }
 

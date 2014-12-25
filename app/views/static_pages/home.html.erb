@@ -4,16 +4,17 @@
 <div id="heroContainer">
     <div id="hero">
         <div>
-            <%= image_tag "hero/hoop.jpg" %>
+            <%= image_tag "hero/hoop.jpg", data: { href: 'test'} %>
             <h2> <span id="h2_join">join.</span> <span class="h2_discover"> discover. </span> <br> <span class="blue ball">ball.</span></h2>
         </div>
-        <div>
-            <%= image_tag "hero/bench.jpg" %>
-            <h2>Look out for our <br><span class="blue">mobile app</span></h2>
+        <div rel="http://insidefindbball.com/?p=1005">
+            <%= image_tag "hero/basketball_20s_legs.jpg", data: { href: 'http://insidefindbball.com/?p=1005' } %>
+            <h2 class="smaller">Pick-up Basketball in your <br>
+            <span class="blue">20s</span> vs your <span class="blue">30s</span></h2>
         </div>
         <div>
-            <%= image_tag "hero/gear.jpg" %>
-            <h2>10 reasons<br> why it's <span class="blue">time</span><br> to upgrade your gear</h2>
+            <%= image_tag "hero/coach_yelling.jpg", data: { href: 'http://insidefindbball.com/?p=1393'} %>
+            <h2 class="smaller">5 Phrases you hate to hear<br><span class="blue"> from your basketball coach</span></h2>
         </div>
         <div>
             <%= image_tag "hero/game.jpg" %>
