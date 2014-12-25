@@ -13,7 +13,7 @@ Findbball::Application.routes.draw do
   resources :contacts, only: [:new, :create]
   resources :video_articles
 
-  root 'static_pages#splash'
+  root 'static_pages#home'
   match '/home', to: 'static_pages#home',     via: 'get'
   match '/signup', to: 'members#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
