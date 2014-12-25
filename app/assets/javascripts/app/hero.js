@@ -7,7 +7,7 @@ fbb.hero = function(){
         cycleOptions: {
             fx:'scrollHorz',
             speed: 800,
-            timeout: 100,
+            timeout: 6000,
             after: function(last,current){
                 var heroContainer = $("#heroContainer");
                 heroContainer.removeClass("clickable");
