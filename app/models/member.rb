@@ -205,9 +205,9 @@ class Member < ActiveRecord::Base
 
     def friends
         if Rails.env.production?
-            Member.where('id != ?', self.id).limit(8).order("RAND()")
+            Member.where('id != ?', self.id).limit(10).order("RAND()")
         else
-            Member.where('id != ?', self.id).limit(8).order("RANDOM()")
+            Member.where('id != ?', self.id).limit(10).order("RANDOM()")
         end
         #BUG maybe
         #Member.where('id != ?', self.id).limit(8).order("RANDOM()")
