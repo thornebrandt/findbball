@@ -40,6 +40,13 @@ fbb.newCourt = function(){
             e.preventDefault();
             setupPickupGameCreation(e);
         });
+        
+        $("#howToAddCourt").click(
+  	        function(e){
+  	            e.preventDefault();
+  	            $("#howToAddCourtModal").modal();
+  	        }
+        );
 
         $("#submit_court").click(function(e){
             e.preventDefault();

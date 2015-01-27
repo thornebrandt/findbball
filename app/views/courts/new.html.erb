@@ -4,7 +4,9 @@
                         ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
 
 <div id="add_court_map" class="mapEl">
-	<div align="center">Map not displaying? Refresh the page.</div>
+	<br />
+	<!-- a href="" does not reload the page in a way that makes the map display... -->
+	<div align="center">Map not displaying? Reload the page.</div>
 </div>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %> </div>
@@ -14,6 +16,7 @@
             <div id="heading_articles">
                    <h3>ADD COURT</h3>
             </div>
+            <a id="howToAddCourt" href="#">How It Works</a>
             <%= form_for @court, :html => {:autocomplete => "off"} do |f| %>
         	    <span class="directions"></span>
         	    <%= f.hidden_field :location %>

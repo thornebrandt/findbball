@@ -5,11 +5,13 @@
     </div>
 </div>
 <div id="next_step">
-Next Step:
-<% if @member.profile_completion[:edit_link] == "profile" %>
+Next Step: <!-- Try doing this better with a hash -->
+<% if @member.profile_completion[:edit_link] == "edit_member_path(@member)" %>
     <%= link_to @member.profile_completion[:next_action], edit_member_path(@member) %>
 <% elsif @member.profile_completion[:edit_link] == "find_hoops" %>
     <%= link_to @member.profile_completion[:next_action], "/find-hoops" %>
+<% elsif @member.profile_completion[:edit_link] == "new_court_path" %>
+	<%= link_to @member.profile_completion[:next_action], new_court_path %>
 <% else %>
     <strong>
         <span href="#"><%= @member.profile_completion[:next_action] %></span>

@@ -59,11 +59,19 @@ class Member < ActiveRecord::Base
         else
             completed += 1
         end
+        
+        total += 1
+        if self.courts.count < 1
+          next_action = "Add a court"
+          edit_link = "new_court_path"
+        else
+          completed += 1
+        end
 
         total += 1
         if !self.about
             next_action = "Introduce yourself"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -71,7 +79,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.favorite_player
             next_action = "Add favorite player"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -79,7 +87,7 @@ class Member < ActiveRecord::Base
         total += 1
         if self.skill_level == -1
             next_action = "Add skill level"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -87,7 +95,7 @@ class Member < ActiveRecord::Base
         total += 1
         if self.organized == -1
             next_action = "Level of organized ball"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -95,7 +103,7 @@ class Member < ActiveRecord::Base
         total += 1
         if self.position == -1
             next_action = "Add favorite position"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -103,7 +111,7 @@ class Member < ActiveRecord::Base
         total += 1
         if self.plays_basketball == -1
             next_action = "How often do you play?"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -111,7 +119,7 @@ class Member < ActiveRecord::Base
         total += 1
         if self.nationality == -1
             next_action = "Add ethnicity"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -119,7 +127,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.weight
             next_action = "Add weight"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -127,7 +135,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.height_feet
             next_action = "Add height"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -135,7 +143,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.birthdate
             next_action = "Add birthdate"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -144,7 +152,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.full_name
             next_action = "Add full name"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -152,7 +160,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.general_location
             next_action = "Add general location"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -160,7 +168,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.photo.file
             next_action = "Upload a photo"
-            edit_link = "profile"
+            edit_link = "edit_member_path(@member)"
         else
             completed += 1
         end
@@ -168,6 +176,7 @@ class Member < ActiveRecord::Base
         total += 1
         if !self.registered
             next_action = "Verify Email."
+            edit_link = false
         else
             completed += 1
         end
