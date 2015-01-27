@@ -3,7 +3,9 @@
 <% difficulty_options = [['Undisclosed', -1], ["Don't Know", 0], ['Beginner', 1],
                         ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
 
-<div id="add_court_map" class="mapEl"></div>
+<div id="add_court_map" class="mapEl">
+	<div align="center">Map not displaying? Refresh the page.</div>
+</div>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %> </div>
     <% end %>
@@ -62,7 +64,7 @@
                             </tr>
                             <tr>
                                 <td class="td_label"><%= f.label :website, "Court Website" %></td>
-                                <td><%= f.text_field :website, id: "courtWebsite", class: "add_court_textInput" %></td>
+                                <td><%= f.text_field :website, id: "courtWebsite", class: "add_court_textInput", value: "http://" %></td>
                             </tr>
                             <tr>
                                 <td class="td_label">
