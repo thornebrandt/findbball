@@ -20,7 +20,7 @@ class Court < ActiveRecord::Base
                    :lat_column_name => :lat,
                    :lng_column_name => :lng
 
-  # VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
+  VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i
 
   validates :name,          presence: true, length: { maximum: 70 }
   validates :location,      presence: true, length: { maximum: 200 }
@@ -32,7 +32,9 @@ class Court < ActiveRecord::Base
   validates :open_time_2,                   length: { maximum: 12 }
   validates :open_am_2,                     length: { maximum: 2 }
   validates :skill_level,                   length: { maximum: 5 }
-  validates_format_of :website, :with => URI::regexp(%w(http https)), :allow_blank => true
+  
+  # Currently rejecting "http://", the default for the field... is there a way to interpret that as "nil"?
+  validates_format_of :website, :with => URI::regexp(VALID_URL_REGEX), :allow_blank => true
 
   def open_hours
     if open_am_1

@@ -26,7 +26,7 @@ fbb.hero = function(){
             if(fbb.currentSlide){
                 var heroLink = $(fbb.currentSlide).attr("data-href");
                 if(heroLink){
-                    window.location = heroLink;
+                    window.open(heroLink);
                 }
             }
         });
