@@ -5,7 +5,7 @@
 
 <div id="add_court_map" class="mapEl">
 	<br />
-	<!-- a href="" does not reload the page in a way that makes the map display... -->
+	<!-- a href="" does not reload the page in a way that makes the map display... so no link yet. -->
 	<div align="center">Map not displaying? Reload the page.</div>
 </div>
     <% flash.each do |key, value| %>
@@ -16,7 +16,7 @@
             <div id="heading_articles">
                    <h3>ADD COURT</h3>
             </div>
-            <a id="howToAddCourt" href="#">How It Works</a>
+            <a class="btn" id="howToAddCourt" href="#">How It Works</a>
             <%= form_for @court, :html => {:autocomplete => "off"} do |f| %>
         	    <span class="directions"></span>
         	    <%= f.hidden_field :location %>

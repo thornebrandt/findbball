@@ -16,6 +16,7 @@ fbb.validate = {
     messages: {
         "court[name]" : "Your court must have a name",
         court_address : "Your court must have an address",
+        "court[website]" : "Your court website must be a valid URL",
         "event[name]": "Your event must have a name",
         "video_article[title]" : "Your video article requires a title",
         event_start_datepicker: "Your event must have a start date",

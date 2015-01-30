@@ -35,6 +35,8 @@ class Court < ActiveRecord::Base
   
   # Currently rejecting "http://", the default for the field... is there a way to interpret that as "nil"?
   validates_format_of :website, :with => URI::regexp(VALID_URL_REGEX), :allow_blank => true
+  before_validation :blank_url
+  
 
   def open_hours
     if open_am_1
@@ -100,5 +102,12 @@ class Court < ActiveRecord::Base
                       ]
       day_options
   end
+  
+  protected
+    def blank_url
+      if self.website == "http://"
+        self.website = ""
+      end
+    end
 
 end
