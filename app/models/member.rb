@@ -10,6 +10,7 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
+	  has_many :identities
 	has_secure_password
 	before_save :beforeSave
     before_validation :beforeValidation
@@ -23,6 +24,18 @@ class Member < ActiveRecord::Base
     # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
+    
+    def self.from_omniauth(auth)  
+      find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)  
+    end  
+    
+    def self.create_with_omniauth(auth)  
+      create! do |member|  
+        member.provider = auth["provider"]  
+        member.uid = auth["uid"]  
+        member.name = auth["info"]["name"]  
+      end  
+    end  
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3

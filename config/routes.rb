@@ -33,6 +33,9 @@ Findbball::Application.routes.draw do
   match '/admin/videoArticles', to: 'video_articles#video_articles',   via: 'get'
 
   match '/profile', to: 'members#profile', via: 'get'
+  
+  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match '/logout', to: 'sessions#destroy', via: [:get, :post]
 
 
 
