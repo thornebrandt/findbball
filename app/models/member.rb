@@ -25,17 +25,17 @@ class Member < ActiveRecord::Base
 
     mount_uploader :photo, PhotoUploader
     
-    def self.from_omniauth(auth)  
-      find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)  
+  def self.from_omniauth(auth)  
+    find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)  
+  end  
+  
+  def self.create_with_omniauth(auth)  
+    create! do |member|  
+      member.provider = auth["provider"]  
+      member.uid = auth["uid"]  
+      member.name = auth["info"]["name"]  
     end  
-    
-    def self.create_with_omniauth(auth)  
-      create! do |member|  
-        member.provider = auth["provider"]  
-        member.uid = auth["uid"]  
-        member.name = auth["info"]["name"]  
-      end  
-    end  
+  end  
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3
