@@ -7,10 +7,6 @@ class SessionsController < ApplicationController
     session[:member_id] = member.id  
     redirect_to home_path, notice: "Signed in!"  
   end  
-    
-    #member = Member.from_omniauth(env['omniauth.auth'])
-    #session[:member_id] = member.id
-    #redirect_to home_path, notice: "Signed in!"
       
 #   member = Member.find_by_email(params[:email].downcase)
 #		if member && member.authenticate(params[:password])
@@ -27,11 +23,11 @@ class SessionsController < ApplicationController
 #		end
 
   def destroy  
-    session[:user_id] = nil  
+    session[:member_id] = nil  
     redirect_to home_path, notice: "Signed out!"  
   end  
 	
 	def failure
-	  redirect_to home_path, alert: "Authentication failed"
+	  redirect_to home_path, alert: "Invalid email/password combination"
 	end
 end
