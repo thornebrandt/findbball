@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
   #skip_before_filter :verify_authenticity_token, only: :create
   
   def create  
-    user = Member.from_omniauth(env["omniauth.auth"])  
+    auth = request.env['omniauth.auth'].to_yaml
+    member = Member.find_by_provider_and_uid(auth["provider"], auth["uid"]) || Member.create_with_omniauth(auth)   
     session[:member_id] = member.id  
     redirect_to home_path, notice: "Signed in!"  
   end  

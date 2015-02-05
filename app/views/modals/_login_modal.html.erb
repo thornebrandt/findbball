@@ -20,7 +20,7 @@
             <div class="modal-footer">
             	<div class="actions"><%= submit_tag "Sign in", class: "btn btn-large btn-primary" %></div>  
 				<% end %>  
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+                <%= link_to "Sign in with Facebook", "/auth/twitter" %>
                 <p>New user? <%= link_to "Sign up now!", signup_path %></p>
             </div>
         </div>

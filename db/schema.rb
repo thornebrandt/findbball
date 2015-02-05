@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204045802) do
+ActiveRecord::Schema.define(version: 20150205185605) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
     t.integer  "court_id"
     t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authentications", force: true do |t|
+    t.integer  "member_id"
+    t.string   "provider"
+    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,6 +133,8 @@ ActiveRecord::Schema.define(version: 20150204045802) do
     t.boolean  "admin"
     t.string   "verification"
     t.datetime "lastLogin"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

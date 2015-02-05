@@ -33,7 +33,8 @@ class Member < ActiveRecord::Base
     create! do |member|  
       member.provider = auth["provider"]  
       member.uid = auth["uid"]  
-      member.name = auth["info"]["name"]  
+      member.name = auth["info"]["name"]
+      member.email = auth['info']['email']
     end  
   end  
 
