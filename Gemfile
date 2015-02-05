@@ -10,7 +10,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'best_in_place', github: 'bernat/best_in_place'
 #gem 'best_in_place', :path => '../best_in_place_fork'
-gem 'rmagick', '~> 2.13.2', require: false
+gem 'rmagick', '~> 2.13.1', require: false
 gem 'carrierwave'
 gem 'gon'
 gem 'geokit-rails'
@@ -20,6 +20,10 @@ gem 'geokit-rails'
 gem 'mail_form', '~> 1.5.0.rc'
 gem 'simple_form', '~> 3.0.0.rc'
 # }
+
+# Facebook
+gem 'omniauth-facebook', '2.0.0'
+gem 'omniauth-identity', '1.1.1'
 
 group :development, :test do
 	gem 'sqlite3'
@@ -37,8 +41,8 @@ group :test do
 end
 
 group :production do
-  gem 'mysql', '~> 2.9.1'
-  gem 'mysql2', '~> 0.3.13'
+# gem 'mysql', '~> 2.9.1'
+#  gem 'mysql2', '~> 0.3.13'
 end
 
 

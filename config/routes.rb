@@ -12,6 +12,7 @@ Findbball::Application.routes.draw do
   resources :pickup_attendees
   resources :contacts, only: [:new, :create]
   resources :video_articles
+  resources :identities  
 
   root 'static_pages#home'
   match '/home', to: 'static_pages#home',     via: 'get'
@@ -34,8 +35,11 @@ Findbball::Application.routes.draw do
 
   match '/profile', to: 'members#profile', via: 'get'
   
-  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  match '/logout', to: 'sessions#destroy', via: [:get, :post]
+  #root to: "sessions#new"  
+  match "/auth/:provider/callback", to: "sessions#create", via: ['get', 'post']
+  match "/auth/failure", to: "sessions#failure", via: ['get', 'post']
+  match "/logout", to: "sessions#destroy", :as => "logout", via: ['get', 'post']
+  
 
 
 
