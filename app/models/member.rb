@@ -18,9 +18,10 @@ class Member < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
-						uniqueness: { case_sensitive: false }
+						uniqueness: { case_sensitive: false },
+						if: :fields_required?
     validates_uniqueness_of :name, :case_sensitive => false
-    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true #needs to be true
+    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :fields_required?
     # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
@@ -37,6 +38,10 @@ class Member < ActiveRecord::Base
       member.email = auth['info']['email']
     end  
   end  
+  
+  def fields_required?
+    !provider.blank? && super
+  end
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3
