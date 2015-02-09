@@ -16,8 +16,6 @@ Findbball::Application.routes.draw do
 
   root 'static_pages#home'
   match '/home', to: 'static_pages#home',     via: 'get'
-  match '/signup', to: 'members#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',   via: 'delete'
   match '/search_members', to: 'members#search', via: 'get'
   match '/search_courts', to: 'courts#search', via: 'get'
   match '/find-hoops', to: 'courts#find_hoops', via: 'get'
@@ -36,6 +34,8 @@ Findbball::Application.routes.draw do
   match '/profile', to: 'members#profile', via: 'get'
   
   #root to: "sessions#new"  
+  match '/signup', to: 'members#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',   via: 'delete'
   match "/auth/:provider/callback", to: "sessions#create", via: ['get', 'post']
   match "/auth/failure", to: "sessions#failure", via: ['get', 'post']
   

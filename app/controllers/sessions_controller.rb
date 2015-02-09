@@ -2,14 +2,8 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
   
   def create  
-    auth = request.env['omniauth.auth'].to_yaml
-    puts auth
-    puts auth[0]
-    puts auth[1]
-    # right now auth['provider'] and auth['uid'] are just returning 'provider' and 'uid' strings...
-    # how to access the actual values of those keys in the yaml?
-    member = Member.find_by_provider_and_uid(auth["provider"], auth["uid"]) || Member.create_with_omniauth(auth)   
-    session[:member_id] = member.id  
+    member = Member.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = member.id
     redirect_to home_path, notice: "Signed in!"  
   end  
       
@@ -28,7 +22,7 @@ class SessionsController < ApplicationController
 #		end
 
   def destroy  
-    session[:member_id] = nil  
+    session[:user_id] = nil  
     redirect_to home_path, notice: "Signed out!"  
   end  
 	

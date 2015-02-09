@@ -10,9 +10,8 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
-	  has_many :identities
 	has_secure_password
-	before_save :beforeSave
+	before_save :beforeSave # skip this if it's from omniauth
     before_validation :beforeValidation
 	before_create :create_remember_token
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -27,15 +26,15 @@ class Member < ActiveRecord::Base
     mount_uploader :photo, PhotoUploader
     
   def self.from_omniauth(auth)  
-    find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)  
+    find_by_provider_and_uid(auth[:provider], auth[:uid]) || create_with_omniauth(auth)  
   end  
   
   def self.create_with_omniauth(auth)  
     create! do |member|  
-      member.provider = auth["provider"]  
-      member.uid = auth["uid"]  
-      member.name = auth["info"]["name"]
-      member.email = auth['info']['email']
+      member.provider = auth[:provider]  
+      member.uid = auth[:uid]  
+      member.name = auth[:info][:name]
+      member.email = auth[:info][:email]
     end  
   end  
   
@@ -247,6 +246,7 @@ class Member < ActiveRecord::Base
     end
 
     def unique_name_from_email(_email)
+      # this is probably where the stack is overflowing in omniauth login
         begin
             if self.name.nil?
                 self.name = self.email[/[^@]+/]

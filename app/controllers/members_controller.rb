@@ -243,7 +243,9 @@ class MembersController < ApplicationController
                                             :photo,
                                             :registerd,
                                             :verification,
-                                            :lastLogin
+                                            :lastLogin,
+                                            :provider,
+                                            :uid
                                         )
 		end
 
