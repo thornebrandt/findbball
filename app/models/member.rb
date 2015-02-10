@@ -11,35 +11,35 @@ class Member < ActiveRecord::Base
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
 	has_secure_password
-	before_save :beforeSave # skip this if it's from omniauth
-    before_validation :beforeValidation
+	before_save :beforeSave, unless: :omniauth?
+  before_validation :beforeValidation
 	before_create :create_remember_token
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
 						uniqueness: { case_sensitive: false },
-						if: :fields_required?
+						unless: :omniauth?
     validates_uniqueness_of :name, :case_sensitive => false
-    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :fields_required?
+    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, unless: :omniauth?
     # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
     
-  def self.from_omniauth(auth)  
-    find_by_provider_and_uid(auth[:provider], auth[:uid]) || create_with_omniauth(auth)  
-  end  
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
+      member.provider = auth.provider
+      member.uid = auth.uid
+      member.name = auth.info.name
+      member.oauth_token = auth.credentials.token
+      member.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      puts member.name
+      member.save!
+      puts member
+    end
+  end
   
-  def self.create_with_omniauth(auth)  
-    create! do |member|  
-      member.provider = auth[:provider]  
-      member.uid = auth[:uid]  
-      member.name = auth[:info][:name]
-      member.email = auth[:info][:email]
-    end  
-  end  
-  
-  def fields_required?
-    !provider.blank? && super
+  def omniauth?
+    provider.present? && super
   end
 
     def log(_text, _type = nil, _id = nil, _level = 3)
@@ -246,7 +246,6 @@ class Member < ActiveRecord::Base
     end
 
     def unique_name_from_email(_email)
-      # this is probably where the stack is overflowing in omniauth login
         begin
             if self.name.nil?
                 self.name = self.email[/[^@]+/]

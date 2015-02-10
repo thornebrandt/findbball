@@ -2,9 +2,11 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
   
   def create  
+    puts env["omniauth.auth"].to_yaml
     member = Member.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = member.id
-    redirect_to home_path, notice: "Signed in!"  
+    #session[:user_id] = member.id
+    #member.log("signed in")
+    #redirect_back_or member
   end  
       
 #   member = Member.find_by_email(params[:email].downcase)
@@ -27,6 +29,7 @@ class SessionsController < ApplicationController
   end  
 	
 	def failure
-	  redirect_to home_path, alert: "Invalid email/password combination"
+	  flash[:error] = "Invalid email/password combination"
+	  redirect_to home_path
 	end
 end

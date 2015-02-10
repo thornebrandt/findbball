@@ -56,6 +56,7 @@ class MembersController < ApplicationController
     end
 
 	def new
+	  puts "members#new got called"
 		@noHeaderFooter = true
 		@member = Member.new
 	end
@@ -77,6 +78,7 @@ class MembersController < ApplicationController
     end
 
     def update
+        puts "members#update got called"
         @member = Member.find(params[:id])
 
         if params[:member][:birthdate]
@@ -106,7 +108,9 @@ class MembersController < ApplicationController
 
 
 	def create
+	  puts "members#create got called"
 		if !signed_in?
+		        puts "member being created"
             @member = Member.new(member_params)
             @member.verification = SecureRandom.hex(13)
             if geo = session[:geo_location]
@@ -245,7 +249,9 @@ class MembersController < ApplicationController
                                             :verification,
                                             :lastLogin,
                                             :provider,
-                                            :uid
+                                            :uid,
+                                            :oauth_token,
+                                            :oauth_expires_at
                                         )
 		end
 
