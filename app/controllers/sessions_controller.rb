@@ -4,9 +4,10 @@ class SessionsController < ApplicationController
   def create  
     puts env["omniauth.auth"].to_yaml
     member = Member.from_omniauth(env["omniauth.auth"])
-    #session[:user_id] = member.id
-    #member.log("signed in")
-    #redirect_back_or member
+    session[:user_id] = member.id
+    member.log("signed in")
+    flash[:success] = "Signed in. Welcome!"
+    redirect_back_or member
   end  
       
 #   member = Member.find_by_email(params[:email].downcase)

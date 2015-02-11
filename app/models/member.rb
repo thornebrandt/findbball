@@ -10,37 +10,39 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
-	has_secure_password
-	before_save :beforeSave, unless: :omniauth?
-  before_validation :beforeValidation
+	  #has_secure_password                        # removed; TODO: make sure password_confirmation stuff still works
+	
+	before_save :beforeSave
+  #before_validation :beforeValidation
 	before_create :create_remember_token
+	
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, 	presence: 	true,
 						format: 	{ with: VALID_EMAIL_REGEX },
-						uniqueness: { case_sensitive: false },
-						unless: :omniauth?
-    validates_uniqueness_of :name, :case_sensitive => false
-    validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, unless: :omniauth?
-    # validates :birthdate, presence: true, allow_nil: false
+						uniqueness: { case_sensitive: false }
+  validates_uniqueness_of :name, :case_sensitive => false
+  validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :password_required?
+  # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
     
-  def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
-      member.provider = auth.provider
-      member.uid = auth.uid
-      member.name = auth.info.name
-      member.oauth_token = auth.credentials.token
-      member.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      puts member.name
-      member.save!
-      puts member
+    def password_required?
+      provider.blank?
     end
-  end
-  
-  def omniauth?
-    provider.present? && super
-  end
+    
+    def self.from_omniauth(auth)
+      where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
+        member.provider = auth.provider
+        member.uid = auth.uid
+        member.name = auth.info.name # give user a different choice maybe? name = full_name right now
+        member.full_name = auth.info.name
+        member.email = auth.info.email
+        member.oauth_token = auth.credentials.token
+        member.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        #TODO: add photo, birthdate
+        member.save!
+      end
+    end
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3
@@ -387,6 +389,7 @@ class Member < ActiveRecord::Base
 
 	private
 		def create_remember_token
+		  puts 'create_remember_token got called'
 			self.remember_token = Member.hash(Member.new_remember_token)
 		end
 end
