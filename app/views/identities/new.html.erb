@@ -2,6 +2,16 @@
 <div id="signup">
     <%= image_tag('signup.jpg', id: 'signup_bg') %>
     <div id="alert-modal">
+    	<% if @identity && @identity.errors.any? %>  
+    		<div class="error_messages">  
+      		<h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>  
+      		<ul>  
+      		<% @identity.errors.full_messages.each do |msg| %>  
+        <li><%= msg %></li>  
+      <% end %>  
+      </ul>  
+    </div>  
+  <% end %>  
         <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><%= value %> </div>
         <% end %>
@@ -9,14 +19,6 @@
     <div id="signup_modal">
         <h2>SIGN UP</h2>
         <%= form_tag "/auth/identity/register" do %>
-        <% if @identity && @identity.errors.any? %>
-        	<div class="error_messages">>
-        		<h2><%= pluralize (@identity.errors.count, "error") %> prohibited this acount from being saved.</h2>
-        		<ul>
-        			<% @identity.errors.full_messages.each do |msg| %>
-        			<li><%= msg %></li>
-        		</ul>
-        	</div>
             <table id="signup_table">
                 <tr>
                     <td width="50%" class="signup_label">

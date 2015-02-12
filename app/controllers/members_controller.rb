@@ -56,7 +56,6 @@ class MembersController < ApplicationController
     end
 
 	def new
-	  puts "members#new got called"
 		@noHeaderFooter = true
 		@member = Member.new
 	end
@@ -108,7 +107,6 @@ class MembersController < ApplicationController
 
 
 	def create
-	  puts "members#create got called"
 		if !signed_in?
 		        puts "member being created"
             @member = Member.new(member_params)

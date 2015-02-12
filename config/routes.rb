@@ -34,7 +34,7 @@ Findbball::Application.routes.draw do
   match '/profile', to: 'members#profile', via: 'get'
   
   #root to: "sessions#new"  
-  match '/signup', to: 'members#new',         via: 'get'
+  match '/signup', to: 'identities#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',   via: 'delete'
   match "/auth/:provider/callback", to: "sessions#create", via: ['get', 'post']
   match "/auth/failure", to: "sessions#failure", via: ['get', 'post']

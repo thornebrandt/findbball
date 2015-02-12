@@ -10,7 +10,8 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
-	  #has_secure_password                        # removed; TODO: make sure password_confirmation stuff still works
+    
+	  has_secure_password validations: false
 	
 	before_save :beforeSave
   #before_validation :beforeValidation
@@ -22,6 +23,7 @@ class Member < ActiveRecord::Base
 						uniqueness: { case_sensitive: false }
   validates_uniqueness_of :name, :case_sensitive => false
   validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :password_required?
+  validates_confirmation_of :password, unless: :password_required?
   # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
@@ -37,8 +39,11 @@ class Member < ActiveRecord::Base
         member.name = auth.info.name # give user a different choice maybe? name = full_name right now
         member.full_name = auth.info.name
         member.email = auth.info.email
-        member.oauth_token = auth.credentials.token
-        member.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        if member.provider == 'facebook'
+          member.oauth_token = auth.credentials.token
+          member.oauth_expires_at = Time.at(auth.credentials.expires_at) # can't convert nil into an exact number
+          member.registered = auth.info.verified                         # email registration
+        end
         #TODO: add photo, birthdate
         member.save!
       end

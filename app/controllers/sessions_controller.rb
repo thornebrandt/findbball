@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   def create  
     puts env["omniauth.auth"].to_yaml
     member = Member.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = member.id
+    sign_in member
+    #session[:user_id] = member.id
     member.log("signed in")
     flash[:success] = "Signed in. Welcome!"
     redirect_back_or member
@@ -25,7 +26,8 @@ class SessionsController < ApplicationController
 #		end
 
   def destroy  
-    session[:user_id] = nil  
+    #session[:user_id] = nil  
+    sign_out
     redirect_to home_path, notice: "Signed out!"  
   end  
 	
