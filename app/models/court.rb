@@ -32,7 +32,7 @@ class Court < ActiveRecord::Base
   validates :skill_level,                   length: { maximum: 5 }
   
   # Currently rejecting "http://", the default for the field... is there a way to interpret that as "nil"?
-  VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)|(^https?:\/\/$)/i
+  VALID_URL_REGEX = /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)|(https?:\/\/)/i
   validates_format_of :website, :with => URI::regexp(VALID_URL_REGEX), :allow_blank => true
   before_validation :blank_url
   

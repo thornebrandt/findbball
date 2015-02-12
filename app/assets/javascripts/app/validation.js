@@ -4,7 +4,7 @@ fbb.validate = {
         "court[name]": "required",
         "court_address": "required",
         "event[name]": "required",
-        "court[website]": "url",
+        "court[website]": "url_or_http",
         "video_article[title]": "required",
         event_start_datepicker: {
             required: true,
@@ -45,11 +45,12 @@ fbb.validate = {
         $.validator.addMethod('phone_format', function (value) {
             return /^[01]?[- .]?\(?[2-9]\d{2}\)?[- .]?\d{3}[- .]?\d{4}$/.test(value);
         }, "Please enter a valid phonenumber");
-		$.validator.addMethod('url_or_http', funciton (value) {
-			return 
-		})
-    }
-};
+        
+		$.validator.addMethod('url_or_http', function (value) {
+			return /((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)|(https?:\/\/)/i.test(value);
+		}, "Please enter a valid URL");
+		}
+    };
 
 
 // forms.validateForm = function($_form){
