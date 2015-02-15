@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
   
   def create  
-    puts env["omniauth.auth"].to_yaml
+    #puts env["omniauth.auth"].to_yaml
     member = Member.from_omniauth(env["omniauth.auth"])
     sign_in member
     #session[:user_id] = member.id

@@ -41,7 +41,7 @@ class Member < ActiveRecord::Base
         member.email = auth.info.email
         if member.provider == 'facebook'
           member.oauth_token = auth.credentials.token
-          member.oauth_expires_at = Time.at(auth.credentials.expires_at) # can't convert nil into an exact number
+          member.oauth_expires_at = Time.at(auth.credentials.expires_at)
           member.registered = auth.info.verified                         # email registration
         end
         #TODO: add photo, birthdate
