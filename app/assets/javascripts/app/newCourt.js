@@ -58,6 +58,10 @@ fbb.newCourt = function(){
                 newCourtForm.submit();
             }
         });
+        
+        $('#reload').click(function() {
+            location.reload();
+        });
 
     };
 

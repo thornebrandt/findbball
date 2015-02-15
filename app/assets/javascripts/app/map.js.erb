@@ -320,7 +320,7 @@ fbb._map = function(){
                     console.log("source");
                     service.getPlacePredictions({
                         input: query,
-                        types: ['establishment'],
+                        types: ['locality', 'postal_code'],
                     }, function(predictions, status) {
                         if (status == google.maps.places.PlacesServiceStatus.OK) {
                             process($.map(predictions, function(prediction) {

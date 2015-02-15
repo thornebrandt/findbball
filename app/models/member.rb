@@ -10,6 +10,7 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
+    has_many :identities
     
 	  has_secure_password validations: false
 	
@@ -32,7 +33,11 @@ class Member < ActiveRecord::Base
       provider.blank?
     end
     
-    def self.from_omniauth(auth)
+    def self.create_with_omniauth(auth)
+      create(name: auth.info.name)
+    end
+    
+    """def self.from_omniauth(auth)
       where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
         member.provider = auth.provider
         member.uid = auth.uid
@@ -47,7 +52,7 @@ class Member < ActiveRecord::Base
         #TODO: add photo, birthdate
         member.save!
       end
-    end
+  end"""
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3

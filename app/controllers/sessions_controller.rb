@@ -2,13 +2,42 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
   
   def create  
-    #puts env["omniauth.auth"].to_yaml
-    member = Member.from_omniauth(env["omniauth.auth"])
-    sign_in member
-    #session[:user_id] = member.id
-    member.log("signed in")
-    flash[:success] = "Signed in. Welcome!"
-    redirect_back_or member
+    auth = env["omniauth.auth"]
+    @identity = Identity.find_with_omniauth(auth)
+    
+    if @identity.nil?
+      # If no identity was found, create a brand new one here
+      @identity = Identity.create_with_omniauth(auth)
+    end
+  
+    if signed_in?
+      if @identity.member == current_user
+      # User is signed in so they are trying to link an identity with their
+      # account. But we found the identity and the user associated with it 
+      # is the current user. So the identity is already associated with 
+      # this user. So let's display an error message.
+        redirect_back_or @identity.member, notice: "Already linked that account!"
+      else
+      # The identity is not associated with the current_user so lets 
+      # associate the identity
+        @identity.member = current_user
+        @identity.save()
+        redirect_back_or @identity.member, notice: "Successfully linked that account!"
+      end
+    else
+      if @identity.member.present?
+      # The identity we found had a user associated with it so let's 
+      # just log them in here
+        self.current_user = @identity.member
+        sign_in member
+        member.log("signed in")
+        flash[:success] = "Signed in. Welcome!"
+        redirect_back_or @identity.member
+      else
+      # No user associated with the identity so we need to create a new one
+        redirect_to signup_url, notice: "Please finish registering" #TODO: It always takes this path...
+      end
+    end
   end  
       
 #   member = Member.find_by_email(params[:email].downcase)
@@ -32,7 +61,7 @@ class SessionsController < ApplicationController
   end  
 	
 	def failure
-	  flash[:error] = "Invalid email/password combination"
+	  flash[:error] = "Invalid email/password combination" # also, email already taken...
 	  redirect_to home_path
 	end
 end

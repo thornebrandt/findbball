@@ -6,7 +6,7 @@
 <div id="add_court_map" class="mapEl">
 	<br />
 	<!-- a href="" does not reload the page in a way that makes the map display... so no link yet. -->
-	<div align="center">Map not displaying? Reload the page.</div>
+	<div align="center">Map not displaying? <a id="reload">Reload the page.</a></div>
 </div>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %> </div>
@@ -16,7 +16,7 @@
             <div id="heading_articles">
                    <h3>ADD COURT</h3>
             </div>
-            <a class="btn btn-default align-center" id="howToAddCourt" href="#">How It Works</a>
+            <a class="btn btn-default" id="howToAddCourt" href="#">How It Works</a>
             <%= form_for @court, :html => {:autocomplete => "off"} do |f| %>
         	    <span class="directions"></span>
         	    <%= f.hidden_field :location %>
@@ -27,7 +27,7 @@
                     <table id="addCourt_table" class="create_table" >
                         <tbody>
                             <tr style="display:none;" class="map_results_container">
-                                <td class="td_label">Court Address</td>
+                                <td class="td_label">City/State or ZIP</td>
                                 <td width="672">
                                     <p id="address_search_result">
                                         Address
@@ -36,12 +36,12 @@
                                 </td>
                             </tr>
                             <tr style="display:none;" id="addressNotFound">
-                                <td colspan="2" class="text-center"><span class="error text-center">Could not find address. Please refine your search.</span></td>
+                                <td colspan="2" class="text-center"><span class="error text-center">Could not find that location. Please refine your search.</span></td>
                             </tr>
                             <tr class="address_search_container">
                                 <td class="td_label">New Court Address</td>
                                 <td width="672">
-                                <input id="address_search", name="court_address" placeholder: "Enter address of court" />
+                                <input id="address_search", name="court_address" placeholder: "Enter City/State or ZIP" />
                                 <button id="submitMap" type="submit" class="hidden">Map</button>
                                 </td>
                             </tr>

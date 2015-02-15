@@ -3,5 +3,4 @@ class IdentitiesController < ApplicationController
     @noHeaderFooter = true
     @identity = env['omniauth.identity']  
   end  
-
 end
