@@ -287,7 +287,7 @@ fbb._map = function(){
         if( $_addressInput.length ){
             $_addressInput.geocomplete({
                 map: fbb.map,
-                types: ['establishment'],
+                types: ['locality', 'postal_code'],
                 location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
                 mapOptions: fbb.courtMapOptions,
                 markerOptions: {

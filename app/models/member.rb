@@ -10,18 +10,17 @@ class Member < ActiveRecord::Base
     has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
-    has_many :identities
     
-	  has_secure_password validations: false
-	
-	before_save :beforeSave
+    has_secure_password validations: false
+  
+  before_save :beforeSave
   #before_validation :beforeValidation
-	before_create :create_remember_token
-	
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email, 	presence: 	true,
-						format: 	{ with: VALID_EMAIL_REGEX },
-						uniqueness: { case_sensitive: false }
+  before_create :create_remember_token
+  
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email,   presence:   true,
+            format:   { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
   validates_uniqueness_of :name, :case_sensitive => false
   validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :password_required?
   validates_confirmation_of :password, unless: :password_required?
@@ -33,11 +32,7 @@ class Member < ActiveRecord::Base
       provider.blank?
     end
     
-    def self.create_with_omniauth(auth)
-      create(name: auth.info.name)
-    end
-    
-    """def self.from_omniauth(auth)
+    def self.from_omniauth(auth)
       where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
         member.provider = auth.provider
         member.uid = auth.uid
@@ -52,7 +47,7 @@ class Member < ActiveRecord::Base
         #TODO: add photo, birthdate
         member.save!
       end
-  end"""
+    end
 
     def log(_text, _type = nil, _id = nil, _level = 3)
         #log level defaults to 3
@@ -224,19 +219,19 @@ class Member < ActiveRecord::Base
         PickupAttendee.find_by_pickup_game_id_and_member_id(_pickup_game_id, self.id)
     end
 
-	def beforeSave
-		self.email.downcase!
+  def beforeSave
+    self.email.downcase!
         unique_name_from_email( self.email )
         parameterizeUsername
-	end
+  end
 
     def beforeValidation
         # puts self.birthdate
     end
 
-	def Member.new_remember_token
-		SecureRandom.urlsafe_base64
-	end
+  def Member.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
 
     def member_actions
         MemberAction.where("level <=  1 AND member_id = ?", self.id).order("created_at DESC").limit(10)
@@ -305,13 +300,13 @@ class Member < ActiveRecord::Base
         end
     end
 
-	def Member.encrypt(token)
-		Digest::SHA1.hexdigest(token.to_s)
-	end
+  def Member.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
 
-	def Member.hash(token)
-		Digest::SHA1.hexdigest(token.to_s)
-	end
+  def Member.hash(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
 
     def nationality_verbose
         case nationality
@@ -397,9 +392,9 @@ class Member < ActiveRecord::Base
         end
     end
 
-	private
-		def create_remember_token
-		  puts 'create_remember_token got called'
-			self.remember_token = Member.hash(Member.new_remember_token)
-		end
+  private
+    def create_remember_token
+      puts 'create_remember_token got called'
+      self.remember_token = Member.hash(Member.new_remember_token)
+    end
 end
