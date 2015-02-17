@@ -11,20 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210050943) do
+ActiveRecord::Schema.define(version: 20150216202222) do
 
   create_table "attendees", force: true do |t|
     t.integer  "event_id"
     t.integer  "court_id"
     t.integer  "member_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "authentications", force: true do |t|
-    t.integer  "member_id"
-    t.string   "provider"
-    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,7 +82,14 @@ ActiveRecord::Schema.define(version: 20150210050943) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "member_id"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
+
+  add_index "identities", ["member_id"], name: "index_identities_on_member_id"
 
   create_table "member_actions", force: true do |t|
     t.integer  "member_id"
@@ -133,10 +132,6 @@ ActiveRecord::Schema.define(version: 20150210050943) do
     t.boolean  "admin"
     t.string   "verification"
     t.datetime "lastLogin"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true

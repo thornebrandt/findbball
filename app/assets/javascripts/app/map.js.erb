@@ -287,7 +287,7 @@ fbb._map = function(){
         if( $_addressInput.length ){
             $_addressInput.geocomplete({
                 map: fbb.map,
-                types: ['locality', 'postal_code'],
+                types: ['(regions)'],
                 location: new google.maps.LatLng(self.mapObj.lat, self.mapObj.lng),
                 mapOptions: fbb.courtMapOptions,
                 markerOptions: {
@@ -320,7 +320,7 @@ fbb._map = function(){
                     console.log("source");
                     service.getPlacePredictions({
                         input: query,
-                        types: ['locality', 'postal_code'],
+                        types: ['(regions)'],
                     }, function(predictions, status) {
                         if (status == google.maps.places.PlacesServiceStatus.OK) {
                             process($.map(predictions, function(prediction) {

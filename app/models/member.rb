@@ -6,12 +6,11 @@ class Member < ActiveRecord::Base
     has_many :court_videos, inverse_of: :member
     has_many :reviews, inverse_of: :member
     has_many :events, inverse_of: :member
-    has_many :attendees,  dependent: :delete_all, inverse_of: :member
-    has_many :pickup_attendees, dependent: :delete_all, inverse_of: :member
+    has_many :attendees,  inverse_of: :member, dependent: :delete_all
+    has_many :pickup_attendees, inverse_of: :member, dependent: :delete_all
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
-    
-    has_secure_password validations: false
+    has_many :identities, inverse_of: :member, dependent: :delete_all
   
   before_save :beforeSave
   #before_validation :beforeValidation
@@ -22,27 +21,24 @@ class Member < ActiveRecord::Base
             format:   { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
   validates_uniqueness_of :name, :case_sensitive => false
-  validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :password_required?
-  validates_confirmation_of :password, unless: :password_required?
+  #has_secure_password validations: false
+  #validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true, if: :password_required?
+  #validates_confirmation_of :password, unless: :password_required?
   # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
     
-    def password_required?
-      provider.blank?
-    end
+    #def password_required?
+    #  provider.blank?
+    #end
     
-    def self.from_omniauth(auth)
-      where(auth.slice(:provider, :uid)).first_or_initialize.tap do |member|
-        member.provider = auth.provider
-        member.uid = auth.uid
-        member.name = auth.info.name # give user a different choice maybe? name = full_name right now
+    def self.create_with_omniauth(auth)
+      create! do |member|
+        member.name = auth.info.name
         member.full_name = auth.info.name
         member.email = auth.info.email
         if member.provider == 'facebook'
-          member.oauth_token = auth.credentials.token
-          member.oauth_expires_at = Time.at(auth.credentials.expires_at)
-          member.registered = auth.info.verified                         # email registration
+          member.registered = auth.info.verified
         end
         #TODO: add photo, birthdate
         member.save!
@@ -219,8 +215,7 @@ class Member < ActiveRecord::Base
         PickupAttendee.find_by_pickup_game_id_and_member_id(_pickup_game_id, self.id)
     end
 
-  def beforeSave
-    self.email.downcase!
+  def beforeSave  # TODO: move to identities
         unique_name_from_email( self.email )
         parameterizeUsername
   end

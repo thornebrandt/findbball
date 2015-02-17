@@ -225,8 +225,8 @@ class MembersController < ApplicationController
 		def member_params
 			params.require(:member).permit( :name,
                                             :email,
-                                            :password,
-                                            :password_confirmation,
+                                            #:password,
+                                            #:password_confirmation,
                                             :full_name,
                                             :general_location,
                                             :nationality,
@@ -246,10 +246,6 @@ class MembersController < ApplicationController
                                             :registerd,
                                             :verification,
                                             :lastLogin,
-                                            :provider,
-                                            :uid,
-                                            :oauth_token,
-                                            :oauth_expires_at
                                         )
 		end
 
