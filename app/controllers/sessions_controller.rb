@@ -3,15 +3,15 @@ class SessionsController < ApplicationController
   
   def create  
     auth = request.env['omniauth.auth']
+    puts auth.to_yaml
     # Find an identity here
-    #@identity = Identity.find_with_omniauth(auth)
+    @identity = Identity.find_by_provider_and_uid(auth.provider, auth.uid)
 
-    #if @identity.nil?
+    if @identity.nil?
+      puts "no identity found for", auth.provider, auth.uid, "creating new one"
       # If no identity was found, create a brand new one here
-    #  @identity = Identity.create_with_omniauth(auth)
-    #end
-    
-    @identity = Identity.from_omniauth(auth) # finds or creates identity
+      @identity = Identity.create_with_omniauth(auth)
+    end
 
     if signed_in?
       if @identity.member == current_user
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         flash[:error] = "Already linked that account!"
         redirect_back_or @identity.member
       else
-      # The identity is not associated with the current_user so lets 
+      # The identity is not associated with the current_user so let's 
       # associate the identity
         @identity.member = current_user
         @identity.save
@@ -37,12 +37,22 @@ class SessionsController < ApplicationController
       @identity.member.log("signed in")
       flash[:success] = "Signed in!"
       redirect_back_or @identity.member
+    elsif Member.find_by(email: @identity.email)
+      # TODO: Dangerous. This can be used to access someone else's account if you sign up with their email.
+      # This can't be the way to do it.
+      @identity.member = Member.find_by(email: @identity.email)
+      @identity.save
+      sign_in @identity.member
+      flash[:success] = "Signed in! You may now sign into this account either through Facebook or your email/password."
+      redirect_back_or @identity.member
     else
       # No user associated with the identity so we need to create a new one
-      @identity.member = Member.create_with_omniauth(auth)  # TODO: this isn't giving the identity a member in the way I want
+      puts "creating new member"
+      @identity.member = Member.create_with_omniauth(auth)
+      @identity.save
       sign_in @identity.member
-      @identity.member.log("signed in")
-      flash[:success] = "Signed in!"
+      @identity.member.log("signed up")
+      flash[:success] = "Signed up!"
       redirect_back_or @identity.member
     end
   end
