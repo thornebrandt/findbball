@@ -3,14 +3,15 @@ class SessionsController < ApplicationController
   
   def create  
     auth = request.env['omniauth.auth']
-    puts auth.to_yaml
     # Find an identity here
-    @identity = Identity.find_with_omniauth(auth)
+    #@identity = Identity.find_with_omniauth(auth)
 
-    if @identity.nil?
+    #if @identity.nil?
       # If no identity was found, create a brand new one here
-      @identity = Identity.create_with_omniauth(auth)
-    end
+    #  @identity = Identity.create_with_omniauth(auth)
+    #end
+    
+    @identity = Identity.from_omniauth(auth) # finds or creates identity
 
     if signed_in?
       if @identity.member == current_user
@@ -38,7 +39,7 @@ class SessionsController < ApplicationController
       redirect_back_or @identity.member
     else
       # No user associated with the identity so we need to create a new one
-      @identity.member = Member.from_omniauth(auth)
+      @identity.member = Member.create_with_omniauth(auth)  # TODO: this isn't giving the identity a member in the way I want
       sign_in @identity.member
       @identity.member.log("signed in")
       flash[:success] = "Signed in!"

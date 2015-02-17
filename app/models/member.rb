@@ -37,7 +37,7 @@ class Member < ActiveRecord::Base
         member.name = auth.info.name
         member.full_name = auth.info.name
         member.email = auth.info.email
-        if member.provider == 'facebook'
+        if auth.provider == 'facebook'
           member.registered = auth.info.verified
         end
         #TODO: add photo, birthdate
