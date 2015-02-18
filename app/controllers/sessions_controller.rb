@@ -5,13 +5,7 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     puts auth.to_yaml
     # Find an identity here
-    @identity = Identity.find_by_provider_and_uid(auth.provider, auth.uid)
-
-    if @identity.nil?
-      puts "no identity found for", auth.provider, auth.uid, "creating new one"
-      # If no identity was found, create a brand new one here
-      @identity = Identity.create_with_omniauth(auth)
-    end
+    @identity = Identity.find_by_provider_and_uid(auth.provider, auth.uid) || Identity.create_with_omniauth(auth)
 
     if signed_in?
       if @identity.member == current_user
@@ -38,13 +32,18 @@ class SessionsController < ApplicationController
       flash[:success] = "Signed in!"
       redirect_back_or @identity.member
     elsif Member.find_by(email: @identity.email)
-      # TODO: Dangerous. This can be used to access someone else's account if you sign up with their email.
-      # This can't be the way to do it.
-      @identity.member = Member.find_by(email: @identity.email)
-      @identity.save
-      sign_in @identity.member
-      flash[:success] = "Signed in! You may now sign into this account either through Facebook or your email/password."
-      redirect_back_or @identity.member
+      # If there's already a member with that email, then that member account either already belongs to the user,
+      # or the user is trying to get access to someone else's account...
+      if auth.provider == 'facebook'
+        # TODO: Make sure email is verified
+        @identity.member = Member.find_by(email: @identity.email)
+        @identity.save
+        sign_in @identity.member
+        flash[:success] = "Signed in! You may now sign into this account either through Facebook or your email/password."
+        redirect_back_or @identity.member
+      end
+      flash[:error] = "The email you have attempted to register belongs to another user."
+      redirect_to home_path
     else
       # No user associated with the identity so we need to create a new one
       puts "creating new member"
@@ -57,23 +56,8 @@ class SessionsController < ApplicationController
     end
   end
 end
-      
-#   member = Member.find_by_email(params[:email].downcase)
-#   if member && member.authenticate(params[:password])
-#            if sign_in member
-#                member.log("signed in")
-#                redirect_back_or member
-#            else
-#                flash[:error] = "Your account has been deactivated" #not right
-#                redirect_to home_path
-#            end
-#   else
-#     flash[:error] = "Invalid email/password combination" #not right
-#     redirect_to home_path
-#   end
 
   def destroy  
-    #session[:user_id] = nil  
     sign_out
     flash[:success] = "Signed out!"
     redirect_to home_path
