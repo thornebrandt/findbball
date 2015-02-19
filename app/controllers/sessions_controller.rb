@@ -6,24 +6,7 @@ class SessionsController < ApplicationController
     puts auth.to_yaml
     # Find an identity here
     @identity = Identity.find_by_provider_and_uid(auth.provider, auth.uid) || Identity.create_with_omniauth(auth)
-
-    if signed_in?
-      if @identity.member == current_user
-      # User is signed in so they are trying to link an identity with their
-      # account. But we found the identity and the user associated with it 
-      # is the current user. So the identity is already associated with 
-      # this user. So let's display an error message.
-        flash[:error] = "Already linked that account!"
-        redirect_back_or @identity.member
-      else
-      # The identity is not associated with the current_user so let's 
-      # associate the identity
-        @identity.member = current_user
-        @identity.save
-        flash[:success] = "Successfully linked that account!"
-        redirect_back_or @identity.member
-    end
-  else
+    
     if @identity.member.present?
       # The identity we found had a user associated with it so let's 
       # just log them in here
@@ -34,14 +17,6 @@ class SessionsController < ApplicationController
     elsif Member.find_by(email: @identity.email)
       # If there's already a member with that email, then that member account either already belongs to the user,
       # or the user is trying to get access to someone else's account...
-      if auth.provider == 'facebook'
-        # TODO: Make sure email is verified
-        @identity.member = Member.find_by(email: @identity.email)
-        @identity.save
-        sign_in @identity.member
-        flash[:success] = "Signed in! You may now sign into this account either through Facebook or your email/password."
-        redirect_back_or @identity.member
-      end
       flash[:error] = "The email you have attempted to register belongs to another user."
       redirect_to home_path
     else
