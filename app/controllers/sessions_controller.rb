@@ -8,19 +8,16 @@ class SessionsController < ApplicationController
     @identity = Identity.find_by_provider_and_uid(auth.provider, auth.uid) || Identity.create_with_omniauth(auth)
     
     if @identity.member.present?
-      # The identity we found had a user associated with it so let's 
-      # just log them in here
+      # The identity we found had a user associated with it so let's log them in here.
       sign_in @identity.member
       @identity.member.log("signed in")
       flash[:success] = "Signed in!"
       redirect_back_or @identity.member
     elsif Member.find_by(email: @identity.email)
-      # If there's already a member with that email, then that member account either already belongs to the user,
-      # or the user is trying to get access to someone else's account...
-      flash[:error] = "The email you have attempted to register belongs to another user."
+      flash[:error] = "The email you have attempted to register already belongs to another user."
       redirect_to home_path
     else
-      # No user associated with the identity so we need to create a new one
+      # No user associated with the identity, so we need to create a new one
       puts "creating new member"
       @identity.member = Member.create_with_omniauth(auth)
       @identity.save
@@ -30,7 +27,7 @@ class SessionsController < ApplicationController
       redirect_back_or @identity.member
     end
   end
-end
+
 
   def destroy  
     sign_out
