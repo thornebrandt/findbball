@@ -28,10 +28,6 @@ class Member < ActiveRecord::Base
 
     mount_uploader :photo, PhotoUploader
     
-    #def password_required?
-    #  provider.blank?
-    #end
-    
     def self.create_with_omniauth(auth)
       create! do |member|
         member.name = auth.info.name

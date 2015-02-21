@@ -4,7 +4,7 @@
                         ['Intermediate', 2], ['Advanced', 3], ['Difficult', 4]] %>
 
 <div id="add_court_map" class="mapEl">
-	<br />
+	<br /><br /><br />
 	<!-- a href="" does not reload the page in a way that makes the map display... so no link yet. -->
 	<div align="center">Map not displaying? <a id="reload">Reload the page.</a></div>
 </div>
@@ -16,7 +16,7 @@
             <div id="heading_articles">
                    <h3>ADD COURT</h3>
             </div>
-            <a class="btn btn-default" id="howToAddCourt" href="#">How It Works</a>
+            <div align="center"><a class="btn btn-default" id="howToAddCourt" href="#">How It Works</a></div>
             <%= form_for @court, :html => {:autocomplete => "off"} do |f| %>
         	    <span class="directions"></span>
         	    <%= f.hidden_field :location %>

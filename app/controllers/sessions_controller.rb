@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
   end  
   
   def failure
-    flash[:error] = "Invalid email/password combination"
+    flash[:error] = @identity.errors.full_messages || "Invalid email/password combination"
     redirect_to home_path
   end
 end
