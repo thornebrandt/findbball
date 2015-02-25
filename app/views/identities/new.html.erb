@@ -1,21 +1,12 @@
 <% provide(:title, "Sign up") %>
 <div id="signup">
+	<% flash.each do |key, value| %>
+		<div id="alert-modal">
+        	<div class="alert alert-<%= key %>"><%= value %> </div>
+        </div>
+    <% end %>
     <%= image_tag('signup.jpg', id: 'signup_bg') %>
     <div id="signup_modal">
-    	<div id="alert-modal">
-    		<% if @identity && @identity.errors.any? %>  
-    			<div class="error_messages">  
-      					<ul>  
-      						<% @identity.errors.full_messages.each do |msg| %>  
-        						<li><%= msg %></li>  
-      						<% end %>  
-      					</ul>  
-    			</div>  
-  			<% end %>  
-        	<% flash.each do |key, value| %>
-            	<div class="alert alert-<%= key %>"><%= value %> </div>
-        	<% end %>
-    	</div>
         <h2>SIGN UP</h2>
         <%= form_tag "/auth/identity/register" do %>
             <table id="signup_table">
@@ -24,7 +15,7 @@
                         <b><%= label_tag :email %></b>
                     </td>
                     <td>
-                        <%= text_field_tag :email, @identity.try(:email) %>
+                        <%= text_field_tag :email, @identity.try(:email), class: "signup_input" %>
                     </td>
                 </tr>
                 <tr>
@@ -32,15 +23,15 @@
                         <b><%= label_tag :password %></b>
                     </td>
                     <td>
-                        <%= password_field_tag :password, class: "signup_input" %>  
+                        <%= password_field_tag :password, nil, class: "signup_input" %>  
                     </td>
                 </tr>
                 <tr>
                     <td class="signup_label">
-                        <b><%= label_tag :password_confirmation %></b>
+                        <b><%= label_tag :password_confirmation, "Confirm Password" %></b>
                     </td>
                     <td>
-                        <%= password_field_tag :password_confirmation, class: 'signup_input' %>
+                        <%= password_field_tag :password_confirmation, nil, class: 'signup_input'  %>
                     </td>
                 </tr>
                 <tr>

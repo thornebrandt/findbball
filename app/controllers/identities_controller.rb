@@ -1,7 +1,10 @@
 class IdentitiesController < ApplicationController
-  def new  
+  def new
     @noHeaderFooter = true
     @identity = env['omniauth.identity']  
+    if @identity
+      flash[:error] = @identity.errors.full_messages[0]
+    end
   end
   
   def identity_params
