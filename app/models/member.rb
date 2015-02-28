@@ -11,11 +11,11 @@ class Member < ActiveRecord::Base
     has_many :pickup_games, inverse_of: :member, dependent: :delete_all
     has_many :member_actions, inverse_of: :member, dependent: :delete_all
     has_many :identities, inverse_of: :member, dependent: :delete_all
-  
+
   before_save :beforeSave
   #before_validation :beforeValidation
   before_create :create_remember_token
-  
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,   presence:   true,
             format:   { with: VALID_EMAIL_REGEX },
@@ -27,7 +27,7 @@ class Member < ActiveRecord::Base
   # validates :birthdate, presence: true, allow_nil: false
 
     mount_uploader :photo, PhotoUploader
-    
+
     def self.create_with_omniauth(auth)
       create! do |member|
         member.name = auth.info.name
@@ -49,12 +49,7 @@ class Member < ActiveRecord::Base
         if defined?(_type) then member_action.linkType = _type end
         if defined?(_id) then member_action.link_id = _id end
         if defined?(_level) then member_action.level = _level end
-        puts "LOGGING"
-        if member_action.save!
-            puts "SAVED"
-        else
-            puts "SPMETHIG WNET WRONG"
-        end
+        member_action.save!
     end
 
     def log_action(_text, _type = nil, _id = nil)
@@ -66,9 +61,6 @@ class Member < ActiveRecord::Base
         completed = 0
         next_action = "Complete!"
         edit_link = false;
-
-        puts "What is happening here"
-
         total += 1
         if self.pickup_games.count < 1
             next_action = "Attend pickup game"
@@ -76,7 +68,7 @@ class Member < ActiveRecord::Base
         else
             completed += 1
         end
-        
+
         total += 1
         if self.courts.count < 1
           next_action = "Add a court"

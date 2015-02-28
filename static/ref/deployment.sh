@@ -19,8 +19,9 @@ export PATH=$PWD/bin:$PATH
 gem install bundle
 cd findbball
 bundle install
-#rake db:migrate RAILS_ENV=production    not doing this anymore
-rake db:schema:load
+rake db:migrate RAILS_ENV=production
+#OR
+#rake db:schema:load
 ../bin/restart
 
 
@@ -35,6 +36,6 @@ on production
 tail -f /home/thornybranch/webapps/findbball_rails/nginx/logs/error.log
 
 
-
+tail -f /home/thornybranch/webapps/findbball_rails/findbball/log/production.log
 
 
