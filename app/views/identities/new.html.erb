@@ -39,6 +39,11 @@
                         <%= submit_tag "Create Account", class: "btn" %>
                     </td>
                 </tr>
+                <tr>
+                	<td colspan="2" class="text-right" style="padding-bottom: 5px;">
+                    	or <%= link_to "Sign up with Facebook", "/auth/facebook", class: "btn btn-large btn-primary" %>
+                    </td>
+                </tr>
             </table>
         <% end %>
         <div class="hr"></div>
