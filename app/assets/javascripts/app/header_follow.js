@@ -20,3 +20,4 @@ function moveScroller() {
     };
     $(window).scroll(move);
     move();
+}
